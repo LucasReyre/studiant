@@ -1,8 +1,10 @@
 package com.studiant.com.presentation.ui.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,25 +13,24 @@ import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.MainPresenter;
 import com.studiant.com.presentation.presenters.MainPresenter.View;
 import com.studiant.com.presentation.presenters.impl.MainPresenterImpl;
+import com.studiant.com.presentation.ui.components.MCarouselView;
 import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.threading.MainThreadImpl;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements View {
+public class MainActivity extends Activity implements View {
 
-    @Bind(R.id.welcome_textview)
-    TextView mWelcomeTextView;
+    @Bind(R.id.welcome_textview) TextView mWelcomeTextView;
 
-    @Bind(R.id.carouselView)
-    CarouselView carouselView;
+    @Bind(R.id.carouselView) MCarouselView carouselView;
+
+    @Bind(R.id.btn_particulier) Button btn_particulier;
+    @Bind(R.id.btn_etudiant) Button btn_etudiant;
 
     private MainPresenter mPresenter;
-
-    int[] sampleImages = {R.drawable.test1, R.drawable.test2};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,7 @@ public class MainActivity extends AppCompatActivity implements View {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImages.length);
-
-        carouselView.setImageListener(imageListener);
-
+        this.carouselView.setImage();
         // create a presenter for this view
         mPresenter = new MainPresenterImpl(
                 ThreadExecutor.getInstance(),
@@ -51,18 +48,23 @@ public class MainActivity extends AppCompatActivity implements View {
         );
     }
 
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
-        }
-    };
     @Override
     protected void onResume() {
         super.onResume();
 
         // let's start welcome message retrieval when the app resumes
         mPresenter.resume();
+    }
+
+
+    /**
+     * Goes to the user list screen.
+     */
+    @OnClick(R.id.btn_particulier)
+    void navigateToParticulierForm() {
+        Intent intentToLaunch = new Intent(this, ChooseActivity.class);
+        this.startActivity(intentToLaunch);
+
     }
 
     @Override

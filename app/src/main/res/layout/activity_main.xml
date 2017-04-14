@@ -10,20 +10,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".presentation.ui.activities.MainActivity">
 
+    <com.studiant.com.presentation.ui.components.MCarouselView
+        android:id="@+id/carouselView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:fillColor="#FFFFFFFF"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        app:strokeWidth="1dp">
+
+    </com.studiant.com.presentation.ui.components.MCarouselView>
+
     <TextView
         android:id="@+id/welcome_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:fillColor="#FFFFFFFF"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="3000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp"/>
+    <Button
+        android:id="@+id/btn_etudiant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/etudiant_btn"
+        android:layout_below="@+id/welcome_textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp" />
+
+    <Button
+        android:id="@+id/btn_particulier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/particulier_btn"
+        android:layout_below="@+id/btn_etudiant"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
