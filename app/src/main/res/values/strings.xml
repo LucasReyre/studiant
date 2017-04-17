@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">S\'tudiant</string>
+
     <string name="etudiant_btn">Etudiant</string>
     <string name="particulier_btn">Particulier</string>
+    <string name="validate_btn">Valider</string>
+
+
+
     <string name="title_activity_choose">ChooseActivity</string>
     <string name="title_text_activity_choose">Choisissez la catégorie de votre job</string>
+
+
+    <string name="facebook_app_id">192555884589603</string>
 </resources>

@@ -1,26 +1,31 @@
 package com.studiant.com.domain.interactors.impl;
 
+import android.util.Log;
+
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
-import com.studiant.com.domain.interactors.interfaces.WelcomingInteractor;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
+import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
+import com.studiant.com.domain.interactors.interfaces.WelcomingInteractor;
+import com.studiant.com.domain.repository.CategoryRepository;
 import com.studiant.com.domain.repository.MessageRepository;
 
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  * <p/>
  */
-public class WelcomingInteractorImpl extends AbstractInteractor implements WelcomingInteractor {
+public class ChooseInteractorImpl extends AbstractInteractor implements ChooseInteractor{
 
-    private WelcomingInteractor.Callback mCallback;
-    private MessageRepository            mMessageRepository;
+    private Callback mCallback;
+    private CategoryRepository mCategoryRepository;
 
-    public WelcomingInteractorImpl(Executor threadExecutor,
-                                   MainThread mainThread,
-                                   Callback callback, MessageRepository messageRepository) {
+    public ChooseInteractorImpl(Executor threadExecutor,
+                                MainThread mainThread,
+                                Callback callback, CategoryRepository categoryRepository) {
         super(threadExecutor, mainThread);
+
         mCallback = callback;
-        mMessageRepository = messageRepository;
+        mCategoryRepository = categoryRepository;
     }
 
     private void notifyError() {
@@ -32,11 +37,12 @@ public class WelcomingInteractorImpl extends AbstractInteractor implements Welco
         });
     }
 
-    private void postMessage(final String msg) {
+    private void postMessage(final String[] listItem) {
+
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onMessageRetrieved(msg);
+                mCallback.onListCategoryRetrieved(listItem);
             }
         });
     }
@@ -45,10 +51,10 @@ public class WelcomingInteractorImpl extends AbstractInteractor implements Welco
     public void run() {
 
         // retrieve the message
-        final String message = mMessageRepository.getWelcomeMessage();
+        final String[] listItem = mCategoryRepository.getListCategoryMessage();
 
         // check if we have failed to retrieve our message
-        if (message == null || message.length() == 0) {
+        if (listItem == null || listItem.length == 0) {
 
             // notify the failure on the main thread
             notifyError();
@@ -57,6 +63,6 @@ public class WelcomingInteractorImpl extends AbstractInteractor implements Welco
         }
 
         // we have retrieved our message, notify the UI on the main thread
-        postMessage(message);
+        postMessage(listItem);
     }
 }

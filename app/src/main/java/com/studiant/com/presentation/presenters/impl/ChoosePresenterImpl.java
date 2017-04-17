@@ -1,40 +1,44 @@
 package com.studiant.com.presentation.presenters.impl;
 
+import android.util.Log;
+
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
+import com.studiant.com.domain.interactors.impl.ChooseInteractorImpl;
+import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
 import com.studiant.com.domain.interactors.interfaces.WelcomingInteractor;
 import com.studiant.com.domain.interactors.impl.WelcomingInteractorImpl;
+import com.studiant.com.domain.repository.CategoryRepository;
 import com.studiant.com.domain.repository.MessageRepository;
-import com.studiant.com.presentation.presenters.interfaces.MainPresenter;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
+import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
 
 /**
  * Created by dmilicic on 12/13/15.
  */
-public class MainPresenterImpl extends AbstractPresenter implements MainPresenter,
-        WelcomingInteractor.Callback {
+public class ChoosePresenterImpl extends AbstractPresenter implements ChoosePresenter,
+        ChooseInteractor.Callback {
 
-    private MainPresenter.View mView;
-    private MessageRepository  mMessageRepository;
+    private ChoosePresenter.View mView;
+    private CategoryRepository mCategoryRepository;
 
-    public MainPresenterImpl(Executor executor, MainThread mainThread,
-                             View view, MessageRepository messageRepository) {
+    public ChoosePresenterImpl(Executor executor, MainThread mainThread,
+                               View view, CategoryRepository categoryRepository) {
         super(executor, mainThread);
         mView = view;
-        mMessageRepository = messageRepository;
+        mCategoryRepository = categoryRepository;
     }
 
     @Override
     public void resume() {
 
         mView.showProgress();
-
         // initialize the interactor
-        WelcomingInteractor interactor = new WelcomingInteractorImpl(
+        ChooseInteractor interactor = new ChooseInteractorImpl(
                 mExecutor,
                 mMainThread,
                 this,
-                mMessageRepository
+                mCategoryRepository
         );
 
         // run the interactor
@@ -61,10 +65,12 @@ public class MainPresenterImpl extends AbstractPresenter implements MainPresente
         mView.showError(message);
     }
 
+
     @Override
-    public void onMessageRetrieved(String message) {
+    public void onListCategoryRetrieved(String[] listItem) {
         mView.hideProgress();
-        mView.displayWelcomeMessage(message);
+        mView.displayListCategorie(listItem);
+
     }
 
     @Override

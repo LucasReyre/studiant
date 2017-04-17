@@ -4,6 +4,7 @@ package com.studiant.com.domain.interactors;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.WelcomingInteractorImpl;
+import com.studiant.com.domain.interactors.interfaces.WelcomingInteractor;
 import com.studiant.com.domain.repository.MessageRepository;
 import com.studiant.com.threading.TestMainThread;
 

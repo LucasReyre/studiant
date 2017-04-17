@@ -3,15 +3,17 @@ package com.studiant.com.presentation.ui.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.presentation.presenters.MainPresenter;
-import com.studiant.com.presentation.presenters.MainPresenter.View;
+import com.studiant.com.presentation.presenters.interfaces.MainPresenter;
+import com.studiant.com.presentation.presenters.interfaces.MainPresenter.View;
 import com.studiant.com.presentation.presenters.impl.MainPresenterImpl;
 import com.studiant.com.presentation.ui.components.MCarouselView;
 import com.studiant.com.storage.WelcomeMessageRepository;
@@ -37,6 +39,7 @@ public class MainActivity extends Activity implements View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
 
         this.carouselView.setImage();
         // create a presenter for this view

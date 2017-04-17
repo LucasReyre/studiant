@@ -2,7 +2,7 @@ package com.studiant.com.domain.interactors.base;
 
 
 /**
- * This is the main interface of an interactor. Each interactor serves a specific use case.
+ * This is the main interfaces of an interactor. Each interactor serves a specific use case.
  */
 public interface Interactor {
 

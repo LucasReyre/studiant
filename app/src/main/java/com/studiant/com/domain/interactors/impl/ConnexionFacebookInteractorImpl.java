@@ -2,25 +2,28 @@ package com.studiant.com.domain.interactors.impl;
 
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
-import com.studiant.com.domain.interactors.interfaces.WelcomingInteractor;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
-import com.studiant.com.domain.repository.MessageRepository;
+import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
+import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
+import com.studiant.com.domain.repository.CategoryRepository;
+import com.studiant.com.storage.ConnexionRepository;
 
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  * <p/>
  */
-public class WelcomingInteractorImpl extends AbstractInteractor implements WelcomingInteractor {
+public class ConnexionFacebookInteractorImpl extends AbstractInteractor implements ConnexionFacebookInteractor {
 
-    private WelcomingInteractor.Callback mCallback;
-    private MessageRepository            mMessageRepository;
+    private Callback mCallback;
+    private ConnexionRepository mConnexionRepository;
 
-    public WelcomingInteractorImpl(Executor threadExecutor,
+    public ConnexionFacebookInteractorImpl(Executor threadExecutor,
                                    MainThread mainThread,
-                                   Callback callback, MessageRepository messageRepository) {
+                                   Callback callback, ConnexionRepository connexionRepository) {
         super(threadExecutor, mainThread);
+
         mCallback = callback;
-        mMessageRepository = messageRepository;
+        mConnexionRepository = connexionRepository;
     }
 
     private void notifyError() {
@@ -32,11 +35,12 @@ public class WelcomingInteractorImpl extends AbstractInteractor implements Welco
         });
     }
 
-    private void postMessage(final String msg) {
+    private void postMessage(final String[] listItem) {
+
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onMessageRetrieved(msg);
+                mCallback.onConnexionFacebookSuccess();
             }
         });
     }
@@ -45,10 +49,10 @@ public class WelcomingInteractorImpl extends AbstractInteractor implements Welco
     public void run() {
 
         // retrieve the message
-        final String message = mMessageRepository.getWelcomeMessage();
+        final String[] listItem = mConnexionRepository.getListCategoryMessage();
 
         // check if we have failed to retrieve our message
-        if (message == null || message.length() == 0) {
+        if (listItem == null || listItem.length == 0) {
 
             // notify the failure on the main thread
             notifyError();
@@ -57,6 +61,6 @@ public class WelcomingInteractorImpl extends AbstractInteractor implements Welco
         }
 
         // we have retrieved our message, notify the UI on the main thread
-        postMessage(message);
+        postMessage(listItem);
     }
 }
