@@ -6,10 +6,22 @@
     <string name="validate_btn">Valider</string>
 
 
-
     <string name="title_activity_choose">ChooseActivity</string>
     <string name="title_text_activity_choose">Choisissez la catégorie de votre job</string>
 
 
-    <string name="facebook_app_id">192555884589603</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_first_name">Prénom</string>
+    <string name="prompt_last_name">Nom</string>
+    <string name="action_sign_in">Valider</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+
+    <string name="facebook_app_id">1924525284450671</string>
 </resources>

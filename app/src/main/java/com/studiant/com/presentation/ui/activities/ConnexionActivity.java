@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -21,7 +22,7 @@ import com.facebook.login.widget.LoginButton;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.domain.interactors.interfaces.ConnexionInteractor;
+import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
 import com.studiant.com.presentation.presenters.impl.ChoosePresenterImpl;
 import com.studiant.com.presentation.presenters.impl.ConnexionPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
@@ -37,12 +38,16 @@ import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ConnexionActivity extends Activity implements ConnexionPresenter.View {
 
 
     @Bind(R.id.login_button_facebook)
     LoginButton loginButton;
+
+    @Bind(R.id.buttonGoToProfil)
+    Button goToProfil;
 
     CallbackManager callbackManager;
     ConnexionPresenter mPresenter;
@@ -76,8 +81,9 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
                         // App code
                         Log.e("onSuccess","ok");
                         if (AccessToken.getCurrentAccessToken() != null) {
-                            mPresenter.setFacebookData();
-                            RequestData();
+                            //mPresenter.setFacebookData();
+                            //RequestData();
+                            goToProfil();
                         }
 
                     }
@@ -94,47 +100,22 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
                 });
     }
 
+    @OnClick(R.id.buttonGoToProfil)
+    void goToProfil() {
+        Intent intentToLaunch = new Intent(this, ProfilParticulierActivity.class);
+        this.startActivity(intentToLaunch);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void RequestData() {
-
-        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object,GraphResponse response) {
-
-                final JSONObject json = response.getJSONObject();
-
-
-
-                try {
-                    if(json != null){
-
-                        Log.e("lucas", json.getString("name"));
-                        Log.e("lucas", json.getString("email"));
-                        Log.e("lucas", json.getString("id"));
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,link,email,picture");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
-
     @Override
     public void onConnexionFacebookSuccess() {
-
+        Log.d("onConnexionFacebook", "ok ");
     }
 
     @Override

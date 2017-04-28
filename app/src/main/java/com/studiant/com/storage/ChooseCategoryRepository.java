@@ -7,11 +7,10 @@ import com.studiant.com.domain.repository.CategoryRepository;
  */
 public class ChooseCategoryRepository implements CategoryRepository {
 
-    String[] ListItem = {"Ice Cream Sandwich", "Jelly Bean", "KitKat", "Lollipop", "Marshmallow"};
+    String[] ListItem = {"Service à la personne", "Baby sitting", "Ménage", "Bricolage", "Autres"};
 
     @Override
     public String[] getListCategoryMessage() {
-        String[] ListItem = {"Ice Cream Sandwich", "Jelly Bean", "KitKat", "Lollipop", "Marshmallow"};
         return ListItem;
     }
 }

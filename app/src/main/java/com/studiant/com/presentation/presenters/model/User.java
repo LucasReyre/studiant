@@ -1,0 +1,63 @@
+package com.studiant.com.presentation.presenters.model;
+
+import android.net.Uri;
+
+/**
+ * Created by lucas on 28/04/2017.
+ */
+
+public class User {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String id;
+    private Uri profilePicture;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Uri getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Uri profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public User(String firstName,String lastName, String email, String id, Uri profilePicture) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.id = id;
+        this.profilePicture = profilePicture;
+    }
+}

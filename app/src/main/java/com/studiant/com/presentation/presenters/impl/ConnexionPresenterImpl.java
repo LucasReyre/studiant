@@ -56,8 +56,6 @@ public class ConnexionPresenterImpl extends AbstractPresenter implements Connexi
 
         // run the interactor
         interactor.execute();
-
-
     }
 
     @Override
