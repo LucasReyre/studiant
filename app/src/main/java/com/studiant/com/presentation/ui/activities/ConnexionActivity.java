@@ -116,6 +116,7 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
     @Override
     public void onConnexionFacebookSuccess() {
         Log.d("onConnexionFacebook", "ok ");
+        goToProfil();
     }
 
     @Override
