@@ -26,7 +26,8 @@
             android:name=".presentation.ui.activities.ChooseActivity"
             android:label="@string/title_activity_choose" />
         <activity android:name=".presentation.ui.activities.ConnexionActivity" />
-        <activity android:name=".presentation.ui.activities.ProfilParticulierActivity"></activity>
+        <activity android:name=".presentation.ui.activities.ProfilParticulierActivity" />
+        <activity android:name=".presentation.ui.activities.AddJobActivity"></activity>
     </application>
 
 </manifest>

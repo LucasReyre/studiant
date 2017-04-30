@@ -43,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
                         Log.e("lucas", json.getString("email"));
                         Log.e("lucas", json.getString("id"));*/
 
-                        user = new User(profile.getName(),profile.getLastName(),json.getString("email"), profile.getId(), profile.getProfilePictureUri(100,100));
+                        user = new User(profile.getFirstName(),profile.getLastName(),json.getString("email"), profile.getId(), profile.getProfilePictureUri(100,100));
 
                     }
 

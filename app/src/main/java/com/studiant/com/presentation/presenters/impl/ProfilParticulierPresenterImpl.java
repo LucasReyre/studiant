@@ -77,8 +77,7 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onProfileRetrieve(User user) {
-        //mView.onProfileRetrieve(user);
-        Log.d("onProfileRetrieve", "my profil  :" + user.getLastName());
+        mView.onProfileRetrieve(user);
     }
 
     @Override
