@@ -24,6 +24,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+
 public class ProfilParticulierActivity extends Activity implements ProfilParticulierPresenter.View {
 
     @Bind(R.id.editTextFirstNameParticulier)
@@ -58,6 +60,7 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
     @OnClick(R.id.buttonValidateParticulier)
     void navigateToAddJob() {
         Intent intentToLaunch = new Intent(this, AddJobActivity.class);
+        intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
         this.startActivity(intentToLaunch);
 
     }

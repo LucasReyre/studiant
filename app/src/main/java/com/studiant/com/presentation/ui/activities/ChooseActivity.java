@@ -25,6 +25,8 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemSelected;
 
+import static com.studiant.com.storage.Constants.*;
+
 
 public class ChooseActivity extends Activity implements ChoosePresenter.View {
 
@@ -61,7 +63,6 @@ public class ChooseActivity extends Activity implements ChoosePresenter.View {
     @Override
     public void displayListCategorie(String[] listItem) {
 
-
         spinner.setItems(listItem);
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
@@ -74,6 +75,7 @@ public class ChooseActivity extends Activity implements ChoosePresenter.View {
     @OnClick(R.id.button_validate)
     void onClickValidate() {
         Intent intentToLaunch = new Intent(this, ConnexionActivity.class);
+        intentToLaunch.putExtra(CATEGORIE_ID_JOB, spinner.getSelectedIndex());
         this.startActivity(intentToLaunch);
     }
 

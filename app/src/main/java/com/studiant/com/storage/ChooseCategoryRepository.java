@@ -1,6 +1,11 @@
 package com.studiant.com.storage;
 
+import android.content.res.Resources;
+import android.util.Log;
+
+import com.studiant.com.R;
 import com.studiant.com.domain.repository.CategoryRepository;
+
 
 /**
  * Created by dmilicic on 1/29/16.

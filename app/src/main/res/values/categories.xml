@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories_array">
+        <item name="servicePersonne">Service à la personne</item>
+        <item name="babySitting">Baby sitting</item>
+        <item name="bricolage">Bricolage</item>
+        <item name="autres">Autres</item>
+    </string-array>
+</resources>

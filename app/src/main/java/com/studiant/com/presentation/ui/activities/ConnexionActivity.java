@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -39,6 +40,8 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 
 public class ConnexionActivity extends Activity implements ConnexionPresenter.View {
 
@@ -103,6 +106,7 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
     @OnClick(R.id.buttonGoToProfil)
     void goToProfil() {
         Intent intentToLaunch = new Intent(this, ProfilParticulierActivity.class);
+        intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
         this.startActivity(intentToLaunch);
     }
 
