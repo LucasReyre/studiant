@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.activities.MainActivity">
-   <!-- android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"-->
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.studiant.com.presentation.ui.activities.MainActivity">
 
-    <com.studiant.com.presentation.ui.components.MCarouselView
-        android:id="@+id/carouselView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:fillColor="#00000000"
-        app:pageColor="#00000000"
-        app:radius="0dp"
-        app:slideInterval="3000"
-        app:strokeColor="#00000000"
-        app:strokeWidth="0dp">
-
-    </com.studiant.com.presentation.ui.components.MCarouselView>
 
     <TextView
         android:id="@+id/welcome_textview"
@@ -29,22 +16,30 @@
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
-    <Button
-        android:id="@+id/btn_etudiant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/etudiant_btn"
-        android:layout_below="@+id/welcome_textview"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_particulier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:text="@string/particulier_btn"
-        android:layout_below="@+id/btn_etudiant"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/btn_etudiant"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/etudiant_btn" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_particulier"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:text="@string/particulier_btn" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

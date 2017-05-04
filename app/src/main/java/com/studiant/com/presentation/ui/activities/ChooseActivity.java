@@ -15,6 +15,7 @@ import com.studiant.com.presentation.presenters.impl.ChoosePresenterImpl;
 import com.studiant.com.presentation.presenters.impl.MainPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
 import com.studiant.com.presentation.presenters.interfaces.MainPresenter;
+import com.studiant.com.presentation.ui.components.MCarouselView;
 import com.studiant.com.storage.ChooseCategoryRepository;
 import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.threading.MainThreadImpl;
@@ -36,6 +37,9 @@ public class ChooseActivity extends Activity implements ChoosePresenter.View {
     @Bind(R.id.button_validate)
     Button btnValidate;
 
+    @Bind(R.id.carouselView)
+    MCarouselView carouselView;
+
     private ChoosePresenter mPresenter;
 
     @Override
@@ -43,6 +47,8 @@ public class ChooseActivity extends Activity implements ChoosePresenter.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
         ButterKnife.bind(this);
+
+        this.carouselView.setImage();
 
         mPresenter = new ChoosePresenterImpl(
                 ThreadExecutor.getInstance(),

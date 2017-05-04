@@ -27,8 +27,6 @@ public class MainActivity extends Activity implements View {
 
     @Bind(R.id.welcome_textview) TextView mWelcomeTextView;
 
-    @Bind(R.id.carouselView) MCarouselView carouselView;
-
     @Bind(R.id.btn_particulier) Button btn_particulier;
     @Bind(R.id.btn_etudiant) Button btn_etudiant;
 
@@ -40,8 +38,6 @@ public class MainActivity extends Activity implements View {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-        this.carouselView.setImage();
         // create a presenter for this view
         mPresenter = new MainPresenterImpl(
                 ThreadExecutor.getInstance(),
