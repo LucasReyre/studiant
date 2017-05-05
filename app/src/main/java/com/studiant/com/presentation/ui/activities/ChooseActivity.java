@@ -82,6 +82,7 @@ public class ChooseActivity extends Activity implements ChoosePresenter.View {
     void onClickValidate() {
         Intent intentToLaunch = new Intent(this, ConnexionActivity.class);
         intentToLaunch.putExtra(CATEGORIE_ID_JOB, spinner.getSelectedIndex());
+        intentToLaunch.putExtra(STATUS_USER, getIntent().getStringExtra(STATUS_USER));
         this.startActivity(intentToLaunch);
     }
 

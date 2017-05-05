@@ -26,8 +26,14 @@
             android:name=".presentation.ui.activities.ChooseActivity"
             android:label="@string/title_activity_choose" />
         <activity android:name=".presentation.ui.activities.ConnexionActivity" />
-        <activity android:name=".presentation.ui.activities.ProfilParticulierActivity" />
-        <activity android:name=".presentation.ui.activities.AddJobActivity"></activity>
+        <activity
+            android:name=".presentation.ui.activities.ProfilParticulierActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".presentation.ui.activities.AddJobActivity" />
+        <activity
+            android:name=".presentation.ui.activities.ProfilEtudiantActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".presentation.ui.activities.DashboardEtudiantActivity"></activity>
     </application>
 
 </manifest>

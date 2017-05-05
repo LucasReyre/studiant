@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.activities.ConnexionActivity">
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.studiant.com.presentation.ui.activities.ConnexionActivity">
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button_facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="171dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/buttonGoToProfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_sign_in"
-        android:layout_below="@+id/login_button_facebook"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="131dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="171dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonGoToProfil"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/action_sign_in"
+            android:layout_below="@+id/login_button_facebook"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+
+</LinearLayout>
 

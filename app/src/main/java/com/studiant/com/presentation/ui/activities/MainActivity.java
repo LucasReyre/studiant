@@ -23,6 +23,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
+import static com.studiant.com.storage.Constants.STATUS_USER;
+
 public class MainActivity extends Activity implements View {
 
     @Bind(R.id.welcome_textview) TextView mWelcomeTextView;
@@ -56,14 +60,18 @@ public class MainActivity extends Activity implements View {
     }
 
 
-    /**
-     * Goes to the user list screen.
-     */
     @OnClick(R.id.btn_particulier)
     void navigateToParticulierForm() {
         Intent intentToLaunch = new Intent(this, ChooseActivity.class);
+        intentToLaunch.putExtra(STATUS_USER, STATUS_PARTICULIER);
         this.startActivity(intentToLaunch);
+    }
 
+    @OnClick(R.id.btn_etudiant)
+    void navigateToConnexionActivity() {
+        Intent intentToLaunch = new Intent(this, ConnexionActivity.class);
+        intentToLaunch.putExtra(STATUS_USER, STATUS_ETUDIANT);
+        this.startActivity(intentToLaunch);
     }
 
     @Override

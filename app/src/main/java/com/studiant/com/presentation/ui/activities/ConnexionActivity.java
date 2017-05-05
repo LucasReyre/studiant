@@ -42,8 +42,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
+import static com.studiant.com.storage.Constants.STATUS_USER;
 
-public class ConnexionActivity extends Activity implements ConnexionPresenter.View {
+public class ConnexionActivity extends Activity implements ConnexionPresenter.View, FacebookCallback {
 
 
     @Bind(R.id.login_button_facebook)
@@ -67,46 +70,26 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
                 this,
                 new ConnexionRepository()
         );
-        //LoginButton loginButton = (LoginButton) this.findViewById(R.id.login_button_facebook);
 
         callbackManager = CallbackManager.Factory.create();
 
         /*AccessToken token = AccessToken.getCurrentAccessToken();
         token.isExpired();
-        Profile profile = Profile.getCurrentProfile();
+        */
 
-        Log.e("Info ", token.isExpired() + " " + profile.getFirstName() + " " + profile.getLastName());*/
-        loginButton.setReadPermissions(Arrays.asList("email"));
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        Log.e("onSuccess","ok");
-                        if (AccessToken.getCurrentAccessToken() != null) {
-                            //mPresenter.setFacebookData();
-                            //RequestData();
-                            goToProfil();
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
+        loginButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
+        LoginManager.getInstance().registerCallback(callbackManager, this);
     }
 
     @OnClick(R.id.buttonGoToProfil)
     void goToProfil() {
-        Intent intentToLaunch = new Intent(this, ProfilParticulierActivity.class);
-        intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
+        Intent intentToLaunch = null;
+        if (getIntent().getStringExtra(STATUS_USER).equals(STATUS_PARTICULIER)){
+            intentToLaunch = new Intent(this, ProfilParticulierActivity.class);
+            intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
+        }else {
+            intentToLaunch = new Intent(this, ProfilEtudiantActivity.class);
+        }
         this.startActivity(intentToLaunch);
     }
 
@@ -119,7 +102,6 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
 
     @Override
     public void onConnexionFacebookSuccess() {
-        Log.d("onConnexionFacebook", "ok ");
         goToProfil();
     }
 
@@ -135,6 +117,30 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
 
     @Override
     public void showError(String message) {
+
+    }
+
+
+    /*
+     *Facebook Callback
+     */
+    @Override
+    public void onSuccess(Object o) {
+        Log.e("onSuccess","ok");
+        if (AccessToken.getCurrentAccessToken() != null) {
+            //mPresenter.setFacebookData();
+            //RequestData();
+            goToProfil();
+        }
+    }
+
+    @Override
+    public void onCancel() {
+
+    }
+
+    @Override
+    public void onError(FacebookException error) {
 
     }
 }

@@ -14,6 +14,8 @@ public class User {
     private String email;
     private String id;
     private Uri profilePicture;
+    private String birthday;
+    private int age;
 
     public String getFirstName() {
         return firstName;
@@ -55,11 +57,28 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
-    public User(String firstName,String lastName, String email, String id, Uri profilePicture) {
+    public User(String firstName,String lastName, String email, String id, Uri profilePicture, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.id = id;
         this.profilePicture = profilePicture;
+        this.birthday = birthday;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

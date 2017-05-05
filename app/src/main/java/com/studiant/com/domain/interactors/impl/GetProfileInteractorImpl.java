@@ -20,6 +20,8 @@ import com.studiant.com.storage.impl.UserRepositoryImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  * <p/>
@@ -48,6 +50,8 @@ public class GetProfileInteractorImpl extends AbstractInteractor implements GetP
     }
 
     private void postMessage(final User user) {
+        String[] birth = user.getBirthday().split("/");
+        user.setAge(getAge(Integer.parseInt(birth[2]), Integer.parseInt(birth[0]), Integer.parseInt(birth[1])));
 
         mMainThread.post(new Runnable() {
             @Override
@@ -61,8 +65,32 @@ public class GetProfileInteractorImpl extends AbstractInteractor implements GetP
     public void run() {
         // retrieve the message
         final User user = mUserRepository.getConnectedProfile();
-
         // we have retrieved our message, notify the UI on the main thread
         postMessage(user);
+    }
+
+    /**
+     * Method to extract the user's age from the entered Date of Birth.
+     *
+     * @param DoB String The user's date of birth.
+     *
+     * @return ageS String The user's age in years based on the supplied DoB.
+     */
+    private int getAge(int year, int month, int day){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        String ageS = ageInt.toString();
+
+        return Integer.parseInt(ageS);
     }
 }

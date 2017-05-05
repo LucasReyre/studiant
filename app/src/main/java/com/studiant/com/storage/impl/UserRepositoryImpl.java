@@ -39,12 +39,12 @@ public class UserRepositoryImpl implements UserRepository {
                 try {
                     if(json != null){
 
-                        /*Log.e("lucas", json.getString("name"));
-                        Log.e("lucas", json.getString("email"));
-                        Log.e("lucas", json.getString("id"));*/
-
-                        user = new User(profile.getFirstName(),profile.getLastName(),json.getString("email"), profile.getId(), profile.getProfilePictureUri(100,100));
-
+                        user = new User(profile.getFirstName(),
+                                        profile.getLastName(),
+                                        json.getString("email"),
+                                        profile.getId(),
+                                        profile.getProfilePictureUri(200,200),
+                                        json.getString("birthday"));
                     }
 
                 } catch (JSONException e) {
@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,link,email,picture");
+        parameters.putString("fields", "id,name,link,email,picture,birthday");
         request.setParameters(parameters);
         request.executeAndWait();
         //request.executeAsync();
