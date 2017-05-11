@@ -28,13 +28,15 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // general
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.jakewharton.timber:timber:4.1.0'
 
     // ui
@@ -51,9 +53,13 @@ dependencies {
     provided "javax.annotation:jsr250-api:1.0"
 
     // network
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:+'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+
+    // inspection
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
 
     // tests

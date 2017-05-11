@@ -19,7 +19,7 @@ import com.studiant.com.presentation.ui.components.MCarouselView;
 import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.threading.MainThreadImpl;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -29,10 +29,10 @@ import static com.studiant.com.storage.Constants.STATUS_USER;
 
 public class MainActivity extends Activity implements View {
 
-    @Bind(R.id.welcome_textview) TextView mWelcomeTextView;
+    @BindView(R.id.welcome_textview) TextView mWelcomeTextView;
 
-    @Bind(R.id.btn_particulier) Button btn_particulier;
-    @Bind(R.id.btn_etudiant) Button btn_etudiant;
+    @BindView(R.id.btn_particulier) Button btn_particulier;
+    @BindView(R.id.btn_etudiant) Button btn_etudiant;
 
     private MainPresenter mPresenter;
 

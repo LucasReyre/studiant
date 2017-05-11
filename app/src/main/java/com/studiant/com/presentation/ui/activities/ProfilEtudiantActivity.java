@@ -19,7 +19,7 @@ import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPres
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,19 +28,19 @@ import static com.studiant.com.storage.Constants.STATUS_USER;
 
 public class ProfilEtudiantActivity extends Activity implements ProfilParticulierPresenter.View{
 
-    @Bind(R.id.editTextFirstNameParticulier)
+    @BindView(R.id.editTextFirstNameParticulier)
     EditText firstNameEditText;
 
-    @Bind(R.id.editTextLastNameParticulier)
+    @BindView(R.id.editTextLastNameParticulier)
     EditText lastNameEditText;
 
-    @Bind(R.id.editTextEmailParticulier)
+    @BindView(R.id.editTextEmailParticulier)
     AutoCompleteTextView emailEditText;
 
-    @Bind(R.id.buttonValidateEtudiant)
+    @BindView(R.id.buttonValidateEtudiant)
     Button validateButton;
 
-    @Bind(R.id.imageViewProfilPicture)
+    @BindView(R.id.imageViewProfilPicture)
     ImageView profilPictureImageView;
 
     private ProfilParticulierPresenter mPresenter;

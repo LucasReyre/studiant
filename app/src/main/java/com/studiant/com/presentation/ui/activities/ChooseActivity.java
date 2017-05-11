@@ -20,7 +20,7 @@ import com.studiant.com.storage.ChooseCategoryRepository;
 import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.threading.MainThreadImpl;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
@@ -31,13 +31,13 @@ import static com.studiant.com.storage.Constants.*;
 
 public class ChooseActivity extends Activity implements ChoosePresenter.View {
 
-    @Bind(R.id.spinner_categorie)
+    @BindView(R.id.spinner_categorie)
     MaterialSpinner spinner;
 
-    @Bind(R.id.button_validate)
+    @BindView(R.id.button_validate)
     Button btnValidate;
 
-    @Bind(R.id.carouselView)
+    @BindView(R.id.carouselView)
     MCarouselView carouselView;
 
     private ChoosePresenter mPresenter;

@@ -20,7 +20,7 @@ import com.studiant.com.presentation.ui.components.MTimePicker;
 import com.studiant.com.storage.ChooseCategoryRepository;
 import com.studiant.com.threading.MainThreadImpl;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
@@ -29,13 +29,13 @@ import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 
 public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
-    @Bind(R.id.spinner_categorie)
+    @BindView(R.id.spinner_categorie)
     MaterialSpinner spinner;
 
-    @Bind(R.id.textViewDate)
+    @BindView(R.id.textViewDate)
     TextView dateTextView;
 
-    @Bind(R.id.textViewTime)
+    @BindView(R.id.textViewTime)
     TextView timeTextView;
 
     private AddJobPresenter mPresenter;

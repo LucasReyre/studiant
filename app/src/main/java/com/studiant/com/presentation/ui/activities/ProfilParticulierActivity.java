@@ -20,7 +20,7 @@ import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,16 +28,16 @@ import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 
 public class ProfilParticulierActivity extends Activity implements ProfilParticulierPresenter.View {
 
-    @Bind(R.id.editTextFirstNameParticulier)
+    @BindView(R.id.editTextFirstNameParticulier)
     EditText firstNameEditText;
 
-    @Bind(R.id.editTextLastNameParticulier)
+    @BindView(R.id.editTextLastNameParticulier)
     EditText lastNameEditText;
 
-    @Bind(R.id.editTextEmailParticulier)
+    @BindView(R.id.editTextEmailParticulier)
     AutoCompleteTextView emailEditText;
 
-    @Bind(R.id.buttonValidateParticulier)
+    @BindView(R.id.buttonValidateParticulier)
     Button validateButton;
 
     private ProfilParticulierPresenter mPresenter;

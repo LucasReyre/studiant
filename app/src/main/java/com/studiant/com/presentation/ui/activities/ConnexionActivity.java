@@ -37,7 +37,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -49,10 +49,10 @@ import static com.studiant.com.storage.Constants.STATUS_USER;
 public class ConnexionActivity extends Activity implements ConnexionPresenter.View, FacebookCallback {
 
 
-    @Bind(R.id.login_button_facebook)
+    @BindView(R.id.login_button_facebook)
     LoginButton loginButton;
 
-    @Bind(R.id.buttonGoToProfil)
+    @BindView(R.id.buttonGoToProfil)
     Button goToProfil;
 
     CallbackManager callbackManager;
