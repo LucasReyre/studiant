@@ -52,6 +52,9 @@ dependencies {
 
     // network
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    compile 'com.squareup.retrofit2:converter-gson:+'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+
 
     // tests
     testCompile 'junit:junit:4.12'
