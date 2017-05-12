@@ -87,13 +87,12 @@ public class ProfilEtudiantActivity extends Activity implements ProfilParticulie
         if (user != null){
             user.setDescription(descriptionEditText.getText().toString());
             user.setDiplome(diplomeEditText.getText().toString());
-            user.setPermis(permisSwitch.isActivated());
+            user.setPermis(permisSwitch.isChecked());
             user.setTypeUser(STATUS_ETUDIANT);
             user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
             mPresenter.insertProfile(user);
         }
-        Intent intentToLaunch = new Intent(this, DashboardEtudiantActivity.class);
-        this.startActivity(intentToLaunch);
+
     }
 
     @Override
@@ -107,7 +106,8 @@ public class ProfilEtudiantActivity extends Activity implements ProfilParticulie
 
     @Override
     public void onUserInsert() {
-        Log.d("onUserInsert", "ok");
+        Intent intentToLaunch = new Intent(this, DashboardEtudiantActivity.class);
+        this.startActivity(intentToLaunch);
     }
 
     @Override
