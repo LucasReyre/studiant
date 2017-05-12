@@ -10,9 +10,18 @@ import com.facebook.Profile;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.CategoryRepository;
 import com.studiant.com.domain.repository.UserRepository;
+import com.studiant.com.network.RestClient;
+import com.studiant.com.network.converters.RESTModelConverter;
+import com.studiant.com.network.model.RESTUtilisateur;
+import com.studiant.com.network.services.UtilisateurService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
+import retrofit2.Response;
+import timber.log.Timber;
 
 /**
  * Created by dmilicic on 1/29/16.
@@ -22,7 +31,20 @@ public class UserRepositoryImpl implements UserRepository {
     private User user;
 
     @Override
-    public void insert(User user) {
+    public void insertUser(User user) {
+
+        UtilisateurService utilisateurService = RestClient.getService(UtilisateurService.class);
+
+        //    utilisateurService.uploadData().enqueue(this);
+        try {
+            Response<Void> response = utilisateurService.insertUser(RESTModelConverter.convertToRestModel(user)).execute();
+
+            Timber.i("UPLOAD SUCCESS: %d", response.code());
+            Log.d("response", "finish");
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("UPLOAD FAIL"+e.getMessage());
+        }
 
     }
 

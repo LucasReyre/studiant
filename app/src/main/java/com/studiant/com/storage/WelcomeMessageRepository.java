@@ -2,8 +2,10 @@ package com.studiant.com.storage;
 
 import android.util.Log;
 
+import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.MessageRepository;
 import com.studiant.com.network.RestClient;
+import com.studiant.com.network.model.RESTUtilisateur;
 import com.studiant.com.network.services.UtilisateurService;
 
 import java.io.IOException;
@@ -16,48 +18,39 @@ import timber.log.Timber;
 /**
  * Created by dmilicic on 1/29/16.
  */
-public class WelcomeMessageRepository implements MessageRepository {
+public class WelcomeMessageRepository implements MessageRepository, Callback<User>  {
     @Override
     public String getWelcomeMessage() {
         String msg = "Welcome, friend!"; // let's be friendly
 
+        UtilisateurService utilisateurService = RestClient.getService(UtilisateurService.class);
 
-        UtilisateurService syncService = RestClient.getService(UtilisateurService.class);
-
-        // TODO: get the real user's name
-
-        // get all unsynced data
-
-        // run the upload
+        //    utilisateurService.uploadData().enqueue(this);
         try {
-            Log.d("response", "start");
-            Response<Void> response = syncService.uploadData().execute();
+            Response<RESTUtilisateur> response = utilisateurService.uploadData().execute();
+            Log.d("response",""+response.body().getmNomUtilisateur());
 
             Timber.i("UPLOAD SUCCESS: %d", response.code());
             Log.d("response", "finish");
 
 
         } catch (IOException e) { // something went wrong
-            Timber.e("UPLOAD FAIL");
+            Timber.e("UPLOAD FAIL"+e.getMessage());
         }
-
 
         return msg;
     }
 
-    private Callback<Void> mResponseCallback = new Callback<Void>() {
-        @Override
-        public void onResponse(Call<Void> call, Response<Void> response) {
-            Timber.i("UPLOAD SUCCESS: %d", response.code());
-            Log.d("response", "onResponse");
+    //Uniquement pour enqueue (appel asynchrone)
+    @Override
+    public void onResponse(Call<User> call, Response<User> response) {
 
-        }
+        Log.d("response", "onResponse");
+    }
 
-        @Override
-        public void onFailure(Call<Void> call, Throwable t) {
-            Timber.e("UPLOAD FAIL");
-            Log.d("response", "onResponse");
+    @Override
+    public void onFailure(Call<User> call, Throwable t) {
+        Log.d("response", "onFailure"+t.getMessage());
 
-        }
-    };
+    }
 }

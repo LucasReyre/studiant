@@ -1,5 +1,6 @@
 package com.studiant.com.network.services;
 
+import com.studiant.com.domain.model.User;
 import com.studiant.com.network.model.RESTUtilisateur;
 
 import retrofit2.Call;
@@ -14,11 +15,12 @@ import retrofit2.http.POST;
 
 public interface UtilisateurService {
 
-    /**
-     * This endpoint will be used to send new costs created on this device.
-     */
+
     @Headers("Connection: close")
-    @GET("/api/Utilisateurs")
-    Call<Void> uploadData();
-   // Call<Void> uploadData(@Body RESTUtilisateur data);
+    @GET("/api/Utilisateurs/findOne")
+    Call<RESTUtilisateur> uploadData();
+
+    @Headers("Connection: close")
+    @POST("/api/Utilisateurs")
+    Call<Void> insertUser(@Body RESTUtilisateur user);
 }

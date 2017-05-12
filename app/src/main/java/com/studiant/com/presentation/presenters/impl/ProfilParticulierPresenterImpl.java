@@ -6,8 +6,10 @@ import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.ConnexionFacebookInteractorImpl;
 import com.studiant.com.domain.interactors.impl.GetProfileInteractorImpl;
+import com.studiant.com.domain.interactors.impl.InsertUserInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
+import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
@@ -18,7 +20,8 @@ import com.studiant.com.storage.ConnexionRepository;
 /**
  * Created by dmilicic on 12/13/15.
  */
-public class ProfilParticulierPresenterImpl extends AbstractPresenter implements ProfilParticulierPresenter, GetProfileInteractor.Callback{
+public class ProfilParticulierPresenterImpl extends AbstractPresenter implements ProfilParticulierPresenter, GetProfileInteractor.Callback,
+        InsertUserInteractor.Callback{
 
     private View mView;
     private UserRepository mUserRepository;
@@ -62,7 +65,6 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     @Override
     public void getFacebookData() {
 
-        Log.d("getFacebookData", "ok ");
         GetProfileInteractor interactor = new GetProfileInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -76,8 +78,27 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
+    public void insertProfile(User user) {
+
+        InsertUserInteractor interactor = new InsertUserInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mUserRepository,
+                user
+        );
+
+        interactor.execute();
+    }
+
+    @Override
     public void onProfileRetrieve(User user) {
         mView.onProfileRetrieve(user);
+    }
+
+    @Override
+    public void onUserInsert() {
+        mView.onUserInsert();
     }
 
     @Override

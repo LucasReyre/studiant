@@ -58,7 +58,6 @@ public class ConnexionFacebookInteractorImpl extends AbstractInteractor implemen
     @Override
     public void run() {
 
-        RequestData();
         // retrieve the message
         final String[] listItem = mConnexionRepository.getListCategoryMessage();
 
@@ -66,33 +65,5 @@ public class ConnexionFacebookInteractorImpl extends AbstractInteractor implemen
         postMessage(listItem);
     }
 
-    private void RequestData() {
 
-        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-
-                final JSONObject json = response.getJSONObject();
-                Profile profile = Profile.getCurrentProfile();
-                try {
-                    if(json != null){
-
-                        Log.e("lucas", json.getString("name"));
-                        Log.e("lucas", json.getString("email"));
-                        Log.e("lucas", json.getString("id"));
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,link,email,picture");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
 }

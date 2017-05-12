@@ -9,8 +9,10 @@ public interface ProfilParticulierPresenter extends BasePresenter {
 
 
     void getFacebookData();
+    void insertProfile(User user);
 
     interface View extends BaseView {
         void onProfileRetrieve(User user);
+        void onUserInsert();
     }
 }

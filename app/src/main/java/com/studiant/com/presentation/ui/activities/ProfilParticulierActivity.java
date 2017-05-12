@@ -82,6 +82,11 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
     }
 
     @Override
+    public void onUserInsert() {
+        Log.d("onUserInsert", "ok");
+    }
+
+    @Override
     public void showProgress() {
 
     }

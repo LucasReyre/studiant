@@ -99,8 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <AutoCompleteTextView
-                    android:id="@+id/editTextEtudes"
+                <EditText
+                    android:id="@+id/editTextDiplome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_study"
@@ -126,6 +126,12 @@
                     android:maxLines="5" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <Switch
+                android:id="@+id/switchPermis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_permis" />
 
             <Button
                 android:id="@+id/buttonValidateEtudiant"

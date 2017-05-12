@@ -84,7 +84,8 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
     @OnClick(R.id.buttonGoToProfil)
     void goToProfil() {
         Intent intentToLaunch = null;
-        if (getIntent().getStringExtra(STATUS_USER).equals(STATUS_PARTICULIER)){
+
+        if (getIntent().getIntExtra(STATUS_USER, STATUS_PARTICULIER) == STATUS_PARTICULIER){
             intentToLaunch = new Intent(this, ProfilParticulierActivity.class);
             intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
         }else {

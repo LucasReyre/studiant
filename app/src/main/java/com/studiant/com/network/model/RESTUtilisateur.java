@@ -33,7 +33,7 @@ public class RESTUtilisateur {
     private String mIdExterneUtilisateur;
 
     @SerializedName("typeConnexionUtilisateur")
-    private String mTypeConnexionUtilisateur;
+    private int mTypeConnexionUtilisateur;
 
     @SerializedName("descriptionUtilisateur")
     private String mDescriptionUtilisateur;
@@ -44,8 +44,22 @@ public class RESTUtilisateur {
     @SerializedName("permisUtilisateur")
     private Boolean mPermisUtilisateur;
 
-    public RESTUtilisateur(String mId, String mNomUtilisateur, String mPrenomUtilisateur, String mDateNaissanceUtilisateur, String mPhotoUtilisateur, String mMailUtilisateur, int mTypeUtilisateur, String mIdExterneUtilisateur, String mTypeConnexionUtilisateur, String mDescriptionUtilisateur, String mDiplomeUtilisateur, Boolean mPermisUtilisateur) {
+    public RESTUtilisateur(String mId, String mNomUtilisateur, String mPrenomUtilisateur, String mDateNaissanceUtilisateur, String mPhotoUtilisateur, String mMailUtilisateur, int mTypeUtilisateur, String mIdExterneUtilisateur, int mTypeConnexionUtilisateur, String mDescriptionUtilisateur, String mDiplomeUtilisateur, Boolean mPermisUtilisateur) {
         this.mId = mId;
+        this.mNomUtilisateur = mNomUtilisateur;
+        this.mPrenomUtilisateur = mPrenomUtilisateur;
+        this.mDateNaissanceUtilisateur = mDateNaissanceUtilisateur;
+        this.mPhotoUtilisateur = mPhotoUtilisateur;
+        this.mMailUtilisateur = mMailUtilisateur;
+        this.mTypeUtilisateur = mTypeUtilisateur;
+        this.mIdExterneUtilisateur = mIdExterneUtilisateur;
+        this.mTypeConnexionUtilisateur = mTypeConnexionUtilisateur;
+        this.mDescriptionUtilisateur = mDescriptionUtilisateur;
+        this.mDiplomeUtilisateur = mDiplomeUtilisateur;
+        this.mPermisUtilisateur = mPermisUtilisateur;
+    }
+
+    public RESTUtilisateur(String mNomUtilisateur, String mPrenomUtilisateur, String mDateNaissanceUtilisateur, String mPhotoUtilisateur, String mMailUtilisateur, int mTypeUtilisateur, String mIdExterneUtilisateur, int mTypeConnexionUtilisateur, String mDescriptionUtilisateur, String mDiplomeUtilisateur, Boolean mPermisUtilisateur) {
         this.mNomUtilisateur = mNomUtilisateur;
         this.mPrenomUtilisateur = mPrenomUtilisateur;
         this.mDateNaissanceUtilisateur = mDateNaissanceUtilisateur;
@@ -123,11 +137,11 @@ public class RESTUtilisateur {
         this.mIdExterneUtilisateur = mIdExterneUtilisateur;
     }
 
-    public String getmTypeConnexionUtilisateur() {
+    public int getmTypeConnexionUtilisateur() {
         return mTypeConnexionUtilisateur;
     }
 
-    public void setmTypeConnexionUtilisateur(String mTypeConnexionUtilisateur) {
+    public void setmTypeConnexionUtilisateur(int mTypeConnexionUtilisateur) {
         this.mTypeConnexionUtilisateur = mTypeConnexionUtilisateur;
     }
 

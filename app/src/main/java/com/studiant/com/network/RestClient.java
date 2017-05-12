@@ -26,7 +26,6 @@ public class RestClient {
 
     static {
 
-        Log.d("response", "start RestClient");
         // enable logging
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -44,7 +43,6 @@ public class RestClient {
     }
 
     public static <T> T getService(Class<T> serviceClass) {
-        Log.d("response", "getService");
         return s_retrofit.create(serviceClass);
     }
 }
