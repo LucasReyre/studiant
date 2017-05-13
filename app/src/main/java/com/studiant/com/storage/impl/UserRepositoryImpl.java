@@ -51,37 +51,71 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getConnectedProfile() {
 
+        if(AccessToken.getCurrentAccessToken() != null) {
 
-        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
+            GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject object, GraphResponse response) {
 
-                final JSONObject json = response.getJSONObject();
-                Profile profile = Profile.getCurrentProfile();
-                try {
-                    if(json != null){
+                    final JSONObject json = response.getJSONObject();
+                    Profile profile = Profile.getCurrentProfile();
+                    try {
+                        if (json != null) {
 
-                        user = new User(profile.getFirstName(),
-                                        profile.getLastName(),
-                                        json.getString("email"),
-                                        profile.getId(),
-                                        profile.getProfilePictureUri(200,200),
-                                        json.getString("birthday"));
+                            user = new User(profile.getFirstName(),
+                                    profile.getLastName(),
+                                    json.getString("email"),
+                                    profile.getId(),
+                                    profile.getProfilePictureUri(200, 200),
+                                    json.getString("birthday"));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+            });
+
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id,name,link,email,picture,birthday");
+            request.setParameters(parameters);
+            request.executeAndWait();
+            //request.executeAsync();
+
+            return user;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public User getProfileFromConnectedUser() {
+
+        User user = getConnectedProfile();
+        RESTUtilisateur restUtilisateur = null;
+
+        if (user == null){
+            return null;
+        }else {
+
+            UtilisateurService utilisateurService = RestClient.getService(UtilisateurService.class);
+
+            //    utilisateurService.uploadData().enqueue(this);
+            try {
+
+                String query = "{\"where\":{\"mailUtilisateur\":\""+user.getEmail()+"\"}}";
+                Response<RESTUtilisateur> response = utilisateurService.getUserFromConnectedProfile(query).execute();
+                Timber.i("UPLOAD SUCCESS: %d", response.code());
+                Log.d("response", "finish");
+                restUtilisateur = response.body();
+
+            } catch (IOException e) { // something went wrong
+                Timber.e("UPLOAD FAIL"+e.getMessage());
             }
-        });
 
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,link,email,picture,birthday");
-        request.setParameters(parameters);
-        request.executeAndWait();
-        //request.executeAsync();
+            return RESTModelConverter.convertToUserModel(restUtilisateur);
+        }
 
-        return user;
     }
 
 }

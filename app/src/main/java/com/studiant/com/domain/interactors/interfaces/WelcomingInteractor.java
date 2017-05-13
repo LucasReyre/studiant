@@ -8,7 +8,6 @@ public interface WelcomingInteractor extends Interactor {
 
     interface Callback {
         void onMessageRetrieved(String message);
-
         void onRetrievalFailed(String error);
     }
 }

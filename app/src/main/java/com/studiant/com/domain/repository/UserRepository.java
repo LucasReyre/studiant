@@ -9,6 +9,6 @@ public interface UserRepository {
 
     void insertUser(User user);
     User getConnectedProfile();
-
+    User getProfileFromConnectedUser();
 
 }

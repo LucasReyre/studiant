@@ -11,6 +11,7 @@
     <string name="add_job"> Ajoutez votre demande</string>
     <string name="confirm_informations"> Confirmez vos informations</string>
 
+    <string name="profil_not_find"> Le profil n\'a pas été retrouvé</string>
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -29,6 +30,9 @@
     <string name="error_field_required">This field is required</string>
 
     <string name="facebook_app_id">1924525284450671</string>
+
+
+
     <!--
     FOLDING CELL
     -->
