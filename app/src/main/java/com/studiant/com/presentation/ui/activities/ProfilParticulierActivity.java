@@ -25,6 +25,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 
 public class ProfilParticulierActivity extends Activity implements ProfilParticulierPresenter.View {
 
@@ -41,6 +44,8 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
     Button validateButton;
 
     private ProfilParticulierPresenter mPresenter;
+
+    User user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +64,14 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
 
     @OnClick(R.id.buttonValidateParticulier)
     void navigateToAddJob() {
-        Intent intentToLaunch = new Intent(this, AddJobActivity.class);
-        intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
-        this.startActivity(intentToLaunch);
+        if (user != null){
+            user.setFirstName(firstNameEditText.getText().toString());
+            user.setLastName(lastNameEditText.getText().toString());
+            user.setEmail(emailEditText.getText().toString());
+            user.setTypeUser(STATUS_PARTICULIER);
+            user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
+            mPresenter.insertProfile(user);
+        }
 
     }
 
@@ -73,7 +83,8 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
         mPresenter.resume();
     }
     @Override
-    public void onProfileRetrieve(User user) {
+    public void onProfileRetrieve(User mUser) {
+        user = mUser;
         firstNameEditText.setText(user.getFirstName());
         lastNameEditText.setText(user.getLastName());
         emailEditText.setText(user.getEmail());
@@ -81,9 +92,12 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
 
     }
 
+
     @Override
     public void onUserInsert() {
-        Log.d("onUserInsert", "ok");
+        Intent intentToLaunch = new Intent(this, AddJobActivity.class);
+        intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
+        this.startActivity(intentToLaunch);
     }
 
     @Override

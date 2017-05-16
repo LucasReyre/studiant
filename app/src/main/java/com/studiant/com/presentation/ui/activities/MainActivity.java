@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements View {
         super.onResume();
 
         // let's start welcome message retrieval when the app resumes
-        mPresenter.resume();
+        //mPresenter.resume();
     }
 
 

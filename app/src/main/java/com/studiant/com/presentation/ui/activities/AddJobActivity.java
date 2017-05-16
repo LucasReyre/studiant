@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 
 public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
@@ -37,6 +40,9 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
     @BindView(R.id.textViewTime)
     TextView timeTextView;
+
+    @BindView(R.id.buttonAddJob)
+    Button addJobButton;
 
     private AddJobPresenter mPresenter;
 
@@ -89,6 +95,11 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
                 Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    @OnClick(R.id.buttonAddJob)
+    void onClickAddJob() {
+
     }
 
     @Override
