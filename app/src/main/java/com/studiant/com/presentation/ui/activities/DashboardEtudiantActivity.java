@@ -17,6 +17,8 @@ import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 import com.studiant.com.presentation.ui.components.Item;
+import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
+import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
 import java.util.ArrayList;
 
@@ -53,8 +55,8 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                     //    return RecyclerViewFragment.newInstance();
                     //case 1:
                     //    return RecyclerViewFragment.newInstance();
-                    //case 2:
-                    //    return WebViewFragment.newInstance();
+                    case 2:
+                        return ListJobEtudiantFragment.newInstance("test", "test2");
                     default:
                         return RecyclerViewFragment.newInstance();
                 }

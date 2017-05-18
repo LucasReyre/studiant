@@ -1,5 +1,4 @@
-package com.studiant.com.presentation.ui.activities;
-
+package com.studiant.com.presentation.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +11,16 @@ import android.view.ViewGroup;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.studiant.com.R;
+import com.studiant.com.presentation.ui.activities.TestRecyclerViewAdapter;
+import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
