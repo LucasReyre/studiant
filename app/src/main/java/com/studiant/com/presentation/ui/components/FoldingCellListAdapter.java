@@ -108,7 +108,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
     }
 
     // View lookup cache
-    private static class ViewHolder {
+    public static class ViewHolder {
         TextView price;
         TextView contentRequestBtn;
         //TextView pledgePrice;

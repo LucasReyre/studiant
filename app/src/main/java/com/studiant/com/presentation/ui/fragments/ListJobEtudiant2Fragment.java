@@ -1,7 +1,5 @@
 package com.studiant.com.presentation.ui.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,29 +18,29 @@ import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.activities.TestRecyclerViewAdapter;
 import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
+import com.studiant.com.presentation.ui.components.FoldingCellRecyclerViewAdapter;
 import com.studiant.com.presentation.ui.components.Item;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class ListJobEtudiantFragment extends Fragment {
+public class ListJobEtudiant2Fragment extends Fragment {
 
     private static final boolean GRID_LAYOUT = false;
     @BindView(R.id.mainListView)
-    ListView theListView;
+    RecyclerView mRecyclerView;
 
-    public ListJobEtudiantFragment() {
+
+    public ListJobEtudiant2Fragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static ListJobEtudiantFragment newInstance() {
-        ListJobEtudiantFragment fragment = new ListJobEtudiantFragment();
+    public static ListJobEtudiant2Fragment newInstance() {
+        ListJobEtudiant2Fragment fragment = new ListJobEtudiant2Fragment();
         return fragment;
     }
 
@@ -53,7 +51,7 @@ public class ListJobEtudiantFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      return inflater.inflate(R.layout.fragment_list_job_etudiant, container, false);
+      return inflater.inflate(R.layout.fragment_list_job_etudiant2, container, false);
     }
 
 
@@ -84,19 +82,18 @@ public class ListJobEtudiantFragment extends Fragment {
             }
         });
 
-        // set elements to adapter
-        theListView.setAdapter(adapter);
+        //setup materialviewpager
 
-        // set on click event listener to list view
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                // toggle clicked cell state
-                ((FoldingCell) view).toggle(false);
-                // register in adapter that state for selected cell is toggled
-                adapter.registerToggle(pos);
-            }
-        });
+        if (GRID_LAYOUT) {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        } else {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+        mRecyclerView.setHasFixedSize(true);
+
+        //Use this now
+        mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
+        mRecyclerView.setAdapter(new FoldingCellRecyclerViewAdapter(items));
 
     }
 

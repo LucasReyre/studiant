@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 import com.studiant.com.presentation.ui.components.Item;
+import com.studiant.com.presentation.ui.fragments.ListJobEtudiant2Fragment;
 import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
@@ -51,12 +53,12 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 switch (position % 4) {
-                    //case 0:
-                    //    return RecyclerViewFragment.newInstance();
-                    //case 1:
-                    //    return RecyclerViewFragment.newInstance();
+                    case 0:
+                        return ListJobEtudiant2Fragment.newInstance();
+                    case 1:
+                        return ListJobEtudiantFragment.newInstance();
                     case 2:
-                        return ListJobEtudiantFragment.newInstance("test", "test2");
+                        return RecyclerViewFragment.newInstance();
                     default:
                         return RecyclerViewFragment.newInstance();
                 }
@@ -71,11 +73,11 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             public CharSequence getPageTitle(int position) {
                 switch (position % 4) {
                     case 0:
-                        return "Selection";
+                        return "Dashboard";
                     case 1:
-                        return "Actualités";
+                        return "Historique";
                     case 2:
-                        return "Professionnel";
+                        return "Mon Profil";
                     case 3:
                         return "Divertissement";
                 }
@@ -88,9 +90,9 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page) {
                     case 0:
-                        return HeaderDesign.fromColorResAndUrl(
+                        return HeaderDesign.fromColorResAndDrawable(
                                 R.color.green,
-                                "http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/06/android_google_moutain_google_now_1920x1080_wallpaper_Wallpaper-HD_2560x1600_www.paperhi.com_-640x400.jpg");
+                                ContextCompat.getDrawable(getApplicationContext(),R.drawable.home1));
                     case 1:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.blue,
