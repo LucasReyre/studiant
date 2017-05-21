@@ -20,6 +20,7 @@ import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 import com.studiant.com.presentation.ui.components.Item;
 import com.studiant.com.presentation.ui.fragments.ListJobEtudiant2Fragment;
 import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
+import com.studiant.com.presentation.ui.fragments.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                     case 0:
                         return ListJobEtudiant2Fragment.newInstance();
                     case 1:
-                        return ListJobEtudiantFragment.newInstance();
+                        return ProfilEtudiantFragment.newInstance();
                     case 2:
                         return RecyclerViewFragment.newInstance();
                     default:
