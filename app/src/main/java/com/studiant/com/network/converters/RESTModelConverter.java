@@ -15,6 +15,7 @@ public class RESTModelConverter {
 
 
     public static User convertToUserModel(RESTUtilisateur restUtilisateur){
+        String id = restUtilisateur.getmId();
         String nomUser = restUtilisateur.getmNomUtilisateur();
         String prenomUser = restUtilisateur.getmPrenomUtilisateur();
         String dateNaissanceUser = restUtilisateur.getmDateNaissanceUtilisateur();
@@ -27,7 +28,7 @@ public class RESTModelConverter {
         String diplomeUser = restUtilisateur.getmDiplomeUtilisateur();
         boolean permisUser = restUtilisateur.getmPermisUtilisateur();
 
-        return new User(prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, permisUser, diplomeUser,typeConnexion, typeUser);
+        return new User(id, prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, permisUser, diplomeUser,typeConnexion, typeUser);
         //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
     }
 
@@ -62,30 +63,14 @@ public class RESTModelConverter {
 
     public static RESTJob convertToRestJobModel(Job job) {
 
-        
-        String nomUser = user.getLastName();
-        String prenomUser = user.getFirstName();
-        String dateNaissanceUser = user.getBirthday();
-        String photoUser = user.getProfilePicture();
-        String mailUser = user.getEmail();
-        int typeUser = user.getTypeUser();
-        String idExterne = user.getIdExterne();
-        int typeConnexion = user.getTypeConnexion();
-        String descriptionUser = user.getDescription();
-        String diplomeUser = user.getDiplome();
-        boolean permisUser = user.isPermis();
+        String mDescription = job.getDescription();
+        String mPrix = job.getPrix();
+        String mAdresseJob = job.getAdresse();
+        String mDate = job.getDate();
+        String mHeure = job.getHeure();
+        String mUtilisateurId = job.getUtilisateurId();
 
-        return new RESTUtilisateur( nomUser,
-                prenomUser,
-                dateNaissanceUser,
-                photoUser,
-                mailUser,
-                typeUser,
-                idExterne,
-                typeConnexion,
-                descriptionUser,
-                diplomeUser,
-                permisUser);
+        return new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId);
 
     }
 

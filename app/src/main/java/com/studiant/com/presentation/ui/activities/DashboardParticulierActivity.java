@@ -50,7 +50,7 @@ public class DashboardParticulierActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position % 4) {
                     case 0:
-                        return ListJobEtudiant2Fragment.newInstance();
+                        return ListJobEtudiant2Fragment.newInstance(user);
                     case 1:
                         return ProfilEtudiantFragment.newInstance(user);
                     case 2:

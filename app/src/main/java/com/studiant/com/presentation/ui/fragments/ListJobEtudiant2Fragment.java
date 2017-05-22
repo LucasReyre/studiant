@@ -1,6 +1,7 @@
 package com.studiant.com.presentation.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
+import com.studiant.com.domain.model.Job;
+import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.ui.activities.AddJobActivity;
 import com.studiant.com.presentation.ui.activities.TestRecyclerViewAdapter;
 import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 import com.studiant.com.presentation.ui.components.FoldingCellRecyclerViewAdapter;
@@ -27,8 +31,11 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.INTENT_USER;
 
 public class ListJobEtudiant2Fragment extends Fragment {
 
@@ -36,19 +43,29 @@ public class ListJobEtudiant2Fragment extends Fragment {
     @BindView(R.id.mainListView)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.fabButton)
+    FloatingActionButton fabButton;
+
+    User user;
 
     public ListJobEtudiant2Fragment() {
         // Required empty public constructor
     }
 
-    public static ListJobEtudiant2Fragment newInstance() {
+    public static ListJobEtudiant2Fragment newInstance(User user) {
         ListJobEtudiant2Fragment fragment = new ListJobEtudiant2Fragment();
+        Bundle args = new Bundle();
+        args.putSerializable(INTENT_USER, user);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            user = (User) getArguments().getSerializable(INTENT_USER);
+        }
     }
 
     @Override
@@ -98,6 +115,14 @@ public class ListJobEtudiant2Fragment extends Fragment {
         mRecyclerView.setAdapter(new FoldingCellRecyclerViewAdapter(items));
 
     }
+
+    @OnClick(R.id.fabButton)
+    void onClickFabButton() {
+        Intent intent = new Intent(getApplicationContext(), AddJobActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        this.startActivity(intent);
+    }
+
 
 
 }

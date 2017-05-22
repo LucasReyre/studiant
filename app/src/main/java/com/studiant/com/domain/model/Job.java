@@ -13,9 +13,9 @@ public class Job {
     private String adresse;
     private String date;
     private String heure;
-    private int utilisateurId;
+    private String utilisateurId;
 
-    public Job(String id, String description, String prix, String adresse, String date, String heure, int utilisateurId) {
+    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId) {
         this.id = id;
         this.description = description;
         this.prix = prix;
@@ -25,8 +25,7 @@ public class Job {
         this.utilisateurId = utilisateurId;
     }
 
-    public Job(String description, String prix, String adresse, String date, String heure) {
-        this.id = id;
+    public Job(String description, String prix, String adresse, String date, String heure, String utilisateurId) {
         this.description = description;
         this.prix = prix;
         this.adresse = adresse;
@@ -83,11 +82,11 @@ public class Job {
         this.heure = heure;
     }
 
-    public int getUtilisateurId() {
+    public String getUtilisateurId() {
         return utilisateurId;
     }
 
-    public void setUtilisateurId(int utilisateurId) {
+    public void setUtilisateurId(String utilisateurId) {
         this.utilisateurId = utilisateurId;
     }
 }

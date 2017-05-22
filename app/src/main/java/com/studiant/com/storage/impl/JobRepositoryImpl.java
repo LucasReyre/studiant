@@ -37,7 +37,8 @@ public class JobRepositoryImpl implements JobRepository {
         JobService jobService = RestClient.getService(JobService.class);
 
         try {
-            Response<Void> response = jobService.insertJob(RESTModelConverter.convertToRestJobModel(job)).execute();
+
+            Response<Void> response = jobService.insertJob(job.getUtilisateurId(), RESTModelConverter.convertToRestJobModel(job)).execute();
 
             //restJob = response.body();
             Timber.i("UPLOAD SUCCESS: %d", response.code());

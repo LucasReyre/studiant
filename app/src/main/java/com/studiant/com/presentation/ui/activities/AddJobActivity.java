@@ -15,11 +15,13 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.domain.model.Job;
+import com.studiant.com.domain.model.User;
 import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
 import com.studiant.com.presentation.ui.components.MDatePicker;
 import com.studiant.com.presentation.ui.components.MTimePicker;
 import com.studiant.com.storage.ChooseCategoryRepository;
+import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
 import butterknife.BindView;
@@ -28,6 +30,7 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 
@@ -56,6 +59,8 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
     private AddJobPresenter mPresenter;
 
+    private User user;
+
     Context context;
 
     @Override
@@ -64,12 +69,14 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
         setContentView(R.layout.activity_add_job);
         ButterKnife.bind(this);
         context = this;
+        user = (User) getIntent().getSerializableExtra(INTENT_USER);
 
         mPresenter = new AddJobPresenterImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this,
-                new ChooseCategoryRepository()
+                new ChooseCategoryRepository(),
+                new JobRepositoryImpl()
         );
 
 
@@ -114,11 +121,13 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
     @OnClick(R.id.buttonAddJob)
     void onClickAddJob() {
+
         Job job = new Job(descriptionTextView.getText().toString(),
                           priceTextView.getText().toString(),
                           adressTextView.getText().toString(),
                           dateTextView.getText().toString(),
-                          timeTextView.getText().toString());
+                          timeTextView.getText().toString(),
+                          user.getId());
 
         mPresenter.insertJob(job);
     }

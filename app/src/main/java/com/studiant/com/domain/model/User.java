@@ -10,6 +10,7 @@ import java.net.URI;
  */
 
 public class User implements Serializable{
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -36,7 +37,8 @@ public class User implements Serializable{
         this.birthday = birthday;
     }
 
-    public User(String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser) {
+    public User(String id, String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -146,5 +148,11 @@ public class User implements Serializable{
         this.typeUser = typeUser;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }

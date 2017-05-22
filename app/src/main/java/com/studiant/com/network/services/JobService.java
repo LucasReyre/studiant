@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -17,8 +18,8 @@ import retrofit2.http.Query;
 public interface JobService {
 
     @Headers("Connection: close")
-    @POST("/api/Jobs")
-    Call<Void> insertJob(@Body RESTJob job);
+    @POST("/api/Utilisateurs/{user_id}/creer")
+    Call<Void> insertJob(@Path(value = "user_id", encoded = true) String userId, @Body RESTJob job);
 
     @Headers("Connection: close")
     @GET("/api/Jobs")

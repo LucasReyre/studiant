@@ -11,6 +11,7 @@ import com.studiant.com.domain.interactors.interfaces.InsertJobInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.repository.CategoryRepository;
+import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
 import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
@@ -23,12 +24,14 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     private View mView;
     private CategoryRepository mCategoryRepository;
+    private JobRepository mJobRepository;
 
     public AddJobPresenterImpl(Executor executor, MainThread mainThread,
-                               View view, CategoryRepository categoryRepository) {
+                               View view, CategoryRepository categoryRepository, JobRepository jobRepository) {
         super(executor, mainThread);
         mView = view;
         mCategoryRepository = categoryRepository;
+        mJobRepository = jobRepository;
     }
 
     @Override
@@ -81,12 +84,12 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     @Override
     public void insertJob(Job job) {
-
         InsertJobInteractor interactor = new InsertJobInteractorImpl(
                 mExecutor,
                 mMainThread,
                 this,
-                mCategoryRepository
+                mJobRepository,
+                job
         );
 
         // run the interactor
