@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
 import com.studiant.com.presentation.ui.components.MDatePicker;
@@ -34,6 +35,15 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
     @BindView(R.id.spinner_categorie)
     MaterialSpinner spinner;
+
+    @BindView(R.id.editTextDescription)
+    TextView descriptionTextView;
+
+    @BindView(R.id.editTextPrice)
+    TextView priceTextView;
+
+    @BindView(R.id.editTextAdress)
+    TextView adressTextView;
 
     @BindView(R.id.textViewDate)
     TextView dateTextView;
@@ -97,9 +107,20 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
         });
     }
 
+    @Override
+    public void onJobInsert() {
+
+    }
+
     @OnClick(R.id.buttonAddJob)
     void onClickAddJob() {
+        Job job = new Job(descriptionTextView.getText().toString(),
+                          priceTextView.getText().toString(),
+                          adressTextView.getText().toString(),
+                          dateTextView.getText().toString(),
+                          timeTextView.getText().toString());
 
+        mPresenter.insertJob(job);
     }
 
     @Override

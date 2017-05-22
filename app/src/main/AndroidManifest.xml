@@ -38,7 +38,12 @@
         <activity
             android:name=".presentation.ui.activities.ProfilEtudiantActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".presentation.ui.activities.DashboardEtudiantActivity">
+        <activity android:name=".presentation.ui.activities.DashboardEtudiantActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
+        <activity android:name=".presentation.ui.activities.DashboardParticulierActivity"
+            android:windowSoftInputMode="stateHidden">
         </activity>
     </application>
 

@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
@@ -94,10 +95,11 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
 
 
     @Override
-    public void onUserInsert() {
-        Intent intentToLaunch = new Intent(this, AddJobActivity.class);
-        intentToLaunch.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
-        this.startActivity(intentToLaunch);
+    public void onUserInsert(User user) {
+        Intent intent = new Intent(this, AddJobActivity.class);
+        intent.putExtra(CATEGORIE_ID_JOB, getIntent().getIntExtra(CATEGORIE_ID_JOB, 0));
+        intent.putExtra(INTENT_USER, user);
+        this.startActivity(intent);
     }
 
     @Override

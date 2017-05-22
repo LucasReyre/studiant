@@ -31,20 +31,24 @@ public class UserRepositoryImpl implements UserRepository {
     private User user;
 
     @Override
-    public void insertUser(User user) {
+    public User insertUser(User user) {
 
+        RESTUtilisateur restUtilisateur = null;
         UtilisateurService utilisateurService = RestClient.getService(UtilisateurService.class);
 
         //    utilisateurService.uploadData().enqueue(this);
         try {
-            Response<Void> response = utilisateurService.insertUser(RESTModelConverter.convertToRestModel(user)).execute();
+            Response<RESTUtilisateur> response = utilisateurService.insertUser(RESTModelConverter.convertToRestUserModel(user)).execute();
 
+            restUtilisateur = response.body();
             Timber.i("UPLOAD SUCCESS: %d", response.code());
-            Log.d("response", "finish");
+            Log.d("response", "finish + " + restUtilisateur.getmNomUtilisateur());
 
         } catch (IOException e) { // something went wrong
             Timber.e("UPLOAD FAIL"+e.getMessage());
         }
+
+        return RESTModelConverter.convertToUserModel(restUtilisateur);
 
     }
 
@@ -66,7 +70,7 @@ public class UserRepositoryImpl implements UserRepository {
                                     profile.getLastName(),
                                     json.getString("email"),
                                     profile.getId(),
-                                    profile.getProfilePictureUri(200, 200),
+                                    profile.getProfilePictureUri(200, 200).toString(),
                                     json.getString("birthday"));
                         }
 

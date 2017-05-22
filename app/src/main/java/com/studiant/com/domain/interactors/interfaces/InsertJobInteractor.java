@@ -3,13 +3,14 @@ package com.studiant.com.domain.interactors.interfaces;
 
 
 import com.studiant.com.domain.interactors.base.Interactor;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
 
 
-public interface InsertUserInteractor extends Interactor {
+public interface InsertJobInteractor extends Interactor {
 
     interface Callback {
-        void onUserInsert(User user);
-        void onRetrievalFailed(String error);
+        void onJobInsert();
+        void onJobInsertFailed(String error);
     }
 }

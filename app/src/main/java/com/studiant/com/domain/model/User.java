@@ -2,18 +2,19 @@ package com.studiant.com.domain.model;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.net.URI;
 
 /**
  * Created by lucas on 28/04/2017.
  */
 
-public class User {
+public class User implements Serializable{
     private String firstName;
     private String lastName;
     private String email;
     private String idExterne;
-    private Uri profilePicture;
+    private String profilePicture;
     private String birthday;
     private int age;
     private String description;
@@ -26,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String idExterne, Uri profilePicture, String birthday) {
+    public User(String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -34,6 +35,21 @@ public class User {
         this.profilePicture = profilePicture;
         this.birthday = birthday;
     }
+
+    public User(String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.idExterne = idExterne;
+        this.profilePicture = profilePicture;
+        this.birthday = birthday;
+        this.description = description;
+        this.permis = permis;
+        this.diplome = diplome;
+        this.typeConnexion = typeConnexion;
+        this.typeUser = typeUser;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -66,11 +82,11 @@ public class User {
         this.idExterne = idExterne;
     }
 
-    public Uri getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Uri profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

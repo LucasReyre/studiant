@@ -5,7 +5,11 @@ import android.util.Log;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.ChooseInteractorImpl;
+import com.studiant.com.domain.interactors.impl.InsertJobInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
+import com.studiant.com.domain.interactors.interfaces.InsertJobInteractor;
+import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.repository.CategoryRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
@@ -15,7 +19,7 @@ import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
  * Created by dmilicic on 12/13/15.
  */
 public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPresenter,
-        ChooseInteractor.Callback {
+        ChooseInteractor.Callback, InsertJobInteractor.Callback {
 
     private View mView;
     private CategoryRepository mCategoryRepository;
@@ -74,9 +78,35 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     }
 
+
+    @Override
+    public void insertJob(Job job) {
+
+        InsertJobInteractor interactor = new InsertJobInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mCategoryRepository
+        );
+
+        // run the interactor
+        interactor.execute();
+
+    }
+
     @Override
     public void onRetrievalFailed(String error) {
         mView.hideProgress();
         onError(error);
+    }
+
+    @Override
+    public void onJobInsert() {
+
+    }
+
+    @Override
+    public void onJobInsertFailed(String error) {
+
     }
 }

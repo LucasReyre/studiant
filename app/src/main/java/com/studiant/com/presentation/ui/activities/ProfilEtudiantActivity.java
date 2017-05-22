@@ -2,9 +2,7 @@ package com.studiant.com.presentation.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +15,7 @@ import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
+import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
@@ -24,10 +23,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
-import static com.studiant.com.storage.Constants.STATUS_USER;
 
 public class ProfilEtudiantActivity extends Activity implements ProfilParticulierPresenter.View{
 
@@ -64,6 +62,7 @@ public class ProfilEtudiantActivity extends Activity implements ProfilParticulie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil_etudiant);
         ButterKnife.bind(this);
+        AdjustKeyboard.assistActivity(this);
 
         mPresenter = new ProfilParticulierPresenterImpl(
                 ThreadExecutor.getInstance(),
@@ -105,9 +104,10 @@ public class ProfilEtudiantActivity extends Activity implements ProfilParticulie
     }
 
     @Override
-    public void onUserInsert() {
-        Intent intentToLaunch = new Intent(this, DashboardEtudiantActivity.class);
-        this.startActivity(intentToLaunch);
+    public void onUserInsert(User user) {
+        Intent intent = new Intent(this, DashboardEtudiantActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        this.startActivity(intent);
     }
 
     @Override

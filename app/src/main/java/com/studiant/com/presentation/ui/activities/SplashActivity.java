@@ -12,6 +12,10 @@ import com.studiant.com.presentation.presenters.interfaces.SplashPresenter;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
+import static com.studiant.com.storage.Constants.INTENT_USER;
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
+
 /**
  * Created by lucas on 12/04/2016.
  */
@@ -43,7 +47,14 @@ public class SplashActivity extends Activity implements SplashPresenter.View{
 
     @Override
     public void onProfileRetrieve(User user) {
-        Intent intent = new Intent(context, DashboardEtudiantActivity.class);
+        Intent intent = new Intent();
+
+        if (user.getTypeUser() == STATUS_ETUDIANT)
+            intent = new Intent(context, DashboardEtudiantActivity.class);
+        else if(user.getTypeUser() == STATUS_PARTICULIER)
+            intent = new Intent(context, DashboardParticulierActivity.class);
+
+        intent.putExtra(INTENT_USER, user);
         startActivity(intent);
         finish();
     }

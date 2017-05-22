@@ -23,7 +23,7 @@ public interface UtilisateurService {
 
     @Headers("Connection: close")
     @POST("/api/Utilisateurs")
-    Call<Void> insertUser(@Body RESTUtilisateur user);
+    Call<RESTUtilisateur> insertUser(@Body RESTUtilisateur user);
 
     @Headers("Connection: close")
     @GET("/api/Utilisateurs/findOne")

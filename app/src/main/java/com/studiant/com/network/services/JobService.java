@@ -20,4 +20,8 @@ public interface JobService {
     @POST("/api/Jobs")
     Call<Void> insertJob(@Body RESTJob job);
 
+    @Headers("Connection: close")
+    @GET("/api/Jobs")
+    Call<RESTUtilisateur> getJobs();
+
 }

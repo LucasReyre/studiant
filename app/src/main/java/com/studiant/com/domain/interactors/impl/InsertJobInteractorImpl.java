@@ -3,47 +3,47 @@ package com.studiant.com.domain.interactors.impl;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
-import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
+import com.studiant.com.domain.interactors.interfaces.InsertJobInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
+import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.domain.repository.UserRepository;
-
-import java.util.Calendar;
 
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  * <p/>
  */
-public class InsertUserInteractorImpl extends AbstractInteractor implements InsertUserInteractor {
+public class InsertJobInteractorImpl extends AbstractInteractor implements InsertJobInteractor {
 
     private Callback mCallback;
-    private UserRepository mUserRepository;
-    private User mUser;
+    private JobRepository mJobRepository;
+    private Job mJob;
 
-    public InsertUserInteractorImpl(Executor threadExecutor,
-                                    MainThread mainThread,
-                                    Callback callback, UserRepository userRepository, User user) {
+    public InsertJobInteractorImpl(Executor threadExecutor,
+                                   MainThread mainThread,
+                                   Callback callback, JobRepository jobRepository, Job job) {
         super(threadExecutor, mainThread);
 
         mCallback = callback;
-        mUserRepository = userRepository;
-        mUser = user;
+        mJobRepository = jobRepository;
+        mJob = job;
     }
 
     private void notifyError() {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onRetrievalFailed("Nothing to welcome you with :(");
+                mCallback.onJobInsertFailed("Job Insert Failed");
             }
         });
     }
 
-    private void postMessage(final User user) {
+    private void postMessage() {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onUserInsert(user);
+                mCallback.onJobInsert();
             }
         });
     }
@@ -51,9 +51,9 @@ public class InsertUserInteractorImpl extends AbstractInteractor implements Inse
     @Override
     public void run() {
         // retrieve the message
-        User user = mUserRepository.insertUser(mUser);
+        mJobRepository.insertJob(mJob);
         // we have retrieved our message, notify the UI on the main thread
-        postMessage(user);
+        postMessage();
     }
 
 }

@@ -8,6 +8,8 @@ public final class Constants {
 
     public static final String CATEGORIE_ID_JOB = "categorie_id_job";
     public static final String STATUS_USER = "status_user";
+    public static final String INTENT_USER = "intent_user";
+
 
     public static final int STATUS_PARTICULIER = 0;
     public static final int STATUS_ETUDIANT = 1;

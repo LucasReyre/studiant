@@ -2,7 +2,9 @@ package com.studiant.com.network.converters;
 
 import android.net.Uri;
 
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
+import com.studiant.com.network.model.RESTJob;
 import com.studiant.com.network.model.RESTUtilisateur;
 
 /**
@@ -16,7 +18,7 @@ public class RESTModelConverter {
         String nomUser = restUtilisateur.getmNomUtilisateur();
         String prenomUser = restUtilisateur.getmPrenomUtilisateur();
         String dateNaissanceUser = restUtilisateur.getmDateNaissanceUtilisateur();
-        Uri photoUser = Uri.parse(restUtilisateur.getmPhotoUtilisateur());
+        String photoUser = restUtilisateur.getmPhotoUtilisateur();
         String mailUser = restUtilisateur.getmMailUtilisateur();
         int typeUser = restUtilisateur.getmTypeUtilisateur();
         String idExterne = restUtilisateur.getmIdExterneUtilisateur();
@@ -25,16 +27,17 @@ public class RESTModelConverter {
         String diplomeUser = restUtilisateur.getmDiplomeUtilisateur();
         boolean permisUser = restUtilisateur.getmPermisUtilisateur();
 
-        return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
+        return new User(prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, permisUser, diplomeUser,typeConnexion, typeUser);
+        //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
     }
 
 
-    public static RESTUtilisateur convertToRestModel(User user) {
+    public static RESTUtilisateur convertToRestUserModel(User user) {
 
         String nomUser = user.getLastName();
         String prenomUser = user.getFirstName();
         String dateNaissanceUser = user.getBirthday();
-        String photoUser = user.getProfilePicture().toString();
+        String photoUser = user.getProfilePicture();
         String mailUser = user.getEmail();
         int typeUser = user.getTypeUser();
         String idExterne = user.getIdExterne();
@@ -54,6 +57,35 @@ public class RESTModelConverter {
                                     descriptionUser,
                                     diplomeUser,
                                     permisUser);
+
+    }
+
+    public static RESTJob convertToRestJobModel(Job job) {
+
+        
+        String nomUser = user.getLastName();
+        String prenomUser = user.getFirstName();
+        String dateNaissanceUser = user.getBirthday();
+        String photoUser = user.getProfilePicture();
+        String mailUser = user.getEmail();
+        int typeUser = user.getTypeUser();
+        String idExterne = user.getIdExterne();
+        int typeConnexion = user.getTypeConnexion();
+        String descriptionUser = user.getDescription();
+        String diplomeUser = user.getDiplome();
+        boolean permisUser = user.isPermis();
+
+        return new RESTUtilisateur( nomUser,
+                prenomUser,
+                dateNaissanceUser,
+                photoUser,
+                mailUser,
+                typeUser,
+                idExterne,
+                typeConnexion,
+                descriptionUser,
+                diplomeUser,
+                permisUser);
 
     }
 

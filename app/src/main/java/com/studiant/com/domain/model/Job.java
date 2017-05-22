@@ -25,6 +25,15 @@ public class Job {
         this.utilisateurId = utilisateurId;
     }
 
+    public Job(String description, String prix, String adresse, String date, String heure) {
+        this.id = id;
+        this.description = description;
+        this.prix = prix;
+        this.adresse = adresse;
+        this.date = date;
+        this.heure = heure;
+        this.utilisateurId = utilisateurId;
+    }
 
     public String getId() {
         return id;

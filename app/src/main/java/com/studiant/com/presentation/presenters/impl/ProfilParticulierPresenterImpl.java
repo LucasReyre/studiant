@@ -97,8 +97,8 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
-    public void onUserInsert() {
-        mView.onUserInsert();
+    public void onUserInsert(User user) {
+        mView.onUserInsert(user);
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.studiant.com.presentation.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,14 +17,13 @@ import com.studiant.com.presentation.ui.fragments.ListJobEtudiant2Fragment;
 import com.studiant.com.presentation.ui.fragments.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 
-public class DashboardEtudiantActivity extends AppCompatActivity {
+public class DashboardParticulierActivity extends AppCompatActivity {
 
 
     @BindView(R.id.materialViewPager)
@@ -35,7 +32,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_etudiant);
+        setContentView(R.layout.activity_dashboard_particulier);
         setTitle("");
         ButterKnife.bind(this);
         AdjustKeyboard.assistActivity(this);
@@ -72,7 +69,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             public CharSequence getPageTitle(int position) {
                 switch (position % 4) {
                     case 0:
-                        return "Dashboard";
+                        return "Dashboard Particulier";
                     case 1:
                         return "Mon Profil";
                     case 2:
@@ -126,45 +123,5 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             });
         }
 
-        /*
-        // get our list view
-        ListView theListView = (ListView) findViewById(R.id.mainListView);
-
-        // prepare elements to display
-        final ArrayList<Item> items = Item.getTestingList();
-
-        // add custom btn handler to first list item
-        items.get(0).setRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellListAdapter adapter = new FoldingCellListAdapter(this, items);
-
-        // add default btn handler for each request btn on each item if custom handler not found
-        adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "DEFAULT HANDLER FOR ALL BUTTONS", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // set elements to adapter
-        theListView.setAdapter(adapter);
-
-        // set on click event listener to list view
-        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                // toggle clicked cell state
-                ((FoldingCell) view).toggle(false);
-                // register in adapter that state for selected cell is toggled
-                adapter.registerToggle(pos);
-            }
-        });
-*/
     }
 }

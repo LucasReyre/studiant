@@ -7,7 +7,7 @@ import com.studiant.com.domain.model.User;
  */
 public interface UserRepository {
 
-    void insertUser(User user);
+    User insertUser(User user);
     User getConnectedProfile();
     User getProfileFromConnectedUser();
 
