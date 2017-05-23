@@ -7,6 +7,8 @@ import com.studiant.com.domain.model.User;
 import com.studiant.com.network.model.RESTJob;
 import com.studiant.com.network.model.RESTUtilisateur;
 
+import java.util.ArrayList;
+
 /**
  * Created by groupama on 12/05/2017.
  */
@@ -74,6 +76,29 @@ public class RESTModelConverter {
 
     }
 
+    public static Job convertToJobModel(RESTJob restJob){
+        String id = restJob.getmId();
+        String prix = restJob.getmPrixJob();
+        String description = restJob.getmDescriptionJob();
+        String adresse = restJob.getmAdresseJob();
+        String date = restJob.getmDateJob();
+        String heure = restJob.getmHeureJob();
+        String utilisateurId = restJob.getmUtilisateurId();
+
+        return new Job(id,description,prix ,adresse, date, heure, utilisateurId);
+
+    }
+
+
+    public static ArrayList<Job> convertToArrayListJobModel(ArrayList<RESTJob> restJobArrayList){
+        ArrayList<Job> jobArrayList = new ArrayList<Job>();
+
+        for (int i = 0; i<restJobArrayList.size();i++){
+            jobArrayList.add(convertToJobModel(restJobArrayList.get(i)));
+        }
+
+        return jobArrayList;
+    }
 
 
 }

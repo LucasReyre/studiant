@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 import timber.log.Timber;
@@ -47,5 +49,26 @@ public class JobRepositoryImpl implements JobRepository {
             Timber.e("UPLOAD FAIL"+e.getMessage());
         }
 
+    }
+
+    @Override
+    public ArrayList<Job> getJobsByUser(User user) {
+
+        ArrayList<RESTJob> restJobList = new ArrayList<RESTJob>();
+
+        JobService jobService = RestClient.getService(JobService.class);
+        try {
+
+            Response<ArrayList<RESTJob>> response = jobService.getJobsByUser(user.getId()).execute();
+
+            //restJob = response.body();
+            Timber.i("GET JOBS BY USER SUCCESS: %d", response.code());
+            return RESTModelConverter.convertToArrayListJobModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+
+        return null;
     }
 }

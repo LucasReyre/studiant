@@ -13,7 +13,8 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
-import com.studiant.com.presentation.ui.fragments.ListJobEtudiant2Fragment;
+import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
+import com.studiant.com.presentation.ui.fragments.ListJobParticulierFragment;
 import com.studiant.com.presentation.ui.fragments.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
@@ -50,7 +51,7 @@ public class DashboardParticulierActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position % 4) {
                     case 0:
-                        return ListJobEtudiant2Fragment.newInstance(user);
+                        return ListJobParticulierFragment.newInstance(user);
                     case 1:
                         return ProfilEtudiantFragment.newInstance(user);
                     case 2:

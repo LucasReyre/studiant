@@ -3,6 +3,9 @@ package com.studiant.com.network.services;
 import com.studiant.com.network.model.RESTJob;
 import com.studiant.com.network.model.RESTUtilisateur;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -22,7 +25,7 @@ public interface JobService {
     Call<Void> insertJob(@Path(value = "user_id", encoded = true) String userId, @Body RESTJob job);
 
     @Headers("Connection: close")
-    @GET("/api/Jobs")
-    Call<RESTUtilisateur> getJobs();
+    @GET("/api/Utilisateurs/{user_id}/creer")
+    Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);
 
 }

@@ -2,6 +2,7 @@ package com.studiant.com.presentation.ui.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -33,6 +34,7 @@ import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_USER;
 
 public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
@@ -116,7 +118,9 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
     @Override
     public void onJobInsert() {
-
+        Intent intent = new Intent(this, DashboardParticulierActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        this.startActivity(intent);
     }
 
     @OnClick(R.id.buttonAddJob)

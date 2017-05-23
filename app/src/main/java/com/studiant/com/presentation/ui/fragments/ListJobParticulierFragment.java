@@ -1,6 +1,5 @@
 package com.studiant.com.presentation.ui.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,20 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
-import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
+import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
+import com.studiant.com.presentation.presenters.impl.DashboardPresenterImpl;
+import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
 import com.studiant.com.presentation.ui.activities.AddJobActivity;
-import com.studiant.com.presentation.ui.activities.TestRecyclerViewAdapter;
 import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 import com.studiant.com.presentation.ui.components.FoldingCellRecyclerViewAdapter;
 import com.studiant.com.presentation.ui.components.Item;
+import com.studiant.com.storage.ChooseCategoryRepository;
+import com.studiant.com.storage.impl.JobRepositoryImpl;
+import com.studiant.com.threading.MainThreadImpl;
 
 import java.util.ArrayList;
 
@@ -34,10 +36,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
-import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
-public class ListJobEtudiant2Fragment extends Fragment {
+public class ListJobParticulierFragment extends Fragment implements DashboardPresenter.View{
 
     private static final boolean GRID_LAYOUT = false;
     @BindView(R.id.mainListView)
@@ -48,12 +49,14 @@ public class ListJobEtudiant2Fragment extends Fragment {
 
     User user;
 
-    public ListJobEtudiant2Fragment() {
+    private DashboardPresenter mPresenter;
+
+    public ListJobParticulierFragment() {
         // Required empty public constructor
     }
 
-    public static ListJobEtudiant2Fragment newInstance(User user) {
-        ListJobEtudiant2Fragment fragment = new ListJobEtudiant2Fragment();
+    public static ListJobParticulierFragment newInstance(User user) {
+        ListJobParticulierFragment fragment = new ListJobParticulierFragment();
         Bundle args = new Bundle();
         args.putSerializable(INTENT_USER, user);
         fragment.setArguments(args);
@@ -65,12 +68,22 @@ public class ListJobEtudiant2Fragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             user = (User) getArguments().getSerializable(INTENT_USER);
+
+            mPresenter = new DashboardPresenterImpl(
+                    ThreadExecutor.getInstance(),
+                    MainThreadImpl.getInstance(),
+                    this,
+                    new JobRepositoryImpl()
+            );
+
+            mPresenter.getJobsByUser(user);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      return inflater.inflate(R.layout.fragment_list_job_etudiant2, container, false);
+      return inflater.inflate(R.layout.fragment_list_job_particulier, container, false);
     }
 
 
@@ -124,5 +137,23 @@ public class ListJobEtudiant2Fragment extends Fragment {
     }
 
 
+    @Override
+    public void showProgress() {
 
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
+
+    }
 }

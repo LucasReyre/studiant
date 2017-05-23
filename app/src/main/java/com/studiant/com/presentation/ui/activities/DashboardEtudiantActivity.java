@@ -1,12 +1,10 @@
 package com.studiant.com.presentation.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +13,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
-import com.studiant.com.presentation.ui.fragments.ListJobEtudiant2Fragment;
+import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
@@ -53,7 +51,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position % 4) {
                     case 0:
-                        return ListJobEtudiant2Fragment.newInstance(user);
+                        return ListJobEtudiantFragment.newInstance(user);
                     case 1:
                         return ProfilEtudiantFragment.newInstance(user);
                     case 2:
