@@ -52,7 +52,13 @@ public class GetJobsInteractorImpl extends AbstractInteractor implements GetJobs
     @Override
     public void run() {
         // retrieve the message
-        ArrayList<Job> jobArrayList = mJobRepository.getJobsByUser(mUser);
+        ArrayList<Job> jobArrayList = new ArrayList<Job>();
+
+        if (mUser==null)
+            jobArrayList = mJobRepository.getJobs();
+        else
+            jobArrayList = mJobRepository.getJobsByUser(mUser);
+
         // we have retrieved our message, notify the UI on the main thread
         postMessage(jobArrayList);
     }

@@ -78,8 +78,22 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
     }
 
     @Override
+    public void getJobs() {
+        User user = null;
+        GetJobsInteractor interactor = new GetJobsInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mJobRepository,
+                user
+        );
+
+        interactor.execute();
+    }
+
+    @Override
     public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
-        Log.d("onJobsRetrieve", " count : " +jobArrayList.size());
+        mView.onJobsRetrieve(jobArrayList);
 
     }
 

@@ -20,12 +20,20 @@ import retrofit2.http.Query;
 
 public interface JobService {
 
+    //Ajout d'un job avec l'utilisateur associé
     @Headers("Connection: close")
     @POST("/api/Utilisateurs/{user_id}/creer")
     Call<Void> insertJob(@Path(value = "user_id", encoded = true) String userId, @Body RESTJob job);
 
+
+    //Récupération de tous les jobs crées par un utilisateur
     @Headers("Connection: close")
     @GET("/api/Utilisateurs/{user_id}/creer")
     Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);
+
+    //Récupération de tous les jobs sans distinction avec les utilisateurs associés
+    @Headers("Connection: close")
+    @GET("/api/Jobs")
+    Call<ArrayList<RESTJob>> getJobs(@Query("filter") String query);
 
 }

@@ -43,7 +43,7 @@
     <string name="propose_par" translatable="false">PROPOSE PAR : </string>
     <string name="pledge_mock" translatable="false">$150</string>
     <string name="pledge_badge" translatable="false">PLEDGE</string>
-    <string name="sender_badge" translatable="false">SENDER</string>
+    <string name="sender_badge" translatable="false">POSTE PAR :</string>
     <string name="client_name_mock" translatable="false">Edward Norton</string>
     <string name="rating_mock" translatable="false">(26)</string>
     <string name="from_badge" translatable="false">FROM</string>
@@ -53,8 +53,8 @@
     <string name="delivery_date_mock" translatable="false">May 16, 2016</string>
     <string name="deadline_badge" translatable="false">REQUEST DEADLINE</string>
     <string name="deadline_time_mock" translatable="false">24 minutes</string>
-    <string name="request_btn_text" translatable="false">REQUEST</string>
-    <string name="btn_annotation_mock" translatable="false">5 people have sent a request</string>
+    <string name="request_btn_text" translatable="false">POSTULER</string>
+    <string name="btn_annotation_mock" translatable="false">5 étudiants ont postulé pour ce job</string>
     <string name="content_from1_mock">W 90th St</string>
     <string name="content_from2_mock">New York, NY 10025</string>
     <string name="content_to1_mock">46th Ave</string>

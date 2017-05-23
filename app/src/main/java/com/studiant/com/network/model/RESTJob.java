@@ -29,6 +29,9 @@ public class RESTJob {
     @SerializedName("utilisateurId")
     private String mUtilisateurId;
 
+    @SerializedName("appartenir")
+    private RESTUtilisateur mRestUtilisateur;
+
     public RESTJob(String mId, String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId) {
         this.mId = mId;
         this.mDescriptionJob = mDescriptionJob;
@@ -102,5 +105,13 @@ public class RESTJob {
 
     public void setmUtilisateurId(String mUtilisateurId) {
         this.mUtilisateurId = mUtilisateurId;
+    }
+
+    public RESTUtilisateur getmRestUtilisateur() {
+        return mRestUtilisateur;
+    }
+
+    public void setmRestUtilisateur(RESTUtilisateur mRestUtilisateur) {
+        this.mRestUtilisateur = mRestUtilisateur;
     }
 }

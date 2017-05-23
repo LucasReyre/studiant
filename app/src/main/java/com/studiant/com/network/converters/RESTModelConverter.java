@@ -84,8 +84,9 @@ public class RESTModelConverter {
         String date = restJob.getmDateJob();
         String heure = restJob.getmHeureJob();
         String utilisateurId = restJob.getmUtilisateurId();
+        User utilisateur = convertToUserModel(restJob.getmRestUtilisateur());
 
-        return new Job(id,description,prix ,adresse, date, heure, utilisateurId);
+        return new Job(id,description,prix ,adresse, date, heure, utilisateurId, utilisateur);
 
     }
 

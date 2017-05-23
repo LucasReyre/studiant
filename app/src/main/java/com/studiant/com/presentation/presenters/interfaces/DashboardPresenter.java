@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public interface DashboardPresenter extends BasePresenter {
 
     void getJobsByUser(User user);
+    void getJobs();
 
     interface View extends BaseView {
         void onJobsRetrieve(ArrayList<Job> jobArrayList);

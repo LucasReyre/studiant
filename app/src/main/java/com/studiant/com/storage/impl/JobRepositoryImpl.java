@@ -54,8 +54,6 @@ public class JobRepositoryImpl implements JobRepository {
     @Override
     public ArrayList<Job> getJobsByUser(User user) {
 
-        ArrayList<RESTJob> restJobList = new ArrayList<RESTJob>();
-
         JobService jobService = RestClient.getService(JobService.class);
         try {
 
@@ -71,4 +69,25 @@ public class JobRepositoryImpl implements JobRepository {
 
         return null;
     }
+
+    @Override
+    public ArrayList<Job> getJobs() {
+        JobService jobService = RestClient.getService(JobService.class);
+
+        try {
+            String query = "{\"include\":[\"appartenir\"]}";
+            Response<ArrayList<RESTJob>> response = jobService.getJobs(query).execute();
+
+            //restJob = response.body();
+            Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
+            return RESTModelConverter.convertToArrayListJobModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+
+        return null;
+    }
+
+
 }

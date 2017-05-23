@@ -105,7 +105,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     @Override
     public void onJobInsert() {
-
+        mView.onJobInsert();
     }
 
     @Override

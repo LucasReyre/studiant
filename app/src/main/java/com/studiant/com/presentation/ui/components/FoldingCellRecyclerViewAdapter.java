@@ -1,6 +1,7 @@
 package com.studiant.com.presentation.ui.components;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class FoldingCellRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     static final int TYPE_HEADER = 0;
     static final int TYPE_CELL = 1;
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
+    private View.OnClickListener defaultRequestBtnClickListener;
 
     public FoldingCellRecyclerViewAdapter(List<Item> contents) {
         this.contents = contents;
@@ -51,6 +53,14 @@ public class FoldingCellRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
         //viewHolder.toAddress.setText(item.getToAddress());
         cellViewHolder.requestsCount.setText(String.valueOf(contents.get(position).getRequestsCount()));
 
+        // set custom btn handler for list item from that item
+        if (contents.get(position).getRequestBtnClickListener() != null) {
+            cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
+        } else {
+            // (optionally) add "default" handler if no handler found in item
+            cellViewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +86,14 @@ public class FoldingCellRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     public void registerUnfold(int position) {
         unfoldedIndexes.add(position);
+    }
+
+    public View.OnClickListener getDefaultRequestBtnClickListener() {
+        return defaultRequestBtnClickListener;
+    }
+
+    public void setDefaultRequestBtnClickListener(View.OnClickListener defaultRequestBtnClickListener) {
+        this.defaultRequestBtnClickListener = defaultRequestBtnClickListener;
     }
 
     // View lookup cache

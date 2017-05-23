@@ -2,6 +2,8 @@ package com.studiant.com.domain.model;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 /**
  * Created by lucas on 28/04/2017.
  */
@@ -14,8 +16,9 @@ public class Job {
     private String date;
     private String heure;
     private String utilisateurId;
+    private User utilisateur;
 
-    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId) {
+    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId, User utilisateur) {
         this.id = id;
         this.description = description;
         this.prix = prix;
@@ -23,6 +26,7 @@ public class Job {
         this.date = date;
         this.heure = heure;
         this.utilisateurId = utilisateurId;
+        this.utilisateur = utilisateur;
     }
 
     public Job(String description, String prix, String adresse, String date, String heure, String utilisateurId) {

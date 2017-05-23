@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,9 +76,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
                     this,
                     new JobRepositoryImpl()
             );
-
-            mPresenter.getJobsByUser(user);
-
         }
     }
 
@@ -92,6 +90,8 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        mPresenter.getJobsByUser(user);
+
         // prepare elements to display
         final ArrayList<Item> items = Item.getTestingList();
 
@@ -104,9 +104,10 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         });
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellListAdapter adapter = new FoldingCellListAdapter(getApplicationContext(), items);
-
+        //final FoldingCellListAdapter adapter = new FoldingCellListAdapter(getApplicationContext(), items);
+        final FoldingCellRecyclerViewAdapter adapter = (new FoldingCellRecyclerViewAdapter(items));
         // add default btn handler for each request btn on each item if custom handler not found
+
         adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +126,7 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        mRecyclerView.setAdapter(new FoldingCellRecyclerViewAdapter(items));
+        mRecyclerView.setAdapter(adapter);
 
     }
 
@@ -154,6 +155,8 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
     @Override
     public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
+        Log.d("onJobsRetrieve", " "+jobArrayList.size());
+
 
     }
 }
