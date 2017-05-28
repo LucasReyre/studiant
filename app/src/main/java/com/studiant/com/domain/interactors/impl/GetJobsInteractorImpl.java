@@ -1,5 +1,7 @@
 package com.studiant.com.domain.interactors.impl;
 
+import android.util.Log;
+
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
@@ -44,7 +46,10 @@ public class GetJobsInteractorImpl extends AbstractInteractor implements GetJobs
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onJobsRetrieve(jobArrayList);
+                if (jobArrayList.size()>0)
+                    mCallback.onJobsRetrieve(jobArrayList);
+                else
+                    mCallback.onRetrievalFailed("No Job Found");
             }
         });
     }
@@ -53,11 +58,12 @@ public class GetJobsInteractorImpl extends AbstractInteractor implements GetJobs
     public void run() {
         // retrieve the message
         ArrayList<Job> jobArrayList = new ArrayList<Job>();
-
-        if (mUser==null)
+        if (mUser==null){
             jobArrayList = mJobRepository.getJobs();
-        else
+        }
+        else{
             jobArrayList = mJobRepository.getJobsByUser(mUser);
+        }
 
         // we have retrieved our message, notify the UI on the main thread
         postMessage(jobArrayList);

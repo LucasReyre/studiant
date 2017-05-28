@@ -1,6 +1,7 @@
 package com.studiant.com.domain.model;
 
 import android.net.Uri;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class Job {
     private String utilisateurId;
     private User utilisateur;
 
+    private View.OnClickListener requestBtnClickListener;
+
     public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId, User utilisateur) {
         this.id = id;
         this.description = description;
@@ -30,6 +33,16 @@ public class Job {
     }
 
     public Job(String description, String prix, String adresse, String date, String heure, String utilisateurId) {
+        this.description = description;
+        this.prix = prix;
+        this.adresse = adresse;
+        this.date = date;
+        this.heure = heure;
+        this.utilisateurId = utilisateurId;
+    }
+
+    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId) {
+        this.id = id;
         this.description = description;
         this.prix = prix;
         this.adresse = adresse;
@@ -92,5 +105,21 @@ public class Job {
 
     public void setUtilisateurId(String utilisateurId) {
         this.utilisateurId = utilisateurId;
+    }
+
+    public User getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(User utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public View.OnClickListener getRequestBtnClickListener() {
+        return requestBtnClickListener;
+    }
+
+    public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
+        this.requestBtnClickListener = requestBtnClickListener;
     }
 }

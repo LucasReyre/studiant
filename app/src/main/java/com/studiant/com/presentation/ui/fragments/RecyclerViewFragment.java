@@ -12,15 +12,12 @@ import android.view.ViewGroup;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.activities.TestRecyclerViewAdapter;
-import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**

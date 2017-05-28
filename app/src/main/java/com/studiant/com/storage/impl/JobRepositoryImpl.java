@@ -58,7 +58,6 @@ public class JobRepositoryImpl implements JobRepository {
         try {
 
             Response<ArrayList<RESTJob>> response = jobService.getJobsByUser(user.getId()).execute();
-
             //restJob = response.body();
             Timber.i("GET JOBS BY USER SUCCESS: %d", response.code());
             return RESTModelConverter.convertToArrayListJobModel(response.body());
@@ -80,6 +79,7 @@ public class JobRepositoryImpl implements JobRepository {
 
             //restJob = response.body();
             Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
+
             return RESTModelConverter.convertToArrayListJobModel(response.body());
 
         } catch (IOException e) { // something went wrong

@@ -20,9 +20,9 @@ import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.presentation.presenters.impl.DashboardPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
-import com.studiant.com.presentation.ui.components.FoldingCellListAdapter;
-import com.studiant.com.presentation.ui.components.FoldingCellRecyclerViewAdapter;
+import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewAdapter;
 import com.studiant.com.presentation.ui.components.Item;
+import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewEtudiantAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
@@ -87,41 +87,6 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardPresen
         ButterKnife.bind(this, view);
         mPresenter.getJobs();
 
-        // prepare elements to display
-        final ArrayList<Item> items = Item.getTestingList();
-
-        // add custom btn handler to first list item
-        items.get(0).setRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellListAdapter adapter = new FoldingCellListAdapter(getApplicationContext(), items);
-
-        // add default btn handler for each request btn on each item if custom handler not found
-        adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "DEFAULT HANDLER FOR ALL BUTTONS", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //setup materialviewpager
-
-        if (GRID_LAYOUT) {
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        } else {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }
-        mRecyclerView.setHasFixedSize(true);
-
-        //Use this now
-        mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        mRecyclerView.setAdapter(new FoldingCellRecyclerViewAdapter(items));
-
     }
 
     @OnClick(R.id.fabButton)
@@ -142,11 +107,38 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardPresen
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
-        Log.d("onJobsRetrieve", " "+jobArrayList.size());
+    public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
+        // prepare elements to display
+        //final ArrayList<Item> items = Item.getTestingList();
+
+        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
+        final FoldingCellRecyclerViewEtudiantAdapter adapter = (new FoldingCellRecyclerViewEtudiantAdapter(jobArrayList));
+
+        for (int i = 0 ; i<jobArrayList.size();i++){
+            final int j = i;
+            jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        //setup materialviewpager
+
+        if (GRID_LAYOUT) {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        } else {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+        mRecyclerView.setHasFixedSize(true);
+
+        //Use this now
+        mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
+        mRecyclerView.setAdapter(adapter);
     }
 }

@@ -76,7 +76,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                     case 2:
                         return "Historique";
                     case 3:
-                        return "Divertissement";
+                        return "Réglages";
                 }
                 return "";
             }

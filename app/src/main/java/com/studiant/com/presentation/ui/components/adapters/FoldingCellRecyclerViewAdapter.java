@@ -1,7 +1,6 @@
-package com.studiant.com.presentation.ui.components;
+package com.studiant.com.presentation.ui.components.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
+import com.studiant.com.presentation.ui.components.Item;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,15 +44,21 @@ public class FoldingCellRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        ViewHolder cellViewHolder = (ViewHolder) holder;
+        final ViewHolder cellViewHolder = (ViewHolder) holder;
         cellViewHolder.foldingCell.fold(true);
         cellViewHolder.price.setText(contents.get(position).getPrice());
         cellViewHolder.time.setText(contents.get(position).getTime());
         cellViewHolder.date.setText(contents.get(position).getDate());
-        cellViewHolder.fromAddress.setText(contents.get(position).getFromAddress());
         //viewHolder.toAddress.setText(item.getToAddress());
         cellViewHolder.requestsCount.setText(String.valueOf(contents.get(position).getRequestsCount()));
 
+
+        /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "OKOKOKOK" + position, Toast.LENGTH_SHORT).show();
+            }
+        });*/
         // set custom btn handler for list item from that item
         if (contents.get(position).getRequestBtnClickListener() != null) {
             cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
@@ -101,7 +107,6 @@ public class FoldingCellRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
         TextView price;
         TextView contentRequestBtn;
         //TextView pledgePrice;
-        TextView fromAddress;
         //TextView toAddress;
         TextView requestsCount;
         TextView date;
@@ -113,9 +118,8 @@ public class FoldingCellRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
-            fromAddress = (TextView) itemView.findViewById(R.id.title_from_address);
             //viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            requestsCount = (TextView) itemView.findViewById(R.id.title_requests_count);
+            requestsCount = (TextView) itemView.findViewById(R.id.title_name);
             //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);

@@ -1,10 +1,9 @@
-package com.studiant.com.presentation.ui.components;
+package com.studiant.com.presentation.ui.components.adapters;
 
 /**
  * Created by lucas on 05/05/2017.
  */
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
+import com.studiant.com.presentation.ui.components.Item;
 
 import java.util.HashSet;
 import java.util.List;
@@ -46,9 +46,8 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             viewHolder.price = (TextView) cell.findViewById(R.id.title_price);
             viewHolder.time = (TextView) cell.findViewById(R.id.title_time_label);
             viewHolder.date = (TextView) cell.findViewById(R.id.title_date_label);
-            viewHolder.fromAddress = (TextView) cell.findViewById(R.id.title_from_address);
             //viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            viewHolder.requestsCount = (TextView) cell.findViewById(R.id.title_requests_count);
+            viewHolder.requestsCount = (TextView) cell.findViewById(R.id.title_name);
             //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
             viewHolder.contentRequestBtn = (TextView) cell.findViewById(R.id.content_request_btn);
             cell.setTag(viewHolder);
@@ -66,7 +65,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         viewHolder.price.setText(item.getPrice());
         viewHolder.time.setText(item.getTime());
         viewHolder.date.setText(item.getDate());
-        viewHolder.fromAddress.setText(item.getFromAddress());
         //viewHolder.toAddress.setText(item.getToAddress());
         viewHolder.requestsCount.setText(String.valueOf(item.getRequestsCount()));
         //viewHolder.pledgePrice.setText(item.getPledgePrice());
@@ -112,7 +110,6 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         TextView price;
         TextView contentRequestBtn;
         //TextView pledgePrice;
-        TextView fromAddress;
         //TextView toAddress;
         TextView requestsCount;
         TextView date;

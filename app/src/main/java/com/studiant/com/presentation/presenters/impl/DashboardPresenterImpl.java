@@ -94,11 +94,11 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
     @Override
     public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
         mView.onJobsRetrieve(jobArrayList);
-
     }
 
     @Override
     public void onRetrievalFailed(String error) {
+        mView.showError(error);
 
     }
 }

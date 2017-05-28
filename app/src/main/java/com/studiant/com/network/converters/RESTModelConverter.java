@@ -1,6 +1,7 @@
 package com.studiant.com.network.converters;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
@@ -84,20 +85,22 @@ public class RESTModelConverter {
         String date = restJob.getmDateJob();
         String heure = restJob.getmHeureJob();
         String utilisateurId = restJob.getmUtilisateurId();
-        User utilisateur = convertToUserModel(restJob.getmRestUtilisateur());
 
-        return new Job(id,description,prix ,adresse, date, heure, utilisateurId, utilisateur);
+        Job job =  new Job(id,description,prix ,adresse, date, heure, utilisateurId);
+        if (restJob.getmRestUtilisateur()!=null){
+            User utilisateur = convertToUserModel(restJob.getmRestUtilisateur());
+            job.setUtilisateur(utilisateur);
+        }
+        return job;
 
     }
 
 
     public static ArrayList<Job> convertToArrayListJobModel(ArrayList<RESTJob> restJobArrayList){
         ArrayList<Job> jobArrayList = new ArrayList<Job>();
-
         for (int i = 0; i<restJobArrayList.size();i++){
             jobArrayList.add(convertToJobModel(restJobArrayList.get(i)));
         }
-
         return jobArrayList;
     }
 
