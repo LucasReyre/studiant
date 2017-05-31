@@ -14,6 +14,10 @@ public final class Constants {
     public static final int STATUS_PARTICULIER = 0;
     public static final int STATUS_ETUDIANT = 1;
 
+    public static final String STATUS_POSTULANT_NOT_CHOOSE = "0";
+    public static final String STATUS_POSTULANT_CHOOSE = "1";
+
+
     public static final int STATUS_CONNEXION_FACEBOOK= 0;
 
 

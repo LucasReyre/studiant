@@ -4,8 +4,10 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.studiant.com.domain.model.Job;
+import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.network.model.RESTJob;
+import com.studiant.com.network.model.RESTPostulant;
 import com.studiant.com.network.model.RESTUtilisateur;
 
 import java.util.ArrayList;
@@ -74,6 +76,17 @@ public class RESTModelConverter {
         String mUtilisateurId = job.getUtilisateurId();
 
         return new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId);
+
+    }
+
+    public static RESTPostulant convertToRestPostulantModel(Postulant postulant) {
+
+        String mTimePostulant = postulant.getTimePostulant();
+        String mStatutPostulant = postulant.getStatutPostulant();
+        String mJobId = postulant.getJob().getId();
+        String mUtilisateurId = postulant.getUser().getId();
+
+        return new RESTPostulant(mTimePostulant,mStatutPostulant,mJobId,mUtilisateurId);
 
     }
 

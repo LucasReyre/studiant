@@ -25,7 +25,6 @@ public interface JobService {
     @POST("/api/Utilisateurs/{user_id}/creer")
     Call<Void> insertJob(@Path(value = "user_id", encoded = true) String userId, @Body RESTJob job);
 
-
     //Récupération de tous les jobs crées par un utilisateur
     @Headers("Connection: close")
     @GET("/api/Utilisateurs/{user_id}/creer")

@@ -18,12 +18,11 @@ import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
-import com.studiant.com.presentation.presenters.impl.DashboardPresenterImpl;
-import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
-import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewAdapter;
-import com.studiant.com.presentation.ui.components.Item;
+import com.studiant.com.presentation.presenters.impl.DashboardEtudiantPresenterImpl;
+import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPresenter;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewEtudiantAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
+import com.studiant.com.storage.impl.PostulantRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ import butterknife.OnClick;
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
-public class ListJobEtudiantFragment extends Fragment implements DashboardPresenter.View{
+public class ListJobEtudiantFragment extends Fragment implements DashboardEtudiantPresenter.View{
 
     private static final boolean GRID_LAYOUT = false;
     @BindView(R.id.mainListView)
@@ -46,7 +45,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardPresen
 
     User user;
 
-    private DashboardPresenter mPresenter;
+    private DashboardEtudiantPresenter mPresenter;
 
     public ListJobEtudiantFragment() {
         // Required empty public constructor
@@ -66,11 +65,12 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardPresen
         if (getArguments() != null) {
             user = (User) getArguments().getSerializable(INTENT_USER);
 
-            mPresenter = new DashboardPresenterImpl(
+            mPresenter = new DashboardEtudiantPresenterImpl(
                     ThreadExecutor.getInstance(),
                     MainThreadImpl.getInstance(),
                     this,
-                    new JobRepositoryImpl()
+                    new JobRepositoryImpl(),
+                    new PostulantRepositoryImpl()
             );
         }
     }
@@ -123,7 +123,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardPresen
             jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON", Toast.LENGTH_SHORT).show();
+                    onPostulerClick(jobArrayList.get(j));
                 }
             });
         }
@@ -140,5 +140,10 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardPresen
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         mRecyclerView.setAdapter(adapter);
+    }
+
+    public void onPostulerClick(Job job){
+        Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
+        mPresenter.insertPostulant(job, user);
     }
 }

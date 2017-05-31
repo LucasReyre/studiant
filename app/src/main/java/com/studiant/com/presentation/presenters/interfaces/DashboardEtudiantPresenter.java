@@ -8,9 +8,10 @@ import com.studiant.com.presentation.ui.BaseView;
 import java.util.ArrayList;
 
 
-public interface DashboardPresenter extends BasePresenter {
+public interface DashboardEtudiantPresenter extends BasePresenter {
 
-    void getJobsByUser(User user);
+    void getJobs();
+    void insertPostulant(Job job, User user);
 
     interface View extends BaseView {
         void onJobsRetrieve(ArrayList<Job> jobArrayList);
