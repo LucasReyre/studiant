@@ -6,12 +6,11 @@ import com.studiant.com.domain.interactors.impl.GetJobsInteractorImpl;
 import com.studiant.com.domain.interactors.impl.InsertPostulantInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.GetJobsInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertPostulantInteractor;
-import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.model.Postulant;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
+import com.studiant.com.presentation.presenters.model.Job;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.domain.repository.PostulantRepository;
-import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
@@ -72,7 +71,7 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
                 mMainThread,
                 this,
                 mJobRepository,
-                user
+                PresentationModelConverter.convertToUserDomainModel(user)
         );
 
         interactor.execute();
@@ -85,17 +84,18 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
                 mMainThread,
                 this,
                 mPostulantRepository,
-                job,
-                user
-
+                PresentationModelConverter.convertToJobDomainModel(job),
+                PresentationModelConverter.convertToUserDomainModel(user)
         );
 
         interactor.execute();
     }
 
+
     @Override
-    public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
-        mView.onJobsRetrieve(jobArrayList);
+    public void onJobsRetrieve(ArrayList<com.studiant.com.domain.model.Job> jobArrayList) {
+        mView.onJobsRetrieve(PresentationModelConverter.convertToArrayListPresenterJobModel(jobArrayList));
+
     }
 
     @Override

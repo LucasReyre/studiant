@@ -25,4 +25,9 @@ public interface PostulantService {
     @POST("/api/Postulants")
     Call<Void> insertPostulant(@Body RESTPostulant restPostulant);
 
+    //Récupération de tous les postulant par job
+    @Headers("Connection: close")
+    @GET("/api/Jobs")
+    Call<ArrayList<RESTJob>> getJobs(@Query("filter") String query);
+
 }

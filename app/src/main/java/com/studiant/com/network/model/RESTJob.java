@@ -2,6 +2,9 @@ package com.studiant.com.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lucas on 11/05/2017.
  */
@@ -29,8 +32,12 @@ public class RESTJob {
     @SerializedName("utilisateurId")
     private String mUtilisateurId;
 
+    @SerializedName("utilisateurs")
+    private ArrayList<RESTUtilisateur> mRestPostulants;
+
     @SerializedName("appartenir")
     private RESTUtilisateur mRestUtilisateur;
+
 
     public RESTJob(String mId, String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId) {
         this.mId = mId;
@@ -113,5 +120,13 @@ public class RESTJob {
 
     public void setmRestUtilisateur(RESTUtilisateur mRestUtilisateur) {
         this.mRestUtilisateur = mRestUtilisateur;
+    }
+
+    public ArrayList<RESTUtilisateur> getmRestPostulant() {
+        return mRestPostulants;
+    }
+
+    public void setmRestPostulant(ArrayList<RESTUtilisateur> mRestPostulant) {
+        this.mRestPostulants = mRestPostulant;
     }
 }

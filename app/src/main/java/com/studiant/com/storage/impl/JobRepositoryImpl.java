@@ -63,7 +63,7 @@ public class JobRepositoryImpl implements JobRepository {
             return RESTModelConverter.convertToArrayListJobModel(response.body());
 
         } catch (IOException e) { // something went wrong
-            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+            e.printStackTrace();
         }
 
         return null;
@@ -74,8 +74,8 @@ public class JobRepositoryImpl implements JobRepository {
         JobService jobService = RestClient.getService(JobService.class);
 
         try {
-            String query = "{\"include\":[\"appartenir\"]}";
-            Response<ArrayList<RESTJob>> response = jobService.getJobs(query).execute();
+            //String query = "{\"include\":[\"appartenir\"]}";
+            Response<ArrayList<RESTJob>> response = jobService.getJobs().execute();
 
             //restJob = response.body();
             Timber.i("GET ALL JOBS SUCCESS: %d", response.code());

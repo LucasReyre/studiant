@@ -10,6 +10,7 @@ import com.studiant.com.domain.interactors.base.AbstractInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 
 import java.util.Calendar;
 
@@ -45,7 +46,7 @@ public class GetProfileFromConnectedInteractorImpl extends AbstractInteractor im
             @Override
             public void run() {
                 if (user != null)
-                    mCallback.onProfileRetrieve(user);
+                    mCallback.onProfileRetrieve(PresentationModelConverter.convertToUserPresenterModel(user));
                 else if (user==null)
                     mCallback.onRetrievalFailed("Le profil n\\'a pas été retrouvé");
             }

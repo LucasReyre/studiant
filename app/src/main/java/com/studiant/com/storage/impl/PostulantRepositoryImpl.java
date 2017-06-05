@@ -40,4 +40,9 @@ public class PostulantRepositoryImpl implements PostulantRepository {
             Timber.e("UPLOAD FAIL"+e.getMessage());
         }
     }
+
+    @Override
+    public void choosePostulant(User user, Job job) {
+
+    }
 }

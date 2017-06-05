@@ -1,9 +1,7 @@
 package com.studiant.com.domain.model;
 
-import android.net.Uri;
-
 import java.io.Serializable;
-import java.net.URI;
+
 
 /**
  * Created by lucas on 28/04/2017.

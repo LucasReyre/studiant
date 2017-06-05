@@ -1,4 +1,4 @@
-package com.studiant.com.domain.model;
+package com.studiant.com.presentation.presenters.model;
 
 
 import android.view.View;
@@ -21,6 +21,7 @@ public class Job implements Serializable{
     private User utilisateur;
     private ArrayList<User> postulants;
 
+    private View.OnClickListener requestBtnClickListener;
 
     public Job(){}
 
@@ -54,18 +55,7 @@ public class Job implements Serializable{
         this.utilisateurId = utilisateurId;
     }
 
-    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId, ArrayList<User> postulants) {
-        this.id = id;
-        this.description = description;
-        this.prix = prix;
-        this.adresse = adresse;
-        this.date = date;
-        this.heure = heure;
-        this.utilisateurId = utilisateurId;
-        this.postulants = postulants;
-    }
-
-    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId, User utilisateur, ArrayList<User> postulants) {
+    public Job(String id, String description, String prix, String adresse, String date, String heure, String utilisateurId, User utilisateur ,ArrayList<User> postulants) {
         this.id = id;
         this.description = description;
         this.prix = prix;
@@ -139,6 +129,14 @@ public class Job implements Serializable{
 
     public void setUtilisateur(User utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public View.OnClickListener getRequestBtnClickListener() {
+        return requestBtnClickListener;
+    }
+
+    public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
+        this.requestBtnClickListener = requestBtnClickListener;
     }
 
     public ArrayList<User> getPostulants() {

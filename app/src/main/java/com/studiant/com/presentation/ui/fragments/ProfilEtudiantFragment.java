@@ -16,7 +16,7 @@ import android.widget.Switch;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.squareup.picasso.Picasso;
 import com.studiant.com.R;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

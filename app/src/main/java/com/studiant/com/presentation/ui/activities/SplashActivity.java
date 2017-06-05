@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.SplashPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.SplashPresenter;
 import com.studiant.com.storage.impl.UserRepositoryImpl;

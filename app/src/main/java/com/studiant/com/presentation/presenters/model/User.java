@@ -1,17 +1,52 @@
 package com.studiant.com.presentation.presenters.model;
 
-import android.net.Uri;
+import android.view.View;
 
-/**
- * Created by lucas on 28/04/2017.
- */
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
-    private String id;
-    private Uri profilePicture;
+    private String idExterne;
+    private String profilePicture;
+    private String birthday;
+    private int age;
+    private String description;
+    private boolean permis;
+    private String diplome;
+    private int typeConnexion;
+    private int typeUser;
+
+    private View.OnClickListener requestBtnClickListener;
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.idExterne = idExterne;
+        this.profilePicture = profilePicture;
+        this.birthday = birthday;
+    }
+
+    public User(String id, String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.idExterne = idExterne;
+        this.profilePicture = profilePicture;
+        this.birthday = birthday;
+        this.description = description;
+        this.permis = permis;
+        this.diplome = diplome;
+        this.typeConnexion = typeConnexion;
+        this.typeUser = typeUser;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -37,6 +72,78 @@ public class User {
         this.email = email;
     }
 
+    public String getIdExterne() {
+        return idExterne;
+    }
+
+    public void setIdExterne(String idExterne) {
+        this.idExterne = idExterne;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isPermis() {
+        return permis;
+    }
+
+    public void setPermis(boolean permis) {
+        this.permis = permis;
+    }
+
+    public String getDiplome() {
+        return diplome;
+    }
+
+    public void setDiplome(String diplome) {
+        this.diplome = diplome;
+    }
+
+    public int getTypeConnexion() {
+        return typeConnexion;
+    }
+
+    public void setTypeConnexion(int typeConnexion) {
+        this.typeConnexion = typeConnexion;
+    }
+
+    public int getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(int typeUser) {
+        this.typeUser = typeUser;
+    }
+
     public String getId() {
         return id;
     }
@@ -45,19 +152,12 @@ public class User {
         this.id = id;
     }
 
-    public Uri getProfilePicture() {
-        return profilePicture;
+    public View.OnClickListener getRequestBtnClickListener() {
+        return requestBtnClickListener;
     }
 
-    public void setProfilePicture(Uri profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public User(String firstName,String lastName, String email, String id, Uri profilePicture) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.id = id;
-        this.profilePicture = profilePicture;
+    public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
+        this.requestBtnClickListener = requestBtnClickListener;
     }
 }
+

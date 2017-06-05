@@ -11,10 +11,11 @@ import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetJobsInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertJobInteractor;
 import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.domain.repository.CategoryRepository;
 import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
 
@@ -71,7 +72,7 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
                 mMainThread,
                 this,
                 mJobRepository,
-                user
+                PresentationModelConverter.convertToUserDomainModel(user)
         );
 
         interactor.execute();
@@ -79,7 +80,7 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
 
     @Override
     public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
-        mView.onJobsRetrieve(jobArrayList);
+        mView.onJobsRetrieve(PresentationModelConverter.convertToArrayListPresenterJobModel(jobArrayList));
     }
 
     @Override

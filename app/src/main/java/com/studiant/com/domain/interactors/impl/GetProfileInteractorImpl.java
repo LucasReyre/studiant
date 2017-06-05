@@ -1,12 +1,6 @@
 package com.studiant.com.domain.interactors.impl;
 
-import android.os.Bundle;
-import android.util.Log;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
@@ -14,11 +8,7 @@ import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteracto
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
-import com.studiant.com.storage.ConnexionRepository;
-import com.studiant.com.storage.impl.UserRepositoryImpl;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 
 import java.util.Calendar;
 
@@ -56,7 +46,7 @@ public class GetProfileInteractorImpl extends AbstractInteractor implements GetP
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onProfileRetrieve(user);
+                mCallback.onProfileRetrieve(PresentationModelConverter.convertToUserPresenterModel(user));
             }
         });
     }
@@ -72,7 +62,6 @@ public class GetProfileInteractorImpl extends AbstractInteractor implements GetP
     /**
      * Method to extract the user's age from the entered Date of Birth.
      *
-     * @param DoB String The user's date of birth.
      *
      * @return ageS String The user's age in years based on the supplied DoB.
      */

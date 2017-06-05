@@ -10,7 +10,7 @@
     <!-- LEFT TITLE PART -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="120dp"
         android:layout_weight="3"
         android:background="@color/bgTitleLeft"
         android:gravity="center_horizontal"
@@ -63,12 +63,12 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@color/contentDividerLine"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:src="@color/contentDividerLine" />
 
         <TextView
-            android:id="@+id/title_description"
+            android:id="@+id/title_name_postulant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -82,7 +82,7 @@
 
 
         <TextView
-            android:id="@+id/title_name"
+            android:id="@+id/title_study"
             style="@style/TitleBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,14 +92,14 @@
             android:layout_toEndOf="@+id/textView2" />
 
         <TextView
+            android:id="@+id/textView2"
             style="@style/TitleBadgeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/propose_par"
-            android:id="@+id/textView2"
-            android:layout_alignBaseline="@+id/title_name"
-            android:layout_alignBottom="@+id/title_name"
-            android:layout_alignParentStart="true" />
+            android:layout_alignBaseline="@+id/title_study"
+            android:layout_alignBottom="@+id/title_study"
+            android:layout_alignParentStart="true"
+            android:text="@string/studiant_in" />
 
     </RelativeLayout>
 </LinearLayout>

@@ -47,7 +47,7 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             viewHolder.time = (TextView) cell.findViewById(R.id.title_time_label);
             viewHolder.date = (TextView) cell.findViewById(R.id.title_date_label);
             //viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            viewHolder.requestsCount = (TextView) cell.findViewById(R.id.title_name);
+            viewHolder.requestsCount = (TextView) cell.findViewById(R.id.title_study);
             //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
             viewHolder.contentRequestBtn = (TextView) cell.findViewById(R.id.content_request_btn);
             cell.setTag(viewHolder);

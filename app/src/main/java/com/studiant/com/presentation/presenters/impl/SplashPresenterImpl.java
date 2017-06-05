@@ -5,14 +5,10 @@ import android.util.Log;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.GetProfileFromConnectedInteractorImpl;
-import com.studiant.com.domain.interactors.impl.GetProfileInteractorImpl;
-import com.studiant.com.domain.interactors.impl.InsertUserInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
-import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
-import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.presentation.presenters.interfaces.SplashPresenter;
 
 /**

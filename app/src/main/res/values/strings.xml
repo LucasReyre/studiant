@@ -64,5 +64,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="studiant_in">Etudiant en : </string>
+    <string name="studiant">Etudiant</string>
+    <string name="requests_choose_studiant">Choisir</string>
+    <string name="permis">permis</string>
+    <string name="postulant">Postulant</string>
 
 </resources>

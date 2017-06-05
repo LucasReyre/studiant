@@ -12,7 +12,7 @@ import android.widget.Switch;
 import com.squareup.picasso.Picasso;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;

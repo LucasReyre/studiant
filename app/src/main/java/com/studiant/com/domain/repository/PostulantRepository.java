@@ -12,5 +12,6 @@ import java.util.ArrayList;
 public interface PostulantRepository {
 
     void insertPostulant(Postulant postulant);
+    void choosePostulant(User user, Job job);
 
 }

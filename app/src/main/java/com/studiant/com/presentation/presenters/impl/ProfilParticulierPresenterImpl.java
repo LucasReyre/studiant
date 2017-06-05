@@ -10,7 +10,8 @@ import com.studiant.com.domain.interactors.impl.InsertUserInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.interfaces.ConnexionPresenter;
@@ -85,7 +86,7 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
                 mMainThread,
                 this,
                 mUserRepository,
-                user
+                PresentationModelConverter.convertToUserDomainModel(user)
         );
 
         interactor.execute();
@@ -97,8 +98,9 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
-    public void onUserInsert(User user) {
-        mView.onUserInsert(user);
+    public void onUserInsert(com.studiant.com.domain.model.User user) {
+        mView.onUserInsert(PresentationModelConverter.convertToUserPresenterModel(user));
+
     }
 
     @Override

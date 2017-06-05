@@ -24,9 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".presentation.ui.activities.MainActivity"/>
-
+        <activity android:name=".presentation.ui.activities.MainActivity" />
         <activity
             android:name=".presentation.ui.activities.ChooseActivity"
             android:label="@string/title_activity_choose" />
@@ -38,13 +36,13 @@
         <activity
             android:name=".presentation.ui.activities.ProfilEtudiantActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".presentation.ui.activities.DashboardEtudiantActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
-
-        <activity android:name=".presentation.ui.activities.DashboardParticulierActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+        <activity
+            android:name=".presentation.ui.activities.DashboardEtudiantActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".presentation.ui.activities.DashboardParticulierActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".presentation.ui.activities.ListPostulantActivity"></activity>
     </application>
 
 </manifest>

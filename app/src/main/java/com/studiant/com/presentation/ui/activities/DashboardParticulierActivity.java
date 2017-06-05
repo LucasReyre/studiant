@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.ListJobParticulierFragment;
@@ -39,11 +39,6 @@ public class DashboardParticulierActivity extends AppCompatActivity {
         AdjustKeyboard.assistActivity(this);
 
         final User user = (User) getIntent().getSerializableExtra(INTENT_USER);
-
-        /*final Toolbar toolbar = mViewPager.getToolbar();
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-        }*/
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 

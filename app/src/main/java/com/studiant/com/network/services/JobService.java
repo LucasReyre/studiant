@@ -27,12 +27,16 @@ public interface JobService {
 
     //Récupération de tous les jobs crées par un utilisateur
     @Headers("Connection: close")
-    @GET("/api/Utilisateurs/{user_id}/creer")
+    @GET("/api/Utilisateurs/{user_id}/creer?filter[include][utilisateurs]")
     Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);
 
     //Récupération de tous les jobs sans distinction avec les utilisateurs associés
     @Headers("Connection: close")
-    @GET("/api/Jobs")
-    Call<ArrayList<RESTJob>> getJobs(@Query("filter") String query);
+    @GET("/api/Jobs?filter[include][appartenir]")
+    Call<ArrayList<RESTJob>> getJobs();
+
+    //Récupération de tous les jobs sans distinction avec les utilisateurs associés
+    /*@GET("/api/Jobs?filter[include][utilisateurs]&filter[where][utilisateurId]={user_id}")
+    Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);*/
 
 }

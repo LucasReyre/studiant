@@ -12,9 +12,9 @@
     folding-cell:cameraHeight="30">
 
     <!-- CONTENT (UNFOLDED) LAYOUT (MUST BE AT LEAST 2x times BIGGER than content layout bellow)-->
-    <include layout="@layout/cell_content_layout_etudiant" />
+    <include layout="@layout/cell_content_layout_job_particulier" />
 
     <!-- TITLE (FOLDED) LAYOUT (MUST BE AT LEAST 2x times SMALLER than content layout above) -->
-    <include layout="@layout/cell_title_job_etudiant_layout" />
+    <include layout="@layout/cell_title_job_particulier_layout" />
 
 </com.ramotion.foldingcell.FoldingCell>

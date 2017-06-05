@@ -98,8 +98,21 @@ public class RESTModelConverter {
         String date = restJob.getmDateJob();
         String heure = restJob.getmHeureJob();
         String utilisateurId = restJob.getmUtilisateurId();
+        ArrayList<User> postulantsArrayList = new ArrayList<User>();
 
         Job job =  new Job(id,description,prix ,adresse, date, heure, utilisateurId);
+
+        if (restJob.getmRestPostulant() != null){
+            ArrayList<RESTUtilisateur> restPostulantsArrayList = restJob.getmRestPostulant();
+
+            for (int i = 0; i<restPostulantsArrayList.size();i++){
+                postulantsArrayList.add(convertToUserModel(restPostulantsArrayList.get(i)));
+            }
+
+            job.setPostulants(postulantsArrayList);
+        }
+
+
         if (restJob.getmRestUtilisateur()!=null){
             User utilisateur = convertToUserModel(restJob.getmRestUtilisateur());
             job.setUtilisateur(utilisateur);

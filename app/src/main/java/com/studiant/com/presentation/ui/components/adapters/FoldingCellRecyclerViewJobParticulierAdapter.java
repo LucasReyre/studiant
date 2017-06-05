@@ -1,6 +1,7 @@
 package com.studiant.com.presentation.ui.components.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.model.Job;
+import com.studiant.com.presentation.presenters.model.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,17 +21,17 @@ import java.util.List;
  * Created by groupama on 18/05/2017.
  */
 
-public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<Job> contents;
+    User user;
 
-    static final int TYPE_HEADER = 0;
-    static final int TYPE_CELL = 1;
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
 
-    public FoldingCellRecyclerViewEtudiantAdapter(ArrayList<Job> contents) {
+    public FoldingCellRecyclerViewJobParticulierAdapter(ArrayList<Job> contents, User user) {
         this.contents = contents;
+        this.user = user;
     }
 
     @Override
@@ -39,24 +41,23 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_job_etudiant, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_job_particulier, parent, false));
     }
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder cellViewHolder = (ViewHolder) holder;
+        Log.d("onBindViewHolder", "ok "+position);
         cellViewHolder.foldingCell.fold(true);
         cellViewHolder.titleDescription.setText(contents.get(position).getDescription());
         String prix = contents.get(position).getPrix()+" €";
         cellViewHolder.price.setText(prix);
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
-        //viewHolder.toAddress.setText(item.getToAddress());
-         cellViewHolder.requestsCount.setText(contents.get(position).getUtilisateur().getFirstName());
 
         //Content
-        cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
+        cellViewHolder.name.setText(user.getFirstName());
         cellViewHolder.priceContent.setText(contents.get(position).getPrix());
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
@@ -116,9 +117,6 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         TextView price;
         TextView titleDescription;
         TextView contentRequestBtn;
-        //TextView pledgePrice;
-        //TextView toAddress;
-        TextView requestsCount;
         TextView date;
         TextView time;
         FoldingCell foldingCell;
@@ -136,9 +134,6 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
-            //viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            requestsCount = (TextView) itemView.findViewById(R.id.title_study);
-            //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content

@@ -8,21 +8,22 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.Job;
+import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.impl.DashboardPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
 import com.studiant.com.presentation.ui.activities.AddJobActivity;
-import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewAdapter;
-import com.studiant.com.presentation.ui.components.Item;
+import com.studiant.com.presentation.ui.activities.ListPostulantActivity;
+import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewJobParticulierAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
 
@@ -33,6 +34,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.studiant.com.storage.Constants.INTENT_JOB;
+import static com.studiant.com.storage.Constants.INTENT_LIST_JOB;
+import static com.studiant.com.storage.Constants.INTENT_LIST_USER;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 public class ListJobParticulierFragment extends Fragment implements DashboardPresenter.View{
@@ -113,40 +117,21 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     }
 
     @Override
-    public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
+    public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
         // prepare elements to display
-        final ArrayList<Item> items = Item.getTestingList();
 
-        // add custom btn handler to first list item
-        items.get(0).setRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON"+items.get(0).getFromAddress(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
+        final FoldingCellRecyclerViewJobParticulierAdapter adapter = new FoldingCellRecyclerViewJobParticulierAdapter(jobArrayList, user);
 
-        for (int i = 0 ; i<items.size();i++){
+        for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
-            items.get(i).setRequestBtnClickListener(new View.OnClickListener() {
+            jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON"+items.get(j).getFromAddress(), Toast.LENGTH_SHORT).show();
+                    onViewStudiantClick(jobArrayList.get(j));
                 }
             });
         }
-
-        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        //final FoldingCellListAdapter adapter = new FoldingCellListAdapter(getApplicationContext(), items);
-        final FoldingCellRecyclerViewAdapter adapter = (new FoldingCellRecyclerViewAdapter(items));
-        // add default btn handler for each request btn on each item if custom handler not found
-
-        adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(getApplicationContext(), "DEFAULT HANDLER FOR ALL BUTTONS " + v.getId(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
         //setup materialviewpager
 
@@ -160,6 +145,16 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         mRecyclerView.setAdapter(adapter);
+
+    }
+
+    public void onViewStudiantClick(Job job){
+        Log.d("onViewStudiantClick", "click " + job.getDescription() + " " + job.getPostulants().size());
+        Intent intent = new Intent(getApplicationContext(), ListPostulantActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        //intent.putExtra(INTENT_LIST_USER, job.getPostulants());
+        intent.putExtra(INTENT_JOB, PresentationModelConverter.convertToJobDomainModel(job));
+        this.startActivity(intent);
 
     }
 
