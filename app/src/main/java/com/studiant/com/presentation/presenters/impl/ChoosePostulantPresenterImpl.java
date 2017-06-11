@@ -2,16 +2,16 @@ package com.studiant.com.presentation.presenters.impl;
 
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
-import com.studiant.com.domain.interactors.impl.GetProfileInteractorImpl;
-import com.studiant.com.domain.interactors.impl.InsertUserInteractorImpl;
-import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
+import com.studiant.com.domain.interactors.impl.ChoosePostulantInteractorImpl;
+import com.studiant.com.domain.interactors.impl.InsertPostulantInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.ChoosePostulantInteractor;
-import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
-import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
+import com.studiant.com.domain.interactors.interfaces.InsertPostulantInteractor;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.PostulantRepository;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.interfaces.ChoosePostulantPresenter;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 
@@ -70,7 +70,17 @@ public class ChoosePostulantPresenterImpl extends AbstractPresenter implements C
     }
 
     @Override
-    public void choosePostulant(User user) {
+    public void choosePostulant(User user, Job job) {
+        ChoosePostulantInteractor interactor = new ChoosePostulantInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mPostulantRepository,
+                job,
+                user
+        );
+
+        interactor.execute();
 
     }
 }

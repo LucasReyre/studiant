@@ -30,6 +30,7 @@
     <string name="error_field_required">This field is required</string>
 
     <string name="facebook_app_id">1924525284450671</string>
+    <string name="google_place_api_key">AIzaSyCOPUSHLPBUJhXZkQ67bipQltjwT0EwqNQ</string>
 
 
     <!--
@@ -69,5 +70,6 @@
     <string name="requests_choose_studiant">Choisir</string>
     <string name="permis">permis</string>
     <string name="postulant">Postulant</string>
+    <string name="see_studiant">Voir les étudiants</string>
 
 </resources>

@@ -6,17 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
+
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.model.User;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
 import com.studiant.com.presentation.ui.components.MDatePicker;
@@ -30,13 +34,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 
+import static com.facebook.login.widget.ProfilePictureView.TAG;
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 import static com.studiant.com.storage.Constants.STATUS_USER;
 
-public class AddJobActivity extends Activity implements AddJobPresenter.View {
+public class AddJobActivity extends Activity implements AddJobPresenter.View, PlaceSelectionListener {
 
     @BindView(R.id.spinner_categorie)
     MaterialSpinner spinner;
@@ -47,9 +52,6 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
     @BindView(R.id.editTextPrice)
     TextView priceTextView;
 
-    @BindView(R.id.editTextAdress)
-    TextView adressTextView;
-
     @BindView(R.id.textViewDate)
     TextView dateTextView;
 
@@ -59,9 +61,13 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
     @BindView(R.id.buttonAddJob)
     Button addJobButton;
 
+    PlaceAutocompleteFragment autocompleteFragment;
+
     private AddJobPresenter mPresenter;
 
     private User user;
+
+    private Job job;
 
     Context context;
 
@@ -71,6 +77,7 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
         setContentView(R.layout.activity_add_job);
         ButterKnife.bind(this);
         context = this;
+        job = new Job();
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
 
         mPresenter = new AddJobPresenterImpl(
@@ -81,6 +88,11 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
                 new JobRepositoryImpl()
         );
 
+        autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        autocompleteFragment.setOnPlaceSelectedListener(this);
+        autocompleteFragment.setBoundsBias(new LatLngBounds(
+                new LatLng(42.244785, -2.208252),
+                new LatLng(51.138001, 7.943115)));
 
     }
 
@@ -126,12 +138,11 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
     @OnClick(R.id.buttonAddJob)
     void onClickAddJob() {
 
-        Job job = new Job(descriptionTextView.getText().toString(),
-                          priceTextView.getText().toString(),
-                          adressTextView.getText().toString(),
-                          dateTextView.getText().toString(),
-                          timeTextView.getText().toString(),
-                          user.getId());
+        job.setDescription(descriptionTextView.getText().toString());
+        job.setPrix(priceTextView.getText().toString());
+        job.setDate(dateTextView.getText().toString());
+        job.setHeure(timeTextView.getText().toString());
+        job.setUtilisateurId(user.getId());
 
         mPresenter.insertJob(job);
     }
@@ -148,6 +159,19 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View {
 
     @Override
     public void showError(String message) {
+
+    }
+
+    @Override
+    public void onPlaceSelected(Place place) {
+        Log.i(TAG, "Place: " + place.getName());
+        job.setAdresse(place.getAddress().toString());
+
+    }
+
+    @Override
+    public void onError(Status status) {
+        Log.i(TAG, "An error occurred: " + status);
 
     }
 }

@@ -30,4 +30,9 @@ public interface PostulantService {
     @GET("/api/Jobs")
     Call<ArrayList<RESTJob>> getJobs(@Query("filter") String query);
 
+    //Récupération de tous les postulant par job
+    @Headers("Connection: close")
+    @POST("/api/Postulants/update")
+    Call<ArrayList<RESTJob>> updatePostulant(@Query("where") String query, @Body RESTPostulant restPostulant);
+
 }

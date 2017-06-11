@@ -91,13 +91,13 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                                 R.color.green,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home1));
                     case 1:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.blue,
-                                "http://www.hdiphonewallpapers.us/phone-wallpapers/540x960-1/540x960-mobile-wallpapers-hd-2218x5ox3.jpg");
+                        return HeaderDesign.fromColorResAndDrawable(
+                                R.color.green,
+                                ContextCompat.getDrawable(getApplicationContext(),R.drawable.home2));
                     case 2:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.cyan,
-                                "http://www.droid-life.com/wp-content/uploads/2014/10/lollipop-wallpapers10.jpg");
+                        return HeaderDesign.fromColorResAndDrawable(
+                                R.color.green,
+                                ContextCompat.getDrawable(getApplicationContext(),R.drawable.home3));
                     case 3:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.red,

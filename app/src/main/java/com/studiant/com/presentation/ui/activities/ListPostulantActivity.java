@@ -82,14 +82,16 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
             });
         }
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(adapter);
     }
 
     private void onChoosePostulantClick(com.studiant.com.presentation.presenters.model.User user){
         Log.d("onChoosePostulantClick", " choose "+user.getFirstName());
-        mPresenter.choosePostulant(PresentationModelConverter.convertToUserDomainModel(user));
+       // mPresenter.choosePostulant(PresentationModelConverter.convertToUserDomainModel(user), PresentationModelConverter.convertToJobDomainModel(job));
     }
 
 
