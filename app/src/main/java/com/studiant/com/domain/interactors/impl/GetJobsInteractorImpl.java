@@ -46,6 +46,7 @@ public class GetJobsInteractorImpl extends AbstractInteractor implements GetJobs
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
+
                 if (jobArrayList.size()>0)
                     mCallback.onJobsRetrieve(jobArrayList);
                 else

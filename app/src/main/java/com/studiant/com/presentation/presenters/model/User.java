@@ -18,6 +18,7 @@ public class User implements Serializable {
     private String diplome;
     private int typeConnexion;
     private int typeUser;
+    private String firebaseToken;
 
     private View.OnClickListener requestBtnClickListener;
 
@@ -158,6 +159,14 @@ public class User implements Serializable {
 
     public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
         this.requestBtnClickListener = requestBtnClickListener;
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
+    }
+
+    public void setFirebaseToken(String firebaseToken) {
+        this.firebaseToken = firebaseToken;
     }
 }
 

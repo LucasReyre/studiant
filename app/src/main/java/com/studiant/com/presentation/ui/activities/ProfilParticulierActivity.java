@@ -9,6 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterImpl;
@@ -68,6 +69,9 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
             user.setEmail(emailEditText.getText().toString());
             user.setTypeUser(STATUS_PARTICULIER);
             user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
+            if (FirebaseInstanceId.getInstance().getToken() != null)
+                user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
+
             mPresenter.insertProfile(user);
         }
 

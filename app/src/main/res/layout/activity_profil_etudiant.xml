@@ -57,6 +57,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPersonName"
                     android:maxLines="1"
+                    android:textColor="@color/editTextColor"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -75,6 +76,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPersonName"
                     android:maxLines="1"
+                    android:textColor="@color/editTextColor"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -106,6 +108,7 @@
                     android:hint="@string/prompt_study"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:textColor="@color/editTextColor"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -123,6 +126,7 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPersonName|textMultiLine"
+                    android:textColor="@color/editTextColor"
                     android:maxLines="5" />
 
             </android.support.design.widget.TextInputLayout>

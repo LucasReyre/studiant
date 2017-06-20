@@ -3,12 +3,14 @@ package com.studiant.com.presentation.ui.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
@@ -89,6 +91,12 @@ public class ProfilEtudiantActivity extends Activity implements ProfilParticulie
             user.setPermis(permisSwitch.isChecked());
             user.setTypeUser(STATUS_ETUDIANT);
             user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
+
+            if (FirebaseInstanceId.getInstance().getToken() != null)
+                user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
+
+            Log.d("Token ", " - "+FirebaseInstanceId.getInstance().getToken());
+
             mPresenter.insertProfile(user);
         }
 

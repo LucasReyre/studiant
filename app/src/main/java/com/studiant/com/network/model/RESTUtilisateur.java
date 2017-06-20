@@ -44,6 +44,9 @@ public class RESTUtilisateur {
     @SerializedName("permisUtilisateur")
     private Boolean mPermisUtilisateur;
 
+    @SerializedName("firebaseToken")
+    private String mfirebaseToken;
+
     public RESTUtilisateur(String mId, String mNomUtilisateur, String mPrenomUtilisateur, String mDateNaissanceUtilisateur, String mPhotoUtilisateur, String mMailUtilisateur, int mTypeUtilisateur, String mIdExterneUtilisateur, int mTypeConnexionUtilisateur, String mDescriptionUtilisateur, String mDiplomeUtilisateur, Boolean mPermisUtilisateur) {
         this.mId = mId;
         this.mNomUtilisateur = mNomUtilisateur;
@@ -167,5 +170,13 @@ public class RESTUtilisateur {
 
     public void setmPermisUtilisateur(Boolean mPermisUtilisateur) {
         this.mPermisUtilisateur = mPermisUtilisateur;
+    }
+
+    public String getMfirebaseToken() {
+        return mfirebaseToken;
+    }
+
+    public void setMfirebaseToken(String mfirebaseToken) {
+        this.mfirebaseToken = mfirebaseToken;
     }
 }

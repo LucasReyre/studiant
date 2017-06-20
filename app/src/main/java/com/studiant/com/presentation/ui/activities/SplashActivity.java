@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
+import com.studiant.com.notification.MyFirebaseInstanceIDService;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.SplashPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.SplashPresenter;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
+
+import java.io.IOException;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
@@ -19,7 +25,7 @@ import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 /**
  * Created by lucas on 12/04/2016.
  */
-public class SplashActivity extends Activity implements SplashPresenter.View{
+public class SplashActivity extends Activity implements SplashPresenter.View, MyFirebaseInstanceIDService.FirebaseInterface{
     Context context = this;
 
     private SplashPresenter mPresenter;
@@ -28,6 +34,10 @@ public class SplashActivity extends Activity implements SplashPresenter.View{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        MyFirebaseInstanceIDService.setListener(this);
+
+        Log.d("SplashToken", " token : "+FirebaseInstanceId.getInstance().getToken());
         // create a presenter for this view
         mPresenter = new SplashPresenterImpl(
                 ThreadExecutor.getInstance(),
@@ -79,5 +89,11 @@ public class SplashActivity extends Activity implements SplashPresenter.View{
     @Override
     public void showError(String message) {
 
+    }
+
+    @Override
+    public void onTokenRefresh(String token) {
+        Log.d("SplashToken", "ontokenRefresh"+token);
+        Log.d("SplashToken", " token : "+FirebaseInstanceId.getInstance().getToken());
     }
 }

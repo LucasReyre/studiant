@@ -80,6 +80,7 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
         job = new Job();
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
 
+
         mPresenter = new AddJobPresenterImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),

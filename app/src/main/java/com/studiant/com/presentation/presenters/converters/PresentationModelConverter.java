@@ -53,7 +53,7 @@ public class PresentationModelConverter {
         if (user == null)
             return null;
 
-        return new User(user.getId(),
+        User domainUser = new User(user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
@@ -65,19 +65,34 @@ public class PresentationModelConverter {
                 user.getDiplome(),
                 user.getTypeConnexion(),
                 user.getTypeUser());
+
+        if (user.getFirebaseToken() != null)
+            domainUser.setFirebaseToken(user.getFirebaseToken());
+
+        return domainUser;
     }
 
     public static com.studiant.com.presentation.presenters.model.Job convertToJobPresenterModel(Job job) {
         Log.d("convertToJobPresenterMo", " - "+job.getId());
-        return new com.studiant.com.presentation.presenters.model.Job(job.getId(),
-                                                                        job.getDescription(),
-                                                                        job.getPrix(),
-                                                                        job.getAdresse(),
-                                                                        job.getDate(),
-                                                                        job.getHeure(),
-                                                                        job.getUtilisateurId(),
-                                                                        convertToUserPresenterModel(job.getUtilisateur()) ,
-                                                                        convertToArrayListPresenterUserModel(job.getPostulants()));
+        Log.d("Bug ", " - "+job.getPostulants());
+
+        com.studiant.com.presentation.presenters.model.Job presenterJob = new com.studiant.com.presentation.presenters.model.Job(job.getId(),
+                job.getDescription(),
+                job.getPrix(),
+                job.getAdresse(),
+                job.getDate(),
+                job.getHeure(),
+                job.getUtilisateurId(),
+                convertToUserPresenterModel(job.getUtilisateur()));
+
+        if (job.getPostulants() == null)
+            return presenterJob;
+        else{
+            presenterJob.setPostulants(convertToArrayListPresenterUserModel(job.getPostulants()));
+            return presenterJob;
+        }
+
+
     }
 
 

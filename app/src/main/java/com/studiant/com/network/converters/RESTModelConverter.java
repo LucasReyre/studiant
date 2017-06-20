@@ -52,17 +52,24 @@ public class RESTModelConverter {
         String diplomeUser = user.getDiplome();
         boolean permisUser = user.isPermis();
 
-        return new RESTUtilisateur( nomUser,
-                                    prenomUser,
-                                    dateNaissanceUser,
-                                    photoUser,
-                                    mailUser,
-                                    typeUser,
-                                    idExterne,
-                                    typeConnexion,
-                                    descriptionUser,
-                                    diplomeUser,
-                                    permisUser);
+
+
+        RESTUtilisateur restUtilisateur = new RESTUtilisateur( nomUser,
+                prenomUser,
+                dateNaissanceUser,
+                photoUser,
+                mailUser,
+                typeUser,
+                idExterne,
+                typeConnexion,
+                descriptionUser,
+                diplomeUser,
+                permisUser);
+
+        if (user.getFirebaseToken() != null)
+            restUtilisateur.setMfirebaseToken(user.getFirebaseToken());
+
+        return restUtilisateur;
 
     }
 

@@ -21,6 +21,7 @@ public class User implements Serializable{
     private String diplome;
     private int typeConnexion;
     private int typeUser;
+    private String firebaseToken;
 
 
     public User() {
@@ -152,5 +153,13 @@ public class User implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getFirebaseToken() {
+        return firebaseToken;
+    }
+
+    public void setFirebaseToken(String firebaseToken) {
+        this.firebaseToken = firebaseToken;
     }
 }
