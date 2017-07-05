@@ -18,7 +18,8 @@ public class RestClient {
     /**
      * This is our main backend/server URL.
      */
-    public static final String REST_API_URL = "https://loopbackstudiant.herokuapp.com/";
+    public static String REST_API_URL = "https://loopbackstudiant.herokuapp.com/";
+    //public static final String REST_API_URL = "https://fcm.googleapis.com/";
 //    public static final String REST_API_URL = "http://192.168.0.12:3000";
 
 
@@ -42,7 +43,26 @@ public class RestClient {
                 .build();
     }
 
+    public static void changeApiBaseUrl(String newApiBaseUrl) {
+        REST_API_URL = newApiBaseUrl;
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
+
+        s_retrofit = new Retrofit.Builder()
+                .baseUrl(REST_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+    }
+
     public static <T> T getService(Class<T> serviceClass) {
         return s_retrofit.create(serviceClass);
     }
+
 }

@@ -7,7 +7,7 @@
     android:baselineAligned="false"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.studiant.com.presentation.ui.activities.ConnexionActivity">
+    tools:context="com.studiant.com.presentation.ui.activities.common.ConnexionActivity">
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button_facebook"

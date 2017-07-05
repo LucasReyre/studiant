@@ -27,7 +27,7 @@ public interface JobService {
 
     //Récupération de tous les jobs crées par un utilisateur
     @Headers("Connection: close")
-    @GET("/api/Utilisateurs/{user_id}/creer?filter[include][utilisateurs]")
+        @GET("/api/Utilisateurs/{user_id}/creer?filter[include][utilisateurs]")
     Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);
 
     //Récupération de tous les jobs sans distinction avec les utilisateurs associés

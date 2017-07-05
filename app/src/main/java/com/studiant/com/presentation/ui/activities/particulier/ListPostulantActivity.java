@@ -1,4 +1,4 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;

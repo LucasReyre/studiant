@@ -34,7 +34,7 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public User(String id, String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser) {
+    public User(String id, String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser, String firebaseToken) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,6 +47,7 @@ public class User implements Serializable {
         this.diplome = diplome;
         this.typeConnexion = typeConnexion;
         this.typeUser = typeUser;
+        this.firebaseToken = firebaseToken;
     }
 
     public String getFirstName() {

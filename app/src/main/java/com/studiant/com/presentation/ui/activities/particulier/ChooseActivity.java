@@ -1,30 +1,24 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.Spinner;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.impl.ChoosePresenterImpl;
-import com.studiant.com.presentation.presenters.impl.MainPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
-import com.studiant.com.presentation.presenters.interfaces.MainPresenter;
+import com.studiant.com.presentation.ui.activities.common.ConnexionActivity;
 import com.studiant.com.presentation.ui.components.MCarouselView;
 import com.studiant.com.storage.ChooseCategoryRepository;
-import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.threading.MainThreadImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
-import butterknife.OnItemSelected;
 
 import static com.studiant.com.storage.Constants.*;
 

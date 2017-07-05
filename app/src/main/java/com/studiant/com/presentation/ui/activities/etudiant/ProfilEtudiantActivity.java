@@ -1,4 +1,4 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.etudiant;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;

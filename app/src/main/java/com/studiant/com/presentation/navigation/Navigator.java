@@ -1,12 +1,5 @@
 package com.studiant.com.presentation.navigation;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-
-import com.studiant.com.presentation.ui.activities.ChooseActivity;
-import com.studiant.com.presentation.ui.activities.MainActivity;
-
 import javax.inject.Inject;
 
 /**

@@ -1,4 +1,4 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.common;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,10 +13,10 @@ import com.studiant.com.notification.MyFirebaseInstanceIDService;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.SplashPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.SplashPresenter;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
+import com.studiant.com.presentation.ui.activities.particulier.DashboardParticulierActivity;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
-
-import java.io.IOException;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
@@ -37,14 +37,12 @@ public class SplashActivity extends Activity implements SplashPresenter.View, My
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         MyFirebaseInstanceIDService.setListener(this);
 
-        Log.d("SplashToken", " token : "+FirebaseInstanceId.getInstance().getToken());
         // create a presenter for this view
         mPresenter = new SplashPresenterImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this,
-                new UserRepositoryImpl() {
-                }
+                new UserRepositoryImpl()
         );
     }
 

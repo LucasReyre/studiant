@@ -1,21 +1,18 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.common;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.Profile;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.interfaces.MainPresenter;
 import com.studiant.com.presentation.presenters.interfaces.MainPresenter.View;
 import com.studiant.com.presentation.presenters.impl.MainPresenterImpl;
-import com.studiant.com.presentation.ui.components.MCarouselView;
+import com.studiant.com.presentation.ui.activities.particulier.ChooseActivity;
 import com.studiant.com.storage.WelcomeMessageRepository;
 import com.studiant.com.threading.MainThreadImpl;
 

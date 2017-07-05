@@ -21,6 +21,7 @@ import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.DashboardEtudiantPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPresenter;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewEtudiantAdapter;
+import com.studiant.com.storage.impl.GCMMessageRepositoryImpl;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.PostulantRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
@@ -70,7 +71,8 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
                     MainThreadImpl.getInstance(),
                     this,
                     new JobRepositoryImpl(),
-                    new PostulantRepositoryImpl()
+                    new PostulantRepositoryImpl(),
+                    new GCMMessageRepositoryImpl()
             );
         }
     }

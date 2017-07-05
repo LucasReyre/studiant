@@ -1,4 +1,4 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

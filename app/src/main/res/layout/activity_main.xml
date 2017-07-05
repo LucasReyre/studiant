@@ -7,7 +7,7 @@
     android:baselineAligned="false"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.studiant.com.presentation.ui.activities.MainActivity">
+    tools:context="com.studiant.com.presentation.ui.activities.common.MainActivity">
 
 
     <TextView

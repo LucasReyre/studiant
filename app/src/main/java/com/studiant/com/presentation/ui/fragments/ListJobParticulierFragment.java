@@ -21,8 +21,8 @@ import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.impl.DashboardPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
-import com.studiant.com.presentation.ui.activities.AddJobActivity;
-import com.studiant.com.presentation.ui.activities.ListPostulantActivity;
+import com.studiant.com.presentation.ui.activities.particulier.AddJobActivity;
+import com.studiant.com.presentation.ui.activities.particulier.ListPostulantActivity;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewJobParticulierAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.threading.MainThreadImpl;
@@ -35,8 +35,6 @@ import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.studiant.com.storage.Constants.INTENT_JOB;
-import static com.studiant.com.storage.Constants.INTENT_LIST_JOB;
-import static com.studiant.com.storage.Constants.INTENT_LIST_USER;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 public class ListJobParticulierFragment extends Fragment implements DashboardPresenter.View{

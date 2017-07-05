@@ -5,7 +5,10 @@ import android.util.Log;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.GetProfileFromConnectedInteractorImpl;
+import com.studiant.com.domain.interactors.impl.SendNotificationInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
+import com.studiant.com.domain.interactors.interfaces.SendNotificationInteractor;
+import com.studiant.com.domain.repository.GCMMessageRepository;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
@@ -18,6 +21,7 @@ public class SplashPresenterImpl extends AbstractPresenter implements SplashPres
 
     private View mView;
     private UserRepository mUserRepository;
+    private GCMMessageRepository mGcmRepository;
 
     public SplashPresenterImpl(Executor executor, MainThread mainThread,
                                View view, UserRepository userRepository) {
@@ -40,7 +44,6 @@ public class SplashPresenterImpl extends AbstractPresenter implements SplashPres
 
         // run the interactor
         interactor.execute();
-
         Log.d("splash", "resume Presenter");
 
     }

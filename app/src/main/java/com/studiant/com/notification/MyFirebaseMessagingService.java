@@ -13,7 +13,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.studiant.com.R;
-import com.studiant.com.presentation.ui.activities.MainActivity;
+import com.studiant.com.presentation.ui.activities.common.MainActivity;
 
 
 /**

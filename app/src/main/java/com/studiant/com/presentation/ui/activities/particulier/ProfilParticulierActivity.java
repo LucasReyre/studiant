@@ -1,10 +1,8 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +23,6 @@ import butterknife.OnClick;
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
-import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 
 public class ProfilParticulierActivity extends Activity implements ProfilParticulierPresenter.View {

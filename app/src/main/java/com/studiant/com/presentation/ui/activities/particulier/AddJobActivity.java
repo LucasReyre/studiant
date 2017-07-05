@@ -1,4 +1,4 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,6 +23,7 @@ import com.studiant.com.domain.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
+import com.studiant.com.presentation.ui.activities.particulier.DashboardParticulierActivity;
 import com.studiant.com.presentation.ui.components.MDatePicker;
 import com.studiant.com.presentation.ui.components.MTimePicker;
 import com.studiant.com.storage.ChooseCategoryRepository;
@@ -37,9 +38,6 @@ import butterknife.OnTouch;
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
-import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
-import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
-import static com.studiant.com.storage.Constants.STATUS_USER;
 
 public class AddJobActivity extends Activity implements AddJobPresenter.View, PlaceSelectionListener {
 

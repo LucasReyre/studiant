@@ -34,7 +34,8 @@ public class PresentationModelConverter {
                                                                         user.isPermis(),
                                                                         user.getDiplome(),
                                                                         user.getTypeConnexion(),
-                                                                        user.getTypeUser());
+                                                                        user.getTypeUser(),
+                                                                        user.getFirebaseToken());
     }
 
 
@@ -64,7 +65,8 @@ public class PresentationModelConverter {
                 user.isPermis(),
                 user.getDiplome(),
                 user.getTypeConnexion(),
-                user.getTypeUser());
+                user.getTypeUser(),
+                user.getFirebaseToken());
 
         if (user.getFirebaseToken() != null)
             domainUser.setFirebaseToken(user.getFirebaseToken());
@@ -73,8 +75,6 @@ public class PresentationModelConverter {
     }
 
     public static com.studiant.com.presentation.presenters.model.Job convertToJobPresenterModel(Job job) {
-        Log.d("convertToJobPresenterMo", " - "+job.getId());
-        Log.d("Bug ", " - "+job.getPostulants());
 
         com.studiant.com.presentation.presenters.model.Job presenterJob = new com.studiant.com.presentation.presenters.model.Job(job.getId(),
                 job.getDescription(),
@@ -97,6 +97,9 @@ public class PresentationModelConverter {
 
 
     public static ArrayList<User> convertToArrayListDomainUserModel(ArrayList<com.studiant.com.presentation.presenters.model.User> domainUserArrayList){
+        if (domainUserArrayList == null)
+            return null;
+
         ArrayList<User> userArrayList = new ArrayList<>();
         for (int i = 0; i<domainUserArrayList.size();i++){
             userArrayList.add(convertToUserDomainModel(domainUserArrayList.get(i)));

@@ -32,8 +32,9 @@ public class RESTModelConverter {
         String descriptionUser = restUtilisateur.getmDescriptionUtilisateur();
         String diplomeUser = restUtilisateur.getmDiplomeUtilisateur();
         boolean permisUser = restUtilisateur.getmPermisUtilisateur();
+        String firebaseToken = restUtilisateur.getMfirebaseToken();
 
-        return new User(id, prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, permisUser, diplomeUser,typeConnexion, typeUser);
+        return new User(id, prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, permisUser, diplomeUser,typeConnexion, typeUser, firebaseToken);
         //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
     }
 

@@ -1,11 +1,16 @@
 package com.studiant.com.presentation.presenters.impl;
 
+import android.util.Log;
+
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.GetJobsInteractorImpl;
 import com.studiant.com.domain.interactors.impl.InsertPostulantInteractorImpl;
+import com.studiant.com.domain.interactors.impl.SendNotificationInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.GetJobsInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertPostulantInteractor;
+import com.studiant.com.domain.interactors.interfaces.SendNotificationInteractor;
+import com.studiant.com.domain.repository.GCMMessageRepository;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
@@ -21,18 +26,20 @@ import java.util.ArrayList;
  * Created by dmilicic on 12/13/15.
  */
 public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements DashboardEtudiantPresenter,
-        GetJobsInteractor.Callback, InsertPostulantInteractor.Callback {
+        GetJobsInteractor.Callback, InsertPostulantInteractor.Callback,  SendNotificationInteractor.Callback{
 
     private View mView;
     private JobRepository mJobRepository;
     private PostulantRepository mPostulantRepository;
+    private GCMMessageRepository mGcmRepository;
 
     public DashboardEtudiantPresenterImpl(Executor executor, MainThread mainThread,
-                                          View view, JobRepository jobRepository, PostulantRepository postulantRepository) {
+                                          View view, JobRepository jobRepository, PostulantRepository postulantRepository, GCMMessageRepository gcmMessageRepository) {
         super(executor, mainThread);
         mView = view;
         mJobRepository = jobRepository;
         mPostulantRepository = postulantRepository;
+        mGcmRepository = gcmMessageRepository;
     }
 
     @Override
@@ -105,8 +112,19 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
-    public void onPostulantInsert() {
+    public void onPostulantInsert(Job job) {
 
+        Log.d("presenter", "user token "+job.getUtilisateur().getFirstName() + "-  "+job.getUtilisateur().getFirebaseToken());
+
+        SendNotificationInteractor interactor = new SendNotificationInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mGcmRepository,
+                PresentationModelConverter.convertToJobDomainModel(job)
+        );
+
+        interactor.execute();
     }
 
     @Override

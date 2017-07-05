@@ -1,39 +1,26 @@
-package com.studiant.com.presentation.ui.activities;
+package com.studiant.com.presentation.ui.activities.common;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
-import com.studiant.com.presentation.presenters.impl.ChoosePresenterImpl;
 import com.studiant.com.presentation.presenters.impl.ConnexionPresenterImpl;
-import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
 import com.studiant.com.presentation.presenters.interfaces.ConnexionPresenter;
-import com.studiant.com.storage.ChooseCategoryRepository;
+import com.studiant.com.presentation.ui.activities.etudiant.ProfilEtudiantActivity;
+import com.studiant.com.presentation.ui.activities.particulier.ProfilParticulierActivity;
 import com.studiant.com.storage.ConnexionRepository;
 import com.studiant.com.threading.MainThreadImpl;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -42,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
-import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 import static com.studiant.com.storage.Constants.STATUS_USER;
 

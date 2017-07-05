@@ -19,7 +19,7 @@
             android:value="@string/google_place_api_key"/>
 
         <activity
-            android:name=".presentation.ui.activities.SplashActivity"
+            android:name=".presentation.ui.activities.common.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,25 +27,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.MainActivity" />
+        <activity android:name=".presentation.ui.activities.common.MainActivity" />
         <activity
-            android:name=".presentation.ui.activities.ChooseActivity"
+            android:name=".presentation.ui.activities.particulier.ChooseActivity"
             android:label="@string/title_activity_choose" />
-        <activity android:name=".presentation.ui.activities.ConnexionActivity" />
+        <activity android:name=".presentation.ui.activities.common.ConnexionActivity" />
         <activity
-            android:name=".presentation.ui.activities.ProfilParticulierActivity"
+            android:name=".presentation.ui.activities.particulier.ProfilParticulierActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".presentation.ui.activities.AddJobActivity" />
+        <activity android:name=".presentation.ui.activities.particulier.AddJobActivity" />
         <activity
-            android:name=".presentation.ui.activities.ProfilEtudiantActivity"
+            android:name=".presentation.ui.activities.etudiant.ProfilEtudiantActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".presentation.ui.activities.DashboardEtudiantActivity"
+            android:name=".presentation.ui.activities.etudiant.DashboardEtudiantActivity"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".presentation.ui.activities.DashboardParticulierActivity"
+            android:name=".presentation.ui.activities.particulier.DashboardParticulierActivity"
             android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".presentation.ui.activities.ListPostulantActivity"></activity>
+        <activity android:name=".presentation.ui.activities.particulier.ListPostulantActivity"></activity>
 
 
         <receiver

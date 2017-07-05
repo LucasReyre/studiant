@@ -10,6 +10,7 @@ import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.domain.repository.PostulantRepository;
+import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 
 import static com.studiant.com.storage.Constants.STATUS_POSTULANT_NOT_CHOOSE;
 
@@ -48,14 +49,13 @@ public class InsertPostulantInteractorImpl extends AbstractInteractor implements
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onPostulantInsert();
+                mCallback.onPostulantInsert(PresentationModelConverter.convertToJobPresenterModel(mJob));
             }
         });
     }
 
     @Override
     public void run() {
-
 
         Postulant postulant = new Postulant(null, getCurrentTimestamp(), STATUS_POSTULANT_NOT_CHOOSE, mUser, mJob);
         // retrieve the message
