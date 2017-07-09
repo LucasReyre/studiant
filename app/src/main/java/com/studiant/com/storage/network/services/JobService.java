@@ -1,10 +1,9 @@
-package com.studiant.com.network.services;
+package com.studiant.com.storage.network.services;
 
-import com.studiant.com.network.model.RESTJob;
-import com.studiant.com.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.model.RESTJob;
+import com.studiant.com.storage.network.model.RESTPostulant;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -38,5 +37,10 @@ public interface JobService {
     //Récupération de tous les jobs sans distinction avec les utilisateurs associés
     /*@GET("/api/Jobs?filter[include][utilisateurs]&filter[where][utilisateurId]={user_id}")
     Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);*/
+
+    //Update d'un job
+    @Headers("Connection: close")
+    @POST("/api/Jobs/")
+    Call<ArrayList<RESTJob>> updateJob(@Query("update") String query, @Body RESTJob restJob);
 
 }

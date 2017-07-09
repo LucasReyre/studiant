@@ -23,11 +23,11 @@ import com.studiant.com.domain.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
-import com.studiant.com.presentation.ui.activities.particulier.DashboardParticulierActivity;
 import com.studiant.com.presentation.ui.components.MDatePicker;
 import com.studiant.com.presentation.ui.components.MTimePicker;
 import com.studiant.com.storage.ChooseCategoryRepository;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import butterknife.BindView;
@@ -157,7 +157,7 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 

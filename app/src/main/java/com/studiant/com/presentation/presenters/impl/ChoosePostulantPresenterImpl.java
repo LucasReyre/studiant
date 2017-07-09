@@ -8,6 +8,7 @@ import com.studiant.com.domain.interactors.interfaces.ChoosePostulantInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertPostulantInteractor;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
+import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.domain.repository.PostulantRepository;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
@@ -21,13 +22,13 @@ import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPres
 public class ChoosePostulantPresenterImpl extends AbstractPresenter implements ChoosePostulantPresenter, ChoosePostulantInteractor.Callback{
 
     private View mView;
-    private PostulantRepository mPostulantRepository;
+    private JobRepository mJobRepository;
 
     public ChoosePostulantPresenterImpl(Executor executor, MainThread mainThread,
-                                        View view, PostulantRepository postulantRepository) {
+                                        View view, JobRepository jobRepository) {
         super(executor, mainThread);
         mView = view;
-        mPostulantRepository = postulantRepository;
+        mJobRepository = jobRepository;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ChoosePostulantPresenterImpl extends AbstractPresenter implements C
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
 
@@ -75,7 +76,7 @@ public class ChoosePostulantPresenterImpl extends AbstractPresenter implements C
                 mExecutor,
                 mMainThread,
                 this,
-                mPostulantRepository,
+                mJobRepository,
                 job,
                 user
         );

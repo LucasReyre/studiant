@@ -1,5 +1,6 @@
-package com.studiant.com.presentation.ui.fragments;
+package com.studiant.com.presentation.ui.fragments.etudiant;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -7,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +24,7 @@ import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerV
 import com.studiant.com.storage.impl.GCMMessageRepositoryImpl;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.PostulantRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.studiant.com.storage.Constants.HTTP_CODE_500;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 public class ListJobEtudiantFragment extends Fragment implements DashboardEtudiantPresenter.View{
@@ -44,6 +46,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     @BindView(R.id.fabButton)
     FloatingActionButton fabButton;
 
+    private ProgressDialog progressDialog;
     User user;
 
     private DashboardEtudiantPresenter mPresenter;
@@ -75,6 +78,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
                     new GCMMessageRepositoryImpl()
             );
         }
+        progressDialog = new ProgressDialog(getContext());
     }
 
     @Override
@@ -87,6 +91,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
         mPresenter.getJobs();
 
     }
@@ -99,17 +104,19 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
 
     @Override
     public void showProgress() {
-
+        progressDialog.setMessage(getResources().getString(R.string.get_message));
+        progressDialog.show();
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @Override
-    public void showError(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    public void showError(WSException e) {
+        if (e.getHttpCode() == HTTP_CODE_500)
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_already_postule), Toast.LENGTH_SHORT).show();
     }
 
     @Override

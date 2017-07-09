@@ -60,7 +60,7 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
     @Override

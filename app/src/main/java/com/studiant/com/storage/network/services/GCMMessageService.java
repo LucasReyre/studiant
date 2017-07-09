@@ -1,17 +1,14 @@
-package com.studiant.com.network.services;
+package com.studiant.com.storage.network.services;
 
-import com.studiant.com.network.model.RESTGCMMessage;
-import com.studiant.com.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.model.RESTGCMMessage;
 
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * Created by lucas on 11/05/2017.

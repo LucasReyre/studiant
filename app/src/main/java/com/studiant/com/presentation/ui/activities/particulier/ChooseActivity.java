@@ -14,6 +14,7 @@ import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
 import com.studiant.com.presentation.ui.activities.common.ConnexionActivity;
 import com.studiant.com.presentation.ui.components.MCarouselView;
 import com.studiant.com.storage.ChooseCategoryRepository;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import butterknife.BindView;
@@ -91,7 +92,7 @@ public class ChooseActivity extends Activity implements ChoosePresenter.View {
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 }

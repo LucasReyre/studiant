@@ -1,47 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutMainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.studiant.com.presentation.ui.activities.common.MainActivity">
+    android:background="@drawable/home3"
+    tools:context=".presentation.ui.activities.common.MainActivity">
 
 
-    <TextView
-        android:id="@+id/welcome_textview"
+    <ImageView
+        android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_etudiant"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="@string/etudiant_btn"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btn_particulier"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:text="@string/particulier_btn"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+        android:layout_marginEnd="7dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp" />
 
 
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

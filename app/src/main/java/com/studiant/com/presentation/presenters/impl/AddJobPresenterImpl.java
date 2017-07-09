@@ -69,7 +69,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
 

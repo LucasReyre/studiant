@@ -16,6 +16,7 @@ import com.studiant.com.presentation.presenters.interfaces.SplashPresenter;
 import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.presentation.ui.activities.particulier.DashboardParticulierActivity;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
@@ -85,7 +86,7 @@ public class SplashActivity extends Activity implements SplashPresenter.View, My
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 

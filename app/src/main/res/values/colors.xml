@@ -17,8 +17,25 @@
     <color name="titleBadgeText">#adafb1</color>
     <color name="mainTextColor">#343d43</color>
     <color name="btnRequest">#ffbf12</color>
+    <color name="colorPopinLogin">#B3FFFFFF</color>
 
     <color name="editTextColor">#000000</color>
 
     <color name="black_overlay">#66000000</color>
+
+
+    <color name="colorTransparent">#00FFFFFF</color>
+    <color name="white">#ffffff</color>
+    <color name="sickly_yellow">#bdd820</color>
+    <color name="pumpkin_orange">#ff7400</color>
+    <color name="greyish_brown">#444444</color>
+    <color name="greyish_brown_two">#4f4f4f</color>
+    <color name="warm_grey">#929292</color>
+    <color name="white_two">#e6e6e6</color>
+    <color name="disable_button_grey">#dadada</color>
+    <color name="teal">#009e7c</color>
+    <color name="light_blue_grey">#b2e2d7</color>
+    <color name="tealish">#21c9a5</color>
+    <color name="pale_peach">#ffeeb2</color>
+    <color name="mango">#ff962a</color>
 </resources>

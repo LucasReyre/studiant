@@ -62,7 +62,7 @@ public class ChoosePresenterImpl extends AbstractPresenter implements ChoosePres
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
 

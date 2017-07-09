@@ -23,15 +23,6 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/price_mock"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,22 +80,22 @@
                 android:id="@+id/content_rating_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/stars"
                 android:layout_alignTop="@+id/content_name_postulant"
-                android:layout_toEndOf="@+id/content_name_postulant"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="6dp" />
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/content_name_postulant"
+                android:src="@drawable/stars" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/content_rating_stars"
+                android:layout_marginLeft="54dp"
+                android:layout_marginStart="9dp"
+                android:layout_toEndOf="@+id/content_rating_stars"
                 android:text="@string/rating_mock"
                 android:textColor="@color/contentBadgeTitle"
-                android:textSize="12sp"
-                android:layout_marginLeft="54dp"
-                android:layout_alignBottom="@+id/content_rating_stars"
-                android:layout_toEndOf="@+id/content_rating_stars"
-                android:layout_marginStart="9dp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -187,7 +178,7 @@
                     android:text="@string/date_title" />
 
                 <TextView
-                    android:id="@+id/content_permis_postulant"
+                    android:id="@+id/content_date_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/content_permis_postulant_title"
@@ -201,8 +192,8 @@
                     android:id="@+id/content_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_permis_postulant"
-                    android:layout_below="@id/content_permis_postulant"
+                    android:layout_alignStart="@id/content_date_job"
+                    android:layout_below="@id/content_date_job"
                     android:text="@string/delivery_date_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
@@ -223,7 +214,7 @@
                     android:text="@string/price_title" />
 
                 <TextView
-                    android:id="@+id/content_permis_postulant"
+                    android:id="@+id/content_price_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/content_permis_postulant_title"
@@ -237,8 +228,8 @@
                     android:id="@+id/content_deadline_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_permis_postulant"
-                    android:layout_below="@id/content_permis_postulant"
+                    android:layout_alignStart="@id/content_price_job"
+                    android:layout_below="@id/content_price_job"
                     android:text=""
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
@@ -260,10 +251,11 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/number_postulant_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/btn_annotation_mock"
+            android:text="@string/number_studiant_postulant"
             android:textAlignment="center"
             android:textColor="@color/contentBadgeTitle"
             android:textSize="12sp" />

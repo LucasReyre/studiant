@@ -10,6 +10,9 @@
     <string name="title_text_activity_choose">Choisissez la catégorie de votre job</string>
     <string name="add_job"> Ajoutez votre demande</string>
     <string name="confirm_informations"> Confirmez vos informations</string>
+    <string name="number_studiant_postulant"> %1$s étudiants ont postulé pour ce job</string>
+
+    <string name="error_already_postule"> Vous avez déja postulé à ce job</string>
 
     <string name="profil_not_find"> Le profil n\'a pas été retrouvé</string>
 
@@ -55,7 +58,6 @@
     <string name="price_title" translatable="false">PRIX</string>
     <string name="deadline_time_mock" translatable="false">20 €</string>
     <string name="request_btn_text" translatable="false">POSTULER</string>
-    <string name="btn_annotation_mock" translatable="false">5 étudiants ont postulé pour ce job</string>
     <string name="content_from1_mock">DESCRIPTION DU JOB</string>
     <string name="content_from2_mock">New York, NY 10025</string>
     <string name="content_to1_mock">46th Ave</string>
@@ -71,5 +73,8 @@
     <string name="permis">permis</string>
     <string name="postulant">Postulant</string>
     <string name="see_studiant">Voir les étudiants</string>
+    <string name="get_message">Récupération des jobs</string>
+    <string name="title_popin_main">Vous ètes :</string>
+    <string name="title_connexion">Choisissez votre moyen de connexion</string>
 
 </resources>

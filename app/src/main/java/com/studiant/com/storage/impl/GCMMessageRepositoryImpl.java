@@ -3,26 +3,18 @@ package com.studiant.com.storage.impl;
 import android.util.Log;
 
 import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.GCMMessageRepository;
-import com.studiant.com.domain.repository.JobRepository;
-import com.studiant.com.network.RestClient;
-import com.studiant.com.network.converters.RESTModelConverter;
-import com.studiant.com.network.model.RESTGCMMessage;
-import com.studiant.com.network.model.RESTJob;
-import com.studiant.com.network.model.RESTNotification;
-import com.studiant.com.network.services.GCMMessageService;
-import com.studiant.com.network.services.JobService;
+import com.studiant.com.storage.network.RestClient;
+import com.studiant.com.storage.network.model.RESTGCMMessage;
+import com.studiant.com.storage.network.model.RESTNotification;
+import com.studiant.com.storage.network.services.GCMMessageService;
 import com.studiant.com.storage.Constants;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Response;
-import timber.log.Timber;
 
 /**
  * Created by dmilicic on 1/29/16.

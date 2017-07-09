@@ -13,8 +13,8 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
-import com.studiant.com.presentation.ui.fragments.ListJobEtudiantFragment;
-import com.studiant.com.presentation.ui.fragments.ProfilEtudiantFragment;
+import com.studiant.com.presentation.ui.fragments.etudiant.ListJobEtudiantFragment;
+import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 
 

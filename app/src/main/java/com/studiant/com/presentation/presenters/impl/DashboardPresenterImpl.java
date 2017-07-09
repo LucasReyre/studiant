@@ -61,7 +61,7 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
 
@@ -85,7 +85,7 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
 
     @Override
     public void onRetrievalFailed(String error) {
-        mView.showError(error);
+       // mView.showError(error);
 
     }
 }

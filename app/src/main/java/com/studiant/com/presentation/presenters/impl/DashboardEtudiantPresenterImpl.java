@@ -19,6 +19,7 @@ import com.studiant.com.domain.repository.PostulantRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
+import com.studiant.com.storage.network.WSException;
 
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
 
@@ -107,15 +108,11 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onRetrievalFailed(String error) {
-        mView.showError(error);
-
     }
 
     @Override
     public void onPostulantInsert(Job job) {
-
-        Log.d("presenter", "user token "+job.getUtilisateur().getFirstName() + "-  "+job.getUtilisateur().getFirebaseToken());
-
+        mView.showProgress();
         SendNotificationInteractor interactor = new SendNotificationInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -128,7 +125,9 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
-    public void onPostulantInsertFailed(String error) {
+    public void onPostulantInsertFailed(WSException error) {
+        mView.hideProgress();
+        mView.showError(error);
 
     }
 }

@@ -14,6 +14,7 @@ import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterI
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import butterknife.BindView;
@@ -111,7 +112,7 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 }

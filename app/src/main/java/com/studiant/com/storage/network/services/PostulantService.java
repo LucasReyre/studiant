@@ -1,8 +1,7 @@
-package com.studiant.com.network.services;
+package com.studiant.com.storage.network.services;
 
-import com.studiant.com.network.model.RESTJob;
-import com.studiant.com.network.model.RESTPostulant;
-import com.studiant.com.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.model.RESTJob;
+import com.studiant.com.storage.network.model.RESTPostulant;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**

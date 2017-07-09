@@ -4,9 +4,9 @@ import android.util.Log;
 
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.MessageRepository;
-import com.studiant.com.network.RestClient;
-import com.studiant.com.network.model.RESTUtilisateur;
-import com.studiant.com.network.services.UtilisateurService;
+import com.studiant.com.storage.network.RestClient;
+import com.studiant.com.storage.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.services.UtilisateurService;
 
 import java.io.IOException;
 

@@ -1,32 +1,22 @@
 package com.studiant.com.storage.impl;
 
-import android.os.Bundle;
 import android.util.Log;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.JobRepository;
-import com.studiant.com.domain.repository.UserRepository;
-import com.studiant.com.network.RestClient;
-import com.studiant.com.network.converters.RESTModelConverter;
-import com.studiant.com.network.model.RESTJob;
-import com.studiant.com.network.model.RESTUtilisateur;
-import com.studiant.com.network.services.JobService;
-import com.studiant.com.network.services.UtilisateurService;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.studiant.com.storage.network.RestClient;
+import com.studiant.com.storage.network.converters.RESTModelConverter;
+import com.studiant.com.storage.network.model.RESTJob;
+import com.studiant.com.storage.network.services.JobService;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Response;
 import timber.log.Timber;
+
+import static com.studiant.com.storage.Constants.HTTP_CODE_200;
 
 /**
  * Created by dmilicic on 1/29/16.
@@ -89,5 +79,29 @@ public class JobRepositoryImpl implements JobRepository {
         return null;
     }
 
+    @Override
+    public ArrayList<Job> updateJob(Job job) {
+        JobService jobService = RestClient.getService(JobService.class);
 
+        try {
+            //String query = "{\"include\":[\"appartenir\"]}";
+            String query = "[where][id]="+job.getId();
+            Response<ArrayList<RESTJob>> response = jobService.updateJob(query,RESTModelConverter.convertToRestJobModel(job)).execute();
+
+            if(response.code() == HTTP_CODE_200)
+                Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
+            else{
+                Log.d("repo", "error");
+                Log.d("repo", response.errorBody().string());
+
+            }
+            //restJob = response.body();
+
+            return RESTModelConverter.convertToArrayListJobModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+        return null;
+    }
 }

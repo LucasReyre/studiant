@@ -187,7 +187,7 @@
                     android:text="@string/date_title" />
 
                 <TextView
-                    android:id="@+id/content_permis_postulant"
+                    android:id="@+id/content_price_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/content_permis_postulant_title"
@@ -201,8 +201,8 @@
                     android:id="@+id/content_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_permis_postulant"
-                    android:layout_below="@id/content_permis_postulant"
+                    android:layout_alignStart="@id/content_price_job"
+                    android:layout_below="@id/content_price_job"
                     android:text="@string/delivery_date_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
@@ -223,7 +223,7 @@
                     android:text="@string/price_title" />
 
                 <TextView
-                    android:id="@+id/content_permis_postulant"
+                    android:id="@+id/content_price_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/content_permis_postulant_title"
@@ -237,8 +237,8 @@
                     android:id="@+id/content_deadline_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_permis_postulant"
-                    android:layout_below="@id/content_permis_postulant"
+                    android:layout_alignStart="@id/content_price_job"
+                    android:layout_below="@id/content_price_job"
                     android:text=""
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
@@ -258,15 +258,6 @@
             android:textAlignment="center"
             android:textColor="@color/mainTextColor"
             android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/btn_annotation_mock"
-            android:textAlignment="center"
-            android:textColor="@color/contentBadgeTitle"
-            android:textSize="12sp" />
 
     </LinearLayout>
 

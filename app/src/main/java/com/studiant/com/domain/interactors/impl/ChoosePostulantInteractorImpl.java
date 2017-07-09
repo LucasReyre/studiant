@@ -11,6 +11,8 @@ import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.domain.repository.PostulantRepository;
 
+import static com.studiant.com.storage.Constants.STATUS_JOB_CLOSE;
+
 /**
  * This is an interactor boilerplate with a reference to a model repository.
  * <p/>
@@ -18,17 +20,17 @@ import com.studiant.com.domain.repository.PostulantRepository;
 public class ChoosePostulantInteractorImpl extends AbstractInteractor implements ChoosePostulantInteractor {
 
     private Callback mCallback;
-    private PostulantRepository mPostulantRepository;
+    private JobRepository mJobRepository;
     private Job mJob;
     private User mPostulant;
 
     public ChoosePostulantInteractorImpl(Executor threadExecutor,
                                          MainThread mainThread,
-                                         Callback callback, PostulantRepository postulantRepository, Job job, User postulant) {
+                                         Callback callback, JobRepository jobRepository, Job job, User postulant) {
         super(threadExecutor, mainThread);
 
         mCallback = callback;
-        mPostulantRepository = postulantRepository;
+        mJobRepository = jobRepository;
         mJob = job;
         mPostulant = postulant;
     }
@@ -53,8 +55,10 @@ public class ChoosePostulantInteractorImpl extends AbstractInteractor implements
 
     @Override
     public void run() {
+        mJob.setStatutJob(STATUS_JOB_CLOSE);
+        mJob.setPostulantId(mPostulant.getId());
         // retrieve the message
-        mPostulantRepository.choosePostulant(mPostulant, mJob);
+        mJobRepository.updateJob(mJob);
         // we have retrieved our message, notify the UI on the main thread
         postMessage();
     }

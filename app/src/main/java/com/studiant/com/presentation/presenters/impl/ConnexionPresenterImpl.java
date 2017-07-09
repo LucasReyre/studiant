@@ -75,7 +75,7 @@ public class ConnexionPresenterImpl extends AbstractPresenter implements Connexi
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
 

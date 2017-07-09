@@ -20,6 +20,7 @@ import com.studiant.com.presentation.presenters.interfaces.ConnexionPresenter;
 import com.studiant.com.presentation.ui.activities.etudiant.ProfilEtudiantActivity;
 import com.studiant.com.presentation.ui.activities.particulier.ProfilParticulierActivity;
 import com.studiant.com.storage.ConnexionRepository;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import java.util.Arrays;
@@ -103,7 +104,7 @@ public class ConnexionActivity extends Activity implements ConnexionPresenter.Vi
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 

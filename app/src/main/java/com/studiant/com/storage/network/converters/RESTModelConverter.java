@@ -1,14 +1,11 @@
-package com.studiant.com.network.converters;
-
-import android.net.Uri;
-import android.util.Log;
+package com.studiant.com.storage.network.converters;
 
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
-import com.studiant.com.network.model.RESTJob;
-import com.studiant.com.network.model.RESTPostulant;
-import com.studiant.com.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.model.RESTJob;
+import com.studiant.com.storage.network.model.RESTPostulant;
+import com.studiant.com.storage.network.model.RESTUtilisateur;
 
 import java.util.ArrayList;
 
@@ -82,8 +79,14 @@ public class RESTModelConverter {
         String mDate = job.getDate();
         String mHeure = job.getHeure();
         String mUtilisateurId = job.getUtilisateurId();
+        String mStatutJob = job.getStatutJob();
 
-        return new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId);
+        RESTJob restJob = new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId,mStatutJob);
+
+        if (job.getPostulantId() != null)
+            restJob.setmPostulantId(job.getPostulantId());
+
+        return restJob;
 
     }
 

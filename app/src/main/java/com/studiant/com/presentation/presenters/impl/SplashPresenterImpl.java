@@ -66,7 +66,7 @@ public class SplashPresenterImpl extends AbstractPresenter implements SplashPres
 
     @Override
     public void onError(String message) {
-        mView.showError(message);
+        //mView.showError(message);
     }
 
     @Override

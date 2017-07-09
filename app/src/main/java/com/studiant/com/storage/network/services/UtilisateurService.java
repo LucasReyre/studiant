@@ -1,7 +1,6 @@
-package com.studiant.com.network.services;
+package com.studiant.com.storage.network.services;
 
-import com.studiant.com.domain.model.User;
-import com.studiant.com.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.model.RESTUtilisateur;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

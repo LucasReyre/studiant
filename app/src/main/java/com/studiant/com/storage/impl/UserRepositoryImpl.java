@@ -8,12 +8,11 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.studiant.com.domain.model.User;
-import com.studiant.com.domain.repository.CategoryRepository;
 import com.studiant.com.domain.repository.UserRepository;
-import com.studiant.com.network.RestClient;
-import com.studiant.com.network.converters.RESTModelConverter;
-import com.studiant.com.network.model.RESTUtilisateur;
-import com.studiant.com.network.services.UtilisateurService;
+import com.studiant.com.storage.network.RestClient;
+import com.studiant.com.storage.network.converters.RESTModelConverter;
+import com.studiant.com.storage.network.model.RESTUtilisateur;
+import com.studiant.com.storage.network.services.UtilisateurService;
 
 import org.json.JSONException;
 import org.json.JSONObject;

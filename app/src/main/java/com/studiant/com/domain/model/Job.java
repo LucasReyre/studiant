@@ -18,6 +18,8 @@ public class Job implements Serializable{
     private String date;
     private String heure;
     private String utilisateurId;
+    private String postulantId;
+    private String statutJob;
     private User utilisateur;
     private ArrayList<User> postulants;
 
@@ -147,5 +149,21 @@ public class Job implements Serializable{
 
     public void setPostulants(ArrayList<User> postulant) {
         this.postulants = postulant;
+    }
+
+    public String getStatutJob() {
+        return statutJob;
+    }
+
+    public void setStatutJob(String statutJob) {
+        this.statutJob = statutJob;
+    }
+
+    public String getPostulantId() {
+        return postulantId;
+    }
+
+    public void setPostulantId(String postulantId) {
+        this.postulantId = postulantId;
     }
 }

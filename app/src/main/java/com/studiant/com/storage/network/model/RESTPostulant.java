@@ -1,4 +1,4 @@
-package com.studiant.com.network.model;
+package com.studiant.com.storage.network.model;
 
 import com.google.gson.annotations.SerializedName;
 

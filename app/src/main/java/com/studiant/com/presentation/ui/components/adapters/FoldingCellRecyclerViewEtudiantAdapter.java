@@ -143,9 +143,9 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);
-            priceContent = (TextView) itemView.findViewById(R.id.content_permis_postulant);
+            priceContent = (TextView) itemView.findViewById(R.id.content_price_job);
             timeContent = (TextView) itemView.findViewById(R.id.content_date);
-            dateContent = (TextView) itemView.findViewById(R.id.content_permis_postulant);
+            dateContent = (TextView) itemView.findViewById(R.id.content_price_job);
             description = (TextView) itemView.findViewById(R.id.content_description_postulant);
 
         }

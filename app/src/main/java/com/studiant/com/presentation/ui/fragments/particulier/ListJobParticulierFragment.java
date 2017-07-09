@@ -1,4 +1,4 @@
-package com.studiant.com.presentation.ui.fragments;
+package com.studiant.com.presentation.ui.fragments.particulier;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import com.studiant.com.presentation.ui.activities.particulier.AddJobActivity;
 import com.studiant.com.presentation.ui.activities.particulier.ListPostulantActivity;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewJobParticulierAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import java.util.ArrayList;
@@ -88,7 +89,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         mPresenter.getJobsByUser(user);
-
     }
 
     @OnClick(R.id.fabButton)
@@ -110,7 +110,7 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 
@@ -130,7 +130,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
                 }
             });
         }
-
         //setup materialviewpager
 
         if (GRID_LAYOUT) {

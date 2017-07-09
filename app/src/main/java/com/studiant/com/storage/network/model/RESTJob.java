@@ -1,9 +1,8 @@
-package com.studiant.com.network.model;
+package com.studiant.com.storage.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by lucas on 11/05/2017.
@@ -24,7 +23,7 @@ public class RESTJob {
     private String mAdresseJob;
 
     @SerializedName("statutJob")
-    private String mAStatutJob;
+    private String mStatutJob;
 
     @SerializedName("dateJob")
     private String mDateJob;
@@ -35,6 +34,9 @@ public class RESTJob {
     @SerializedName("utilisateurId")
     private String mUtilisateurId;
 
+    @SerializedName("postulantId")
+    private String mPostulantId;
+
     @SerializedName("utilisateurs")
     private ArrayList<RESTUtilisateur> mRestPostulants;
 
@@ -42,23 +44,14 @@ public class RESTJob {
     private RESTUtilisateur mRestUtilisateur;
 
 
-    public RESTJob(String mId, String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId) {
-        this.mId = mId;
+    public RESTJob(String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId, String mStatutJob) {
         this.mDescriptionJob = mDescriptionJob;
         this.mPrixJob = mPrixJob;
         this.mAdresseJob = mAdresseJob;
         this.mDateJob = mDateJob;
         this.mHeureJob = mHeureJob;
         this.mUtilisateurId = mUtilisateurId;
-    }
-
-    public RESTJob(String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId) {
-        this.mDescriptionJob = mDescriptionJob;
-        this.mPrixJob = mPrixJob;
-        this.mAdresseJob = mAdresseJob;
-        this.mDateJob = mDateJob;
-        this.mHeureJob = mHeureJob;
-        this.mUtilisateurId = mUtilisateurId;
+        this.mStatutJob = mStatutJob;
     }
 
     public RESTJob(String mId, String mDescriptionJob, String mPrixJob, String mAdresseJob, String mAStatutJob, String mDateJob, String mHeureJob, String mUtilisateurId) {
@@ -66,7 +59,7 @@ public class RESTJob {
         this.mDescriptionJob = mDescriptionJob;
         this.mPrixJob = mPrixJob;
         this.mAdresseJob = mAdresseJob;
-        this.mAStatutJob = mAStatutJob;
+        this.mStatutJob = mStatutJob;
         this.mDateJob = mDateJob;
         this.mHeureJob = mHeureJob;
         this.mUtilisateurId = mUtilisateurId;
@@ -144,12 +137,12 @@ public class RESTJob {
         this.mRestPostulants = mRestPostulant;
     }
 
-    public String getmAStatutJob() {
-        return mAStatutJob;
+    public String getmStatutJob() {
+        return mStatutJob;
     }
 
-    public void setmAStatutJob(String mAStatutJob) {
-        this.mAStatutJob = mAStatutJob;
+    public void setmStatutJob(String mStatutJob) {
+        this.mStatutJob = mStatutJob;
     }
 
     public ArrayList<RESTUtilisateur> getmRestPostulants() {
@@ -158,5 +151,13 @@ public class RESTJob {
 
     public void setmRestPostulants(ArrayList<RESTUtilisateur> mRestPostulants) {
         this.mRestPostulants = mRestPostulants;
+    }
+
+    public String getmPostulantId() {
+        return mPostulantId;
+    }
+
+    public void setmPostulantId(String mPostulantId) {
+        this.mPostulantId = mPostulantId;
     }
 }

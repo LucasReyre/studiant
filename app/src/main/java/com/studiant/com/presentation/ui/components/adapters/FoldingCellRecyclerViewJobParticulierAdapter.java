@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
+import com.studiant.com.AndroidApplication;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
@@ -58,10 +59,11 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
 
         //Content
         cellViewHolder.name.setText(user.getFirstName());
-        cellViewHolder.priceContent.setText(contents.get(position).getPrix());
+        cellViewHolder.priceContent.setText(prix);
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
         cellViewHolder.description.setText(contents.get(position).getDescription());
+        cellViewHolder.nummberPostulant.setText(AndroidApplication.getContext().getString(R.string.number_studiant_postulant, String.valueOf(contents.get(position).getPostulants().size())));
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +121,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         TextView contentRequestBtn;
         TextView date;
         TextView time;
+        TextView nummberPostulant;
         FoldingCell foldingCell;
 
         //Content Cell
@@ -132,16 +135,18 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             super(itemView);
             titleDescription = (TextView) itemView.findViewById(R.id.title_description);
             price = (TextView) itemView.findViewById(R.id.title_price);
+            price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);
-            priceContent = (TextView) itemView.findViewById(R.id.content_permis_postulant);
+            priceContent = (TextView) itemView.findViewById(R.id.content_price_job);
             timeContent = (TextView) itemView.findViewById(R.id.content_date);
-            dateContent = (TextView) itemView.findViewById(R.id.content_permis_postulant);
+            dateContent = (TextView) itemView.findViewById(R.id.content_date_job);
             description = (TextView) itemView.findViewById(R.id.content_description_postulant);
+            nummberPostulant = (TextView) itemView.findViewById(R.id.number_postulant_textview);
 
         }
     }

@@ -1,15 +1,12 @@
 package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.model.User;
@@ -19,18 +16,17 @@ import com.studiant.com.presentation.presenters.impl.ChoosePostulantPresenterImp
 import com.studiant.com.presentation.presenters.interfaces.ChoosePostulantPresenter;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewPostulantAdapter;
+import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.PostulantRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.studiant.com.storage.Constants.INTENT_JOB;
-import static com.studiant.com.storage.Constants.INTENT_LIST_JOB;
-import static com.studiant.com.storage.Constants.INTENT_LIST_USER;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 public class ListPostulantActivity extends Activity implements ChoosePostulantPresenter.View {
@@ -55,7 +51,7 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this,
-                new PostulantRepositoryImpl()
+                new JobRepositoryImpl()
         );
 
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
@@ -91,7 +87,7 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
 
     private void onChoosePostulantClick(com.studiant.com.presentation.presenters.model.User user){
         Log.d("onChoosePostulantClick", " choose "+user.getFirstName());
-       // mPresenter.choosePostulant(PresentationModelConverter.convertToUserDomainModel(user), PresentationModelConverter.convertToJobDomainModel(job));
+        mPresenter.choosePostulant(PresentationModelConverter.convertToUserDomainModel(user), PresentationModelConverter.convertToJobDomainModel(job));
     }
 
 
@@ -111,7 +107,7 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(WSException e) {
 
     }
 }

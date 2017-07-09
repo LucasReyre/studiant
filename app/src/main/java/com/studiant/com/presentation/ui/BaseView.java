@@ -1,5 +1,7 @@
 package com.studiant.com.presentation.ui;
 
+import com.studiant.com.storage.network.WSException;
+
 /**
  * <p>
  * This interfaces represents a basic view. All views should implement these common methods.
@@ -21,7 +23,7 @@ public interface BaseView {
     /**
      * This method is used for showing error messages on the UI.
      *
-     * @param message The error message to be displayed.
+     * @param e The error message to be displayed.
      */
-    void showError(String message);
+    void showError(WSException e);
 }

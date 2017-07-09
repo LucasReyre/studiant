@@ -1,14 +1,7 @@
 package com.studiant.com.presentation.presenters.converters;
 
-import android.app.Presentation;
-import android.util.Log;
-
 import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
-import com.studiant.com.network.model.RESTJob;
-import com.studiant.com.network.model.RESTPostulant;
-import com.studiant.com.network.model.RESTUtilisateur;
 
 import java.util.ArrayList;
 

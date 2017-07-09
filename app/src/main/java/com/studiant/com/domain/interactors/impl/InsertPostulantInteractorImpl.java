@@ -1,5 +1,7 @@
 package com.studiant.com.domain.interactors.impl;
 
+import android.util.Log;
+
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
@@ -11,6 +13,7 @@ import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.JobRepository;
 import com.studiant.com.domain.repository.PostulantRepository;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
+import com.studiant.com.storage.network.WSException;
 
 import static com.studiant.com.storage.Constants.STATUS_POSTULANT_NOT_CHOOSE;
 
@@ -36,11 +39,11 @@ public class InsertPostulantInteractorImpl extends AbstractInteractor implements
         mUser = user;
     }
 
-    private void notifyError() {
+    private void notifyError(final WSException e) {
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onPostulantInsertFailed("Postulant Insert Failed");
+                mCallback.onPostulantInsertFailed(e);
             }
         });
     }
@@ -59,9 +62,13 @@ public class InsertPostulantInteractorImpl extends AbstractInteractor implements
 
         Postulant postulant = new Postulant(null, getCurrentTimestamp(), STATUS_POSTULANT_NOT_CHOOSE, mUser, mJob);
         // retrieve the message
-        mPostulantRepository.insertPostulant(postulant);
+        try {
+            mPostulantRepository.insertPostulant(postulant);
+            postMessage();
+        } catch (WSException e) {
+            notifyError(e);
+        }
         // we have retrieved our message, notify the UI on the main thread
-        postMessage();
     }
 
     public String getCurrentTimestamp(){
