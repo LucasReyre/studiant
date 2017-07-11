@@ -7,15 +7,21 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.facebook.CallbackManager;
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.fragments.common.ConnexionFragment;
 import com.studiant.com.presentation.ui.fragments.common.MainFragment;
+import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiant2Fragment;
+import com.studiant.com.presentation.ui.fragments.particulier.AddJobFragment;
 import com.studiant.com.presentation.ui.fragments.particulier.CategoriesFragment;
+import com.studiant.com.presentation.ui.fragments.particulier.ProfilParticulierFragment;
 
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener,
-        CategoriesFragment.OnFragmentInteractionListener, ConnexionFragment.OnFragmentInteractionListener{
+        CategoriesFragment.OnFragmentInteractionListener, ConnexionFragment.OnFragmentInteractionListener,
+        ProfilParticulierFragment.OnFragmentInteractionListener, ProfilEtudiant2Fragment.OnFragmentInteractionListener,
+        AddJobFragment.OnFragmentInteractionListener{
 
 
     /*@BindView(R.id.btn_particulier) Button btn_particulier;
@@ -43,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
             ft.addToBackStack(null);
             ft.replace(android.R.id.content,destinationFragment, destinationFragment.getClass().getName()).commit();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(android.R.id.content);
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

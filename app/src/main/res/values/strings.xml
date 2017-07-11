@@ -76,5 +76,6 @@
     <string name="get_message">Récupération des jobs</string>
     <string name="title_popin_main">Vous ètes :</string>
     <string name="title_connexion">Choisissez votre moyen de connexion</string>
+    <string name="title_profil">Confirmez vos informations</string>
 
 </resources>

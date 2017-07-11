@@ -17,6 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -99,7 +101,7 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.buttonStudiant)
     void navigateToConnexionActivity() {
-
+        mainActivity.transitionFragment(ConnexionFragment.newInstance(STATUS_ETUDIANT), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
     }
 
     /**

@@ -26,6 +26,7 @@
 
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="white">#ffffff</color>
+    <color name="customRed">#B21351</color>
     <color name="sickly_yellow">#bdd820</color>
     <color name="pumpkin_orange">#ff7400</color>
     <color name="greyish_brown">#444444</color>

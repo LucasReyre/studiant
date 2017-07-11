@@ -5,22 +5,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 
-import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.presentation.presenters.impl.ChoosePresenterImpl;
-import com.studiant.com.presentation.presenters.interfaces.ChoosePresenter;
-import com.studiant.com.presentation.ui.activities.common.ConnexionActivity;
+import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterImpl;
+import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
+import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.activities.common.MainActivity;
-import com.studiant.com.presentation.ui.fragments.common.ConnexionFragment;
-import com.studiant.com.storage.ChooseCategoryRepository;
+import com.studiant.com.presentation.ui.activities.particulier.AddJobActivity;
+import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
@@ -29,28 +30,42 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
+import static com.studiant.com.storage.Constants.INTENT_USER;
+import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
 import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 import static com.studiant.com.storage.Constants.STATUS_USER;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CategoriesFragment.OnFragmentInteractionListener} interface
+ * {@link ProfilParticulierFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CategoriesFragment#newInstance} factory method to
+ * Use the {@link ProfilParticulierFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CategoriesFragment extends Fragment implements ChoosePresenter.View{
+public class ProfilParticulierFragment extends Fragment implements ProfilParticulierPresenter.View{
 
     private OnFragmentInteractionListener mListener;
-    private ChoosePresenter mPresenter;
+    private int categorie;
+    User user = null;
+
+    @BindView(R.id.editTextFirstNameParticulier)
+    EditText firstNameEditText;
+
+    @BindView(R.id.editTextLastNameParticulier)
+    EditText lastNameEditText;
+
+    @BindView(R.id.editTextEmailParticulier)
+    AutoCompleteTextView emailEditText;
+
+    @BindView(R.id.buttonValidateParticulier)
+    Button validateButton;
+
     private MainActivity mainActivity;
 
-    @BindView(R.id.spinner_categorie) MaterialSpinner spinner;
+    private ProfilParticulierPresenter mPresenter;
 
-    @BindView(R.id.button_validate) Button btnValidate;
-
-    public CategoriesFragment() {
+    public ProfilParticulierFragment() {
         // Required empty public constructor
     }
 
@@ -58,14 +73,13 @@ public class CategoriesFragment extends Fragment implements ChoosePresenter.View
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-
-     * @return A new instance of fragment CategoriesFragment.
+     * @return A new instance of fragment ProfilParticulierFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CategoriesFragment newInstance() {
-        CategoriesFragment fragment = new CategoriesFragment();
+    public static ProfilParticulierFragment newInstance(int categorie) {
+        ProfilParticulierFragment fragment = new ProfilParticulierFragment();
         Bundle args = new Bundle();
-
+        args.putInt(CATEGORIE_ID_JOB, categorie);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,25 +88,24 @@ public class CategoriesFragment extends Fragment implements ChoosePresenter.View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            categorie = getArguments().getInt(CATEGORIE_ID_JOB);
         }
+        mainActivity = (MainActivity)getActivity();
 
-        mainActivity = (MainActivity) getActivity();
-
-        mPresenter = new ChoosePresenterImpl(
+        mPresenter = new ProfilParticulierPresenterImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this,
-                new ChooseCategoryRepository()
+                new UserRepositoryImpl() {
+                }
         );
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false);
+        return inflater.inflate(R.layout.fragment_profil_particulier, container, false);
     }
 
     @Override
@@ -120,19 +133,32 @@ public class CategoriesFragment extends Fragment implements ChoosePresenter.View
     }
 
     @Override
-    public void displayListCategorie(String[] listItem) {
-        spinner.setItems(listItem);
-        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-            }
-        });
+    public void onProfileRetrieve(User mUser) {
+        user = mUser;
+        firstNameEditText.setText(user.getFirstName());
+        lastNameEditText.setText(user.getLastName());
+        emailEditText.setText(user.getEmail());
     }
 
-    @OnClick(R.id.button_validate)
-    void onClickValidate() {
-        mainActivity.transitionFragment(ConnexionFragment.newInstance(STATUS_PARTICULIER, spinner.getSelectedIndex()),R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+    @OnClick(R.id.buttonValidateParticulier)
+    void navigateToAddJob() {
+        if (user != null){
+            user.setFirstName(firstNameEditText.getText().toString());
+            user.setLastName(lastNameEditText.getText().toString());
+            user.setEmail(emailEditText.getText().toString());
+            user.setTypeUser(STATUS_PARTICULIER);
+            user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
+            if (FirebaseInstanceId.getInstance().getToken() != null)
+                user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
+
+            mPresenter.insertProfile(user);
+        }
+
+    }
+
+    @Override
+    public void onUserInsert(User user) {
+        mainActivity.transitionFragment(AddJobFragment.newInstance(user, categorie), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
     }
 
     @Override
