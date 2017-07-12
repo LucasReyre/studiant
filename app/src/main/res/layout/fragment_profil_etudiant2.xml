@@ -11,20 +11,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
         android:background="@color/colorPopinLogin"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="70dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="1.0"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <ScrollView
@@ -50,10 +46,10 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
                     android:text="@string/title_profil"
                     android:textAlignment="center"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
+                    android:textSize="20sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +57,7 @@
                 <ImageView
                     android:id="@+id/imageViewProfilPicture"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
@@ -111,7 +107,8 @@
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textAppearance="@style/EditTextStyle"
-                            android:textColor="@color/customRed" />
+                            android:textColor="@color/dark"
+                            android:textSize="20sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -156,7 +153,8 @@
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textAppearance="@style/EditTextStyle"
-                            android:textColor="@color/customRed" />
+                            android:textColor="@color/dark"
+                            android:textSize="20sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -201,7 +199,8 @@
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textAppearance="@style/EditTextStyle"
-                            android:textColor="@color/customRed" />
+                            android:textColor="@color/dark"
+                            android:textSize="20sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -246,7 +245,8 @@
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textAppearance="@style/EditTextStyle"
-                            android:textColor="@color/customRed" />
+                            android:textColor="@color/dark"
+                            android:textSize="20sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -268,11 +268,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/ConstraintLayoutDiplome">
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="256dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        tools:layout_editor_absoluteX="8dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:layout_marginLeft="8dp"
+                        app:layout_constraintLeft_toLeftOf="parent">
 
                         <EditText
                             android:id="@+id/editTextDescription"
@@ -284,7 +287,9 @@
                             android:imeActionLabel="@string/action_sign_in_short"
                             android:imeOptions="actionUnspecified"
                             android:inputType="textPersonName|textMultiLine"
-                            android:maxLines="5" />
+                            android:maxLines="5"
+                            android:textColor="@color/dark"
+                            android:textSize="20sp" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -294,8 +299,9 @@
                     android:id="@+id/switchPermis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="80dp"
-                    android:text="@string/prompt_permis" />
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/prompt_permis"
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/buttonValidateEtudiant"
