@@ -3,6 +3,7 @@
    <!-- <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>-->
     <color name="colorAccent">#FF4081</color>
+    <color name="colorBackground">#FFEFDB</color>
 
     <color name="colorPrimary">#594691</color>
     <color name="colorPrimaryDark">#3e2d70</color>
@@ -27,7 +28,7 @@
 
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="white">#ffffff</color>
-    <color name="customRed">#B21351</color>
+    <color name="customRed">#7F0301</color>
     <color name="sickly_yellow">#bdd820</color>
     <color name="pumpkin_orange">#ff7400</color>
     <color name="greyish_brown">#444444</color>

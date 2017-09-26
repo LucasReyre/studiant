@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayoutMainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home3"
+    android:background="@color/colorBackground"
     tools:context=".presentation.ui.activities.common.MainActivity">
 
 </android.support.constraint.ConstraintLayout>
