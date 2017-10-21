@@ -1,13 +1,17 @@
 package com.studiant.com.presentation.ui.activities.particulier;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.Status;
@@ -25,8 +29,12 @@ import com.studiant.com.presentation.presenters.impl.AddJobPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddJobPresenter;
 import com.studiant.com.presentation.ui.components.MDatePicker;
 import com.studiant.com.presentation.ui.components.MTimePicker;
+import com.studiant.com.presentation.ui.fragments.particulier.payment.AddCbFragment;
+import com.studiant.com.presentation.ui.fragments.particulier.payment.ConfirmPaymentFragment;
+import com.studiant.com.presentation.ui.fragments.particulier.payment.PaymentChoiceFragment;
 import com.studiant.com.storage.ChooseCategoryRepository;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
+import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
@@ -39,7 +47,11 @@ import static com.facebook.login.widget.ProfilePictureView.TAG;
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
-public class AddJobActivity extends Activity implements AddJobPresenter.View, PlaceSelectionListener {
+public class AddJobActivity extends AppCompatActivity implements AddJobPresenter.View,
+                                                                PlaceSelectionListener,
+                                                                PaymentChoiceFragment.OnFragmentInteractionListener,
+                                                                AddCbFragment.OnFragmentInteractionListener,
+                                                                ConfirmPaymentFragment.OnFragmentInteractionListener{
 
     @BindView(R.id.spinner_categorie)
     MaterialSpinner spinner;
@@ -58,6 +70,9 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
 
     @BindView(R.id.buttonAddJob)
     Button addJobButton;
+
+    @BindView(R.id.fragmentFramelayout)
+    FrameLayout fragmentFrameLayout;
 
     PlaceAutocompleteFragment autocompleteFragment;
 
@@ -78,13 +93,14 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
         job = new Job();
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
 
-
+        System.out.println("addjob : " + user.getFirstName() + " " + user.getIdMangoPay());
         mPresenter = new AddJobPresenterImpl(
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this,
                 new ChooseCategoryRepository(),
-                new JobRepositoryImpl()
+                new JobRepositoryImpl(),
+                new UserRepositoryImpl()
         );
 
         autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -134,8 +150,20 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
         this.startActivity(intent);
     }
 
+
+    @OnClick(R.id.buttonCancelJob)
+    public void onCancelAddJobClick(){
+        Intent intent = new Intent(this, DashboardParticulierActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        this.startActivity(intent);
+    }
+
     @OnClick(R.id.buttonAddJob)
     void onClickAddJob() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        PaymentChoiceFragment paymentChoiceFragment= PaymentChoiceFragment.newInstance();
+        paymentChoiceFragment.show(fm, paymentChoiceFragment.getTag());
 
         job.setDescription(descriptionTextView.getText().toString());
         job.setPrix(priceTextView.getText().toString());
@@ -143,7 +171,57 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
         job.setHeure(timeTextView.getText().toString());
         job.setUtilisateurId(user.getId());
 
+        //mPresenter.insertJob(job);
+    }
+
+    @Override
+    public void onClickPayment(String choice) {
+        job.setMoyenPayment(choice);
+
+        switch (choice){
+            case "CB":
+                mPresenter.getCard(user);
+            break;
+            case "CESU":
+                displayPayment();
+                break;
+            case "ESPECES":
+                displayPayment();
+                break;
+        }
+    }
+
+    @Override
+    public void displayAddCard() {
+
+        fragmentFrameLayout.setVisibility(View.VISIBLE);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        AddCbFragment addCbFragment= AddCbFragment.newInstance(user);
+        ft.add(R.id.fragmentFramelayout, addCbFragment, addCbFragment.getClass().getName()).commit();
+
+        /*addCbFragment.show(fm, addCbFragment.getTag());
+        addCbFragment*/
+
+    }
+
+    @Override
+    public void onCardRegister() {
+        displayPayment();
+    }
+
+    @Override
+    public void displayPayment() {
+        fragmentFrameLayout.setVisibility(View.VISIBLE);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ConfirmPaymentFragment confirmPaymentFragment= ConfirmPaymentFragment.newInstance(user, job);
+        ft.replace(R.id.fragmentFramelayout, confirmPaymentFragment, confirmPaymentFragment.getClass().getName()).commit();
+    }
+
+    @Override
+    public void onPaymentConfirm() {
+        fragmentFrameLayout.setVisibility(View.GONE);
         mPresenter.insertJob(job);
+
     }
 
     @Override
@@ -160,6 +238,8 @@ public class AddJobActivity extends Activity implements AddJobPresenter.View, Pl
     public void showError(WSException e) {
 
     }
+
+
 
     @Override
     public void onPlaceSelected(Place place) {

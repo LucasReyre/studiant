@@ -35,6 +35,7 @@ import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
@@ -146,13 +147,13 @@ public class ConnexionFragment extends Fragment implements FacebookCallback {
         mListener = null;
     }
 
-    void goToProfil() {
+    void goToProfil(boolean fromFacebook) {
        Intent intentToLaunch = null;
 
         if (statusUser == STATUS_PARTICULIER){
             mainActivity.transitionFragment(ProfilParticulierFragment.newInstance(categorie), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
         }else {
-            mainActivity.transitionFragment(ProfilEtudiant2Fragment.newInstance(), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+            mainActivity.transitionFragment(ProfilEtudiant2Fragment.newInstance(fromFacebook), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
         }
 //        this.startActivity(intentToLaunch);
     }
@@ -162,8 +163,13 @@ public class ConnexionFragment extends Fragment implements FacebookCallback {
         if (AccessToken.getCurrentAccessToken() != null) {
             //mPresenter.setFacebookData();
             //RequestData();
-            goToProfil();
+            goToProfil(true);
         }
+    }
+
+    @OnClick(R.id.inscriptionParticulierButton)
+    void onInscriptionParticulierClick(){
+        goToProfil(false);
     }
 
     @Override
@@ -175,16 +181,6 @@ public class ConnexionFragment extends Fragment implements FacebookCallback {
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
     }
 }

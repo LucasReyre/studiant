@@ -44,6 +44,9 @@ public class RESTUtilisateur {
     @SerializedName("permisUtilisateur")
     private Boolean mPermisUtilisateur;
 
+    @SerializedName("idMangoPayUtilisateur")
+    private String mIdMangopay;
+
     @SerializedName("firebaseToken")
     private String mfirebaseToken;
 
@@ -178,5 +181,13 @@ public class RESTUtilisateur {
 
     public void setMfirebaseToken(String mfirebaseToken) {
         this.mfirebaseToken = mfirebaseToken;
+    }
+
+    public String getmIdMangopay() {
+        return mIdMangopay;
+    }
+
+    public void setmIdMangopay(String mIdMangopay) {
+        this.mIdMangopay = mIdMangopay;
     }
 }

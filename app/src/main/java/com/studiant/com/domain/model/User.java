@@ -22,6 +22,7 @@ public class User implements Serializable{
     private int typeConnexion;
     private int typeUser;
     private String firebaseToken;
+    private String idMangoPay;
 
 
     public User() {
@@ -36,6 +37,21 @@ public class User implements Serializable{
         this.birthday = birthday;
     }
 
+    public User(String id, String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, String diplome, int typeConnexion, int typeUser, String firebaseToken) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.idExterne = idExterne;
+        this.profilePicture = profilePicture;
+        this.birthday = birthday;
+        this.description = description;
+        this.diplome = diplome;
+        this.typeConnexion = typeConnexion;
+        this.typeUser = typeUser;
+        this.firebaseToken = firebaseToken;
+    }
+
     public User(String id, String firstName, String lastName, String email, String idExterne, String profilePicture, String birthday, String description, boolean permis, String diplome, int typeConnexion, int typeUser, String firebaseToken) {
         this.id = id;
         this.firstName = firstName;
@@ -45,8 +61,8 @@ public class User implements Serializable{
         this.profilePicture = profilePicture;
         this.birthday = birthday;
         this.description = description;
-        this.permis = permis;
         this.diplome = diplome;
+        this.permis = permis;
         this.typeConnexion = typeConnexion;
         this.typeUser = typeUser;
         this.firebaseToken = firebaseToken;
@@ -162,5 +178,13 @@ public class User implements Serializable{
 
     public void setFirebaseToken(String firebaseToken) {
         this.firebaseToken = firebaseToken;
+    }
+
+    public String getIdMangoPay() {
+        return idMangoPay;
+    }
+
+    public void setIdMangoPay(String idMangoPay) {
+        this.idMangoPay = idMangoPay;
     }
 }

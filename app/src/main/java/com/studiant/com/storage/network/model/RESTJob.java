@@ -37,6 +37,9 @@ public class RESTJob {
     @SerializedName("postulantId")
     private String mPostulantId;
 
+    @SerializedName("typePaiementJob")
+    private String typePaiementJob;
+
     @SerializedName("utilisateurs")
     private ArrayList<RESTUtilisateur> mRestPostulants;
 
@@ -44,7 +47,7 @@ public class RESTJob {
     private RESTUtilisateur mRestUtilisateur;
 
 
-    public RESTJob(String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId, String mStatutJob) {
+    public RESTJob(String mDescriptionJob, String mPrixJob, String mAdresseJob, String mDateJob, String mHeureJob, String mUtilisateurId, String mStatutJob, String typePaiementJob) {
         this.mDescriptionJob = mDescriptionJob;
         this.mPrixJob = mPrixJob;
         this.mAdresseJob = mAdresseJob;
@@ -52,18 +55,9 @@ public class RESTJob {
         this.mHeureJob = mHeureJob;
         this.mUtilisateurId = mUtilisateurId;
         this.mStatutJob = mStatutJob;
+        this.typePaiementJob = typePaiementJob;
     }
 
-    public RESTJob(String mId, String mDescriptionJob, String mPrixJob, String mAdresseJob, String mAStatutJob, String mDateJob, String mHeureJob, String mUtilisateurId) {
-        this.mId = mId;
-        this.mDescriptionJob = mDescriptionJob;
-        this.mPrixJob = mPrixJob;
-        this.mAdresseJob = mAdresseJob;
-        this.mStatutJob = mStatutJob;
-        this.mDateJob = mDateJob;
-        this.mHeureJob = mHeureJob;
-        this.mUtilisateurId = mUtilisateurId;
-    }
 
     public String getmId() {
         return mId;
@@ -159,5 +153,13 @@ public class RESTJob {
 
     public void setmPostulantId(String mPostulantId) {
         this.mPostulantId = mPostulantId;
+    }
+
+    public String getTypePaiementJob() {
+        return typePaiementJob;
+    }
+
+    public void setTypePaiementJob(String typePaiementJob) {
+        this.typePaiementJob = typePaiementJob;
     }
 }

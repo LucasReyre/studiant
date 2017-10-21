@@ -38,6 +38,11 @@ public class SplashActivity extends Activity implements SplashPresenter.View, My
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         MyFirebaseInstanceIDService.setListener(this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         // create a presenter for this view
         mPresenter = new SplashPresenterImpl(
                 ThreadExecutor.getInstance(),
@@ -45,11 +50,6 @@ public class SplashActivity extends Activity implements SplashPresenter.View, My
                 this,
                 new UserRepositoryImpl()
         );
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         mPresenter.resume();
     }
 

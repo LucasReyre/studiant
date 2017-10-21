@@ -16,19 +16,24 @@ public class PresentationModelConverter {
         if (user == null)
             return null;
 
-        return new com.studiant.com.presentation.presenters.model.User(user.getId(),
-                                                                        user.getFirstName(),
-                                                                        user.getLastName(),
-                                                                        user.getEmail(),
-                                                                        user.getIdExterne(),
-                                                                        user.getProfilePicture(),
-                                                                        user.getBirthday(),
-                                                                        user.getDescription(),
-                                                                        user.isPermis(),
-                                                                        user.getDiplome(),
-                                                                        user.getTypeConnexion(),
-                                                                        user.getTypeUser(),
-                                                                        user.getFirebaseToken());
+        com.studiant.com.presentation.presenters.model.User mUser = new com.studiant.com.presentation.presenters.model.User(user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getIdExterne(),
+                user.getProfilePicture(),
+                user.getBirthday(),
+                user.getDescription(),
+                user.isPermis(),
+                user.getDiplome(),
+                user.getTypeConnexion(),
+                user.getTypeUser(),
+                user.getFirebaseToken());
+
+        if (user.getIdMangoPay() != null)
+            mUser.setIdMangoPay(user.getIdMangoPay());
+
+        return mUser;
     }
 
 
@@ -44,6 +49,7 @@ public class PresentationModelConverter {
 
 
     public static User convertToUserDomainModel(com.studiant.com.presentation.presenters.model.User user){
+
         if (user == null)
             return null;
 
@@ -63,6 +69,9 @@ public class PresentationModelConverter {
 
         if (user.getFirebaseToken() != null)
             domainUser.setFirebaseToken(user.getFirebaseToken());
+
+        if (user.getIdMangoPay() != null)
+            domainUser.setIdMangoPay(user.getIdMangoPay());
 
         return domainUser;
     }

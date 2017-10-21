@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/activity_crear_entrenamiento"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_crear_entrenamiento"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -20,120 +21,95 @@
             android:gravity="center"
             android:orientation="vertical">
 
+
             <include layout="@layout/material_view_pager_placeholder"/>
-            
+
             <ImageView
                 android:id="@+id/imageViewProfilPicture"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/com_facebook_profile_picture_blank_square"
-                app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+                android:layout_marginBottom="30dp" />
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/firstNameTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
-                <EditText
-                    android:id="@+id/editTextFirstNameParticulier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_first_name"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPersonName"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/lastNameTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
-                <EditText
-                    android:id="@+id/editTextLastNameParticulier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_last_name"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPersonName"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/emailTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/editTextEmailParticulier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/diplomeTextView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
-                <EditText
-                    android:id="@+id/editTextDiplome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_study"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
-                <EditText
-                    android:id="@+id/editTextDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_description_studiant"
-                    android:imeActionId="@+id/buttonValidateEtudiant"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPersonName|textMultiLine"
-                    android:layout_marginBottom="20dp"
-                    android:maxLines="5" />
 
-            </android.support.design.widget.TextInputLayout>
 
             <Switch
                 android:id="@+id/switchPermis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp"
+                android:enabled="false"
+                android:layout_marginBottom="30dp"
                 android:text="@string/prompt_permis" />
-    <!--
+
             <Button
-                android:id="@+id/buttonValidateEtudiant"
-                style="?android:textAppearanceSmall"
+                android:id="@+id/addRibButton"
+                style="@style/StyleButtonParticulier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold" />
-    -->
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="@string/add_rib"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <Button
+                android:id="@+id/getMoneybutton"
+                style="@style/StyleButtonParticulier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="@string/get_money"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <!--
+                    <Button
+                        android:id="@+id/buttonValidateEtudiant"
+                        style="?android:textAppearanceSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/action_sign_in"
+                        android:textStyle="bold" />
+            -->
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
+<!--
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,5 +117,5 @@
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/com_facebook_button_like_icon_selected" />
+        android:src="@drawable/com_facebook_button_like_icon_selected" />-->
 </RelativeLayout>

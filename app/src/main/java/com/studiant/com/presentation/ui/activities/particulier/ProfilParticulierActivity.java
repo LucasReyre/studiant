@@ -92,6 +92,11 @@ public class ProfilParticulierActivity extends Activity implements ProfilParticu
 
     }
 
+    @Override
+    public void onImageUpload(String urlImage) {
+
+    }
+
 
     @Override
     public void onUserInsert(User user) {

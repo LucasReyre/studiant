@@ -1,7 +1,5 @@
 package com.studiant.com.storage.impl;
 
-import android.util.Log;
-
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
@@ -19,6 +17,7 @@ import timber.log.Timber;
 
 import static com.studiant.com.storage.Constants.HTTP_CODE_200;
 import static com.studiant.com.storage.Constants.HTTP_CODE_500;
+import static com.studiant.com.storage.Constants.REST_API_URL;
 
 /**
  * Created by dmilicic on 1/29/16.
@@ -29,7 +28,7 @@ public class PostulantRepositoryImpl implements PostulantRepository {
     @Override
     public void insertPostulant(Postulant postulant) throws WSException {
         RESTPostulant restPostulant = null;
-        PostulantService postulantService = RestClient.getService(PostulantService.class);
+        PostulantService postulantService = RestClient.createService(PostulantService.class, REST_API_URL);
 
         try {
 

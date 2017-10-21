@@ -40,6 +40,7 @@ public class InsertUserInteractorImpl extends AbstractInteractor implements Inse
     }
 
     private void postMessage(final User user) {
+        System.out.println("post");
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
@@ -50,10 +51,14 @@ public class InsertUserInteractorImpl extends AbstractInteractor implements Inse
 
     @Override
     public void run() {
-        // retrieve the message
-        User user = mUserRepository.insertUser(mUser);
-        // we have retrieved our message, notify the UI on the main thread
-        postMessage(user);
+        User user = null;
+        try {
+            user = mUserRepository.insertUser(mUser);
+            System.out.println("userInserted" + user.getId());
+            postMessage(user);
+        } catch (Exception e) {
+            notifyError();
+        }
     }
 
 }

@@ -32,6 +32,7 @@ import com.studiant.com.presentation.ui.components.MDatePicker;
 import com.studiant.com.presentation.ui.components.MTimePicker;
 import com.studiant.com.storage.ChooseCategoryRepository;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
+import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
@@ -132,7 +133,8 @@ public class AddJobFragment extends Fragment implements AddJobPresenter.View, Pl
                 MainThreadImpl.getInstance(),
                 this,
                 new ChooseCategoryRepository(),
-                new JobRepositoryImpl()
+                new JobRepositoryImpl(),
+                new UserRepositoryImpl()
         );
         mPresenter.resume();
 
@@ -214,6 +216,25 @@ public class AddJobFragment extends Fragment implements AddJobPresenter.View, Pl
         this.startActivity(intent);
     }
 
+
+
+    @OnClick(R.id.buttonCancelJob)
+    public void onCancelAddJobClick(){
+        Intent intent = new Intent(getActivity(), DashboardParticulierActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        this.startActivity(intent);
+    }
+
+    @Override
+    public void displayAddCard() {
+
+    }
+
+    @Override
+    public void displayPayment() {
+
+    }
+
     @Override
     public void showProgress() {
 
@@ -229,16 +250,7 @@ public class AddJobFragment extends Fragment implements AddJobPresenter.View, Pl
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
     }
 }

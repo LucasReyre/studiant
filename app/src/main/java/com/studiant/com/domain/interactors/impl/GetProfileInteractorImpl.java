@@ -4,7 +4,6 @@ package com.studiant.com.domain.interactors.impl;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
-import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
@@ -54,7 +53,7 @@ public class GetProfileInteractorImpl extends AbstractInteractor implements GetP
     @Override
     public void run() {
         // retrieve the message
-        final User user = mUserRepository.getConnectedProfile();
+        final User user = mUserRepository.getConnectedFacebookProfile();
         // we have retrieved our message, notify the UI on the main thread
         postMessage(user);
     }

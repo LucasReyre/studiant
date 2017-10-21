@@ -1,9 +1,15 @@
 package com.studiant.com.storage.network.converters;
 
+import com.studiant.com.domain.model.Card;
+import com.studiant.com.domain.model.CardReg;
 import com.studiant.com.domain.model.Job;
+import com.studiant.com.domain.model.PayIn;
 import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
+import com.studiant.com.storage.network.model.RESTCard;
+import com.studiant.com.storage.network.model.RESTCardReg;
 import com.studiant.com.storage.network.model.RESTJob;
+import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTPostulant;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
 
@@ -28,11 +34,55 @@ public class RESTModelConverter {
         int typeConnexion = restUtilisateur.getmTypeConnexionUtilisateur();
         String descriptionUser = restUtilisateur.getmDescriptionUtilisateur();
         String diplomeUser = restUtilisateur.getmDiplomeUtilisateur();
-        boolean permisUser = restUtilisateur.getmPermisUtilisateur();
+
+
         String firebaseToken = restUtilisateur.getMfirebaseToken();
 
-        return new User(id, prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, permisUser, diplomeUser,typeConnexion, typeUser, firebaseToken);
+        User user = new User(id, prenomUser, nomUser, mailUser,idExterne, photoUser, dateNaissanceUser, descriptionUser, diplomeUser,typeConnexion, typeUser, firebaseToken);
+
+        if (restUtilisateur.getmPermisUtilisateur() != null){
+            user.setPermis(restUtilisateur.getmPermisUtilisateur());
+        }
+
+        if (restUtilisateur.getmIdMangopay() != null)
+            user.setIdMangoPay(restUtilisateur.getmIdMangopay());
+
+
+        return user;
         //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
+    }
+
+
+    public static PayIn convertToPayInModel(RESTPayIn restPayIn){
+        return new PayIn(restPayIn.getStatus(),restPayIn.getCreationDate(),restPayIn.getCreditedWalletId(),restPayIn.getAuthorId());
+    }
+
+    public static Card convertToCardModel(RESTCard restCard){
+
+        String id = restCard.getId();
+        String alias = restCard.getAlias();
+        String cardProvider = restCard.getCardProvider();
+        String cardType = restCard.getCardType();
+        String country = restCard.getCountry();
+        String expiration = restCard.getExpirationDate();
+        String validity = restCard.getValidity();
+        String userId = restCard.getUserId();
+
+        return new Card(expiration,alias,cardType,cardProvider,country,validity,userId,id);
+
+    }
+
+    public static CardReg convertToCardRegModel(RESTCardReg restCardReg){
+
+        String clientId = restCardReg.getClientId();
+        String accessKey = restCardReg.getAccessKey();
+        String cardPreregistrationId = restCardReg.getCardPreregistrationId();
+        String cardType = restCardReg.getCardType();
+        String baseUrl = restCardReg.getBaseUrl();
+        String cardRegistrationUrl = restCardReg.getCardRegistrationUrl();
+        String preregistrationData = restCardReg.getPreregistrationData();
+
+        return new CardReg(accessKey,baseUrl,cardPreregistrationId,cardRegistrationUrl,cardType,clientId,preregistrationData);
     }
 
 
@@ -49,6 +99,7 @@ public class RESTModelConverter {
         String descriptionUser = user.getDescription();
         String diplomeUser = user.getDiplome();
         boolean permisUser = user.isPermis();
+        String mangoPayId = user.getIdMangoPay();
 
 
 
@@ -67,6 +118,10 @@ public class RESTModelConverter {
         if (user.getFirebaseToken() != null)
             restUtilisateur.setMfirebaseToken(user.getFirebaseToken());
 
+        if (user.getIdMangoPay() != null)
+            restUtilisateur.setmIdMangopay(user.getIdMangoPay());
+
+
         return restUtilisateur;
 
     }
@@ -80,8 +135,9 @@ public class RESTModelConverter {
         String mHeure = job.getHeure();
         String mUtilisateurId = job.getUtilisateurId();
         String mStatutJob = job.getStatutJob();
+        String typePaiement = job.getMoyenPayment();
 
-        RESTJob restJob = new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId,mStatutJob);
+        RESTJob restJob = new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId,mStatutJob, typePaiement);
 
         if (job.getPostulantId() != null)
             restJob.setmPostulantId(job.getPostulantId());
@@ -109,9 +165,13 @@ public class RESTModelConverter {
         String date = restJob.getmDateJob();
         String heure = restJob.getmHeureJob();
         String utilisateurId = restJob.getmUtilisateurId();
+        String typePaiementJob = restJob.getTypePaiementJob();
+
         ArrayList<User> postulantsArrayList = new ArrayList<User>();
 
         Job job =  new Job(id,description,prix ,adresse, date, heure, utilisateurId);
+
+        job.setMoyenPayment(typePaiementJob);
 
         if (restJob.getmRestPostulant() != null){
             ArrayList<RESTUtilisateur> restPostulantsArrayList = restJob.getmRestPostulant();

@@ -13,6 +13,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
+import com.studiant.com.presentation.ui.fragments.etudiant.ListHistoriqueJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ListJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
@@ -53,9 +54,9 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                     case 0:
                         return ListJobEtudiantFragment.newInstance(user);
                     case 1:
-                        return ProfilEtudiantFragment.newInstance(user);
+                        return ListHistoriqueJobEtudiantFragment.newInstance(user);
                     case 2:
-                        return RecyclerViewFragment.newInstance();
+                        return ProfilEtudiantFragment.newInstance(user);
                     default:
                         return RecyclerViewFragment.newInstance();
                 }
@@ -70,11 +71,11 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             public CharSequence getPageTitle(int position) {
                 switch (position % 4) {
                     case 0:
-                        return "Dashboard";
+                        return "Les offres";
                     case 1:
-                        return "Mon Profil";
+                        return "Mes jobs";
                     case 2:
-                        return "Historique";
+                        return "Mon Compte";
                     case 3:
                         return "Réglages";
                 }

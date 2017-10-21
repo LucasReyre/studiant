@@ -122,12 +122,12 @@ public class CategoriesFragment extends Fragment implements ChoosePresenter.View
     @Override
     public void displayListCategorie(String[] listItem) {
         spinner.setItems(listItem);
-        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+        /*spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     @OnClick(R.id.button_validate)

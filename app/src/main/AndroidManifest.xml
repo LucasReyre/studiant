@@ -27,23 +27,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activities.common.MainActivity" />
+
+
+        <activity android:name=".presentation.ui.activities.common.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.ui.activities.particulier.ChooseActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_choose" />
-        <activity android:name=".presentation.ui.activities.common.ConnexionActivity" />
+
+
+        <activity android:name=".presentation.ui.activities.common.ConnexionActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".presentation.ui.activities.particulier.ProfilParticulierActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".presentation.ui.activities.particulier.AddJobActivity" />
+
+        <activity android:name=".presentation.ui.activities.particulier.AddJobActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".presentation.ui.activities.etudiant.ProfilEtudiantActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".presentation.ui.activities.etudiant.DashboardEtudiantActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+
+
         <activity
             android:name=".presentation.ui.activities.particulier.DashboardParticulierActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".presentation.ui.activities.particulier.ListPostulantActivity"></activity>
 

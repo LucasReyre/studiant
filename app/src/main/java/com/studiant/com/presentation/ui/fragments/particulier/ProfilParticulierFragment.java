@@ -32,6 +32,7 @@ import butterknife.OnClick;
 import static com.studiant.com.storage.Constants.CATEGORIE_ID_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
+import static com.studiant.com.storage.Constants.STATUS_CONNEXION_NORMAL;
 import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 import static com.studiant.com.storage.Constants.STATUS_USER;
 
@@ -96,8 +97,7 @@ public class ProfilParticulierFragment extends Fragment implements ProfilParticu
                 ThreadExecutor.getInstance(),
                 MainThreadImpl.getInstance(),
                 this,
-                new UserRepositoryImpl() {
-                }
+                new UserRepositoryImpl()
         );
     }
 
@@ -140,8 +140,15 @@ public class ProfilParticulierFragment extends Fragment implements ProfilParticu
         emailEditText.setText(user.getEmail());
     }
 
+    @Override
+    public void onImageUpload(String urlImage) {
+        
+    }
+
     @OnClick(R.id.buttonValidateParticulier)
     void navigateToAddJob() {
+        System.out.println("navigateToAddJob");
+
         if (user != null){
             user.setFirstName(firstNameEditText.getText().toString());
             user.setLastName(lastNameEditText.getText().toString());
@@ -152,12 +159,25 @@ public class ProfilParticulierFragment extends Fragment implements ProfilParticu
                 user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
 
             mPresenter.insertProfile(user);
+        }else{
+            System.out.println("else");
+            User user = new User();
+            user.setFirstName(firstNameEditText.getText().toString());
+            user.setLastName(lastNameEditText.getText().toString());
+            user.setEmail(emailEditText.getText().toString());
+            user.setTypeUser(STATUS_PARTICULIER);
+            user.setTypeConnexion(STATUS_CONNEXION_NORMAL);
+            if (FirebaseInstanceId.getInstance().getToken() != null)
+                user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
+
+            mPresenter.insertProfile(user);
         }
 
     }
 
     @Override
     public void onUserInsert(User user) {
+        mPresenter.saveUser(user);
         mainActivity.transitionFragment(AddJobFragment.newInstance(user, categorie), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
     }
 

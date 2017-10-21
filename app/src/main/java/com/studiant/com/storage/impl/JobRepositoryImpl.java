@@ -13,10 +13,14 @@ import com.studiant.com.storage.network.services.JobService;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
 import static com.studiant.com.storage.Constants.HTTP_CODE_200;
+import static com.studiant.com.storage.Constants.REST_API_URL;
+import static com.studiant.com.storage.Constants.STATUS_JOB_OPEN;
 
 /**
  * Created by dmilicic on 1/29/16.
@@ -26,7 +30,8 @@ public class JobRepositoryImpl implements JobRepository {
     @Override
     public void insertJob(Job job) {
         RESTJob restJob = null;
-        JobService jobService = RestClient.getService(JobService.class);
+        job.setStatutJob(STATUS_JOB_OPEN);
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
 
@@ -44,7 +49,7 @@ public class JobRepositoryImpl implements JobRepository {
     @Override
     public ArrayList<Job> getJobsByUser(User user) {
 
-        JobService jobService = RestClient.getService(JobService.class);
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
         try {
 
             Response<ArrayList<RESTJob>> response = jobService.getJobsByUser(user.getId()).execute();
@@ -60,8 +65,30 @@ public class JobRepositoryImpl implements JobRepository {
     }
 
     @Override
+    public ArrayList<Job> getHistoriqueJobsByUser(User user) {
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
+
+        String query = "{\"where\":{\"postulantId\":\""+user.getId()+"\"},\"include\":[\"appartenir\"]}";
+
+        try {
+            //String query = "{\"include\":[\"appartenir\"]}";
+            Response<ArrayList<RESTJob>> response = jobService.getHistoriqueJobsByUser(query).execute();
+
+            //restJob = response.body();
+            Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
+
+            return RESTModelConverter.convertToArrayListJobModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
     public ArrayList<Job> getJobs() {
-        JobService jobService = RestClient.getService(JobService.class);
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
             //String query = "{\"include\":[\"appartenir\"]}";
@@ -81,7 +108,7 @@ public class JobRepositoryImpl implements JobRepository {
 
     @Override
     public ArrayList<Job> updateJob(Job job) {
-        JobService jobService = RestClient.getService(JobService.class);
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
             //String query = "{\"include\":[\"appartenir\"]}";

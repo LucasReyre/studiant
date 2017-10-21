@@ -45,10 +45,15 @@ public class GetProfileFromConnectedInteractorImpl extends AbstractInteractor im
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                if (user != null)
+                if (user != null){
+                    System.out.println("ok1 different");
                     mCallback.onProfileRetrieve(PresentationModelConverter.convertToUserPresenterModel(user));
-                else if (user==null)
+                }
+                else if (user==null){
+                    System.out.println("ok1 null");
                     mCallback.onRetrievalFailed("Le profil n\\'a pas été retrouvé");
+
+                }
             }
         });
     }

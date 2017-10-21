@@ -7,9 +7,13 @@ import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.ConnexionFacebookInteractorImpl;
 import com.studiant.com.domain.interactors.impl.GetProfileInteractorImpl;
 import com.studiant.com.domain.interactors.impl.InsertUserInteractorImpl;
+import com.studiant.com.domain.interactors.impl.SaveUserInteractorImpl;
+import com.studiant.com.domain.interactors.impl.UploadImageInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertUserInteractor;
+import com.studiant.com.domain.interactors.interfaces.SaveUserInteractor;
+import com.studiant.com.domain.interactors.interfaces.UploadImageInteractor;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.domain.repository.UserRepository;
@@ -21,8 +25,9 @@ import com.studiant.com.storage.ConnexionRepository;
 /**
  * Created by dmilicic on 12/13/15.
  */
-public class ProfilParticulierPresenterImpl extends AbstractPresenter implements ProfilParticulierPresenter, GetProfileInteractor.Callback,
-        InsertUserInteractor.Callback{
+public class ProfilParticulierPresenterImpl extends AbstractPresenter implements ProfilParticulierPresenter,
+        GetProfileInteractor.Callback,
+        InsertUserInteractor.Callback, UploadImageInteractor.Callback {
 
     private View mView;
     private UserRepository mUserRepository;
@@ -79,7 +84,20 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
+    public void saveUser(User user) {
+        SaveUserInteractor interactor = new SaveUserInteractorImpl(
+                mExecutor,
+                mMainThread,
+                user
+        );
+
+        // run the interactor
+        interactor.execute();
+    }
+
+    @Override
     public void insertProfile(User user) {
+        System.out.println("insertProfile "+user.getFirstName());
 
         InsertUserInteractor interactor = new InsertUserInteractorImpl(
                 mExecutor,
@@ -98,7 +116,28 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
+    public void uploadImage(String image) {
+        System.out.println("uploadImage interactore");
+        UploadImageInteractor interactor = new UploadImageInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mUserRepository,
+                image
+        );
+
+        interactor.execute();
+    }
+
+    @Override
+    public void onImageUpload(String image) {
+        mView.onImageUpload(image);
+
+    }
+
+    @Override
     public void onUserInsert(com.studiant.com.domain.model.User user) {
+        System.out.println("onUserInsert "+user.getId());
         mView.onUserInsert(PresentationModelConverter.convertToUserPresenterModel(user));
 
     }

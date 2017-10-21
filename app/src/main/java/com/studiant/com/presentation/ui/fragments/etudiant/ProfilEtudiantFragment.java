@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.squareup.picasso.Picasso;
@@ -32,20 +33,20 @@ public class ProfilEtudiantFragment extends Fragment {
     @BindView(R.id.imageViewProfilPicture)
     ImageView profilPictureImageView;
 
-    @BindView(R.id.editTextFirstNameParticulier)
-    EditText firstNameEditText;
+    @BindView(R.id.firstNameTextView)
+    TextView firstNameEditText;
 
-    @BindView(R.id.editTextLastNameParticulier)
-    EditText lastNameEditText;
+    @BindView(R.id.lastNameTextView)
+    TextView lastNameEditText;
 
-    @BindView(R.id.editTextEmailParticulier)
-    EditText emailEditText;
+    @BindView(R.id.emailTextView)
+    TextView emailEditText;
 
-    @BindView(R.id.editTextDiplome)
-    EditText diplomeEditText;
+    @BindView(R.id.diplomeTextView)
+    TextView diplomeEditText;
 
-    @BindView(R.id.editTextDescription)
-    EditText descriptionEditText;
+    @BindView(R.id.descriptionTextView)
+    TextView descriptionEditText;
 
     @BindView(R.id.switchPermis)
     Switch permisSwitch;

@@ -1,5 +1,6 @@
 package com.studiant.com.storage.network.services;
 
+import com.studiant.com.AndroidApplication;
 import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPostulant;
 
@@ -29,9 +30,14 @@ public interface JobService {
         @GET("/api/Utilisateurs/{user_id}/creer?filter[include][utilisateurs]")
     Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);
 
+    //Récupération de tous les jobs crées par un utilisateur
+    @Headers("Connection: close")
+    @GET("/api/Jobs")
+    Call<ArrayList<RESTJob>> getHistoriqueJobsByUser(@Query("filter") String query);
+
     //Récupération de tous les jobs sans distinction avec les utilisateurs associés
     @Headers("Connection: close")
-    @GET("/api/Jobs?filter[include][appartenir]")
+    @GET("/api/Jobs?filter[include][appartenir]&filter[where][statutJob]=0")
     Call<ArrayList<RESTJob>> getJobs();
 
     //Récupération de tous les jobs sans distinction avec les utilisateurs associés

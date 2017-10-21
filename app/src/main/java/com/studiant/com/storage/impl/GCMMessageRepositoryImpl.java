@@ -32,9 +32,7 @@ public class GCMMessageRepositoryImpl implements GCMMessageRepository {
         RESTNotification restNotification = new RESTNotification(Constants.GCM_TITLE, Constants.GCM_BODY_NEW_POSTULANT+"\""+job.getDescription().substring(0,10)+"\"");
         RESTGCMMessage restgcmMessage = new RESTGCMMessage(to,restNotification);
 
-        RestClient.changeApiBaseUrl(Constants.HTTP_URL_FCM);
-        GCMMessageService gcmMessageService = RestClient.getService(GCMMessageService.class);
-        RestClient.changeApiBaseUrl("https://loopbackstudiant.herokuapp.com/");
+        GCMMessageService gcmMessageService = RestClient.createService(GCMMessageService.class, Constants.HTTP_URL_FCM);
 
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", "key="+ Constants.LEGACY_SERVER_KEY);

@@ -89,22 +89,22 @@
                 android:id="@+id/content_rating_stars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/stars"
                 android:layout_alignTop="@+id/content_name_postulant"
-                android:layout_toEndOf="@+id/content_name_postulant"
                 android:layout_marginStart="13dp"
-                android:layout_marginTop="6dp" />
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/content_name_postulant"
+                android:src="@drawable/stars" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/content_rating_stars"
+                android:layout_marginLeft="54dp"
+                android:layout_marginStart="9dp"
+                android:layout_toEndOf="@+id/content_rating_stars"
                 android:text="@string/rating_mock"
                 android:textColor="@color/contentBadgeTitle"
-                android:textSize="12sp"
-                android:layout_marginLeft="54dp"
-                android:layout_alignBottom="@+id/content_rating_stars"
-                android:layout_toEndOf="@+id/content_rating_stars"
-                android:layout_marginStart="9dp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 

@@ -1,5 +1,8 @@
 package com.studiant.com.domain.repository;
 
+import com.studiant.com.domain.model.Card;
+import com.studiant.com.domain.model.CardReg;
+import com.studiant.com.domain.model.PayIn;
 import com.studiant.com.domain.model.User;
 
 /**
@@ -7,8 +10,13 @@ import com.studiant.com.domain.model.User;
  */
 public interface UserRepository {
 
-    User insertUser(User user);
-    User getConnectedProfile();
+    User insertUser(User user) throws Exception;
+    Card getCardUser(User user) throws Exception;
+    CardReg getCardReg(User user) throws Exception;
+    User getConnectedFacebookProfile();
+    User getConnectedNormalProfile();
     User getProfileFromConnectedUser();
+    String uploadImage(String image) throws Exception;
+    PayIn directPayment(String mangoPayId, String amount) throws Exception;
 
 }

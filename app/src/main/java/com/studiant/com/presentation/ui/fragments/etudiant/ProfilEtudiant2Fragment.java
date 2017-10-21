@@ -1,12 +1,16 @@
 package com.studiant.com.presentation.ui.fragments.etudiant;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +31,19 @@ import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
+import static com.studiant.com.storage.Constants.INTENT_FROM_FACEBOOK;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 import static com.studiant.com.storage.Constants.STATUS_CONNEXION_FACEBOOK;
+import static com.studiant.com.storage.Constants.STATUS_CONNEXION_NORMAL;
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 
 /**
@@ -64,25 +75,23 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
 
     @BindView(R.id.switchPermis)
     Switch permisSwitch;
+    boolean fromFacebook;
 
     User user;
     private ProfilParticulierPresenter mPresenter;
     private OnFragmentInteractionListener mListener;
+    private String encodedImage;
+
+    private static final int SELECT_PICTURE = 1;
 
     public ProfilEtudiant2Fragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ProfilEtudiant2Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProfilEtudiant2Fragment newInstance() {
+    public static ProfilEtudiant2Fragment newInstance(boolean fromFacebook) {
         ProfilEtudiant2Fragment fragment = new ProfilEtudiant2Fragment();
         Bundle args = new Bundle();
+        args.putBoolean(INTENT_FROM_FACEBOOK, fromFacebook);
         fragment.setArguments(args);
         return fragment;
     }
@@ -91,6 +100,7 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            fromFacebook = getArguments().getBoolean(INTENT_FROM_FACEBOOK);
         }
         mPresenter = new ProfilParticulierPresenterImpl(
                 ThreadExecutor.getInstance(),
@@ -136,7 +146,7 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
 
     @OnClick(R.id.buttonValidateEtudiant)
     void onClickValidate() {
-
+        System.out.println("onClickValidate");
         if (user != null){
             user.setDescription(descriptionEditText.getText().toString());
             user.setDiplome(diplomeEditText.getText().toString());
@@ -150,8 +160,74 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
             Log.d("Token ", " - "+FirebaseInstanceId.getInstance().getToken());
 
             mPresenter.insertProfile(user);
+
+        }else{
+            user = new User();
+            user.setLastName(lastNameEditText.getText().toString());
+            user.setFirstName(firstNameEditText.getText().toString());
+            user.setEmail(emailEditText.getText().toString());
+            user.setDiplome(diplomeEditText.getText().toString());
+            user.setPermis(permisSwitch.isChecked());
+            user.setTypeUser(STATUS_ETUDIANT);
+            user.setTypeConnexion(STATUS_CONNEXION_NORMAL);
+
+            mPresenter.uploadImage(encodedImage);
         }
 
+    }
+
+    @OnClick(R.id.imageViewProfilPicture)
+    void onImageViewClick(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                    //InputStream inputStream = getContext().getContentResolver().openInputStream(selectedImageUri);
+                    Picasso.with(getContext()).load(selectedImageUri).into(profilPictureImageView);
+
+                InputStream imageStream = null;
+                try {
+                    imageStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
+                    Bitmap selectedImage = getResizedBitmap(BitmapFactory.decodeStream(imageStream), 200);
+                    encodedImage = encodeImage(selectedImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return encImage;
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
     @Override
@@ -164,7 +240,15 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
     }
 
     @Override
+    public void onImageUpload(String urlImage) {
+        System.out.println("onImageUpload" + urlImage);
+        user.setProfilePicture(urlImage);
+        mPresenter.insertProfile(user);
+    }
+
+    @Override
     public void onUserInsert(User user) {
+        mPresenter.saveUser(user);
         Intent intent = new Intent(getActivity(), DashboardEtudiantActivity.class);
         intent.putExtra(INTENT_USER, user);
         this.startActivity(intent);

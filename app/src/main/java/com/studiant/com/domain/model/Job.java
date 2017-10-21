@@ -20,6 +20,7 @@ public class Job implements Serializable{
     private String utilisateurId;
     private String postulantId;
     private String statutJob;
+    private String moyenPayment;
     private User utilisateur;
     private ArrayList<User> postulants;
 
@@ -165,5 +166,13 @@ public class Job implements Serializable{
 
     public void setPostulantId(String postulantId) {
         this.postulantId = postulantId;
+    }
+
+    public String getMoyenPayment() {
+        return moyenPayment;
+    }
+
+    public void setMoyenPayment(String moyenPayment) {
+        this.moyenPayment = moyenPayment;
     }
 }

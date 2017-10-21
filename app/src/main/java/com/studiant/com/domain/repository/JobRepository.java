@@ -13,6 +13,7 @@ public interface JobRepository {
 
     void insertJob(Job job);
     ArrayList<Job> getJobsByUser(User user);
+    ArrayList<Job> getHistoriqueJobsByUser(User user);
     ArrayList<Job> getJobs();
     ArrayList<Job> updateJob(Job job);
 

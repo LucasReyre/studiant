@@ -113,6 +113,11 @@ public class ProfilEtudiantActivity extends Activity implements ProfilParticulie
     }
 
     @Override
+    public void onImageUpload(String urlImage) {
+
+    }
+
+    @Override
     public void onUserInsert(User user) {
         Intent intent = new Intent(this, DashboardEtudiantActivity.class);
         intent.putExtra(INTENT_USER, user);

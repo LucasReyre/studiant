@@ -64,6 +64,8 @@
     <string name="content_to2_mock">Woodside, NY 11101</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="prompt_permis">Avez vous le permis</string>
+    <string name="add_rib">Ajouter un RIB</string>
+    <string name="get_money">Encaisser mon argent</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -77,5 +79,6 @@
     <string name="title_popin_main">Inscrivez-vous pour découvrir les offres disponibles ou les étudiants prêts à les réaliser</string>
     <string name="title_connexion">Choisissez votre moyen de connexion</string>
     <string name="title_profil">Confirmez vos informations</string>
+    <string name="job_done">JOB TERMINE</string>
 
 </resources>

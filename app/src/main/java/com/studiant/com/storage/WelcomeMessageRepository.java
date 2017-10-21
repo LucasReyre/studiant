@@ -15,6 +15,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static com.studiant.com.storage.Constants.REST_API_URL;
+
 /**
  * Created by dmilicic on 1/29/16.
  */
@@ -23,7 +25,7 @@ public class WelcomeMessageRepository implements MessageRepository, Callback<Use
     public String getWelcomeMessage() {
         String msg = "Welcome, friend!"; // let's be friendly
 
-        UtilisateurService utilisateurService = RestClient.getService(UtilisateurService.class);
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_URL);
 
         //    utilisateurService.uploadData().enqueue(this);
         try {
