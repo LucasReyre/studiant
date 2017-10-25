@@ -11,11 +11,14 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
+import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
+import com.studiant.com.presentation.ui.fragments.particulier.InscriptionParticulierFragment;
 import com.studiant.com.presentation.ui.fragments.particulier.ListJobParticulierFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
+import com.studiant.com.presentation.ui.fragments.particulier.ProfilParticulierFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +26,7 @@ import butterknife.ButterKnife;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 
-public class DashboardParticulierActivity extends AppCompatActivity {
+public class DashboardParticulierActivity extends AppCompatActivity implements ProfilParticulierFragment.OnFragmentInteractionListener, InscriptionParticulierFragment.OnFragmentInteractionListener{
 
 
     @BindView(R.id.materialViewPager)
@@ -43,11 +46,11 @@ public class DashboardParticulierActivity extends AppCompatActivity {
 
             @Override
             public Fragment getItem(int position) {
-                switch (position % 4) {
+                switch (position % 3) {
                     case 0:
                         return ListJobParticulierFragment.newInstance(user);
                     case 1:
-                        return ProfilEtudiantFragment.newInstance(user);
+                        return ProfilParticulierFragment.newInstance(user);
                     case 2:
                         return RecyclerViewFragment.newInstance();
                     default:
@@ -57,20 +60,18 @@ public class DashboardParticulierActivity extends AppCompatActivity {
 
             @Override
             public int getCount() {
-                return 4;
+                return 3;
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                switch (position % 4) {
+                switch (position % 3) {
                     case 0:
                         return "Dashboard Particulier";
                     case 1:
                         return "Mon Profil";
                     case 2:
-                        return "Historique";
-                    case 3:
-                        return "Divertissement";
+                        return "Réglages";
                 }
                 return "";
             }
@@ -92,10 +93,10 @@ public class DashboardParticulierActivity extends AppCompatActivity {
                         return HeaderDesign.fromColorResAndDrawable(
                                 R.color.green,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home3));
-                    case 3:
+                   /* case 3:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.red,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
+                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");*/
                 }
 
                 //execute others actions if needed (ex : modify your header logo)
@@ -112,8 +113,8 @@ public class DashboardParticulierActivity extends AppCompatActivity {
             logo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mViewPager.notifyHeaderChanged();
-                    Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
+                   // mViewPager.notifyHeaderChanged();
+                   // Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
                 }
             });
         }

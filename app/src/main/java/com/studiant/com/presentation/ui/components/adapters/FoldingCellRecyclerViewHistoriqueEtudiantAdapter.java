@@ -132,7 +132,7 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
 
         public ViewHolder(View itemView){
             super(itemView);
-            titleDescription = (TextView) itemView.findViewById(R.id.title_description);
+            titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);

@@ -22,6 +22,12 @@ public class RESTJob {
     @SerializedName("adresseJob")
     private String mAdresseJob;
 
+    @SerializedName("cityJob")
+    private String mCityJob;
+
+    @SerializedName("categorieJob")
+    private String mcategorieJob;
+
     @SerializedName("statutJob")
     private String mStatutJob;
 
@@ -39,6 +45,9 @@ public class RESTJob {
 
     @SerializedName("typePaiementJob")
     private String typePaiementJob;
+
+    @SerializedName("latlongJob")
+    private RESTGeoplace mGeoplace;
 
     @SerializedName("utilisateurs")
     private ArrayList<RESTUtilisateur> mRestPostulants;
@@ -161,5 +170,29 @@ public class RESTJob {
 
     public void setTypePaiementJob(String typePaiementJob) {
         this.typePaiementJob = typePaiementJob;
+    }
+
+    public RESTGeoplace getmGeoplace() {
+        return mGeoplace;
+    }
+
+    public void setmGeoplace(RESTGeoplace mGeoplace) {
+        this.mGeoplace = mGeoplace;
+    }
+
+    public String getmCityJob() {
+        return mCityJob;
+    }
+
+    public void setmCityJob(String mCityJob) {
+        this.mCityJob = mCityJob;
+    }
+
+    public String getMcategorieJob() {
+        return mcategorieJob;
+    }
+
+    public void setMcategorieJob(String mcategorieJob) {
+        this.mcategorieJob = mcategorieJob;
     }
 }

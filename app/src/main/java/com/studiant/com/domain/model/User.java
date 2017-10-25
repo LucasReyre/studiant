@@ -23,6 +23,7 @@ public class User implements Serializable{
     private int typeUser;
     private String firebaseToken;
     private String idMangoPay;
+    private String telephoneUtilisateur;
 
 
     public User() {
@@ -186,5 +187,13 @@ public class User implements Serializable{
 
     public void setIdMangoPay(String idMangoPay) {
         this.idMangoPay = idMangoPay;
+    }
+
+    public String getTelephoneUtilisateur() {
+        return telephoneUtilisateur;
+    }
+
+    public void setTelephoneUtilisateur(String telephoneUtilisateur) {
+        this.telephoneUtilisateur = telephoneUtilisateur;
     }
 }

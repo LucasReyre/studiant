@@ -8,6 +8,7 @@ import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.storage.network.model.RESTCard;
 import com.studiant.com.storage.network.model.RESTCardReg;
+import com.studiant.com.storage.network.model.RESTGeoplace;
 import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTPostulant;
@@ -47,6 +48,8 @@ public class RESTModelConverter {
         if (restUtilisateur.getmIdMangopay() != null)
             user.setIdMangoPay(restUtilisateur.getmIdMangopay());
 
+        if (restUtilisateur.getmTelephoneUtilisateur() != null)
+            user.setTelephoneUtilisateur(restUtilisateur.getmTelephoneUtilisateur());
 
         return user;
         //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
@@ -101,8 +104,6 @@ public class RESTModelConverter {
         boolean permisUser = user.isPermis();
         String mangoPayId = user.getIdMangoPay();
 
-
-
         RESTUtilisateur restUtilisateur = new RESTUtilisateur( nomUser,
                 prenomUser,
                 dateNaissanceUser,
@@ -121,6 +122,9 @@ public class RESTModelConverter {
         if (user.getIdMangoPay() != null)
             restUtilisateur.setmIdMangopay(user.getIdMangoPay());
 
+        if (user.getTelephoneUtilisateur() != null)
+            restUtilisateur.setmTelephoneUtilisateur(user.getTelephoneUtilisateur());
+
 
         return restUtilisateur;
 
@@ -136,11 +140,26 @@ public class RESTModelConverter {
         String mUtilisateurId = job.getUtilisateurId();
         String mStatutJob = job.getStatutJob();
         String typePaiement = job.getMoyenPayment();
+        RESTGeoplace restGeoplace = new RESTGeoplace();
 
         RESTJob restJob = new RESTJob(mDescription,mPrix,mAdresseJob,mDate,mHeure,mUtilisateurId,mStatutJob, typePaiement);
 
         if (job.getPostulantId() != null)
             restJob.setmPostulantId(job.getPostulantId());
+
+        if (job.getCity() != null)
+            restJob.setmCityJob(job.getCity());
+
+        if (job.getLat() != null)
+            restGeoplace.setLat(job.getLat());
+
+        if (job.getLng() != null)
+            restGeoplace.setLng(job.getLng());
+
+        if (job.getCategorie() != null)
+            restJob.setMcategorieJob(job.getCategorie());
+
+        restJob.setmGeoplace(restGeoplace);
 
         return restJob;
 
@@ -172,6 +191,12 @@ public class RESTModelConverter {
         Job job =  new Job(id,description,prix ,adresse, date, heure, utilisateurId);
 
         job.setMoyenPayment(typePaiementJob);
+
+        if (restJob.getMcategorieJob() != null)
+            job.setCategorie(restJob.getMcategorieJob());
+
+        if (restJob.getmCityJob() != null)
+            job.setCity(restJob.getmCityJob());
 
         if (restJob.getmRestPostulant() != null){
             ArrayList<RESTUtilisateur> restPostulantsArrayList = restJob.getmRestPostulant();

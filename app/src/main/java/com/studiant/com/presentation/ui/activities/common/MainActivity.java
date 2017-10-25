@@ -5,22 +5,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.facebook.CallbackManager;
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.fragments.common.ConnexionFragment;
 import com.studiant.com.presentation.ui.fragments.common.MainFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiant2Fragment;
 import com.studiant.com.presentation.ui.fragments.particulier.AddJobFragment;
 import com.studiant.com.presentation.ui.fragments.particulier.CategoriesFragment;
-import com.studiant.com.presentation.ui.fragments.particulier.ProfilParticulierFragment;
+import com.studiant.com.presentation.ui.fragments.particulier.InscriptionParticulierFragment;
 
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener,
         CategoriesFragment.OnFragmentInteractionListener, ConnexionFragment.OnFragmentInteractionListener,
-        ProfilParticulierFragment.OnFragmentInteractionListener, ProfilEtudiant2Fragment.OnFragmentInteractionListener,
+        InscriptionParticulierFragment.OnFragmentInteractionListener, ProfilEtudiant2Fragment.OnFragmentInteractionListener,
         AddJobFragment.OnFragmentInteractionListener{
 
 

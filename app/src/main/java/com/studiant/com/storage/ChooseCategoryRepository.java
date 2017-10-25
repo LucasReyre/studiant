@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.util.Log;
 
 import com.studiant.com.R;
+import com.studiant.com.domain.model.Categorie;
 import com.studiant.com.domain.repository.CategoryRepository;
 
 
@@ -12,10 +13,25 @@ import com.studiant.com.domain.repository.CategoryRepository;
  */
 public class ChooseCategoryRepository implements CategoryRepository {
 
-    String[] ListItem = {"Service à la personne", "Baby sitting", "Ménage", "Bricolage", "Autres"};
+    String[] ListItem = {"Cours particuliers",
+                        "Informatique",
+                        "Jardinage",
+                        "Baby-sitting",
+                        "Déménagement",
+                        "Bricolage",
+                        "Evènementiel",
+                        "Nettoyage/Repassage",
+                        "Animaux",
+                        "Mécanique/Réparation",
+                        "Transport/Livraison",
+                        "Beauté/Bien être",
+                        "Administration",
+                        "Autres"};
 
     @Override
     public String[] getListCategoryMessage() {
-        return ListItem;
+        Categorie categorie = new Categorie();
+
+        return categorie.getCategories();
     }
 }

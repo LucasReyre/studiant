@@ -17,6 +17,7 @@
     <string name="profil_not_find"> Le profil n\'a pas été retrouvé</string>
 
     <string name="prompt_email">Email</string>
+    <string name="prompt_tel">Telephone</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="prompt_first_name">Prénom</string>
     <string name="prompt_description">Description</string>
@@ -58,7 +59,7 @@
     <string name="price_title" translatable="false">PRIX</string>
     <string name="deadline_time_mock" translatable="false">20 €</string>
     <string name="request_btn_text" translatable="false">POSTULER</string>
-    <string name="content_from1_mock">DESCRIPTION DU JOB</string>
+    <string name="content_from1_mock">DESCRIPTION DU JOB </string>
     <string name="content_from2_mock">New York, NY 10025</string>
     <string name="content_to1_mock">46th Ave</string>
     <string name="content_to2_mock">Woodside, NY 11101</string>

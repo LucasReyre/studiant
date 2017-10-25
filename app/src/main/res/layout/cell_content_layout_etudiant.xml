@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <!-- content header line -->
     <RelativeLayout
@@ -82,7 +82,7 @@
                 android:layout_below="@+id/content_name_title"
                 android:text="@string/client_name_mock"
                 android:textColor="@color/mainTextColor"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -144,7 +144,7 @@
                     android:layout_below="@id/content_description_title"
                     android:text="@string/content_from1_mock"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -194,7 +194,7 @@
                     android:layout_below="@id/content_permis_postulant_title"
                     android:text="@string/delivery_time_mock"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -230,7 +230,7 @@
                     android:layout_below="@id/content_permis_postulant_title"
                     android:text="@string/deadline_time_mock"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView

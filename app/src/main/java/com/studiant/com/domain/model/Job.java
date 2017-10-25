@@ -3,6 +3,8 @@ package com.studiant.com.domain.model;
 
 import android.view.View;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -15,12 +17,16 @@ public class Job implements Serializable{
     private String description;
     private String prix;
     private String adresse;
+    private String categorie;
+    private String city;
     private String date;
     private String heure;
     private String utilisateurId;
     private String postulantId;
     private String statutJob;
     private String moyenPayment;
+    private String lat;
+    private String lng;
     private User utilisateur;
     private ArrayList<User> postulants;
 
@@ -174,5 +180,37 @@ public class Job implements Serializable{
 
     public void setMoyenPayment(String moyenPayment) {
         this.moyenPayment = moyenPayment;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 }

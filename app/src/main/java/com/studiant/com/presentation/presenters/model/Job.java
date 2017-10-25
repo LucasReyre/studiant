@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class Job implements Serializable{
     private String id;
     private String description;
+    private String categorie;
+    private String city;
     private String prix;
     private String adresse;
     private String date;
@@ -145,5 +147,21 @@ public class Job implements Serializable{
 
     public void setPostulants(ArrayList<User> postulant) {
         this.postulants = postulant;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

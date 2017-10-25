@@ -2,6 +2,8 @@ package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -37,6 +39,10 @@ import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -134,11 +140,13 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
     public void displayListCategorie(String[] listItem) {
         spinner.setItems(listItem);
         spinner.setSelectedIndex(getIntent().getIntExtra(CATEGORIE_ID_JOB,0));
+        job.setCategorie(listItem[0]);
         Log.d("displayListCategorie", "- "+ getIntent().getIntExtra(CATEGORIE_ID_JOB,0));
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                job.setCategorie(item);
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
             }
         });
     }
@@ -243,7 +251,20 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
 
     @Override
     public void onPlaceSelected(Place place) {
-        Log.i(TAG, "Place: " + place.getName());
+        Geocoder mGeocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> addresses = null;
+            addresses = mGeocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                job.setCity(addresses.get(0).getLocality());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        job.setLat(String.valueOf(place.getLatLng().latitude));
+        job.setLng(String.valueOf(place.getLatLng().longitude));
         job.setAdresse(place.getAddress().toString());
 
     }

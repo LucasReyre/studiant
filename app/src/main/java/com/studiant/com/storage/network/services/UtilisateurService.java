@@ -41,7 +41,8 @@ public interface UtilisateurService {
                                      @Field("typeConnexionUtilisateur") String typeConnexionUtilisateur,
                                      @Field("diplomeUtilisateur") String diplomeUtilisateur,
                                      @Field("photoUtilisateur") String photoUtilisateur,
-                                     @Field("idExterneUtilisateur") String idExterneUtilisateur);
+                                     @Field("idExterneUtilisateur") String idExterneUtilisateur,
+                                     @Field("telephoneUtilisateur") String telephoneUtilisateur);
 
     /*@Headers("Connection: close")
     @POST("/api/Utilisateurs")

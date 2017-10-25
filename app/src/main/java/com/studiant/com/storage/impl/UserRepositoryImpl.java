@@ -65,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
 
             //Response<RESTUtilisateur> response = utilisateurService.insertUser(RESTModelConverter.convertToRestUserModel(user)).execute();
-            Response<RESTUtilisateur> response = utilisateurService.insertUser(user.getEmail(),user.getFirstName(),user.getLastName(),String.valueOf(user.getTypeUser()),user.getFirebaseToken(),String.valueOf(user.getTypeConnexion()),user.getDiplome(),user.getProfilePicture(),user.getIdExterne()).execute();
+            Response<RESTUtilisateur> response = utilisateurService.insertUser(user.getEmail(),user.getFirstName(),user.getLastName(),String.valueOf(user.getTypeUser()),user.getFirebaseToken(),String.valueOf(user.getTypeConnexion()),user.getDiplome(),user.getProfilePicture(),user.getIdExterne(), user.getTelephoneUtilisateur()).execute();
             if (response.code() == 200){
                 System.out.println("ok" + response.body().getmId());
                 return RESTModelConverter.convertToUserModel(response.body());

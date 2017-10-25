@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +11,7 @@
     <!-- LEFT TITLE PART -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_weight="3"
         android:background="@color/bgTitleLeft"
         android:gravity="center_horizontal"
@@ -19,14 +20,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="20dp">
-
-        <TextView
-            android:id="@+id/title_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
-            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/title_time_label"
@@ -46,6 +39,14 @@
             android:textColor="@android:color/white"
             android:textSize="12sp" />
 
+        <ImageView
+            android:id="@+id/categorieImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/autres" />
+
 
     </RelativeLayout>
     <!-- RIGHT TITLE PART -->
@@ -54,21 +55,68 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/bgTitleRight"
-        android:paddingBottom="20dp"
-        android:paddingEnd="20dp"
-        android:paddingStart="15dp"
-        android:paddingTop="20dp">
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageView"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="6dp"
+            android:text="Ville" />
+
+        <TextView
+            android:id="@+id/cityTextView"
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/textView2"
+            android:layout_marginTop="20dp"
+            android:text="Ville" />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/title_study"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/cityTextView"
+            android:layout_marginTop="20dp"
+            android:text="Tarif" />
+
+        <TextView
+            android:id="@+id/tarifTextView"
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/title_study"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/textView7"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="20dp"
+            android:text="Tarif"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@color/contentDividerLine"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/categorieTextView"
+            android:layout_marginTop="11dp"
+            android:src="@color/contentDividerLine" />
 
         <TextView
-            android:id="@+id/title_description"
+            android:id="@+id/categorieTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
@@ -79,27 +127,6 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/title_study"
-            style="@style/TitleBadgeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="13dp"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/textView2" />
-
-        <TextView
-            style="@style/TitleBadgeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/propose_par"
-            android:id="@+id/textView2"
-            android:layout_alignBaseline="@+id/title_study"
-            android:layout_alignBottom="@+id/title_study"
-            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </LinearLayout>

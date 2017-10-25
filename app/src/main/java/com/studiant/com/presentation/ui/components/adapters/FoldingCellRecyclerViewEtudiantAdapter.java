@@ -1,13 +1,16 @@
 package com.studiant.com.presentation.ui.components.adapters;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
+import com.studiant.com.domain.model.Categorie;
 import com.studiant.com.presentation.presenters.model.Job;
 
 import java.util.ArrayList;
@@ -47,13 +50,17 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder cellViewHolder = (ViewHolder) holder;
         cellViewHolder.foldingCell.fold(true);
-        cellViewHolder.titleDescription.setText(contents.get(position).getDescription());
         String prix = contents.get(position).getPrix()+" €";
-        cellViewHolder.price.setText(prix);
+//        cellViewHolder.price.setText(prix);
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
         //viewHolder.toAddress.setText(item.getToAddress());
-         cellViewHolder.requestsCount.setText(contents.get(position).getUtilisateur().getFirstName());
+        cellViewHolder.cityTextView.setText(contents.get(position).getCity());
+        cellViewHolder.tarifTextView.setText(prix);
+
+        Categorie categorie = new Categorie(contents.get(position).getCategorie());
+        cellViewHolder.categorieTextView.setText(contents.get(position).getCategorie());
+        cellViewHolder.categorieImageView.setImageResource(categorie.getImageRessource());
 
         //Content
         cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
@@ -114,11 +121,13 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
     // View lookup cache
     private static class ViewHolder extends RecyclerView.ViewHolder {
         TextView price;
-        TextView titleDescription;
+        TextView categorieTextView;
         TextView contentRequestBtn;
+        TextView cityTextView;
+        ImageView categorieImageView;
+        TextView tarifTextView;
         //TextView pledgePrice;
         //TextView toAddress;
-        TextView requestsCount;
         TextView date;
         TextView time;
         FoldingCell foldingCell;
@@ -132,12 +141,14 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
 
         public ViewHolder(View itemView){
             super(itemView);
-            titleDescription = (TextView) itemView.findViewById(R.id.title_description);
+            categorieTextView = (TextView) itemView.findViewById(R.id.categorieTextView);
+            categorieImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
+            cityTextView = (TextView) itemView.findViewById(R.id.cityTextView);
+            tarifTextView = (TextView) itemView.findViewById(R.id.tarifTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             //viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            requestsCount = (TextView) itemView.findViewById(R.id.title_study);
             //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);

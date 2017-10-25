@@ -135,7 +135,7 @@
                     android:layout_below="@id/content_description_title"
                     android:text="@string/content_from1_mock"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>

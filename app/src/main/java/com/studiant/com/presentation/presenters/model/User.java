@@ -20,6 +20,7 @@ public class User implements Serializable {
     private int typeUser;
     private String firebaseToken;
     private String idMangoPay;
+    private String telephone;
 
     private View.OnClickListener requestBtnClickListener;
 
@@ -177,6 +178,14 @@ public class User implements Serializable {
 
     public void setIdMangoPay(String idMangoPay) {
         this.idMangoPay = idMangoPay;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }
 

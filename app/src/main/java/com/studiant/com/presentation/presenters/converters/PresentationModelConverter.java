@@ -73,6 +73,9 @@ public class PresentationModelConverter {
         if (user.getIdMangoPay() != null)
             domainUser.setIdMangoPay(user.getIdMangoPay());
 
+        if (user.getTelephone() != null)
+            domainUser.setTelephoneUtilisateur(user.getTelephone());
+
         return domainUser;
     }
 
@@ -86,6 +89,12 @@ public class PresentationModelConverter {
                 job.getHeure(),
                 job.getUtilisateurId(),
                 convertToUserPresenterModel(job.getUtilisateur()));
+
+        if(job.getCategorie() != null)
+            presenterJob.setCategorie(job.getCategorie());
+
+        if (job.getCity() != null)
+            presenterJob.setCity(job.getCity());
 
         if (job.getPostulants() == null)
             return presenterJob;

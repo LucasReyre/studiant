@@ -17,6 +17,9 @@ public class RESTUtilisateur {
     @SerializedName("prenomUtilisateur")
     private String mPrenomUtilisateur;
 
+    @SerializedName("TelephoneUtilisateur")
+    private String mTelephoneUtilisateur;
+
     @SerializedName("dateNaissanceUtilisateur")
     private String mDateNaissanceUtilisateur;
 
@@ -77,6 +80,7 @@ public class RESTUtilisateur {
         this.mDescriptionUtilisateur = mDescriptionUtilisateur;
         this.mDiplomeUtilisateur = mDiplomeUtilisateur;
         this.mPermisUtilisateur = mPermisUtilisateur;
+        this.mTelephoneUtilisateur = mTelephoneUtilisateur;
     }
 
     public String getmId() {
@@ -189,5 +193,13 @@ public class RESTUtilisateur {
 
     public void setmIdMangopay(String mIdMangopay) {
         this.mIdMangopay = mIdMangopay;
+    }
+
+    public String getmTelephoneUtilisateur() {
+        return mTelephoneUtilisateur;
+    }
+
+    public void setmTelephoneUtilisateur(String mTelephoneUtilisateur) {
+        this.mTelephoneUtilisateur = mTelephoneUtilisateur;
     }
 }

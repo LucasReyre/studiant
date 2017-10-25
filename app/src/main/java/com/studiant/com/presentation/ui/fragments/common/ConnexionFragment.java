@@ -2,11 +2,9 @@ package com.studiant.com.presentation.ui.fragments.common;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +16,10 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.studiant.com.R;
-import com.studiant.com.domain.executor.impl.ThreadExecutor;
-import com.studiant.com.presentation.presenters.impl.ConnexionPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ConnexionPresenter;
 import com.studiant.com.presentation.ui.activities.common.MainActivity;
-import com.studiant.com.presentation.ui.activities.etudiant.ProfilEtudiantActivity;
-import com.studiant.com.presentation.ui.activities.particulier.ProfilParticulierActivity;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiant2Fragment;
-import com.studiant.com.presentation.ui.fragments.particulier.CategoriesFragment;
-import com.studiant.com.presentation.ui.fragments.particulier.ProfilParticulierFragment;
-import com.studiant.com.storage.ConnexionRepository;
-import com.studiant.com.storage.network.WSException;
-import com.studiant.com.threading.MainThreadImpl;
+import com.studiant.com.presentation.ui.fragments.particulier.InscriptionParticulierFragment;
 
 import java.util.Arrays;
 
@@ -151,7 +141,7 @@ public class ConnexionFragment extends Fragment implements FacebookCallback {
        Intent intentToLaunch = null;
 
         if (statusUser == STATUS_PARTICULIER){
-            mainActivity.transitionFragment(ProfilParticulierFragment.newInstance(categorie), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+            mainActivity.transitionFragment(InscriptionParticulierFragment.newInstance(categorie), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
         }else {
             mainActivity.transitionFragment(ProfilEtudiant2Fragment.newInstance(fromFacebook), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
         }

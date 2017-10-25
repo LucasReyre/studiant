@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.AndroidApplication;
 import com.studiant.com.R;
+import com.studiant.com.domain.model.Categorie;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
 
@@ -51,19 +53,23 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         final ViewHolder cellViewHolder = (ViewHolder) holder;
         Log.d("onBindViewHolder", "ok "+position);
         cellViewHolder.foldingCell.fold(true);
-        cellViewHolder.titleDescription.setText(contents.get(position).getDescription());
+//        cellViewHolder.titleDescription.setText(contents.get(position).getDescription());
         String prix = contents.get(position).getPrix()+" €";
         cellViewHolder.price.setText(prix);
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
-
         //Content
         cellViewHolder.name.setText(user.getFirstName());
         cellViewHolder.priceContent.setText(prix);
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
         cellViewHolder.description.setText(contents.get(position).getDescription());
+        cellViewHolder.categorieJobTextView.setText(contents.get(position).getCategorie());
+        cellViewHolder.cityTextView.setText(contents.get(position).getCity());
         cellViewHolder.nummberPostulant.setText(AndroidApplication.getContext().getString(R.string.number_studiant_postulant, String.valueOf(contents.get(position).getPostulants().size())));
+
+        Categorie categorie = new Categorie(contents.get(position).getCategorie());
+        cellViewHolder.categorieJobImageView.setImageResource(categorie.getImageRessource());
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +128,9 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         TextView date;
         TextView time;
         TextView nummberPostulant;
+        TextView categorieJobTextView;
+        ImageView categorieJobImageView;
+        TextView cityTextView;
         FoldingCell foldingCell;
 
         //Content Cell
@@ -133,12 +142,15 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
 
         public ViewHolder(View itemView){
             super(itemView);
-            titleDescription = (TextView) itemView.findViewById(R.id.title_description);
+            categorieJobImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
+            titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
+            categorieJobTextView = (TextView) itemView.findViewById(R.id.categorieTextView);
+            cityTextView = (TextView) itemView.findViewById(R.id.cityTextView);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);
