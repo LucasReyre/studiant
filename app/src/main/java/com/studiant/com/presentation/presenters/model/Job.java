@@ -19,6 +19,8 @@ public class Job implements Serializable{
     private String adresse;
     private String date;
     private String heure;
+    private String lat;
+    private String lng;
     private String utilisateurId;
     private User utilisateur;
     private ArrayList<User> postulants;
@@ -163,5 +165,21 @@ public class Job implements Serializable{
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 }

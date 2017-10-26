@@ -152,7 +152,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     }
 
     public void onPostulerClick(Job job){
-        Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
         mPresenter.insertPostulant(job, user);
     }
 }

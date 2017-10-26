@@ -33,7 +33,7 @@ public interface UtilisateurService {
     @FormUrlEncoded
     @Headers("Connection: close")
     @POST("/mangoApi/demos/users_create.php")
-    Call<RESTUtilisateur> insertUser(@Field("mailUtilisateur") String mailUtilisateur,
+    Call<RESTUtilisateur> insertUser(@Field(value = "mailUtilisateur", encoded = true) String mailUtilisateur,
                                      @Field("prenomUtilisateur") String prenomUtilisateur,
                                      @Field("nomUtilisateur") String nomUtilisateur,
                                      @Field("typeUtilisateur") String typeUtilisateur,

@@ -198,6 +198,11 @@ public class RESTModelConverter {
         if (restJob.getmCityJob() != null)
             job.setCity(restJob.getmCityJob());
 
+        if (restJob.getmGeoplace() != null){
+            job.setLng(restJob.getmGeoplace().getLng());
+            job.setLat(restJob.getmGeoplace().getLat());
+        }
+
         if (restJob.getmRestPostulant() != null){
             ArrayList<RESTUtilisateur> restPostulantsArrayList = restJob.getmRestPostulant();
 

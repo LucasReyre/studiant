@@ -67,7 +67,7 @@ public class JobRepositoryImpl implements JobRepository {
     @Override
     public ArrayList<Job> getHistoriqueJobsByUser(User user) {
         JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
-
+        System.out.println("getHistoriqueJobsByUser");
         String query = "{\"where\":{\"postulantId\":\""+user.getId()+"\"},\"include\":[\"appartenir\"]}";
 
         try {
@@ -113,7 +113,8 @@ public class JobRepositoryImpl implements JobRepository {
         try {
             //String query = "{\"include\":[\"appartenir\"]}";
             String query = "[where][id]="+job.getId();
-            Response<ArrayList<RESTJob>> response = jobService.updateJob(query,RESTModelConverter.convertToRestJobModel(job)).execute();
+            System.out.println("update : "+job.getId());
+            Response<ArrayList<RESTJob>> response = jobService.updateJob(job.getId(),RESTModelConverter.convertToRestJobModel(job)).execute();
 
             if(response.code() == HTTP_CODE_200)
                 Timber.i("GET ALL JOBS SUCCESS: %d", response.code());

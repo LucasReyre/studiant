@@ -46,7 +46,7 @@ public interface JobService {
 
     //Update d'un job
     @Headers("Connection: close")
-    @POST("/api/Jobs/")
-    Call<ArrayList<RESTJob>> updateJob(@Query("update") String query, @Body RESTJob restJob);
+    @POST("/api/Jobs/{job_id}/replace")
+    Call<ArrayList<RESTJob>> updateJob(@Path(value = "job_id", encoded = true) String userId, @Body RESTJob restJob);
 
 }

@@ -10,5 +10,5 @@ import java.util.ArrayList;
  */
 public interface GCMMessageRepository {
 
-    void sendNotification(Job job);
+    void sendNotification(String token, String body);
 }

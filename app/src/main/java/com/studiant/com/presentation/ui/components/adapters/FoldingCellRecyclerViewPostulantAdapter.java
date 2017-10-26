@@ -64,7 +64,6 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
         cellViewHolder.priceContent.setText(contents.get(position).getPrix());
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());*/
-        cellViewHolder.description.setText(contents.get(position).getDescription());
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +130,6 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
         TextView priceContent;
         TextView timeContent;
         TextView dateContent;
-        TextView description;
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -148,7 +146,6 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
             priceContent = (TextView) itemView.findViewById(R.id.content_price_job);
             timeContent = (TextView) itemView.findViewById(R.id.content_date);
             dateContent = (TextView) itemView.findViewById(R.id.content_price_job);
-            description = (TextView) itemView.findViewById(R.id.content_description_postulant);
 
         }
     }

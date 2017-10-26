@@ -96,6 +96,11 @@ public class PresentationModelConverter {
         if (job.getCity() != null)
             presenterJob.setCity(job.getCity());
 
+        if (job.getLat() != null && job.getLng() != null){
+            presenterJob.setLat(job.getLat());
+            presenterJob.setLng(job.getLng());
+        }
+
         if (job.getPostulants() == null)
             return presenterJob;
         else{
@@ -120,7 +125,7 @@ public class PresentationModelConverter {
 
 
     public static Job convertToJobDomainModel(com.studiant.com.presentation.presenters.model.Job job) {
-        return new Job(job.getId(),
+        Job domainJob = new Job(job.getId(),
                 job.getDescription(),
                 job.getPrix(),
                 job.getAdresse(),
@@ -129,6 +134,13 @@ public class PresentationModelConverter {
                 job.getUtilisateurId(),
                 convertToUserDomainModel(job.getUtilisateur()),
                 convertToArrayListDomainUserModel(job.getPostulants()));
+
+        if (job.getLat() != null && job.getLng() != null){
+            domainJob.setLat(job.getLat());
+            domainJob.setLng(job.getLng());
+        }
+
+        return domainJob;
 
     }
 

@@ -120,7 +120,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
         final FoldingCellRecyclerViewJobParticulierAdapter adapter = new FoldingCellRecyclerViewJobParticulierAdapter(jobArrayList, user);
-
         for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
             jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
@@ -146,7 +145,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     }
 
     public void onViewStudiantClick(Job job){
-        Log.d("onViewStudiantClick", "click " + job.getDescription() + " " + job.getPostulants().size());
         Intent intent = new Intent(getApplicationContext(), ListPostulantActivity.class);
         intent.putExtra(INTENT_USER, user);
         //intent.putExtra(INTENT_LIST_USER, job.getPostulants());

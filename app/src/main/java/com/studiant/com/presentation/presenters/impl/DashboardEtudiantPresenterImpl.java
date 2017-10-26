@@ -19,6 +19,7 @@ import com.studiant.com.domain.repository.PostulantRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPresenter;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
+import com.studiant.com.storage.Constants;
 import com.studiant.com.storage.network.WSException;
 
 import java.util.ArrayList;
@@ -87,6 +88,7 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void insertPostulant(Job job, User user) {
+        mView.showProgress();
         InsertPostulantInteractor interactor = new InsertPostulantInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -112,13 +114,14 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onPostulantInsert(Job job) {
-        mView.showProgress();
+
         SendNotificationInteractor interactor = new SendNotificationInteractorImpl(
                 mExecutor,
                 mMainThread,
                 this,
                 mGcmRepository,
-                PresentationModelConverter.convertToJobDomainModel(job)
+                job.getUtilisateur().getFirebaseToken(),
+                Constants.GCM_BODY_NEW_POSTULANT
         );
 
         interactor.execute();

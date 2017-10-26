@@ -58,6 +58,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         cellViewHolder.price.setText(prix);
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
+        cellViewHolder.numberTextView.setText(String.valueOf(position));
         //Content
         cellViewHolder.name.setText(user.getFirstName());
         cellViewHolder.priceContent.setText(prix);
@@ -65,7 +66,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
         cellViewHolder.description.setText(contents.get(position).getDescription());
         cellViewHolder.categorieJobTextView.setText(contents.get(position).getCategorie());
-        cellViewHolder.cityTextView.setText(contents.get(position).getCity());
+        cellViewHolder.cityTextView.setText(contents.get(position).getAdresse());
         cellViewHolder.nummberPostulant.setText(AndroidApplication.getContext().getString(R.string.number_studiant_postulant, String.valueOf(contents.get(position).getPostulants().size())));
 
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
@@ -123,6 +124,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
     // View lookup cache
     private static class ViewHolder extends RecyclerView.ViewHolder {
         TextView price;
+        TextView numberTextView;
         TextView titleDescription;
         TextView contentRequestBtn;
         TextView date;
@@ -144,6 +146,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             super(itemView);
             categorieJobImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
             titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
+            numberTextView = (TextView) itemView.findViewById(R.id.numberTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);

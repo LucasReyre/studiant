@@ -17,16 +17,18 @@ public class SendNotificationInteractorImpl extends AbstractInteractor implement
 
     private Callback mCallback;
     private GCMMessageRepository mGcmMessageRepository;
-    private Job mJob;
+    private String token;
+    private String body;
 
     public SendNotificationInteractorImpl(Executor threadExecutor,
                                           MainThread mainThread,
-                                          Callback callback, GCMMessageRepository gcmRepository, Job job) {
+                                          Callback callback, GCMMessageRepository gcmRepository, String token, String body) {
         super(threadExecutor, mainThread);
 
         mCallback = callback;
         mGcmMessageRepository = gcmRepository;
-        mJob = job;
+        this.token = token;
+        this.body = body;
     }
 
     private void notifyError() {
@@ -50,7 +52,7 @@ public class SendNotificationInteractorImpl extends AbstractInteractor implement
     @Override
     public void run() {
         // retrieve the message
-        mGcmMessageRepository.sendNotification(mJob);
+        mGcmMessageRepository.sendNotification(token, body);
         // we have retrieved our message, notify the UI on the main thread
         //postMessage();
     }
