@@ -64,6 +64,9 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
     @BindView(R.id.editTextLastName)
     EditText lastNameEditText;
 
+    @BindView(R.id.editTextTelephone)
+    EditText telephoneEditText;
+
     @BindView(R.id.editTextEmail)
     EditText emailEditText;
 
@@ -150,6 +153,7 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
         if (user != null){
             user.setDescription(descriptionEditText.getText().toString());
             user.setDiplome(diplomeEditText.getText().toString());
+            user.setTelephone(telephoneEditText.getText().toString());
             user.setPermis(permisSwitch.isChecked());
             user.setTypeUser(STATUS_ETUDIANT);
             user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
@@ -167,6 +171,7 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
             user.setFirstName(firstNameEditText.getText().toString());
             user.setEmail(emailEditText.getText().toString());
             user.setDiplome(diplomeEditText.getText().toString());
+            user.setTelephone(telephoneEditText.getText().toString());
             user.setPermis(permisSwitch.isChecked());
             user.setTypeUser(STATUS_ETUDIANT);
             user.setTypeConnexion(STATUS_CONNEXION_NORMAL);
@@ -239,6 +244,12 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
         Picasso.with(getContext()).load(user.getProfilePicture()).into(profilPictureImageView);
     }
 
+    @OnClick(R.id.cguTextView)
+    public void onCguTextViewClick() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://studiant.fr/?page_id=987"));
+        startActivity(browserIntent);
+    }
+
     @Override
     public void onImageUpload(String urlImage) {
         System.out.println("onImageUpload" + urlImage);
@@ -269,16 +280,6 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
     }
 }

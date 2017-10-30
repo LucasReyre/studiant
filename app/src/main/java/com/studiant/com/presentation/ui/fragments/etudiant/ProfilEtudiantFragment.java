@@ -24,8 +24,6 @@ import butterknife.ButterKnife;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 public class ProfilEtudiantFragment extends Fragment {
-    private static final boolean GRID_LAYOUT = false;
-    private static final int ITEM_COUNT = 100;
 
     @BindView(R.id.profilEtudiantscrollView)
     NestedScrollView profilEtudiantscrollView;
@@ -40,12 +38,21 @@ public class ProfilEtudiantFragment extends Fragment {
     TextView lastNameEditText;
 
     @BindView(R.id.emailTextView)
-    TextView emailEditText;
+    TextView emailTextView;
 
     @BindView(R.id.diplomeTextView)
-    TextView diplomeEditText;
+    TextView diplomeTextView;
+
+    @BindView(R.id.mailEditText)
+    TextView mailEditText;
+
+    @BindView(R.id.telephoneEditText)
+    TextView telephoneEditText;
 
     @BindView(R.id.descriptionTextView)
+    TextView descriptionTextView;
+
+    @BindView(R.id.editTextDescription)
     TextView descriptionEditText;
 
     @BindView(R.id.switchPermis)
@@ -92,9 +99,12 @@ public class ProfilEtudiantFragment extends Fragment {
         Picasso.with(getContext()).load(user.getProfilePicture()).into(profilPictureImageView);
         firstNameEditText.setText(user.getFirstName());
         lastNameEditText.setText(user.getLastName());
-        emailEditText.setText(user.getEmail());
-        diplomeEditText.setText(user.getDiplome());
+        emailTextView.setText(user.getEmail());
+        diplomeTextView.setText(user.getDiplome());
+        mailEditText.setText(user.getEmail());
         descriptionEditText.setText(user.getDescription());
+        telephoneEditText.setText(user.getTelephone());
+        descriptionTextView.setText(user.getDescription());
         permisSwitch.setChecked(user.isPermis());
     }
 }
