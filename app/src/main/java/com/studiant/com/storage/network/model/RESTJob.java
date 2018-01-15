@@ -22,7 +22,7 @@ public class RESTJob {
     @SerializedName("adresseJob")
     private String mAdresseJob;
 
-    @SerializedName("cityJob")
+    @SerializedName("villeJob")
     private String mCityJob;
 
     @SerializedName("categorieJob")

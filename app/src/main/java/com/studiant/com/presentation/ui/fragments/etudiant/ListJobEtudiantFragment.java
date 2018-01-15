@@ -123,6 +123,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
         // prepare elements to display
         //final ArrayList<Item> items = Item.getTestingList();
+        System.out.println("job lucas : "+jobArrayList.get(0).getCity());
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
         final FoldingCellRecyclerViewEtudiantAdapter adapter = (new FoldingCellRecyclerViewEtudiantAdapter(jobArrayList));

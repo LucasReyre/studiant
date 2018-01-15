@@ -33,6 +33,7 @@ public class SaveUserInteractorImpl extends AbstractInteractor implements SaveUs
         editor.putString(Constants.SHARED_PREFERENCE_USER, userJson);
         editor.commit();
 
-        System.out.println("save : "+mUser.getId() + " "+ mUser.getFirstName());
+        System.out.println("save : "+userJson);
+        System.out.println("save : "+mUser.getId() + " "+ mUser.getFirstName() + " " +mUser.getTelephone());
     }
 }

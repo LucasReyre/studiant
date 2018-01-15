@@ -33,6 +33,10 @@ public class PresentationModelConverter {
         if (user.getIdMangoPay() != null)
             mUser.setIdMangoPay(user.getIdMangoPay());
 
+        if (user.getTelephoneUtilisateur() != null)
+            mUser.setTelephone(user.getTelephoneUtilisateur());
+
+
         return mUser;
     }
 
@@ -75,6 +79,9 @@ public class PresentationModelConverter {
 
         if (user.getTelephone() != null)
             domainUser.setTelephoneUtilisateur(user.getTelephone());
+
+        if (user.getPassword() != null)
+            domainUser.setPassword(user.getPassword());
 
         return domainUser;
     }

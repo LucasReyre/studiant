@@ -152,7 +152,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/constraintLayoutMail">
+            android:id="@+id/constraintLayoutPassword">
 
             <android.support.design.widget.TextInputLayout
                 android:theme="@style/EditTextHint"
@@ -183,7 +183,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutMail"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPassword"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

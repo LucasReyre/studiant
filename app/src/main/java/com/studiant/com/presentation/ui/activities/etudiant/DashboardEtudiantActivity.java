@@ -89,19 +89,19 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                 switch (page) {
                     case 0:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.green,
+                                R.color.colorBackground,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home1));
                     case 1:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.green,
+                                R.color.colorBackground,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home2));
                     case 2:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.green,
+                                R.color.colorBackground,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home3));
                     case 3:
                         return HeaderDesign.fromColorResAndUrl(
-                                R.color.red,
+                                R.color.colorBackground,
                                 "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
                 }
 

@@ -42,11 +42,16 @@ public interface UtilisateurService {
                                      @Field("diplomeUtilisateur") String diplomeUtilisateur,
                                      @Field("photoUtilisateur") String photoUtilisateur,
                                      @Field("idExterneUtilisateur") String idExterneUtilisateur,
-                                     @Field("telephoneUtilisateur") String telephoneUtilisateur);
+                                     @Field("telephoneUtilisateur") String telephoneUtilisateur,
+                                     @Field("passwordUtilisateur") String passwordUtilisateur);
 
     /*@Headers("Connection: close")
     @POST("/api/Utilisateurs")
     Call<RESTUtilisateur> insertUser(@Body RESTUtilisateur user);*/
+
+    @Headers("Connection: close")
+    @GET("/api/Utilisateurs/findOne")
+    Call<RESTUtilisateur> loginUser(@Query("filter") String query);
 
     @Headers("Connection: close")
     @GET("/api/Utilisateurs/findOne")

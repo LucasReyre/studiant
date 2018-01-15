@@ -11,6 +11,7 @@ import com.studiant.com.domain.model.User;
 public interface UserRepository {
 
     User insertUser(User user) throws Exception;
+    User loginUser(String mail, String password) throws Exception;
     Card getCardUser(User user) throws Exception;
     CardReg getCardReg(User user) throws Exception;
     User getConnectedFacebookProfile();

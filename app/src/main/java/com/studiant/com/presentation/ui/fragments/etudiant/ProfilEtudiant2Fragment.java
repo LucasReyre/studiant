@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +19,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 import com.studiant.com.R;
+import com.studiant.com.Utils.SecurityUtils;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.presentation.presenters.impl.ProfilParticulierPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
@@ -75,6 +78,9 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
 
     @BindView(R.id.editTextDescription)
     EditText descriptionEditText;
+
+    @BindView(R.id.editTextPassword)
+    EditText passwordEditText;
 
     @BindView(R.id.switchPermis)
     Switch permisSwitch;
@@ -150,6 +156,10 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
     @OnClick(R.id.buttonValidateEtudiant)
     void onClickValidate() {
         System.out.println("onClickValidate");
+
+        if (!verifForm())
+            return;
+
         if (user != null){
             user.setDescription(descriptionEditText.getText().toString());
             user.setDiplome(diplomeEditText.getText().toString());
@@ -174,11 +184,28 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
             user.setTelephone(telephoneEditText.getText().toString());
             user.setPermis(permisSwitch.isChecked());
             user.setTypeUser(STATUS_ETUDIANT);
+            user.setPassword(SecurityUtils.hashToSha512(passwordEditText.toString()));
             user.setTypeConnexion(STATUS_CONNEXION_NORMAL);
 
             mPresenter.uploadImage(encodedImage);
         }
 
+    }
+
+    public boolean verifForm(){
+        if (lastNameEditText.getText().toString().length() > 1 && firstNameEditText.getText().toString().length() > 1
+            && isValidEmail(emailEditText.getText().toString()) && diplomeEditText.getText().toString().length() > 1
+            && telephoneEditText.getText().toString().length() == 10 && passwordEditText.toString().length() > 1)
+            return true;
+        else{
+            Toast.makeText(getActivity(), "Merci de vérifier votre saisie",
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
     @OnClick(R.id.imageViewProfilPicture)

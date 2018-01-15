@@ -15,6 +15,7 @@ public class User implements Serializable{
     private String idExterne;
     private String profilePicture;
     private String birthday;
+    private String password;
     private int age;
     private String description;
     private boolean permis;
@@ -195,5 +196,13 @@ public class User implements Serializable{
 
     public void setTelephoneUtilisateur(String telephoneUtilisateur) {
         this.telephoneUtilisateur = telephoneUtilisateur;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

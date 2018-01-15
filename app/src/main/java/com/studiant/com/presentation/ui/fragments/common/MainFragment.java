@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.activities.common.MainActivity;
+import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiant2Fragment;
 import com.studiant.com.presentation.ui.fragments.particulier.CategoriesFragment;
 
 import butterknife.BindView;
@@ -19,14 +20,6 @@ import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MainFragment extends Fragment {
 
     @BindView(R.id.buttonParticular) Button btn_particulier;
@@ -40,13 +33,6 @@ public class MainFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
@@ -101,19 +87,16 @@ public class MainFragment extends Fragment {
 
     @OnClick(R.id.buttonStudiant)
     void navigateToConnexionActivity() {
-        mainActivity.transitionFragment(ConnexionFragment.newInstance(STATUS_ETUDIANT), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+        //mainActivity.transitionFragment(ConnexionFragment.newInstance(STATUS_ETUDIANT), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+        mainActivity.transitionFragment(ProfilEtudiant2Fragment.newInstance(false), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @OnClick(R.id.loginTextView)
+    void onLoginClick(){
+        mainActivity.transitionFragment(LoginFragment.newInstance(), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+    }
+
+
     public interface OnFragmentInteractionListener {
     }
 }

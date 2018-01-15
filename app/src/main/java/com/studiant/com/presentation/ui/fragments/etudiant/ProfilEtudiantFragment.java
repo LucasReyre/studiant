@@ -34,29 +34,16 @@ public class ProfilEtudiantFragment extends Fragment {
     @BindView(R.id.firstNameTextView)
     TextView firstNameEditText;
 
-    @BindView(R.id.lastNameTextView)
-    TextView lastNameEditText;
+    @BindView(R.id.mailTextView)
+    TextView mailTextView;
 
-    @BindView(R.id.emailTextView)
-    TextView emailTextView;
 
-    @BindView(R.id.diplomeTextView)
-    TextView diplomeTextView;
+    @BindView(R.id.phoneEditText)
+    TextView phoneEditText;
 
-    @BindView(R.id.mailEditText)
-    TextView mailEditText;
-
-    @BindView(R.id.telephoneEditText)
-    TextView telephoneEditText;
-
-    @BindView(R.id.descriptionTextView)
-    TextView descriptionTextView;
 
     @BindView(R.id.editTextDescription)
     TextView descriptionEditText;
-
-    @BindView(R.id.switchPermis)
-    Switch permisSwitch;
 
     User user;
 
@@ -96,15 +83,11 @@ public class ProfilEtudiantFragment extends Fragment {
 
     private void bindView() {
         Log.d("bindView", " "+user.getFirstName() + " "+user.getDescription() + " " + user.isPermis());
+        Log.d("bindView", " "+user.getTelephone() + " " + user.getDiplome());
         Picasso.with(getContext()).load(user.getProfilePicture()).into(profilPictureImageView);
-        firstNameEditText.setText(user.getFirstName());
-        lastNameEditText.setText(user.getLastName());
-        emailTextView.setText(user.getEmail());
-        diplomeTextView.setText(user.getDiplome());
-        mailEditText.setText(user.getEmail());
+        firstNameEditText.setText(user.getFirstName() + " " + user.getLastName());
+        mailTextView.setText(user.getEmail());
+        phoneEditText.setText(user.getTelephone());
         descriptionEditText.setText(user.getDescription());
-        telephoneEditText.setText(user.getTelephone());
-        descriptionTextView.setText(user.getDescription());
-        permisSwitch.setChecked(user.isPermis());
     }
 }

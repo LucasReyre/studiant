@@ -11,6 +11,7 @@ public class User implements Serializable {
     private String email;
     private String idExterne;
     private String profilePicture;
+    private String password;
     private String birthday;
     private int age;
     private String description;
@@ -186,6 +187,14 @@ public class User implements Serializable {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

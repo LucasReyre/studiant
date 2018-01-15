@@ -54,14 +54,6 @@ public class CategoriesFragment extends Fragment implements ChoosePresenter.View
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-
-     * @return A new instance of fragment CategoriesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CategoriesFragment newInstance() {
         CategoriesFragment fragment = new CategoriesFragment();
         Bundle args = new Bundle();
@@ -132,7 +124,8 @@ public class CategoriesFragment extends Fragment implements ChoosePresenter.View
 
     @OnClick(R.id.button_validate)
     void onClickValidate() {
-        mainActivity.transitionFragment(ConnexionFragment.newInstance(STATUS_PARTICULIER, spinner.getSelectedIndex()),R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+        //mainActivity.transitionFragment(ConnexionFragment.newInstance(STATUS_PARTICULIER, spinner.getSelectedIndex()),R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
+        mainActivity.transitionFragment(InscriptionParticulierFragment.newInstance(spinner.getSelectedIndex()), R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out);
     }
 
     @Override

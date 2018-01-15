@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.studiant.com.R;
 import com.studiant.com.presentation.ui.fragments.common.ConnexionFragment;
+import com.studiant.com.presentation.ui.fragments.common.LoginFragment;
 import com.studiant.com.presentation.ui.fragments.common.MainFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiant2Fragment;
 import com.studiant.com.presentation.ui.fragments.particulier.AddJobFragment;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener,
         CategoriesFragment.OnFragmentInteractionListener, ConnexionFragment.OnFragmentInteractionListener,
         InscriptionParticulierFragment.OnFragmentInteractionListener, ProfilEtudiant2Fragment.OnFragmentInteractionListener,
-        AddJobFragment.OnFragmentInteractionListener{
+        AddJobFragment.OnFragmentInteractionListener, LoginFragment.OnFragmentInteractionListener{
 
 
     /*@BindView(R.id.btn_particulier) Button btn_particulier;

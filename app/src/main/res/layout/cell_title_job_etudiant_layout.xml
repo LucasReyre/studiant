@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_weight="3"
-        android:background="@color/bgTitleLeft"
+        android:background="@drawable/background_job"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingBottom="20dp"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/title_time_label"
             android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="12sp" />
 
         <ImageView
