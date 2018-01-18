@@ -2,6 +2,7 @@ package com.studiant.com.storage.network.services;
 
 import com.studiant.com.storage.network.model.RESTCard;
 import com.studiant.com.storage.network.model.RESTCardReg;
+import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTImage;
 import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
@@ -44,6 +45,18 @@ public interface UtilisateurService {
                                      @Field("idExterneUtilisateur") String idExterneUtilisateur,
                                      @Field("telephoneUtilisateur") String telephoneUtilisateur,
                                      @Field("passwordUtilisateur") String passwordUtilisateur);
+
+
+    @FormUrlEncoded
+    @Headers("Connection: close")
+    @POST("/mangoApi/demos/user-create_iban.php")
+    Call<RESTIban> insertRib(@Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
+                             @Field("IBAN") String iban,
+                             @Field("BIC") String bic,
+                             @Field("nameUtilisateur") String nameUtilisateur,
+                             @Field("AdresseLine1") String adresse,
+                             @Field("city") String city,
+                             @Field("codePostal") String codePostal);
 
     /*@Headers("Connection: close")
     @POST("/api/Utilisateurs")

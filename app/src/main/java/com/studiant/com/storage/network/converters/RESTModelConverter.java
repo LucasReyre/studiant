@@ -5,10 +5,12 @@ import com.studiant.com.domain.model.CardReg;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.PayIn;
 import com.studiant.com.domain.model.Postulant;
+import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.storage.network.model.RESTCard;
 import com.studiant.com.storage.network.model.RESTCardReg;
 import com.studiant.com.storage.network.model.RESTGeoplace;
+import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTPostulant;
@@ -55,6 +57,14 @@ public class RESTModelConverter {
         //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
     }
 
+    public static Rib convertToRibModel(RESTIban restIban){
+        return new Rib(restIban.getUserId(),
+                        restIban.getActive(),
+                        restIban.getCreationDate(),
+                        restIban.getOwnerName(),
+                        restIban.getId(),
+                        restIban.getType());
+    }
 
     public static PayIn convertToPayInModel(RESTPayIn restPayIn){
         return new PayIn(restPayIn.getStatus(),restPayIn.getCreationDate(),restPayIn.getCreditedWalletId(),restPayIn.getAuthorId());

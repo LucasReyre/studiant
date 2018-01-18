@@ -82,5 +82,10 @@
     <string name="title_connexion">Choisissez votre moyen de connexion</string>
     <string name="title_profil">Confirmez vos informations</string>
     <string name="job_done">JOB TERMINE</string>
+    <string name="iban">Iban</string>
+    <string name="bic">Code BIC</string>
+    <string name="nom_prenom">Nom Prenom</string>
+    <string name="cp">Code postal</string>
+    <string name="ville">Ville</string>
 
 </resources>

@@ -14,12 +14,14 @@ import com.studiant.com.AndroidApplication;
 import com.studiant.com.domain.model.Card;
 import com.studiant.com.domain.model.CardReg;
 import com.studiant.com.domain.model.PayIn;
+import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.storage.network.RestClient;
 import com.studiant.com.storage.network.converters.RESTModelConverter;
 import com.studiant.com.storage.network.model.RESTCard;
 import com.studiant.com.storage.network.model.RESTCardReg;
+import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTImage;
 import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
@@ -79,6 +81,26 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
 
+    }
+
+    @Override
+    public Rib insertRib(Rib rib) throws Exception {
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
+
+        try {
+            Response<RESTIban> response = utilisateurService.insertRib(rib.getIdMangoPayUtilisateur(), rib.getIban(), rib.getBic(),rib.getNomPrenomUtilisateur(), rib.getAdresseUtilisateur(), rib.getVilleUtilisateur(), rib.getCodePostalUtilisateur()).execute();
+            if (response.code() == 200){
+                System.out.println("ok" + response.body().getActive());
+                System.out.println("ok" + response.body().getActive());
+                return RESTModelConverter.convertToRibModel(response.body());
+            }
+            else{
+                System.out.println("error");
+                throw new Exception(response.errorBody().string());
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
     }
 
     @Override
