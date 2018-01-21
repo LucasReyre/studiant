@@ -7,6 +7,7 @@ import com.studiant.com.presentation.ui.BaseView;
 
 public interface LoginPresenter extends BasePresenter {
     void login(String mail, String password);
+    void getMdp(String mail);
 
     interface View extends BaseView {
         void onLoginSuccess(User user);

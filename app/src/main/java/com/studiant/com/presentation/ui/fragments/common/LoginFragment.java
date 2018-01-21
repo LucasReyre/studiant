@@ -1,5 +1,6 @@
 package com.studiant.com.presentation.ui.fragments.common;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,6 +30,8 @@ import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
+import java.security.NoSuchAlgorithmException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,6 +47,7 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
     @BindView(R.id.editTextPassword) EditText editTextPassword;
     private LoginPresenter mPresenter;
     private MainActivity mainActivity;
+    private ProgressDialog progressDialog;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -83,14 +87,23 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
                 this,
                 new UserRepositoryImpl()
         );
+        progressDialog = new ProgressDialog(getContext());
 
     }
 
 
     @OnClick(R.id.buttonLogin)
     void onLoginClick(){
-        System.out.println();
-        mPresenter.login(editTextEmail.getText().toString(), SecurityUtils.hashToSha512(editTextPassword.toString()));
+        try {
+            mPresenter.login(editTextEmail.getText().toString(), SecurityUtils.hashToSha512(editTextPassword.getText().toString()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @OnClick(R.id.textViewGetMdp)
+    void onGetMdpClick(){
+        mPresenter.getMdp(editTextEmail.getText().toString());
     }
 
     @Override
@@ -124,6 +137,7 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
     }
 
 
+
     @Override
     public void onLoginFailed() {
 
@@ -131,12 +145,13 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
 
     @Override
     public void showProgress() {
-
+        progressDialog.setMessage(getResources().getString(R.string.get_message_connexion));
+        progressDialog.show();
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @Override

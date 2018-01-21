@@ -3,6 +3,7 @@ package com.studiant.com.presentation.ui.fragments.etudiant;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.studiant.com.presentation.presenters.model.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
@@ -79,6 +81,13 @@ public class ProfilEtudiantFragment extends Fragment {
         //setup materialviewpager
         MaterialViewPagerHelper.registerScrollView(getActivity(), profilEtudiantscrollView);
 
+    }
+
+    @OnClick(R.id.addRibButton)
+    public void onAddRibClick(){
+        AddRibFragment addRibFragment = AddRibFragment.newInstance(user);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.add(android.R.id.content, addRibFragment).commit();
     }
 
     private void bindView() {

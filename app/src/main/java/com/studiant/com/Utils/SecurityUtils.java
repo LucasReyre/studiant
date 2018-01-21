@@ -9,19 +9,16 @@ import java.security.NoSuchAlgorithmException;
 
 public abstract class SecurityUtils {
 
-    public static String hashToSha512(String stringToHash){
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        byte[] digest = md.digest("Hello, world!".getBytes());
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < digest.length; i++) {
-            sb.append(Integer.toString((digest[i] & 0xff) + 0x100, 16).substring(1));
-        }
+    public static String hashToSha512(String stringToHash) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update(stringToHash.getBytes());
+        byte byteData[] = md.digest();
 
-        return String.valueOf(sb);
+        //convert the byte to hex format method 1
+        StringBuffer hashCodeBuffer = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            hashCodeBuffer.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return hashCodeBuffer.toString();
     }
 }

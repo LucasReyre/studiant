@@ -220,7 +220,7 @@
                     android:text="@string/date_title" />
 
                 <TextView
-                    android:id="@+id/content_price_job"
+                    android:id="@+id/content_heure_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/content_permis_postulant_title"
@@ -234,8 +234,8 @@
                     android:id="@+id/content_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_price_job"
-                    android:layout_below="@id/content_price_job"
+                    android:layout_alignStart="@id/content_heure_job"
+                    android:layout_below="@id/content_heure_job"
                     android:text="@string/delivery_date_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
@@ -248,7 +248,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/content_permis_postulant_title"
+                    android:id="@+id/content_price_postulant_title"
                     style="@style/ContentMainBadgeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -259,8 +259,8 @@
                     android:id="@+id/content_price_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_permis_postulant_title"
-                    android:layout_below="@id/content_permis_postulant_title"
+                    android:layout_alignStart="@id/content_price_postulant_title"
+                    android:layout_below="@id/content_price_postulant_title"
                     android:text="@string/deadline_time_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="18sp"

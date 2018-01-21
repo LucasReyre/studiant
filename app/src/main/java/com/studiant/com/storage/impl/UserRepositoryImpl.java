@@ -127,6 +127,24 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void getPassword(String mail) throws Exception {
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
+
+        try {
+            Response<Void> response = utilisateurService.getPassword(mail).execute();
+            if (response.code() == 200){
+               // return RESTModelConverter.convertToRibModel(response.body());
+            }
+            else{
+                System.out.println("error");
+                throw new Exception(response.errorBody().string());
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+
+    @Override
     public CardReg getCardReg(User user) throws Exception {
         UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
         System.out.println("mangopay "+user.getIdMangoPay());

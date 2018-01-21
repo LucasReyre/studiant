@@ -38,6 +38,7 @@ import com.studiant.com.threading.MainThreadImpl;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -185,7 +186,11 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
             user.setTelephone(telephoneEditText.getText().toString());
             user.setPermis(permisSwitch.isChecked());
             user.setTypeUser(STATUS_ETUDIANT);
-            user.setPassword(SecurityUtils.hashToSha512(passwordEditText.toString()));
+            try {
+                user.setPassword(SecurityUtils.hashToSha512(passwordEditText.toString()));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
             user.setTypeConnexion(STATUS_CONNEXION_NORMAL);
 
             mPresenter.uploadImage(encodedImage);

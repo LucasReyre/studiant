@@ -58,6 +58,11 @@ public interface UtilisateurService {
                              @Field("city") String city,
                              @Field("codePostal") String codePostal);
 
+    @FormUrlEncoded
+    @Headers("Connection: close")
+    @POST("/studiantApi/forgotPassword.php")
+    Call<Void> getPassword(@Field("mailUtilisateur") String mailUtilisateur);
+
     /*@Headers("Connection: close")
     @POST("/api/Utilisateurs")
     Call<RESTUtilisateur> insertUser(@Body RESTUtilisateur user);*/
