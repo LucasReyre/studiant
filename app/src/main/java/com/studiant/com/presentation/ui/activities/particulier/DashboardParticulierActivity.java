@@ -13,6 +13,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.ui.activities.etudiant.SettingFragment;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.presentation.ui.fragments.particulier.InscriptionParticulierFragment;
 import com.studiant.com.presentation.ui.fragments.particulier.ListJobParticulierFragment;
@@ -52,7 +53,7 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
                     case 1:
                         return ProfilParticulierFragment.newInstance(user);
                     case 2:
-                        return RecyclerViewFragment.newInstance();
+                        return SettingFragment.newInstance();
                     default:
                         return RecyclerViewFragment.newInstance();
                 }

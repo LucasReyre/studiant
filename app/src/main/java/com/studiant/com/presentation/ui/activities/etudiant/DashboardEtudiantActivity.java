@@ -57,6 +57,8 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                         return ListHistoriqueJobEtudiantFragment.newInstance(user);
                     case 2:
                         return ProfilEtudiantFragment.newInstance(user);
+                    case 3:
+                        return SettingFragment.newInstance();
                     default:
                         return RecyclerViewFragment.newInstance();
                 }
