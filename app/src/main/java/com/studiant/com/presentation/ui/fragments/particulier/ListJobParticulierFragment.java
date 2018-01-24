@@ -1,6 +1,9 @@
 package com.studiant.com.presentation.ui.fragments.particulier;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -128,6 +131,13 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
                     onViewStudiantClick(jobArrayList.get(j));
                 }
             });
+
+            jobArrayList.get(i).setStudiantCodeBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onStudiantCodeClick(jobArrayList.get(j));
+                }
+            });
         }
         //setup materialviewpager
 
@@ -150,6 +160,24 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         //intent.putExtra(INTENT_LIST_USER, job.getPostulants());
         intent.putExtra(INTENT_JOB, PresentationModelConverter.convertToJobDomainModel(job));
         this.startActivity(intent);
+
+    }
+
+    public void onStudiantCodeClick(Job job){
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getContext());
+        }
+        builder.setTitle("S'tudiant Code")
+                .setMessage("Le S'tudiant code est : "+job.getId())
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .show();
 
     }
 

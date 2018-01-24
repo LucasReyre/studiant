@@ -31,6 +31,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
+    private View.OnClickListener studiantCodeBtnClickListener;
 
     public FoldingCellRecyclerViewJobParticulierAdapter(ArrayList<Job> contents, User user) {
         this.contents = contents;
@@ -58,7 +59,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         cellViewHolder.price.setText(prix);
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
-        cellViewHolder.numberTextView.setText(String.valueOf(position));
+//        cellViewHolder.numberTextView.setText(String.valueOf(position));
         //Content
         cellViewHolder.name.setText(user.getFirstName());
         cellViewHolder.priceContent.setText(prix);
@@ -81,9 +82,11 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         // set custom btn handler for list item from that item
         if (contents.get(position).getRequestBtnClickListener() != null) {
             cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
+            cellViewHolder.studiantCodeBtn.setOnClickListener(contents.get(position).getStudiantCodeBtnClickListener());
         } else {
             // (optionally) add "default" handler if no handler found in item
             cellViewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
+            cellViewHolder.studiantCodeBtn.setOnClickListener(defaultRequestBtnClickListener);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +130,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         TextView numberTextView;
         TextView titleDescription;
         TextView contentRequestBtn;
+        TextView studiantCodeBtn;
         TextView date;
         TextView time;
         TextView nummberPostulant;
@@ -152,6 +156,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
+            studiantCodeBtn =  itemView.findViewById(R.id.studiant_btn);
             categorieJobTextView = (TextView) itemView.findViewById(R.id.categorieTextView);
             cityTextView = (TextView) itemView.findViewById(R.id.cityTextView);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);

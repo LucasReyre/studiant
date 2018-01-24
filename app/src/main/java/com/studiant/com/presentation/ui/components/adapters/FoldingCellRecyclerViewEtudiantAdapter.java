@@ -64,10 +64,22 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
 
         //Content
         cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
-        cellViewHolder.priceContent.setText(contents.get(position).getPrix());
+        cellViewHolder.priceContent.setText(contents.get(position).getPrix() +" €");
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
         cellViewHolder.description.setText(contents.get(position).getDescription());
+
+        switch (contents.get(position).getModePaiement()){
+            case "CB":
+                cellViewHolder.modePaiementImage.setImageResource(R.drawable.credit_card);
+                break;
+            case "ESPECES":
+                cellViewHolder.modePaiementImage.setImageResource(R.drawable.change);
+                break;
+            case "CESU":
+                cellViewHolder.modePaiementImage.setImageResource(R.drawable.check);
+                break;
+        }
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +143,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         TextView date;
         TextView time;
         FoldingCell foldingCell;
+        ImageView modePaiementImage;
 
         //Content Cell
         TextView name;
@@ -152,11 +165,12 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
             //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
+            modePaiementImage = itemView.findViewById(R.id.imageViewModePaiementt);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);
+            timeContent = (TextView) itemView.findViewById(R.id.content_heure_job);
             priceContent = (TextView) itemView.findViewById(R.id.content_price_job);
-            timeContent = (TextView) itemView.findViewById(R.id.content_date);
-            dateContent = (TextView) itemView.findViewById(R.id.content_price_job);
+            dateContent = (TextView) itemView.findViewById(R.id.content_date);
             description = (TextView) itemView.findViewById(R.id.content_description_postulant);
 
         }

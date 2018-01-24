@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -9,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgContentTop"
+        android:background="@color/customRed"
         android:paddingBottom="7dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
@@ -68,26 +69,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/content_rating_stars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/content_name_postulant"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/content_name_postulant"
-                android:src="@drawable/stars" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/content_rating_stars"
-                android:layout_marginLeft="54dp"
-                android:layout_marginStart="9dp"
-                android:layout_toEndOf="@+id/content_rating_stars"
-                android:text="@string/rating_mock"
-                android:textColor="@color/contentBadgeTitle"
-                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -192,6 +173,15 @@
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/content_price_postulant_title"
+                    style="@style/ContentMainBadgeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/price_title" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -200,19 +190,9 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/content_price_postulant_title"
-                    style="@style/ContentMainBadgeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/price_title" />
-
-                <TextView
                     android:id="@+id/content_price_job"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/content_price_postulant_title"
-                    android:layout_below="@id/content_price_postulant_title"
                     android:text="@string/deadline_time_mock"
                     android:textColor="@color/mainTextColor"
                     android:textSize="16sp"
@@ -227,6 +207,15 @@
                     android:text=""
                     android:textColor="@color/mainTextColor"
                     android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imageViewModePaiementt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="19dp"
+                    android:layout_toEndOf="@+id/content_price_job"
+                    app:srcCompat="@drawable/change" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -237,11 +226,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@color/btnRequest"
+            android:background="@color/customRed"
             android:padding="10dp"
             android:text="@string/request_btn_text"
             android:textAlignment="center"
-            android:textColor="@color/mainTextColor"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </LinearLayout>

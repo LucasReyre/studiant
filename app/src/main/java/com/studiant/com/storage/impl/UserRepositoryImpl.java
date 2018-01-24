@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.studiant.com.AndroidApplication;
 import com.studiant.com.domain.model.Card;
 import com.studiant.com.domain.model.CardReg;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.PayIn;
 import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
@@ -23,6 +24,7 @@ import com.studiant.com.storage.network.model.RESTCard;
 import com.studiant.com.storage.network.model.RESTCardReg;
 import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTImage;
+import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
 import com.studiant.com.storage.network.services.UtilisateurService;
@@ -81,6 +83,48 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
 
+    }
+
+    @Override
+    public Job getPaiement(String postulantId, String jobId) throws Exception {
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
+
+        try {
+            Response<RESTJob> response = utilisateurService.getPaiement(postulantId, jobId, "cQEWS7UoI39I7Uk1FxC0YcuG8ge3kXEWArhu2DM1").execute();
+            if (response.code() == 200){
+                return RESTModelConverter.convertToJobModel(response.body());
+            }
+            else{
+                System.out.println("error");
+                throw new Exception(response.errorBody().string());
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+
+    @Override
+    public void getMoney(User user) throws Exception {
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
+
+        try {
+            Response<Void> response = utilisateurService.getMoney(user.getIdWallet(),
+                                                                    user.getLastName(),
+                                                                    user.getFirstName(),
+                                                                    user.getIdMangoPay(),
+                                                                    user.getEmail(),
+                                                                    user.getIban(),
+                                                                    user.getIdIban()).execute();
+            if (response.code() == 200){
+                //return RESTModelConverter.convertToJobModel(response.body());
+            }
+            else{
+                System.out.println("error");
+                throw new Exception(response.errorBody().string());
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
     }
 
     @Override

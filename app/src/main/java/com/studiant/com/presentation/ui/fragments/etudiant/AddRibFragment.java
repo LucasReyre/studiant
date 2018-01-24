@@ -18,6 +18,7 @@ import com.studiant.com.presentation.presenters.impl.AddRibPresenterImpl;
 import com.studiant.com.presentation.presenters.impl.HistoriqueJobEtudiantPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.AddRibPresenter;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
@@ -31,7 +32,6 @@ import static com.studiant.com.storage.Constants.INTENT_USER;
 
 
 public class AddRibFragment extends Fragment implements AddRibPresenter.View{
-    private static final String ARG_PARAM1 = "param1";
 
     @BindView(R.id.editTextIban) EditText editTextIban;
     @BindView(R.id.editTextBic) EditText editTextBic;
@@ -86,7 +86,7 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
 
     @OnClick(R.id.buttonValidateRib)
     public void onButtonValidateRib(){
-        Rib rib = new Rib(user.getIdMangoPay(),
+        Rib rib = new Rib(  user.getIdMangoPay(),
                             editTextIban.getText().toString(),
                             editTextBic.getText().toString(),
                             editTextNomPrenom.getText().toString(),
@@ -99,6 +99,13 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
 
     @Override
     public void onRibInsert(Rib rib) {
+        user.setIban(editTextIban.getText().toString());
+        user.setIdIban(rib.getId());
+        System.out.println("onRibInsert : " + rib.getId());
+        mPresenter.saveUser(user);
+
+        ((DashboardEtudiantActivity) getActivity()).updateUser(user);
+
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.remove(this).commit();
 

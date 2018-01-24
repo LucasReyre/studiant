@@ -3,26 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <!-- content header line -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgContentTop"
+        android:background="@color/customRed"
         android:paddingBottom="7dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingTop="7dp">
 
-        <TextView
-            android:id="@+id/numberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/order_id_mock"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -76,27 +68,6 @@
                 android:textColor="@color/mainTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/content_rating_stars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/content_name_postulant"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="6dp"
-                android:layout_toEndOf="@+id/content_name_postulant"
-                android:src="@drawable/stars" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/content_rating_stars"
-                android:layout_marginLeft="54dp"
-                android:layout_marginStart="9dp"
-                android:layout_toEndOf="@+id/content_rating_stars"
-                android:text="@string/rating_mock"
-                android:textColor="@color/contentBadgeTitle"
-                android:textSize="12sp" />
 
         </RelativeLayout>
 
@@ -244,11 +215,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/btnRequest"
+            android:background="@color/customRed"
             android:padding="10dp"
             android:text="@string/see_studiant"
             android:textAlignment="center"
-            android:textColor="@color/mainTextColor"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/studiant_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/customRed"
+            android:padding="10dp"
+            android:text="@string/studiant_code"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView

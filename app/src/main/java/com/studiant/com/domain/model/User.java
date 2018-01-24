@@ -24,6 +24,9 @@ public class User implements Serializable{
     private int typeUser;
     private String firebaseToken;
     private String idMangoPay;
+    private String idWallet;
+    private String iban;
+    private String idIban;
     private String telephoneUtilisateur;
 
 
@@ -204,5 +207,29 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getIdWallet() {
+        return idWallet;
+    }
+
+    public void setIdWallet(String idWallet) {
+        this.idWallet = idWallet;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public String getIdIban() {
+        return idIban;
+    }
+
+    public void setIdIban(String idIban) {
+        this.idIban = idIban;
     }
 }

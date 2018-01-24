@@ -13,6 +13,7 @@ import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.storage.Constants;
 
 import static com.studiant.com.storage.Constants.SHARED_PREFERENCE_NAME;
+import static com.studiant.com.storage.Constants.SHARED_PREFERENCE_USER;
 
 
 public class SaveUserInteractorImpl extends AbstractInteractor implements SaveUserInteractor {
@@ -28,12 +29,35 @@ public class SaveUserInteractorImpl extends AbstractInteractor implements SaveUs
     @Override
     public void run() {
         Gson gson = new Gson();
-        String userJson = gson.toJson(mUser);
-        SharedPreferences.Editor editor = AndroidApplication.getContext().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
-        editor.putString(Constants.SHARED_PREFERENCE_USER, userJson);
-        editor.commit();
+        SharedPreferences sharedPreferences = AndroidApplication.getContext().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        String json = sharedPreferences.getString(SHARED_PREFERENCE_USER, null);
+        User user = gson.fromJson(json, User.class);
 
-        System.out.println("save : "+userJson);
-        System.out.println("save : "+mUser.getId() + " "+ mUser.getFirstName() + " " +mUser.getTelephone());
+        if (user == null){
+            String userJson = gson.toJson(mUser);
+            SharedPreferences.Editor editor = AndroidApplication.getContext().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
+            editor.putString(Constants.SHARED_PREFERENCE_USER, userJson);
+            editor.commit();
+
+            System.out.println("save : "+userJson);
+            System.out.println("save : "+mUser.getId() + " "+ mUser.getFirstName() + " " +mUser.getTelephone());
+        }else{
+            if (mUser.getIdIban() != null)
+                user.setIdIban(mUser.getIdIban());
+
+            if (mUser.getIban() != null)
+                user.setIban(mUser.getIban());
+
+            String userJson = gson.toJson(user);
+            SharedPreferences.Editor editor = AndroidApplication.getContext().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
+            editor.putString(Constants.SHARED_PREFERENCE_USER, userJson);
+            editor.commit();
+
+            System.out.println("else save : "+userJson);
+            System.out.println("else save : "+mUser.getId() + " "+ mUser.getFirstName() + " " +mUser.getTelephone());
+        }
+
+
+
     }
 }

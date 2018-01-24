@@ -13,11 +13,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.squareup.picasso.Picasso;
 import com.studiant.com.R;
+import com.studiant.com.domain.executor.impl.ThreadExecutor;
+import com.studiant.com.presentation.presenters.impl.AddRibPresenterImpl;
+import com.studiant.com.presentation.presenters.impl.ProfilEtudiantPresenterImpl;
+import com.studiant.com.presentation.presenters.interfaces.ProfilEtudiantPresenter;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.storage.impl.UserRepositoryImpl;
+import com.studiant.com.storage.network.WSException;
+import com.studiant.com.threading.MainThreadImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +33,7 @@ import butterknife.OnClick;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
-public class ProfilEtudiantFragment extends Fragment {
+public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPresenter.View {
 
     @BindView(R.id.profilEtudiantscrollView)
     NestedScrollView profilEtudiantscrollView;
@@ -49,6 +57,8 @@ public class ProfilEtudiantFragment extends Fragment {
 
     User user;
 
+    private ProfilEtudiantPresenter mPresenter;
+
     public static ProfilEtudiantFragment newInstance(User user) {
 
         ProfilEtudiantFragment fragment = new ProfilEtudiantFragment();
@@ -69,6 +79,12 @@ public class ProfilEtudiantFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mPresenter = new ProfilEtudiantPresenterImpl(
+                ThreadExecutor.getInstance(),
+                MainThreadImpl.getInstance(),
+                this,
+                new UserRepositoryImpl());
+
         return inflater.inflate(R.layout.fragment_profil_etudiant, container, false);
     }
 
@@ -90,6 +106,18 @@ public class ProfilEtudiantFragment extends Fragment {
         ft.add(android.R.id.content, addRibFragment).commit();
     }
 
+
+    @OnClick(R.id.getMoneybutton)
+    public void onGetMoneyButtonClick(){
+        if(user.getIdIban() == null){
+            Toast.makeText(getActivity(), "Merci de renseigner un RIB",
+            Toast.LENGTH_LONG).show();
+        }else{
+            mPresenter.getMoney(user);
+        }
+
+    }
+
     private void bindView() {
         Log.d("bindView", " "+user.getFirstName() + " "+user.getDescription() + " " + user.isPermis());
         Log.d("bindView", " "+user.getTelephone() + " " + user.getDiplome());
@@ -98,5 +126,25 @@ public class ProfilEtudiantFragment extends Fragment {
         mailTextView.setText(user.getEmail());
         phoneEditText.setText(user.getTelephone());
         descriptionEditText.setText(user.getDescription());
+    }
+
+    @Override
+    public void onMoneyRetrieve() {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showError(WSException e) {
+
     }
 }

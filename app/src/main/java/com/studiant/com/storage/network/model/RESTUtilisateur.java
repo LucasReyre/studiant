@@ -50,6 +50,9 @@ public class RESTUtilisateur {
     @SerializedName("idMangoPayUtilisateur")
     private String mIdMangopay;
 
+    @SerializedName("idWalletUtilisateur")
+    private String idWalletUtilisateur;
+
     @SerializedName("firebaseToken")
     private String mfirebaseToken;
 
@@ -201,5 +204,13 @@ public class RESTUtilisateur {
 
     public void setmTelephoneUtilisateur(String mTelephoneUtilisateur) {
         this.mTelephoneUtilisateur = mTelephoneUtilisateur;
+    }
+
+    public String getIdWalletUtilisateur() {
+        return idWalletUtilisateur;
+    }
+
+    public void setIdWalletUtilisateur(String idWalletUtilisateur) {
+        this.idWalletUtilisateur = idWalletUtilisateur;
     }
 }

@@ -31,11 +31,69 @@
                 android:layout_marginTop="30dp"
                 app:srcCompat="@drawable/logo_full" />
 
+
+        <TextView
+                android:id="@+id/textViewDeconnexion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:text="Déconnexion"
+                android:textColor="@color/accent_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPassword" />
+
+        <LinearLayout
+            android:id="@+id/socialLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+
             <ImageView
-                android:id="@+id/imageViewMosaique"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/mosaique" />
+                android:id="@+id/imageViewFacebook"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/facebook_logo" />
+
+            <ImageView
+                android:id="@+id/imageViewInstagram"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/instagram_logo" />
+
+            <ImageView
+                android:id="@+id/imageViewTwitter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/twitter_logo" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Vous avez une question ?\ncontact@studiant.fr" />
+
+        <TextView
+            android:id="@+id/textViewStudiantSite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:text="Studiant.fr"
+            android:textColor="@color/accent_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPassword" />
+
     </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

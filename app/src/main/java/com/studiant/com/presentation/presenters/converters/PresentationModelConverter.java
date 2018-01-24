@@ -36,6 +36,9 @@ public class PresentationModelConverter {
         if (user.getTelephoneUtilisateur() != null)
             mUser.setTelephone(user.getTelephoneUtilisateur());
 
+        if (user.getIdWallet() != null)
+            mUser.setIdWallet(user.getIdWallet());
+
 
         return mUser;
     }
@@ -83,6 +86,15 @@ public class PresentationModelConverter {
         if (user.getPassword() != null)
             domainUser.setPassword(user.getPassword());
 
+        if (user.getIdWallet() != null)
+            domainUser.setIdWallet(user.getIdWallet());
+
+        if (user.getIban() != null)
+            domainUser.setIban(user.getIban());
+
+        if (user.getIdIban() != null)
+            domainUser.setIdIban(user.getIdIban());
+
         return domainUser;
     }
 
@@ -107,6 +119,12 @@ public class PresentationModelConverter {
             presenterJob.setLat(job.getLat());
             presenterJob.setLng(job.getLng());
         }
+
+        if (job.getMoyenPayment() != null)
+            presenterJob.setModePaiement(job.getMoyenPayment());
+
+        if (job.getStatutJob() != null)
+            presenterJob.setStatut(job.getStatutJob());
 
         if (job.getPostulants() == null)
             return presenterJob;

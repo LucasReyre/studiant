@@ -77,6 +77,7 @@
     <string name="permis">permis</string>
     <string name="postulant">Postulant</string>
     <string name="see_studiant">Voir les étudiants</string>
+    <string name="studiant_code">S\'tudiant code</string>
     <string name="get_message">Récupération des jobs</string>
     <string name="get_message_password">Récupération du mot de passe</string>
     <string name="get_message_connexion">Connexion en cours</string>

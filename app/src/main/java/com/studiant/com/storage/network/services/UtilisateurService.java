@@ -4,6 +4,7 @@ import com.studiant.com.storage.network.model.RESTCard;
 import com.studiant.com.storage.network.model.RESTCardReg;
 import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTImage;
+import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
 
@@ -46,17 +47,28 @@ public interface UtilisateurService {
                                      @Field("telephoneUtilisateur") String telephoneUtilisateur,
                                      @Field("passwordUtilisateur") String passwordUtilisateur);
 
+    @FormUrlEncoded
+    @Headers("Connection: close")
+    @POST("/mangoApi/demos/user_create_iban.php")
+    Call<RESTIban> insertRib( @Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
+                                     @Field("IBAN") String iban,
+                                     @Field("BIC") String bic,
+                                     @Field("nameUtilisateur") String nameUtilisateur,
+                                     @Field("AddressLine1") String addresseLine,
+                                     @Field("city") String city,
+                                     @Field("codePostal") String codePostal);
+
 
     @FormUrlEncoded
     @Headers("Connection: close")
-    @POST("/mangoApi/demos/user-create_iban.php")
-    Call<RESTIban> insertRib(@Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
-                             @Field("IBAN") String iban,
-                             @Field("BIC") String bic,
-                             @Field("nameUtilisateur") String nameUtilisateur,
-                             @Field("AdresseLine1") String adresse,
-                             @Field("city") String city,
-                             @Field("codePostal") String codePostal);
+    @POST("/mangoApi/demos/payout.php")
+    Call<Void> getMoney(@Field("idWalletUtilisateur") String idWalletUtilisateur,
+                         @Field("nomUtilisateur") String nomUtilsateur,
+                         @Field("prenomUtilisateur") String prenomUtilisateur,
+                         @Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
+                         @Field("mailUtilisateur") String mailUtilisateur,
+                         @Field("ibanUtilisateur") String ibanUtilisateur,
+                         @Field("idIbanUtilisateur") String idIbanUtilisateur);
 
     @FormUrlEncoded
     @Headers("Connection: close")
@@ -79,6 +91,13 @@ public interface UtilisateurService {
     @Headers("Connection: close")
     @POST("/mangoApi/demos/user_get_card.php")
     Call<RESTCard> getUserCard(@Field("idMangoPayUtilisateur") String idMangoPay);
+
+    @FormUrlEncoded
+    @Headers("Connection: close")
+    @POST("/mangoApi/demos/validateStudiantCode.php")
+    Call<RESTJob> getPaiement(@Field("postulantId") String postulantId,
+                              @Field("jobId") String jobId,
+                              @Field("secret") String secret);
 
     @FormUrlEncoded
     @Headers("Connection: close")

@@ -22,7 +22,9 @@ import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPres
 import com.studiant.com.presentation.presenters.interfaces.HistoriqueJobEtudiantPresenter;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewEtudiantAdapter;
+import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewHistoriqueEtudiantAdapter;
 import com.studiant.com.storage.impl.GCMMessageRepositoryImpl;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.PostulantRepositoryImpl;
@@ -117,7 +119,7 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
         //final ArrayList<Item> items = Item.getTestingList();
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellRecyclerViewEtudiantAdapter adapter = (new FoldingCellRecyclerViewEtudiantAdapter(jobArrayList));
+        final FoldingCellRecyclerViewHistoriqueEtudiantAdapter adapter = (new FoldingCellRecyclerViewHistoriqueEtudiantAdapter(jobArrayList));
 
         for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
@@ -144,7 +146,12 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
     }
 
     public void onPostulerClick(Job job){
-        Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
         //mPresenter.insertPostulant(job, user);
+        System.out.println("statut : "+job.getStatut());
+        if (!job.getStatut().equals("2")){
+            ((DashboardEtudiantActivity)getActivity()).displaySetStudiantCode(job);
+        }
+
     }
 }

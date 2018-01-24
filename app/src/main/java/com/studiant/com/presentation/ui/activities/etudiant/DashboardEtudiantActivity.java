@@ -3,6 +3,7 @@ package com.studiant.com.presentation.ui.activities.etudiant;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,12 +12,15 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
+import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
+import com.studiant.com.presentation.ui.fragments.common.SettingFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ListHistoriqueJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ListJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
+import com.studiant.com.presentation.ui.fragments.etudiant.StudiantCodeFragment;
 
 
 import butterknife.BindView;
@@ -31,6 +35,8 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
     @BindView(R.id.materialViewPager)
     MaterialViewPager mViewPager;
 
+    public User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +45,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         AdjustKeyboard.assistActivity(this);
 
-        final User user = (User) getIntent().getSerializableExtra(INTENT_USER);
+        this.user = (User) getIntent().getSerializableExtra(INTENT_USER);
 
         /*final Toolbar toolbar = mViewPager.getToolbar();
         if (toolbar != null) {
@@ -167,5 +173,16 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
             }
         });
 */
+    }
+
+    public void updateUser(User user){
+        this.user = user;
+    }
+
+    public void displaySetStudiantCode(Job job){
+        StudiantCodeFragment studiantCodeFragment = new StudiantCodeFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.add(android.R.id.content,studiantCodeFragment, studiantCodeFragment.getClass().getName()).commit();
     }
 }

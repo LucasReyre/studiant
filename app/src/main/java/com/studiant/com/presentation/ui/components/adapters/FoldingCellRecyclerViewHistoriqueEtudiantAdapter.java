@@ -47,20 +47,22 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder cellViewHolder = (ViewHolder) holder;
         cellViewHolder.foldingCell.fold(true);
-        cellViewHolder.titleDescription.setText(contents.get(position).getDescription());
+        cellViewHolder.titleDescription.setText(contents.get(position).getCategorie());
         String prix = contents.get(position).getPrix()+" €";
         cellViewHolder.price.setText(prix);
+        cellViewHolder.cityTitle.setText(contents.get(position).getCity());
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
         //viewHolder.toAddress.setText(item.getToAddress());
-         cellViewHolder.requestsCount.setText(contents.get(position).getUtilisateur().getFirstName());
 
         //Content
-        cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
+        cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName() + " " +contents.get(position).getUtilisateur().getLastName());
         cellViewHolder.priceContent.setText(contents.get(position).getPrix());
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
+        cellViewHolder.adresseContent.setText(contents.get(position).getAdresse());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
         cellViewHolder.description.setText(contents.get(position).getDescription());
+        cellViewHolder.phoneContent.setText(contents.get(position).getUtilisateur().getTelephone());
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +120,10 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         TextView contentRequestBtn;
         //TextView pledgePrice;
         //TextView toAddress;
-        TextView requestsCount;
         TextView date;
         TextView time;
+        TextView cityTitle;
+        TextView adresseContent;
         FoldingCell foldingCell;
 
         //Content Cell
@@ -128,17 +131,18 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         TextView priceContent;
         TextView timeContent;
         TextView dateContent;
+        TextView phoneContent;
         TextView description;
 
         public ViewHolder(View itemView){
             super(itemView);
             titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
-            price = (TextView) itemView.findViewById(R.id.title_price);
+            price = (TextView) itemView.findViewById(R.id.tarifTextView);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
+            cityTitle = itemView.findViewById(R.id.cityTextView);
+            adresseContent = itemView.findViewById(R.id.adresseTextView);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
-            //viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            requestsCount = (TextView) itemView.findViewById(R.id.title_study);
-            //viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
+            phoneContent = itemView.findViewById(R.id.phoneTextView);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content

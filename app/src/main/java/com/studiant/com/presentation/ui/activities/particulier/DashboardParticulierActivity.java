@@ -6,18 +6,15 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
-import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.presentation.presenters.model.User;
-import com.studiant.com.presentation.ui.activities.etudiant.SettingFragment;
+import com.studiant.com.presentation.ui.fragments.common.SettingFragment;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.presentation.ui.fragments.particulier.InscriptionParticulierFragment;
 import com.studiant.com.presentation.ui.fragments.particulier.ListJobParticulierFragment;
-import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.RecyclerViewFragment;
 import com.studiant.com.presentation.ui.fragments.particulier.ProfilParticulierFragment;
 
@@ -84,15 +81,15 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
                 switch (page) {
                     case 0:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.green,
+                                R.color.colorBackground,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home1));
                     case 1:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.green,
+                                R.color.colorBackground,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home2));
                     case 2:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.green,
+                                R.color.colorBackground,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home3));
                    /* case 3:
                         return HeaderDesign.fromColorResAndUrl(

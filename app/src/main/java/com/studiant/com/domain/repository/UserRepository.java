@@ -2,6 +2,7 @@ package com.studiant.com.domain.repository;
 
 import com.studiant.com.domain.model.Card;
 import com.studiant.com.domain.model.CardReg;
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.PayIn;
 import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
@@ -12,6 +13,8 @@ import com.studiant.com.domain.model.User;
 public interface UserRepository {
 
     User insertUser(User user) throws Exception;
+    Job getPaiement(String postulantId, String jobId) throws Exception;
+    void getMoney(User user) throws Exception;
     User loginUser(String mail, String password) throws Exception;
     void getPassword(String mail) throws Exception;
     Card getCardUser(User user) throws Exception;

@@ -23,9 +23,12 @@ public class Job implements Serializable{
     private String lng;
     private String utilisateurId;
     private User utilisateur;
+    private String modePaiement;
+    private String statut;
     private ArrayList<User> postulants;
 
     private View.OnClickListener requestBtnClickListener;
+    private View.OnClickListener studiantCodeBtnClickListener;
 
     public Job(){}
 
@@ -143,6 +146,14 @@ public class Job implements Serializable{
         this.requestBtnClickListener = requestBtnClickListener;
     }
 
+    public View.OnClickListener getStudiantCodeBtnClickListener() {
+        return studiantCodeBtnClickListener;
+    }
+
+    public void setStudiantCodeBtnClickListener(View.OnClickListener studiantCodeBtnClickListener) {
+        this.studiantCodeBtnClickListener = studiantCodeBtnClickListener;
+    }
+
     public ArrayList<User> getPostulants() {
         return postulants;
     }
@@ -181,5 +192,21 @@ public class Job implements Serializable{
 
     public void setLng(String lng) {
         this.lng = lng;
+    }
+
+    public String getModePaiement() {
+        return modePaiement;
+    }
+
+    public void setModePaiement(String modePaiement) {
+        this.modePaiement = modePaiement;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 }

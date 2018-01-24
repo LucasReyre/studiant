@@ -53,6 +53,9 @@ public class RESTModelConverter {
         if (restUtilisateur.getmTelephoneUtilisateur() != null)
             user.setTelephoneUtilisateur(restUtilisateur.getmTelephoneUtilisateur());
 
+        if (restUtilisateur.getIdWalletUtilisateur() != null)
+            user.setIdWallet(restUtilisateur.getIdWalletUtilisateur());
+
         return user;
         //return new User(prenomUser,nomUser,mailUser,idExterne,photoUser, dateNaissanceUser);
     }
@@ -212,6 +215,9 @@ public class RESTModelConverter {
             job.setLng(restJob.getmGeoplace().getLng());
             job.setLat(restJob.getmGeoplace().getLat());
         }
+
+        if (restJob.getmStatutJob() != null)
+            job.setStatutJob(restJob.getmStatutJob());
 
         if (restJob.getmRestPostulant() != null){
             ArrayList<RESTUtilisateur> restPostulantsArrayList = restJob.getmRestPostulant();
