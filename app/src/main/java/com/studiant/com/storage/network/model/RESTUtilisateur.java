@@ -41,7 +41,7 @@ public class RESTUtilisateur {
     @SerializedName("descriptionUtilisateur")
     private String mDescriptionUtilisateur;
 
-    @SerializedName("diplome")
+    @SerializedName("diplomeUtilisateur")
     private String mDiplomeUtilisateur;
 
     @SerializedName("permisUtilisateur")

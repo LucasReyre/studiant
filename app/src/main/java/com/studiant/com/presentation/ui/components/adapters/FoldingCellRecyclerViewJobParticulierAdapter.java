@@ -1,11 +1,14 @@
 package com.studiant.com.presentation.ui.components.adapters;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
@@ -28,14 +31,16 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
 
     List<Job> contents;
     User user;
+    Context context;
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
     private View.OnClickListener studiantCodeBtnClickListener;
 
-    public FoldingCellRecyclerViewJobParticulierAdapter(ArrayList<Job> contents, User user) {
+    public FoldingCellRecyclerViewJobParticulierAdapter(ArrayList<Job> contents, User user, Context context) {
         this.contents = contents;
         this.user = user;
+        this.context = context;
     }
 
     @Override
@@ -73,6 +78,11 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
         cellViewHolder.categorieJobImageView.setImageResource(categorie.getImageRessource());
 
+        if (contents.get(position).getStatut().equals("2")){
+            cellViewHolder.backgroundJobImageView.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
+            cellViewHolder.studiantCodeBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
+            cellViewHolder.contentRequestBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
+        }
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +146,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         TextView nummberPostulant;
         TextView categorieJobTextView;
         ImageView categorieJobImageView;
+        RelativeLayout backgroundJobImageView;
         TextView cityTextView;
         FoldingCell foldingCell;
 
@@ -148,6 +159,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
 
         public ViewHolder(View itemView){
             super(itemView);
+            backgroundJobImageView = (RelativeLayout) itemView.findViewById(R.id.backgoundJob);
             categorieJobImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
             titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
             numberTextView = (TextView) itemView.findViewById(R.id.numberTextView);

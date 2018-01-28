@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -80,6 +81,7 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mainActivity = (MainActivity) this.getActivity();
         mPresenter = new LoginPresenterImpl(
                 ThreadExecutor.getInstance(),

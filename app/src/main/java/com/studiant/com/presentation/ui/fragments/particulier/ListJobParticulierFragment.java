@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.studiant.com.R;
@@ -122,8 +123,9 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         // prepare elements to display
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellRecyclerViewJobParticulierAdapter adapter = new FoldingCellRecyclerViewJobParticulierAdapter(jobArrayList, user);
+        final FoldingCellRecyclerViewJobParticulierAdapter adapter = new FoldingCellRecyclerViewJobParticulierAdapter(jobArrayList, user, getContext());
         for (int i = 0 ; i<jobArrayList.size();i++){
+            System.out.println("etudiant : "+jobArrayList.get(i).getPostulants().get(0).getDiplome());
             final int j = i;
             jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,30 +157,44 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     }
 
     public void onViewStudiantClick(Job job){
-        Intent intent = new Intent(getApplicationContext(), ListPostulantActivity.class);
-        intent.putExtra(INTENT_USER, user);
-        //intent.putExtra(INTENT_LIST_USER, job.getPostulants());
-        intent.putExtra(INTENT_JOB, PresentationModelConverter.convertToJobDomainModel(job));
-        this.startActivity(intent);
+        if (!job.getStatut().equals("2")){
+            Intent intent = new Intent(getApplicationContext(), ListPostulantActivity.class);
+            intent.putExtra(INTENT_USER, user);
+            //intent.putExtra(INTENT_LIST_USER, job.getPostulants());
+            intent.putExtra(INTENT_JOB, PresentationModelConverter.convertToJobDomainModel(job));
+            this.startActivity(intent);
+        }else{
+            toastJobCompleted();
+        }
 
     }
 
     public void onStudiantCodeClick(Job job){
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(getContext());
-        }
-        builder.setTitle("S'tudiant Code")
-                .setMessage("Le S'tudiant code est : "+job.getId())
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-                    }
-                })
-                .show();
+        if (!job.getStatut().equals("2")){
 
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Light_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(getContext());
+            }
+            builder.setTitle("S'tudiant Code")
+                    .setMessage("Le S'tudiant code est : "+job.getId())
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    })
+                    .show();
+        }else{
+            toastJobCompleted();
+        }
+
+    }
+
+    public void toastJobCompleted(){
+        Toast.makeText(getActivity(), "Ce job est terminé",
+                Toast.LENGTH_LONG).show();
     }
 
 }

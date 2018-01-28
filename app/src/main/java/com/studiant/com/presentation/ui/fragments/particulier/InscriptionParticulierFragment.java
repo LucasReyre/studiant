@@ -1,15 +1,19 @@
 package com.studiant.com.presentation.ui.fragments.particulier;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.studiant.com.R;
@@ -44,6 +48,7 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
     private OnFragmentInteractionListener mListener;
     private int categorie;
     User user = null;
+    private ProgressDialog progressDialog;
 
     @BindView(R.id.editTextFirstNameParticulier)
     EditText firstNameEditText;
@@ -56,6 +61,9 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
 
     @BindView(R.id.editTextTelParticulier)
     AutoCompleteTextView telEditText;
+
+    @BindView(R.id.editTextPassword)
+    AutoCompleteTextView passwordEditText;
 
     @BindView(R.id.buttonValidateParticulier)
     Button validateButton;
@@ -89,6 +97,7 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
         if (getArguments() != null) {
             categorie = getArguments().getInt(CATEGORIE_ID_JOB);
         }
+        progressDialog = new ProgressDialog(getContext());
         mainActivity = (MainActivity)getActivity();
 
         mPresenter = new ProfilParticulierPresenterImpl(
@@ -110,6 +119,7 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mPresenter.resume();
     }
 
@@ -147,12 +157,19 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
     void navigateToAddJob() {
         System.out.println("navigateToAddJob");
 
+        if (!validateForm()){
+            Toast.makeText(getActivity(), "Merci de vérifier le formulaire",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if (user != null){
             user.setFirstName(firstNameEditText.getText().toString());
             user.setLastName(lastNameEditText.getText().toString());
             user.setEmail(emailEditText.getText().toString());
             user.setTypeUser(STATUS_PARTICULIER);
             user.setTypeConnexion(STATUS_CONNEXION_FACEBOOK);
+            user.setPassword(passwordEditText.getText().toString());
             user.setTelephone(telEditText.getText().toString());
             if (FirebaseInstanceId.getInstance().getToken() != null)
                 user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
@@ -163,6 +180,7 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
             user.setFirstName(firstNameEditText.getText().toString());
             user.setLastName(lastNameEditText.getText().toString());
             user.setEmail(emailEditText.getText().toString());
+            user.setPassword(passwordEditText.getText().toString());
             user.setTypeUser(STATUS_PARTICULIER);
             user.setTelephone(telEditText.getText().toString());
             user.setTypeConnexion(STATUS_CONNEXION_NORMAL);
@@ -174,6 +192,21 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
 
     }
 
+    public boolean validateForm(){
+
+        if (firstNameEditText.getText().toString().length() > 2 && lastNameEditText.getText().length() > 2
+                && isValidEmail(emailEditText.getText().toString()) && passwordEditText.getText().length() > 2
+                && telEditText.getText().length() != 10)
+            return false;
+        else
+            return true;
+
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
     @Override
     public void onUserInsert(User user) {
         mPresenter.saveUser(user);
@@ -182,12 +215,13 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
 
     @Override
     public void showProgress() {
-
+        progressDialog.setMessage(getResources().getString(R.string.get_message_inscription_loading));
+        progressDialog.show();
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @Override

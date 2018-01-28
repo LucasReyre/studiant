@@ -151,7 +151,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/constraintLayoutPassword">
+            android:id="@+id/constraintLayoutMail">
 
             <android.support.design.widget.TextInputLayout
                 android:theme="@style/EditTextHint"
@@ -169,7 +169,46 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
+                    android:imeActionId="@+id/login"
                     android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/EditTextStyle"
+                    android:textColor="@color/customRed" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutMail"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/constraintLayoutPassword">
+
+            <android.support.design.widget.TextInputLayout
+                android:theme="@style/EditTextHint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <AutoCompleteTextView
+                    android:id="@+id/editTextEmailPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="@+id/login"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textAppearance="@style/EditTextStyle"

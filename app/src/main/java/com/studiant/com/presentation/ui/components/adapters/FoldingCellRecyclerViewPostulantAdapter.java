@@ -54,23 +54,11 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
         cellViewHolder.studyPostulant.setText(contents.get(position).getDiplome());
         cellViewHolder.descriptionPostulant.setText(contents.get(position).getDescription());
 
+        System.out.println("etudiant en "+ contents.get(position).getDiplome());
+
         Picasso.with(context).load(contents.get(position).getProfilePicture()).into(cellViewHolder.profilPicture);
-       /* String prix = contents.get(position).getPrix()+" €";
-        cellViewHolder.time.setText(contents.get(position).getHeure());
-        cellViewHolder.date.setText(contents.get(position).getDate());
+        Picasso.with(context).load(contents.get(position).getProfilePicture()).into(cellViewHolder.profilPictureTitle);
 
-        //Content
-        cellViewHolder.name.setText(user.getFirstName());
-        cellViewHolder.priceContent.setText(contents.get(position).getPrix());
-        cellViewHolder.dateContent.setText(contents.get(position).getDate());
-        cellViewHolder.timeContent.setText(contents.get(position).getHeure());*/
-
-        /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "OKOKOKOK" + position, Toast.LENGTH_SHORT).show();
-            }
-        });*/
         // set custom btn handler for list item from that item
         if (contents.get(position).getRequestBtnClickListener() != null) {
             cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
@@ -121,6 +109,7 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
         TextView studyPostulant;
         TextView descriptionPostulant;
         ImageView profilPicture;
+        ImageView profilPictureTitle;
         TextView contentRequestBtn;
         TextView time;
         FoldingCell foldingCell;
@@ -140,6 +129,7 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
             profilPicture = (ImageView) itemView.findViewById(R.id.content_profil_picture_postulant);
+            profilPictureTitle = (ImageView) itemView.findViewById(R.id.imageViewProfilPictureTitle);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);

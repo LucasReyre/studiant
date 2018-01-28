@@ -98,6 +98,7 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     @Override
     public void insertProfile(User user) {
         System.out.println("insertProfile "+user.getFirstName());
+        mView.showProgress();
 
         InsertUserInteractor interactor = new InsertUserInteractorImpl(
                 mExecutor,
@@ -138,12 +139,13 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     @Override
     public void onUserInsert(com.studiant.com.domain.model.User user) {
         System.out.println("onUserInsert "+user.getId());
+        mView.hideProgress();
         mView.onUserInsert(PresentationModelConverter.convertToUserPresenterModel(user));
 
     }
 
     @Override
     public void onRetrievalFailed(String error) {
-
+        mView.hideProgress();
     }
 }
