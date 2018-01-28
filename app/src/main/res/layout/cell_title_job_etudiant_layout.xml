@@ -97,11 +97,8 @@
             style="@style/TitleBadgeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/title_study"
             android:layout_alignParentStart="true"
-            android:layout_alignTop="@id/textView7"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textView7"
             android:text="Tarif"
             android:textSize="14dp"
             android:textStyle="bold" />
@@ -127,6 +124,15 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageViewModePaiementTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tarifTextView"
+            android:layout_marginStart="21dp"
+            android:layout_toEndOf="@+id/tarifTextView"
+            app:srcCompat="@drawable/check" />
 
     </RelativeLayout>
 </LinearLayout>
