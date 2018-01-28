@@ -72,12 +72,15 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         switch (contents.get(position).getModePaiement()){
             case "CB":
                 cellViewHolder.modePaiementImage.setImageResource(R.drawable.credit_card);
+                cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.credit_card);
                 break;
             case "ESPECES":
                 cellViewHolder.modePaiementImage.setImageResource(R.drawable.change);
+                cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.change);
                 break;
             case "CESU":
                 cellViewHolder.modePaiementImage.setImageResource(R.drawable.check);
+                cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.check);
                 break;
         }
 
@@ -144,6 +147,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         TextView time;
         FoldingCell foldingCell;
         ImageView modePaiementImage;
+        ImageView modePaiementImageTitle;
 
         //Content Cell
         TextView name;
@@ -166,6 +170,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             modePaiementImage = itemView.findViewById(R.id.imageViewModePaiementt);
+            modePaiementImageTitle = itemView.findViewById(R.id.imageViewModePaiementTitle);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);
             timeContent = (TextView) itemView.findViewById(R.id.content_heure_job);

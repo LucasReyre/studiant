@@ -151,6 +151,8 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
         System.out.println("statut : "+job.getStatut());
         if (!job.getStatut().equals("2")){
             ((DashboardEtudiantActivity)getActivity()).displaySetStudiantCode(job);
+        }else{
+            Toast.makeText(getActivity(), "Ce job à déja été validé", Toast.LENGTH_LONG).show();
         }
 
     }
