@@ -41,6 +41,11 @@ public interface JobService {
     Call<ArrayList<RESTJob>> getJobs();
 
     //Récupération de tous les jobs sans distinction avec les utilisateurs associés
+    @Headers("Connection: close")
+    @GET("/api/Jobs")
+    Call<ArrayList<RESTJob>> getJobsWithFilter(@Query("filter") String filter);
+
+    //Récupération de tous les jobs sans distinction avec les utilisateurs associés
     /*@GET("/api/Jobs?filter[include][utilisateurs]&filter[where][utilisateurId]={user_id}")
     Call<ArrayList<RESTJob>> getJobsByUser(@Path(value = "user_id", encoded = true) String userId);*/
 

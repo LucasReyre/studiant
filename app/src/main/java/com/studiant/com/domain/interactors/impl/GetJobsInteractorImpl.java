@@ -12,6 +12,7 @@ import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.JobRepository;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This is an interactor boilerplate with a reference to a model repository.
@@ -22,15 +23,17 @@ public class GetJobsInteractorImpl extends AbstractInteractor implements GetJobs
     private Callback mCallback;
     private JobRepository mJobRepository;
     private User mUser;
+    private Map<String, String> mFilterMap;
 
     public GetJobsInteractorImpl(Executor threadExecutor,
                                  MainThread mainThread,
-                                 Callback callback, JobRepository jobRepository, User user) {
+                                 Callback callback, JobRepository jobRepository, User user, Map<String, String> filterMap) {
         super(threadExecutor, mainThread);
 
         mCallback = callback;
         mJobRepository = jobRepository;
         mUser = user;
+        mFilterMap = filterMap;
     }
 
     private void notifyError() {
@@ -60,7 +63,10 @@ public class GetJobsInteractorImpl extends AbstractInteractor implements GetJobs
         // retrieve the message
         ArrayList<Job> jobArrayList = new ArrayList<Job>();
         if (mUser==null){
-            jobArrayList = mJobRepository.getJobs();
+            if (mFilterMap == null)
+                jobArrayList = mJobRepository.getJobs();
+            else
+                jobArrayList = mJobRepository.getJobsWithFilter(mFilterMap);
         }
         else{
             jobArrayList = mJobRepository.getJobsByUser(mUser);

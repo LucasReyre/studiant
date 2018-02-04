@@ -144,9 +144,9 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
     @Override
     public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
-        mSwipeRefreshLayout.setRefreshing(false);
 
-        if (mJobArrayList != null){
+        if (mSwipeRefreshLayout.isRefreshing()){
+            mSwipeRefreshLayout.setRefreshing(false);
             refreshData(jobArrayList);
             return;
         }

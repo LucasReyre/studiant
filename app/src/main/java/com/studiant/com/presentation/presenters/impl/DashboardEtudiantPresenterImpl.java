@@ -23,6 +23,7 @@ import com.studiant.com.storage.Constants;
 import com.studiant.com.storage.network.WSException;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by dmilicic on 12/13/15.
@@ -80,7 +81,23 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
                 mMainThread,
                 this,
                 mJobRepository,
-                PresentationModelConverter.convertToUserDomainModel(user)
+                PresentationModelConverter.convertToUserDomainModel(user),
+                null
+        );
+
+        interactor.execute();
+    }
+
+    @Override
+    public void getJobsWithFilter(Map<String, String> filterMap) {
+        User user = null;
+        GetJobsInteractor interactor = new GetJobsInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mJobRepository,
+                PresentationModelConverter.convertToUserDomainModel(user),
+                filterMap
         );
 
         interactor.execute();

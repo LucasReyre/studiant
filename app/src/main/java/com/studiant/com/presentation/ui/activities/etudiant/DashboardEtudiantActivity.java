@@ -41,6 +41,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity implements Filt
     MaterialViewPager mViewPager;
 
     public boolean isRibDisplay = false;
+    private ListJobEtudiantFragment listJobEtudiantFragment;
     public User user;
 
     @Override
@@ -71,7 +72,8 @@ public class DashboardEtudiantActivity extends AppCompatActivity implements Filt
             public Fragment getItem(int position) {
                 switch (position % 4) {
                     case 0:
-                        return ListJobEtudiantFragment.newInstance(user);
+                        listJobEtudiantFragment = ListJobEtudiantFragment.newInstance(user);
+                        return listJobEtudiantFragment;
                     case 1:
                         return ListHistoriqueJobEtudiantFragment.newInstance(user);
                     case 2:
@@ -191,10 +193,6 @@ public class DashboardEtudiantActivity extends AppCompatActivity implements Filt
 
     @Override
     public void onBackPressed() {
-        //if (android.R.id.content)
-        //if(this.getSupportFragmentManager().findFragmentById(android.R.id.content) instanceof AddRibFragment){
-
-        //}
 
         if (!isRibDisplay){
             super.onBackPressed();
@@ -209,6 +207,11 @@ public class DashboardEtudiantActivity extends AppCompatActivity implements Filt
             }
         }
 
+    }
+
+    @Override
+    public void onValidateFilter(String price, String categorie) {
+        listJobEtudiantFragment.onFilterRequest(price, categorie);
     }
 
     public void updateUser(User user){

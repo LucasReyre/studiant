@@ -31,6 +31,8 @@ import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +53,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     SwipeRefreshLayout mSwipeRefreshLayout;
     FoldingCellRecyclerViewEtudiantAdapter adapter;
     ArrayList<Job> mJobArrayList;
+    boolean refreshWithfilter = false;
 
     //@BindView(R.id.fabButton)
     //FloatingActionButton fabButton;
@@ -130,6 +133,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
 
     public void refreshData(ArrayList<Job> jobArrayList){
 
+        System.out.println("refresh Data");
         //mJobArrayList.clear();
         mJobArrayList = jobArrayList;
         adapter.notifyDataSetChanged();
@@ -139,9 +143,10 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     @Override
     public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
         System.out.println("onJobsRetrieve");
-        mSwipeRefreshLayout.setRefreshing(false);
 
-        if (mJobArrayList != null){
+        if (mSwipeRefreshLayout.isRefreshing() || refreshWithfilter){
+            mSwipeRefreshLayout.setRefreshing(false);
+            refreshWithfilter = false;
             refreshData(jobArrayList);
             return;
         }
@@ -176,9 +181,23 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
         mRecyclerView.setAdapter(adapter);
     }
 
+    public void onFilterRequest(String price, String categorie){
+        refreshWithfilter = true;
+
+        Map<String,String> myMap = new HashMap<>();
+        myMap.put("price",price);
+
+        if (categorie != null && !categorie.equals("Toutes"))
+            myMap.put("categorie",categorie);
+
+        mPresenter.getJobsWithFilter(myMap);
+        System.out.println("onFilterRequest "+ price + " "+categorie);
+    }
+
     @Override
     public void onJobRetrieveFail() {
         mSwipeRefreshLayout.setRefreshing(false);
+        refreshWithfilter = false;
     }
 
     public void onPostulerClick(Job job){

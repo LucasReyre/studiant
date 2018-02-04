@@ -72,7 +72,8 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
                 mMainThread,
                 this,
                 mJobRepository,
-                PresentationModelConverter.convertToUserDomainModel(user)
+                PresentationModelConverter.convertToUserDomainModel(user),
+                null
         );
 
         interactor.execute();

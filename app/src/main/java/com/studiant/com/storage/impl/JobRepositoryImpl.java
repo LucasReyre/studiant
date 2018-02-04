@@ -12,6 +12,7 @@ import com.studiant.com.storage.network.services.JobService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +35,6 @@ public class JobRepositoryImpl implements JobRepository {
         JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
-            if(job.getci)
             Response<Void> response = jobService.insertJob(job.getUtilisateurId(), RESTModelConverter.convertToRestJobModel(job)).execute();
 
             //restJob = response.body();
@@ -91,8 +91,46 @@ public class JobRepositoryImpl implements JobRepository {
         JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
+
             //String query = "{\"include\":[\"appartenir\"]}";
             Response<ArrayList<RESTJob>> response = jobService.getJobs().execute();
+
+            //restJob = response.body();
+            Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
+
+            return RESTModelConverter.convertToArrayListJobModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<Job> getJobsWithFilter(Map<String, String> filterMap) {
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
+        System.out.println("getJobsWithFilter "+filterMap);
+        try {
+
+            //String query = "{\"include\":[\"appartenir\"]}";
+            String filter = null;
+            String filterCategorie = "" ;
+            String filterPrice= "" ;
+            if (filterMap != null){
+                if (filterMap.get("categorie") != null)
+                    filterCategorie = ",\"categorieJob\":\"" + filterMap.get("categorie") + "\"";
+
+                if (filterMap.get("price") != null)
+                    filterPrice = ",\"prixJob\":{\"gt\":" + filterMap.get("price") + "}";
+
+
+                filter = "{\"where\":{\"statutJob\" : \"0\" "+filterCategorie+filterPrice+"},\"include\":[\"appartenir\"]}";
+            }
+
+            System.out.println("filter : "+filter);
+
+            Response<ArrayList<RESTJob>> response = jobService.getJobsWithFilter(filter).execute();
 
             //restJob = response.body();
             Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
