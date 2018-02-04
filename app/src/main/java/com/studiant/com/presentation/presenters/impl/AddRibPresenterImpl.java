@@ -86,11 +86,13 @@ public class AddRibPresenterImpl extends AbstractPresenter implements AddRibPres
 
     @Override
     public void onRibInsert(Rib rib) {
+        mView.hideProgress();
         mView.onRibInsert(rib);
     }
 
     @Override
     public void onRibInsertFailed(String error) {
+        mView.hideProgress();
         mView.onRibError();
     }
 }

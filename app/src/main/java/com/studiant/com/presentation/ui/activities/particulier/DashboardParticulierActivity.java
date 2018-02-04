@@ -21,6 +21,7 @@ import com.studiant.com.presentation.ui.fragments.particulier.ProfilParticulierF
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.view.View.GONE;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 
@@ -39,6 +40,7 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
         AdjustKeyboard.assistActivity(this);
 
         final User user = (User) getIntent().getSerializableExtra(INTENT_USER);
+        System.out.println("user : "+user.getTelephone());
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
@@ -65,7 +67,7 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
             public CharSequence getPageTitle(int position) {
                 switch (position % 3) {
                     case 0:
-                        return "Dashboard Particulier";
+                        return "Offres";
                     case 1:
                         return "Mon Profil";
                     case 2:
@@ -81,16 +83,16 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
                 switch (page) {
                     case 0:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.colorBackground,
+                                R.color.warm_grey,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home1));
                     case 1:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.colorBackground,
+                                R.color.warm_grey,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home2));
                     case 2:
                         return HeaderDesign.fromColorResAndDrawable(
                                 R.color.colorBackground,
-                                ContextCompat.getDrawable(getApplicationContext(),R.drawable.home3));
+                                ContextCompat.getDrawable(getApplicationContext(),R.drawable.mosaique));
                    /* case 3:
                         return HeaderDesign.fromColorResAndUrl(
                                 R.color.red,
@@ -105,8 +107,9 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
 
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
+        mViewPager.getToolbar().setVisibility(GONE);
 
-        final View logo = findViewById(R.id.logo_white);
+        /*final View logo = findViewById(R.id.logo_white);
         if (logo != null) {
             logo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,7 +118,7 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
                    // Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+        }*/
 
     }
 }

@@ -56,6 +56,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         cellViewHolder.date.setText(contents.get(position).getDate());
         //viewHolder.toAddress.setText(item.getToAddress());
         cellViewHolder.cityTextView.setText(contents.get(position).getCity());
+        cellViewHolder.cityContentTextView.setText(contents.get(position).getCity());
         cellViewHolder.tarifTextView.setText(prix);
 
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
@@ -139,6 +140,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         TextView categorieTextView;
         TextView contentRequestBtn;
         TextView cityTextView;
+        TextView cityContentTextView;
         ImageView categorieImageView;
         TextView tarifTextView;
         //TextView pledgePrice;
@@ -161,6 +163,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
             categorieTextView = (TextView) itemView.findViewById(R.id.categorieTextView);
             categorieImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
             cityTextView = (TextView) itemView.findViewById(R.id.cityTextView);
+            cityContentTextView = (TextView) itemView.findViewById(R.id.content_city);
             tarifTextView = (TextView) itemView.findViewById(R.id.tarifTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);

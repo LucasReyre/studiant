@@ -2,11 +2,9 @@ package com.studiant.com.presentation.presenters.impl;
 
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
-import com.studiant.com.domain.interactors.impl.ConnexionFacebookInteractorImpl;
 import com.studiant.com.domain.interactors.impl.GetPasswordInteractorImpl;
 import com.studiant.com.domain.interactors.impl.LoginInteractorImpl;
 import com.studiant.com.domain.interactors.impl.SaveUserInteractorImpl;
-import com.studiant.com.domain.interactors.interfaces.ConnexionFacebookInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetPasswordInteractor;
 import com.studiant.com.domain.interactors.interfaces.LoginInteractor;
 import com.studiant.com.domain.interactors.interfaces.SaveUserInteractor;
@@ -14,9 +12,7 @@ import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
-import com.studiant.com.presentation.presenters.interfaces.ConnexionPresenter;
 import com.studiant.com.presentation.presenters.interfaces.LoginPresenter;
-import com.studiant.com.storage.ConnexionRepository;
 
 /**
  * Created by dmilicic on 12/13/15.
@@ -91,7 +87,7 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     }
 
     public void saveUser(User user){
-        System.out.println("save : "+user.getTelephoneUtilisateur());
+        System.out.println("save : "+user.getTelephone());
         SaveUserInteractor interactor = new SaveUserInteractorImpl(
                 mExecutor,
                 mMainThread,

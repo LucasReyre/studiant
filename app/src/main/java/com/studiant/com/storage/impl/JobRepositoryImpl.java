@@ -34,7 +34,7 @@ public class JobRepositoryImpl implements JobRepository {
         JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
-
+            if(job.getci)
             Response<Void> response = jobService.insertJob(job.getUtilisateurId(), RESTModelConverter.convertToRestJobModel(job)).execute();
 
             //restJob = response.body();

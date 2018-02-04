@@ -22,9 +22,6 @@ import com.studiant.com.presentation.presenters.interfaces.ConnexionPresenter;
 import com.studiant.com.presentation.presenters.interfaces.ProfilParticulierPresenter;
 import com.studiant.com.storage.ConnexionRepository;
 
-/**
- * Created by dmilicic on 12/13/15.
- */
 public class ProfilParticulierPresenterImpl extends AbstractPresenter implements ProfilParticulierPresenter,
         GetProfileInteractor.Callback,
         InsertUserInteractor.Callback, UploadImageInteractor.Callback {

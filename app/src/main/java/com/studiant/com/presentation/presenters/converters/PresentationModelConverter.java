@@ -33,8 +33,8 @@ public class PresentationModelConverter {
         if (user.getIdMangoPay() != null)
             mUser.setIdMangoPay(user.getIdMangoPay());
 
-        if (user.getTelephoneUtilisateur() != null)
-            mUser.setTelephone(user.getTelephoneUtilisateur());
+        if (user.getTelephone() != null)
+            mUser.setTelephone(user.getTelephone());
 
         if (user.getIdWallet() != null)
             mUser.setIdWallet(user.getIdWallet());
@@ -81,7 +81,7 @@ public class PresentationModelConverter {
             domainUser.setIdMangoPay(user.getIdMangoPay());
 
         if (user.getTelephone() != null)
-            domainUser.setTelephoneUtilisateur(user.getTelephone());
+            domainUser.setTelephone(user.getTelephone());
 
         if (user.getPassword() != null)
             domainUser.setPassword(user.getPassword());

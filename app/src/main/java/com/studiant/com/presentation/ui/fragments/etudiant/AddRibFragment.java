@@ -1,6 +1,8 @@
 package com.studiant.com.presentation.ui.fragments.etudiant;
 
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
@@ -40,8 +44,11 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
     @BindView(R.id.editTextCp) EditText editTextCp;
     @BindView(R.id.editTextVille) EditText editTextVille;
 
+    private ProgressDialog progressDialog;
+
     private User user;
     private AddRibPresenter mPresenter;
+    private OnFragmentInteractionListener mListener;
 
     public AddRibFragment() {
         // Required empty public constructor
@@ -61,6 +68,7 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
         if (getArguments() != null) {
             this.user = (User) getArguments().getSerializable(INTENT_USER);
         }
+        progressDialog = new ProgressDialog(getContext());
     }
 
     @Override
@@ -81,7 +89,26 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        mListener.onAddRibDisplay();
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @OnClick(R.id.buttonValidateRib)
@@ -106,6 +133,7 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
 
         ((DashboardEtudiantActivity) getActivity()).updateUser(user);
 
+        mListener.onAddRibClose();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.remove(this).commit();
 
@@ -113,21 +141,30 @@ public class AddRibFragment extends Fragment implements AddRibPresenter.View{
 
     @Override
     public void onRibError() {
+        Toast.makeText(getActivity(), "Merci de vérifier votre saisie",
+                Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void showProgress() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_add_rib));
+        progressDialog.show();
 
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @Override
     public void showError(WSException e) {
 
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onAddRibDisplay();
+        void onAddRibClose();
     }
 }

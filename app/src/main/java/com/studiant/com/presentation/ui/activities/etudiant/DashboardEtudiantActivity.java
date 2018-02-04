@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.presentation.ui.fragments.common.SettingFragment;
+import com.studiant.com.presentation.ui.fragments.etudiant.AddRibFragment;
+import com.studiant.com.presentation.ui.fragments.etudiant.FilterFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ListHistoriqueJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ListJobEtudiantFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.ProfilEtudiantFragment;
@@ -26,15 +30,17 @@ import com.studiant.com.presentation.ui.fragments.etudiant.StudiantCodeFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.view.View.GONE;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 
-public class DashboardEtudiantActivity extends AppCompatActivity {
+public class DashboardEtudiantActivity extends AppCompatActivity implements FilterFragment.OnFragmentInteractionListener, AddRibFragment.OnFragmentInteractionListener{
 
 
     @BindView(R.id.materialViewPager)
     MaterialViewPager mViewPager;
 
+    public boolean isRibDisplay = false;
     public User user;
 
     @Override
@@ -47,10 +53,17 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
 
         this.user = (User) getIntent().getSerializableExtra(INTENT_USER);
 
-        /*final Toolbar toolbar = mViewPager.getToolbar();
+
+        final Toolbar toolbar = mViewPager.getToolbar();
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-        }*/
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayUseLogoEnabled(false);
+            actionBar.setHomeButtonEnabled(false);
+        }
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
@@ -97,20 +110,20 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                 switch (page) {
                     case 0:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.colorBackground,
+                                R.color.warm_grey,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home1));
                     case 1:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.colorBackground,
+                                R.color.warm_grey,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home2));
                     case 2:
                         return HeaderDesign.fromColorResAndDrawable(
-                                R.color.colorBackground,
+                                R.color.warm_grey,
                                 ContextCompat.getDrawable(getApplicationContext(),R.drawable.home3));
                     case 3:
-                        return HeaderDesign.fromColorResAndUrl(
+                        return HeaderDesign.fromColorResAndDrawable(
                                 R.color.colorBackground,
-                                "http://www.tothemobile.com/wp-content/uploads/2014/07/original.jpg");
+                                ContextCompat.getDrawable(getApplicationContext(),R.drawable.mosaique));
                 }
 
                 //execute others actions if needed (ex : modify your header logo)
@@ -121,7 +134,8 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
 
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
-
+        mViewPager.getToolbar().setVisibility(GONE);
+/*
         final View logo = findViewById(R.id.logo_white);
         if (logo != null) {
             logo.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +145,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+        }*/
 
         /*
         // get our list view
@@ -175,6 +189,28 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
 */
     }
 
+    @Override
+    public void onBackPressed() {
+        //if (android.R.id.content)
+        //if(this.getSupportFragmentManager().findFragmentById(android.R.id.content) instanceof AddRibFragment){
+
+        //}
+
+        if (!isRibDisplay){
+            super.onBackPressed();
+
+        }else{
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            Fragment f = getSupportFragmentManager().findFragmentByTag(AddRibFragment.class.getName());
+            if(f!=null){
+                ft.remove(f);
+                ft.commit();
+            }
+        }
+
+    }
+
     public void updateUser(User user){
         this.user = user;
     }
@@ -184,5 +220,16 @@ public class DashboardEtudiantActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.add(android.R.id.content,studiantCodeFragment, studiantCodeFragment.getClass().getName()).commit();
+    }
+
+    @Override
+    public void onAddRibDisplay() {
+        isRibDisplay = true;
+    }
+
+    @Override
+    public void onAddRibClose() {
+        isRibDisplay = false;
+
     }
 }

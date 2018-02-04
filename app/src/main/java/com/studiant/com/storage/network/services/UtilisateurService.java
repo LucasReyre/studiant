@@ -18,6 +18,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -46,6 +47,15 @@ public interface UtilisateurService {
                                      @Field("idExterneUtilisateur") String idExterneUtilisateur,
                                      @Field("telephoneUtilisateur") String telephoneUtilisateur,
                                      @Field("passwordUtilisateur") String passwordUtilisateur);
+
+
+    @FormUrlEncoded
+    @Headers("Connection: close")
+    @PATCH("/api/Utilisateurs")
+    Call<RESTUtilisateur> updateUser(@Field("descriptionUtilisateur") String descriptionUtilisateur,
+                                     @Field("telephoneUtilisateur") String telephoneUtilisateur,
+                                     @Field("diplomeUtilisateur") String diplomeUtilisateur,
+                                     @Field("id") String id);
 
     @FormUrlEncoded
     @Headers("Connection: close")

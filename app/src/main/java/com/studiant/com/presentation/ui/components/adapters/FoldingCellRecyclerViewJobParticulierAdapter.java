@@ -162,7 +162,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             backgroundJobImageView = (RelativeLayout) itemView.findViewById(R.id.backgoundJob);
             categorieJobImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
             titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
-            numberTextView = (TextView) itemView.findViewById(R.id.numberTextView);
+            //numberTextView = (TextView) itemView.findViewById(R.id.numberTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);
             price = (TextView) itemView.findViewById(R.id.title_price);
             time = (TextView) itemView.findViewById(R.id.title_time_label);

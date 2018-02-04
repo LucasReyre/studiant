@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
 
             //Response<RESTUtilisateur> response = utilisateurService.insertUser(RESTModelConverter.convertToRestUserModel(user)).execute();
-            Response<RESTUtilisateur> response = utilisateurService.insertUser(user.getEmail(),user.getFirstName(),user.getLastName(),String.valueOf(user.getTypeUser()),user.getFirebaseToken(),String.valueOf(user.getTypeConnexion()),user.getDiplome(),user.getProfilePicture(),user.getIdExterne(), user.getTelephoneUtilisateur(),user.getPassword()).execute();
+            Response<RESTUtilisateur> response = utilisateurService.insertUser(user.getEmail(),user.getFirstName(),user.getLastName(),String.valueOf(user.getTypeUser()),user.getFirebaseToken(),String.valueOf(user.getTypeConnexion()),user.getDiplome(),user.getProfilePicture(),user.getIdExterne(), user.getTelephone(),user.getPassword()).execute();
             if (response.code() == 200){
                 System.out.println("ok" + response.body().getmId());
                 return RESTModelConverter.convertToUserModel(response.body());
@@ -82,6 +82,28 @@ public class UserRepositoryImpl implements UserRepository {
                 throw new IOException(e);
         }
 
+
+    }
+
+    @Override
+    public User updateUser(User user) throws Exception {
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_URL);
+
+        try {
+
+            //Response<RESTUtilisateur> response = utilisateurService.insertUser(RESTModelConverter.convertToRestUserModel(user)).execute();
+            Response<RESTUtilisateur> response = utilisateurService.updateUser(user.getDescription(), user.getTelephone(), user.getTelephone(), user.getId()).execute();
+            if (response.code() == 200){
+                System.out.println("ok" + response.body().getmId());
+                return RESTModelConverter.convertToUserModel(response.body());
+            }
+            else{
+                System.out.println("error");
+                throw new Exception(response.errorBody().string());
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
 
     }
 

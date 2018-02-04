@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -98,6 +99,8 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
         context = this;
         job = new Job();
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         System.out.println("addjob : " + user.getFirstName() + " " + user.getIdMangoPay());
         mPresenter = new AddJobPresenterImpl(
@@ -111,6 +114,7 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
 
         autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
+        autocompleteFragment.setHint("Choisir un lieu");
         autocompleteFragment.setBoundsBias(new LatLngBounds(
                 new LatLng(42.244785, -2.208252),
                 new LatLng(51.138001, 7.943115)));

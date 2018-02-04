@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -30,6 +31,7 @@ import com.studiant.com.threading.MainThreadImpl;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
@@ -47,6 +49,8 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
     @BindView(R.id.mailTextView)
     TextView mailTextView;
 
+    @BindView(R.id.diplomeEditText)
+    TextView diplomeEditText;
 
     @BindView(R.id.phoneEditText)
     TextView phoneEditText;
@@ -93,7 +97,7 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         bindView();
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         //setup materialviewpager
         MaterialViewPagerHelper.registerScrollView(getActivity(), profilEtudiantscrollView);
 
@@ -103,7 +107,7 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
     public void onAddRibClick(){
         AddRibFragment addRibFragment = AddRibFragment.newInstance(user);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.add(android.R.id.content, addRibFragment).commit();
+        ft.add(android.R.id.content, addRibFragment, addRibFragment.getClass().getName()).commit();
     }
 
 
@@ -120,12 +124,12 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
 
     private void bindView() {
         Log.d("bindView", " "+user.getFirstName() + " "+user.getDescription() + " " + user.isPermis());
-        Log.d("bindView", " "+user.getTelephone() + " " + user.getDiplome());
         Picasso.with(getContext()).load(user.getProfilePicture()).into(profilPictureImageView);
         firstNameEditText.setText(user.getFirstName() + " " + user.getLastName());
         mailTextView.setText(user.getEmail());
         phoneEditText.setText(user.getTelephone());
         descriptionEditText.setText(user.getDescription());
+        diplomeEditText.setText(user.getDiplome());
     }
 
     @Override
@@ -141,6 +145,26 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
     @Override
     public void hideProgress() {
 
+    }
+
+    @OnClick(R.id.saveButton)
+    public void onSaveClick(){
+        user.setDiplome(diplomeEditText.getText().toString());
+        user.setTelephone(phoneEditText.getText().toString());
+        user.setDescription(descriptionEditText.getText().toString());
+        mPresenter.saveUser(user);
+    }
+
+    @Override
+    public void onUserUpdate() {
+        Toast.makeText(getActivity(), "Profil sauvegardé !",
+                Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onUserUpdateFailed() {
+        Toast.makeText(getActivity(), "Une erreur est survenue !",
+                Toast.LENGTH_LONG).show();
     }
 
     @Override

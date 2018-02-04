@@ -51,7 +51,7 @@ public class RESTModelConverter {
             user.setIdMangoPay(restUtilisateur.getmIdMangopay());
 
         if (restUtilisateur.getmTelephoneUtilisateur() != null)
-            user.setTelephoneUtilisateur(restUtilisateur.getmTelephoneUtilisateur());
+            user.setTelephone(restUtilisateur.getmTelephoneUtilisateur());
 
         if (restUtilisateur.getIdWalletUtilisateur() != null)
             user.setIdWallet(restUtilisateur.getIdWalletUtilisateur());
@@ -135,8 +135,8 @@ public class RESTModelConverter {
         if (user.getIdMangoPay() != null)
             restUtilisateur.setmIdMangopay(user.getIdMangoPay());
 
-        if (user.getTelephoneUtilisateur() != null)
-            restUtilisateur.setmTelephoneUtilisateur(user.getTelephoneUtilisateur());
+        if (user.getTelephone() != null)
+            restUtilisateur.setmTelephoneUtilisateur(user.getTelephone());
 
 
         return restUtilisateur;

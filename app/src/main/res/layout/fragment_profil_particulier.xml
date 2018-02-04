@@ -31,21 +31,42 @@
                 style="@style/ProfileParticulierTextView"
                 android:text="TextView" />
 
-            <TextView
-                android:id="@+id/mailTextView"
-                style="@style/ProfileParticulierTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="TextView" />
 
-            <TextView
-                android:id="@+id/numberTextView"
+            <EditText
+                android:id="@+id/telephoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                style="@style/ProfileParticulierTextView"
-                android:text="TextView" />
+                android:layout_marginLeft="20dp"
+                android:ems="10"
+                android:layout_marginTop="20dp"
+                android:inputType="number"
+                android:text="Telephone"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/mailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="textEmailAddress|number"
+                android:text="Mail"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/saveButton"
+                style="@style/StyleButtonParticulier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:text="Enregistrer modifications"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
 
             <!--

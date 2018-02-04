@@ -1,9 +1,7 @@
 package com.studiant.com.domain.interactors.impl;
 
-import android.content.res.Resources;
 import android.util.Log;
 
-import com.studiant.com.R;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.base.AbstractInteractor;
@@ -11,8 +9,6 @@ import com.studiant.com.domain.interactors.interfaces.GetProfileInteractor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
-
-import java.util.Calendar;
 
 /**
  * This is an interactor boilerplate with a reference to a model repository.
@@ -63,7 +59,6 @@ public class GetProfileFromConnectedInteractorImpl extends AbstractInteractor im
         // retrieve the message
         Log.d("splash", "run");
         final User user = mUserRepository.getProfileFromConnectedUser();
-        System.out.println("user lucas : "+user.getTelephoneUtilisateur());
         // we have retrieved our message, notify the UI on the main thread
         postMessage(user);
     }

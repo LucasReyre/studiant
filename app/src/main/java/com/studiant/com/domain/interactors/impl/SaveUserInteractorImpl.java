@@ -48,6 +48,12 @@ public class SaveUserInteractorImpl extends AbstractInteractor implements SaveUs
             if (mUser.getIban() != null)
                 user.setIban(mUser.getIban());
 
+            if ((user.getTelephone() == null && mUser.getTelephone() != null)|| !user.getTelephone().equals(mUser.getTelephone()))
+                user.setTelephone(mUser.getTelephone());
+
+            if ((user.getEmail() == null && mUser.getEmail() != null)|| !user.getEmail().equals(mUser.getEmail()))
+                user.setEmail(mUser.getEmail());
+
             String userJson = gson.toJson(user);
             SharedPreferences.Editor editor = AndroidApplication.getContext().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).edit();
             editor.putString(Constants.SHARED_PREFERENCE_USER, userJson);

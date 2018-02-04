@@ -26,6 +26,10 @@
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
         <item name="android:dayOfWeekBackground">@color/black_overlay</item>
+        <item name="android:headerBackground">@color/customRed</item>
+        <item name="android:state_selected">@color/customRed</item>
+        <item name="android:calendarTextColor">@color/customRed</item>
+        <item name="android:yearListSelectorColor">@color/customRed</item>
     </style>
 
     <!-- Base application theme. -->

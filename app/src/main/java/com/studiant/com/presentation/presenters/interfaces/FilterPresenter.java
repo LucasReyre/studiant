@@ -1,18 +1,15 @@
 package com.studiant.com.presentation.presenters.interfaces;
 
+import com.studiant.com.domain.model.Job;
 import com.studiant.com.presentation.presenters.base.BasePresenter;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.ui.BaseView;
 
 
-public interface ProfilEtudiantPresenter extends BasePresenter {
+public interface FilterPresenter extends BasePresenter {
 
-    void getMoney(User user);
-    void saveUser(User user);
 
     interface View extends BaseView {
-        void onMoneyRetrieve();
-        void onUserUpdate();
-        void onUserUpdateFailed();
+        void displayListCategorie(String[] listItem);
     }
 }

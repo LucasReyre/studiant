@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,12 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     @BindView(R.id.fabButton)
     FloatingActionButton fabButton;
 
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private ArrayList<Job> mJobArrayList;
+
+    FoldingCellRecyclerViewJobParticulierAdapter adapter;
     User user;
 
     private DashboardPresenter mPresenter;
@@ -93,6 +100,15 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         mPresenter.getJobsByUser(user);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                mPresenter.getJobsByUser(user);
+            }
+        });
+
     }
 
     @OnClick(R.id.fabButton)
@@ -118,12 +134,28 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
     }
 
+    public void refreshData(ArrayList<Job> jobArrayList){
+
+        //mJobArrayList.clear();
+        mJobArrayList = jobArrayList;
+        adapter.notifyDataSetChanged();
+
+    }
+
     @Override
     public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
+        mSwipeRefreshLayout.setRefreshing(false);
+
+        if (mJobArrayList != null){
+            refreshData(jobArrayList);
+            return;
+        }
+
+        mJobArrayList = jobArrayList;
         // prepare elements to display
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellRecyclerViewJobParticulierAdapter adapter = new FoldingCellRecyclerViewJobParticulierAdapter(jobArrayList, user, getContext());
+       adapter = new FoldingCellRecyclerViewJobParticulierAdapter(mJobArrayList, user, getContext());
         for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
             jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {

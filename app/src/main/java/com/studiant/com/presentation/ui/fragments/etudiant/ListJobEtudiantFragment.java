@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +23,7 @@ import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.DashboardEtudiantPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.DashboardEtudiantPresenter;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewEtudiantAdapter;
+import com.studiant.com.presentation.ui.fragments.particulier.payment.PaymentChoiceFragment;
 import com.studiant.com.storage.impl.GCMMessageRepositoryImpl;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.PostulantRepositoryImpl;
@@ -43,8 +46,14 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     @BindView(R.id.mainListView)
     RecyclerView mRecyclerView;
 
-    @BindView(R.id.fabButton)
-    FloatingActionButton fabButton;
+
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    FoldingCellRecyclerViewEtudiantAdapter adapter;
+    ArrayList<Job> mJobArrayList;
+
+    //@BindView(R.id.fabButton)
+    //FloatingActionButton fabButton;
 
     private ProgressDialog progressDialog;
     User user;
@@ -91,16 +100,16 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
         mPresenter.getJobs();
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                mPresenter.getJobs();
+            }
+        });
 
     }
-
-    @OnClick(R.id.fabButton)
-    void onClickFabButton() {
-
-    }
-
 
     @Override
     public void showProgress() {
@@ -119,14 +128,29 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_already_postule), Toast.LENGTH_SHORT).show();
     }
 
+    public void refreshData(ArrayList<Job> jobArrayList){
+
+        //mJobArrayList.clear();
+        mJobArrayList = jobArrayList;
+        adapter.notifyDataSetChanged();
+
+    }
+
     @Override
     public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
+        System.out.println("onJobsRetrieve");
+        mSwipeRefreshLayout.setRefreshing(false);
+
+        if (mJobArrayList != null){
+            refreshData(jobArrayList);
+            return;
+        }
         // prepare elements to display
         //final ArrayList<Item> items = Item.getTestingList();
         System.out.println("job lucas : "+jobArrayList.get(0).getCity());
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellRecyclerViewEtudiantAdapter adapter = (new FoldingCellRecyclerViewEtudiantAdapter(jobArrayList));
+        adapter = (new FoldingCellRecyclerViewEtudiantAdapter(jobArrayList));
 
         for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
@@ -152,8 +176,20 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
         mRecyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onJobRetrieveFail() {
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
     public void onPostulerClick(Job job){
         //Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
         mPresenter.insertPostulant(job, user);
+    }
+
+    @OnClick(R.id.fabButton)
+    public void onFilterClick(){
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FilterFragment filterFragment= FilterFragment.newInstance();
+        filterFragment.show(fm, filterFragment.getTag());
     }
 }

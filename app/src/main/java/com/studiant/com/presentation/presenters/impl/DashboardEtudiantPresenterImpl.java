@@ -110,6 +110,7 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onRetrievalFailed(String error) {
+        mView.onJobRetrieveFail();
     }
 
     @Override

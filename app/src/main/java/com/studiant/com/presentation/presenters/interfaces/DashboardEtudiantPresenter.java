@@ -15,5 +15,6 @@ public interface DashboardEtudiantPresenter extends BasePresenter {
 
     interface View extends BaseView {
         void onJobsRetrieve(ArrayList<Job> jobArrayList);
+        void onJobRetrieveFail();
     }
 }

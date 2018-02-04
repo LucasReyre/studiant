@@ -27,7 +27,7 @@ public class User implements Serializable{
     private String idWallet;
     private String iban;
     private String idIban;
-    private String telephoneUtilisateur;
+    private String telephone;
 
 
     public User() {
@@ -193,12 +193,12 @@ public class User implements Serializable{
         this.idMangoPay = idMangoPay;
     }
 
-    public String getTelephoneUtilisateur() {
-        return telephoneUtilisateur;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTelephoneUtilisateur(String telephoneUtilisateur) {
-        this.telephoneUtilisateur = telephoneUtilisateur;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getPassword() {
