@@ -64,7 +64,11 @@ public class GetPostulantInteractorImpl extends AbstractInteractor implements Ge
         // retrieve the message
         Postulant postulant = null;
 
-        postulant = mPostulantRepository.findPostulant(mJobId, mUtilisateurId);
+        try {
+            postulant = mPostulantRepository.findPostulant(mJobId, mUtilisateurId);
+        } catch (Exception e) {
+            System.out.println("exception levé");
+        }
 
         // we have retrieved our message, notify the UI on the main thread
         postMessage(postulant);

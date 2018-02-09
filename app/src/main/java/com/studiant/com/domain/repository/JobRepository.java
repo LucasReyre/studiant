@@ -17,7 +17,7 @@ public interface JobRepository {
     ArrayList<Job> getHistoriqueJobsByUser(User user);
     ArrayList<Job> getJobsWithFilter(Map<String, String> filterMap);
     ArrayList<Job> getJobs();
-    ArrayList<Job> updateJob(Job job);
+    Job updateJob(Job job);
 
 
 }

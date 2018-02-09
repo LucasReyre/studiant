@@ -53,6 +53,6 @@ public interface JobService {
     //Update d'un job
     @Headers("Connection: close")
     @PATCH("/api/Jobs/{job_id}")
-    Call<ArrayList<RESTJob>> updateJob(@Path(value = "job_id", encoded = true) String userId, @Body RESTJob restJob);
+    Call<RESTJob> updateJob(@Path(value = "job_id", encoded = true) String userId, @Body RESTJob restJob);
 
 }

@@ -149,6 +149,7 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
     @Override
     public void onPostulantInsert(Job job, User user) {
         mView.showProgressPostulant();
+        mView.hideProgress();
         SendNotificationInteractor interactor = new SendNotificationInteractorImpl(
                 mExecutor,
                 mMainThread,

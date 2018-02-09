@@ -1,6 +1,8 @@
 package com.studiant.com.presentation.ui.activities.particulier;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.studiant.com.presentation.presenters.impl.ChoosePostulantPresenterImp
 
 import com.studiant.com.presentation.presenters.interfaces.ChoosePostulantPresenter;
 import com.studiant.com.presentation.presenters.model.Job;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewPostulantAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
 import com.studiant.com.storage.impl.PostulantRepositoryImpl;
@@ -26,8 +29,11 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.studiant.com.AndroidApplication.getContext;
 import static com.studiant.com.storage.Constants.INTENT_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 
 public class ListPostulantActivity extends Activity implements ChoosePostulantPresenter.View {
 
@@ -40,6 +46,7 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
     private User user;
 
     ChoosePostulantPresenter mPresenter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,8 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
                 this,
                 new JobRepositoryImpl()
         );
+
+        progressDialog = new ProgressDialog(getContext());
 
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
         //postulantArrayList = (ArrayList<User>) getIntent().getSerializableExtra(INTENT_LIST_JOB);
@@ -93,17 +102,21 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
 
     @Override
     public void onPostulantChoosed() {
-
+        Intent intent = new Intent();
+        intent = new Intent(getContext(), DashboardParticulierActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        startActivity(intent);
     }
 
     @Override
     public void showProgress() {
-
+        progressDialog.setMessage(getResources().getString(R.string.get_message));
+        progressDialog.show();
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @Override

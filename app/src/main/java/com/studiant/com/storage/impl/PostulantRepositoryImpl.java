@@ -53,11 +53,11 @@ public class PostulantRepositoryImpl implements PostulantRepository {
     }
 
     @Override
-    public Postulant findPostulant(String jobId, String utilisateurId) {
+    public Postulant findPostulant(String jobId, String utilisateurId) throws Exception {
         PostulantService postulantService = RestClient.createService(PostulantService.class, REST_API_URL);
         System.out.println("findPostulant");
 
-        String query = "{\"where\":{\"jobId\":\""+jobId+"\", \"utilisateurId\":\""+utilisateurId+"\"}";
+        String query = "{\"where\":{\"jobId\":\""+jobId+"\", \"utilisateurId\":\""+utilisateurId+"\"}}";
 
         try {
             //String query = "{\"include\":[\"appartenir\"]}";
@@ -65,6 +65,9 @@ public class PostulantRepositoryImpl implements PostulantRepository {
 
             //restJob = response.body();
             Timber.i("GET ALL JOBS POSTULANT: %d", response.code());
+
+            if (response.code() == 404)
+                throw new Exception(response.message());
 
             return RESTModelConverter.convertToPostulantModel(response.body());
 

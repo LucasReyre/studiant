@@ -62,16 +62,18 @@ public class ChoosePostulantPresenterImpl extends AbstractPresenter implements C
 
     @Override
     public void onPostulantInsert() {
-
+        mView.hideProgress();
+        mView.onPostulantChoosed();
     }
 
     @Override
     public void onInsertFailed(String error) {
-
+        mView.hideProgress();
     }
 
     @Override
     public void choosePostulant(User user, Job job) {
+        mView.showProgress();
         ChoosePostulantInteractor interactor = new ChoosePostulantInteractorImpl(
                 mExecutor,
                 mMainThread,

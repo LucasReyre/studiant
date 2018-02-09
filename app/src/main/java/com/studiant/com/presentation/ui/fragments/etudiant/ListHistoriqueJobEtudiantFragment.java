@@ -160,7 +160,6 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
                     mPresenter.closeJob(job);
                     break;
                 case "CESU":
-                    mPresenter.closeJob(job);
                     Toast.makeText(getActivity(), "Job terminé", Toast.LENGTH_LONG).show();
                     break;
             }

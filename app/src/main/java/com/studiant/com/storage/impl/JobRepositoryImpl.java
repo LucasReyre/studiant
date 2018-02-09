@@ -145,14 +145,14 @@ public class JobRepositoryImpl implements JobRepository {
     }
 
     @Override
-    public ArrayList<Job> updateJob(Job job) {
+    public Job updateJob(Job job) {
         JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 
         try {
             //String query = "{\"include\":[\"appartenir\"]}";
             String query = "[where][id]="+job.getId();
             System.out.println("update : "+job.getId());
-            Response<ArrayList<RESTJob>> response = jobService.updateJob(job.getId(),RESTModelConverter.convertToRestJobModel(job)).execute();
+            Response<RESTJob> response = jobService.updateJob(job.getId(),RESTModelConverter.convertToRestJobModel(job)).execute();
 
             if(response.code() == HTTP_CODE_200)
                 Timber.i("GET ALL JOBS SUCCESS: %d", response.code());
@@ -163,7 +163,7 @@ public class JobRepositoryImpl implements JobRepository {
             }
             //restJob = response.body();
 
-            return RESTModelConverter.convertToArrayListJobModel(response.body());
+            return RESTModelConverter.convertToJobModel(response.body());
 
         } catch (IOException e) { // something went wrong
             Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
