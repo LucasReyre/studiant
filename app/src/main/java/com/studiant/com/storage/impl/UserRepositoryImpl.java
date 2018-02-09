@@ -92,7 +92,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
 
             //Response<RESTUtilisateur> response = utilisateurService.insertUser(RESTModelConverter.convertToRestUserModel(user)).execute();
-            Response<RESTUtilisateur> response = utilisateurService.updateUser(user.getDescription(), user.getTelephone(), user.getTelephone(), user.getId()).execute();
+            Response<RESTUtilisateur> response = utilisateurService.updateUser(user.getDescription(), user.getTelephone(), user.getDiplome(), user.getId()).execute();
             if (response.code() == 200){
                 System.out.println("ok" + response.body().getmId());
                 return RESTModelConverter.convertToUserModel(response.body());

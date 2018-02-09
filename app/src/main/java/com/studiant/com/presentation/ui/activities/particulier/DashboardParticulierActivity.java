@@ -69,7 +69,7 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
                     case 0:
                         return "Offres";
                     case 1:
-                        return "Mon Profil";
+                        return "Profil";
                     case 2:
                         return "Réglages";
                 }

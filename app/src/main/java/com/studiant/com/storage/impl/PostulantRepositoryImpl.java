@@ -7,10 +7,13 @@ import com.studiant.com.domain.repository.PostulantRepository;
 import com.studiant.com.storage.network.RestClient;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.storage.network.converters.RESTModelConverter;
+import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPostulant;
+import com.studiant.com.storage.network.services.JobService;
 import com.studiant.com.storage.network.services.PostulantService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit2.Response;
 import timber.log.Timber;
@@ -47,5 +50,28 @@ public class PostulantRepositoryImpl implements PostulantRepository {
 
     @Override
     public void choosePostulant(User user, Job job) {
+    }
+
+    @Override
+    public Postulant findPostulant(String jobId, String utilisateurId) {
+        PostulantService postulantService = RestClient.createService(PostulantService.class, REST_API_URL);
+        System.out.println("findPostulant");
+
+        String query = "{\"where\":{\"jobId\":\""+jobId+"\", \"utilisateurId\":\""+utilisateurId+"\"}";
+
+        try {
+            //String query = "{\"include\":[\"appartenir\"]}";
+            Response<RESTPostulant> response = postulantService.findPostulant(query).execute();
+
+            //restJob = response.body();
+            Timber.i("GET ALL JOBS POSTULANT: %d", response.code());
+
+            return RESTModelConverter.convertToPostulantModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+
+        return null;
     }
 }

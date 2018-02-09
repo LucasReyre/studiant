@@ -21,13 +21,14 @@ public final class Constants {
     public static final String LEGACY_SERVER_KEY= "AAAA6imzCUY:APA91bFW3SFt53D9Pb_mR6APrsRKp2ouXpyELZwvmHBH4oLNmzSOoNMoetPIwnsTyPSY12j8hzxjqgkXfJLqcEB2puRXsCem5ujyJgFzt3ANBcVb1MWZZ3Y3Z9Jt6D26FqhyPHUzzz6w";
     public static final String HTTP_URL_FCM= "https://fcm.googleapis.com/";
     public static final String GCM_TITLE= "S\'tudiant";
-    public static final String GCM_BODY_NEW_POSTULANT= "Une étudiant vient de postuler à l'annonce ";
+    public static final String GCM_BODY_NEW_POSTULANT= " vient de postuler à l'annonce ";
 
     public static final int STATUS_PARTICULIER = 0;
     public static final int STATUS_ETUDIANT = 1;
 
     public static final String STATUS_JOB_OPEN = "0";
-    public static final String STATUS_JOB_CLOSE = "1";
+    public static final String STATUS_JOB_POSTULANT_CHOOSE = "1";
+    public static final String STATUS_JOB_CLOSE = "2";
 
     public static final String STATUS_POSTULANT_NOT_CHOOSE = "0";
     public static final String STATUS_POSTULANT_CHOOSE = "1";

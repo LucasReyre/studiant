@@ -126,7 +126,7 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
             jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onPostulerClick(jobArrayList.get(j));
+                    onCloseJobClick(jobArrayList.get(j));
                 }
             });
         }
@@ -145,15 +145,33 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
         mRecyclerView.setAdapter(adapter);
     }
 
-    public void onPostulerClick(Job job){
+    public void onCloseJobClick(Job job){
         //Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
         //mPresenter.insertPostulant(job, user);
         System.out.println("statut : "+job.getStatut());
+        System.out.println("mode paiement: "+job.getModePaiement());
+
         if (!job.getStatut().equals("2")){
-            ((DashboardEtudiantActivity)getActivity()).displaySetStudiantCode(job);
+            switch (job.getModePaiement()){
+                case "CB":
+                    ((DashboardEtudiantActivity)getActivity()).displaySetStudiantCode(job);
+                    break;
+                case "ESPECES":
+                    mPresenter.closeJob(job);
+                    break;
+                case "CESU":
+                    mPresenter.closeJob(job);
+                    Toast.makeText(getActivity(), "Job terminé", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }else{
             Toast.makeText(getActivity(), "Ce job à déja été validé", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    @Override
+    public void onJobClose() {
+        Toast.makeText(getActivity(), "Ce job est validé", Toast.LENGTH_LONG).show();
     }
 }

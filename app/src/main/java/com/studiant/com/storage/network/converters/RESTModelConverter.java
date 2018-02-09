@@ -189,6 +189,15 @@ public class RESTModelConverter {
 
     }
 
+    public static Postulant convertToPostulantModel(RESTPostulant restPostulant){
+
+        return new Postulant(restPostulant.getmId(),
+                            restPostulant.getmTimePostulant(),
+                            restPostulant.getmStatutPostulant(),
+                            restPostulant.getmUtilisateurId(),
+                            restPostulant.getmJobId());
+    }
+
     public static Job convertToJobModel(RESTJob restJob){
         String id = restJob.getmId();
         String prix = restJob.getmPrixJob();
@@ -198,6 +207,8 @@ public class RESTModelConverter {
         String heure = restJob.getmHeureJob();
         String utilisateurId = restJob.getmUtilisateurId();
         String typePaiementJob = restJob.getTypePaiementJob();
+
+        System.out.println("convertoJob "+typePaiementJob);
 
         ArrayList<User> postulantsArrayList = new ArrayList<User>();
 

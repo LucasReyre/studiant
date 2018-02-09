@@ -79,6 +79,7 @@
     <string name="see_studiant">Voir les étudiants</string>
     <string name="studiant_code">S\'tudiant code</string>
     <string name="get_message">Récupération des jobs</string>
+    <string name="get_message_postulant">Postulation en cours</string>
     <string name="get_message_add_rib">Ajout en cours</string>
     <string name="get_message_inscription_loading">Inscription en cours</string>
     <string name="get_message_password">Récupération du mot de passe</string>

@@ -52,7 +52,7 @@ public class InsertPostulantInteractorImpl extends AbstractInteractor implements
         mMainThread.post(new Runnable() {
             @Override
             public void run() {
-                mCallback.onPostulantInsert(PresentationModelConverter.convertToJobPresenterModel(mJob));
+                mCallback.onPostulantInsert(PresentationModelConverter.convertToJobPresenterModel(mJob),PresentationModelConverter.convertToUserPresenterModel(mUser));
             }
         });
     }

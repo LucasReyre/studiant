@@ -30,6 +30,11 @@ public interface PostulantService {
 
     //Récupération de tous les postulant par job
     @Headers("Connection: close")
+    @GET("/api/Postulants/findOne")
+    Call<RESTPostulant> findPostulant(@Query("filter") String query);
+
+    //Récupération de tous les postulant par job
+    @Headers("Connection: close")
     @POST("/api/Postulants/update")
     Call<ArrayList<RESTJob>> updatePostulant(@Query("where") String query, @Body RESTPostulant restPostulant);
 

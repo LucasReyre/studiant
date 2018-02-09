@@ -152,6 +152,8 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
         user.setDiplome(diplomeEditText.getText().toString());
         user.setTelephone(phoneEditText.getText().toString());
         user.setDescription(descriptionEditText.getText().toString());
+        System.out.println("onSaveClick : diplome "+user.getDiplome());
+        System.out.println("onSaveClick : telephone "+user.getTelephone());
         mPresenter.saveUser(user);
     }
 

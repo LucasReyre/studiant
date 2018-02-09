@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -51,7 +52,7 @@ public interface JobService {
 
     //Update d'un job
     @Headers("Connection: close")
-    @POST("/api/Jobs/{job_id}/replace")
+    @PATCH("/api/Jobs/{job_id}")
     Call<ArrayList<RESTJob>> updateJob(@Path(value = "job_id", encoded = true) String userId, @Body RESTJob restJob);
 
 }

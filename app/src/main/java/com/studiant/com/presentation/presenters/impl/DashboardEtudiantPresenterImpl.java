@@ -5,9 +5,11 @@ import android.util.Log;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.GetJobsInteractorImpl;
+import com.studiant.com.domain.interactors.impl.GetPostulantInteractorImpl;
 import com.studiant.com.domain.interactors.impl.InsertPostulantInteractorImpl;
 import com.studiant.com.domain.interactors.impl.SendNotificationInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.GetJobsInteractor;
+import com.studiant.com.domain.interactors.interfaces.GetPostulantInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertPostulantInteractor;
 import com.studiant.com.domain.interactors.interfaces.SendNotificationInteractor;
 import com.studiant.com.domain.repository.GCMMessageRepository;
@@ -29,7 +31,7 @@ import java.util.Map;
  * Created by dmilicic on 12/13/15.
  */
 public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements DashboardEtudiantPresenter,
-        GetJobsInteractor.Callback, InsertPostulantInteractor.Callback,  SendNotificationInteractor.Callback{
+        GetJobsInteractor.Callback, InsertPostulantInteractor.Callback,  SendNotificationInteractor.Callback, GetPostulantInteractor.Callback {
 
     private View mView;
     private JobRepository mJobRepository;
@@ -89,6 +91,20 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
+    public void getPostulant(String utilisateurId, String jobId) {
+        GetPostulantInteractor interactor = new GetPostulantInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mPostulantRepository,
+                utilisateurId,
+                jobId
+        );
+
+        interactor.execute();
+    }
+
+    @Override
     public void getJobsWithFilter(Map<String, String> filterMap) {
         User user = null;
         GetJobsInteractor interactor = new GetJobsInteractorImpl(
@@ -105,7 +121,7 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void insertPostulant(Job job, User user) {
-        mView.showProgress();
+        mView.showProgressPostulant();
         InsertPostulantInteractor interactor = new InsertPostulantInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -131,18 +147,19 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
     }
 
     @Override
-    public void onPostulantInsert(Job job) {
-
+    public void onPostulantInsert(Job job, User user) {
+        mView.showProgressPostulant();
         SendNotificationInteractor interactor = new SendNotificationInteractorImpl(
                 mExecutor,
                 mMainThread,
                 this,
                 mGcmRepository,
                 job.getUtilisateur().getFirebaseToken(),
-                Constants.GCM_BODY_NEW_POSTULANT
+                user.getFirstName() + " " +Constants.GCM_BODY_NEW_POSTULANT
         );
 
         interactor.execute();
+
     }
 
     @Override
@@ -150,5 +167,23 @@ public class DashboardEtudiantPresenterImpl extends AbstractPresenter implements
         mView.hideProgress();
         mView.showError(error);
 
+    }
+
+    @Override
+    public void onPostulantRetrieve() {
+        mView.hideProgress();
+        mView.onPostulantRetrieve();
+    }
+
+    @Override
+    public void onPostulantRetrievalFailed(String error) {
+        mView.hideProgress();
+        mView.onPostulantRetrieveFail();
+    }
+
+    @Override
+    public void onPostulantRequestError(String error) {
+        mView.hideProgress();
+        mView.onPostulantRetrieveFail();
     }
 }

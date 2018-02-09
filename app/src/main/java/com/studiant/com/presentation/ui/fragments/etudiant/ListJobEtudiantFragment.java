@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
+import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.presentation.presenters.impl.DashboardEtudiantPresenterImpl;
@@ -54,6 +55,7 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     FoldingCellRecyclerViewEtudiantAdapter adapter;
     ArrayList<Job> mJobArrayList;
     boolean refreshWithfilter = false;
+    private Job jobPostuler;
 
     //@BindView(R.id.fabButton)
     //FloatingActionButton fabButton;
@@ -121,6 +123,12 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     }
 
     @Override
+    public void showProgressPostulant() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_postulant));
+        progressDialog.show();
+    }
+
+    @Override
     public void hideProgress() {
         progressDialog.hide();
     }
@@ -131,18 +139,28 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_already_postule), Toast.LENGTH_SHORT).show();
     }
 
-    public void refreshData(ArrayList<Job> jobArrayList){
+    public void refreshData(final ArrayList<Job> jobArrayList){
 
-        System.out.println("refresh Data");
-        //mJobArrayList.clear();
+        mJobArrayList.clear();
         mJobArrayList = jobArrayList;
         adapter.notifyDataSetChanged();
+        adapter = (new FoldingCellRecyclerViewEtudiantAdapter(mJobArrayList));
+        for (int i = 0 ; i<jobArrayList.size();i++){
+            final int j = i;
+            jobArrayList.get(i).setRequestBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onPostulerClick(mJobArrayList.get(j));
+                }
+            });
+        }
+
+        mRecyclerView.setAdapter(adapter);
 
     }
 
     @Override
     public void onJobsRetrieve(final ArrayList<Job> jobArrayList) {
-        System.out.println("onJobsRetrieve");
 
         if (mSwipeRefreshLayout.isRefreshing() || refreshWithfilter){
             mSwipeRefreshLayout.setRefreshing(false);
@@ -150,12 +168,14 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
             refreshData(jobArrayList);
             return;
         }
+
+        mJobArrayList = jobArrayList;
         // prepare elements to display
         //final ArrayList<Item> items = Item.getTestingList();
         System.out.println("job lucas : "+jobArrayList.get(0).getCity());
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        adapter = (new FoldingCellRecyclerViewEtudiantAdapter(jobArrayList));
+        adapter = (new FoldingCellRecyclerViewEtudiantAdapter(mJobArrayList));
 
         for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
@@ -201,8 +221,19 @@ public class ListJobEtudiantFragment extends Fragment implements DashboardEtudia
     }
 
     public void onPostulerClick(Job job){
+        jobPostuler = job;
+        mPresenter.getPostulant(user.getId(),job.getId());
         //Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR "+job.getDescription(), Toast.LENGTH_SHORT).show();
-        mPresenter.insertPostulant(job, user);
+    }
+
+    @Override
+    public void onPostulantRetrieve() {
+        Toast.makeText(getApplicationContext(), "Vous avez déja postulé à ce job", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPostulantRetrieveFail() {
+        mPresenter.insertPostulant(jobPostuler, user);
     }
 
     @OnClick(R.id.fabButton)

@@ -175,7 +175,7 @@ public class FilterFragment extends DialogFragment implements FilterPresenter.Vi
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 //job.setCategorie(item);
                 categorie = item;
-                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
             }
         });
     }

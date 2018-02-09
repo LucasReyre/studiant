@@ -11,8 +11,10 @@ import java.util.ArrayList;
 public interface HistoriqueJobEtudiantPresenter extends BasePresenter {
 
     void getHistoriqueJobs(User user);
+    void closeJob(Job job);
 
     interface View extends BaseView {
         void onJobsRetrieve(ArrayList<Job> jobArrayList);
+        void onJobClose();
     }
 }

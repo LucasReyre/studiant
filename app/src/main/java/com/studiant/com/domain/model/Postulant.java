@@ -10,8 +10,18 @@ public class Postulant {
     private String statutPostulant;
     private User user;
     private Job job;
+    private String utilisateurId;
+    private String jobId;
 
     public Postulant() {
+    }
+
+    public Postulant(String id, String timePostulant, String statutPostulant, String utilisateurId, String jobId) {
+        this.id = id;
+        this.timePostulant = timePostulant;
+        this.statutPostulant = statutPostulant;
+        this.utilisateurId = utilisateurId;
+        this.jobId = jobId;
     }
 
     public Postulant(String id, String timePostulant, String statutPostulant, User user, Job job) {

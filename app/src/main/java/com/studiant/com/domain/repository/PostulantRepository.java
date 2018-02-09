@@ -14,5 +14,6 @@ public interface PostulantRepository {
 
     void insertPostulant(Postulant postulant) throws WSException;
     void choosePostulant(User user, Job job);
+    Postulant findPostulant(String jobId, String utilisateurId);
 
 }

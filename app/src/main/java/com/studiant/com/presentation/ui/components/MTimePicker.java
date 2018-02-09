@@ -61,7 +61,7 @@ public class MTimePicker implements View.OnClickListener, TimePickerDialog.OnTim
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
         TimePickerDialog mTimePicker = new TimePickerDialog(_context, this, hour, minute, true);
-        mTimePicker.setTitle("Select Time");
+        mTimePicker.setTitle("Sélectionner l'heure");
         mTimePicker.show();
     }
 

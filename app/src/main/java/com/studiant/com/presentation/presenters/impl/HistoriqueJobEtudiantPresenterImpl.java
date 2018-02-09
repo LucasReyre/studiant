@@ -2,10 +2,12 @@ package com.studiant.com.presentation.presenters.impl;
 
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
+import com.studiant.com.domain.interactors.impl.CloseJobInteractorImpl;
 import com.studiant.com.domain.interactors.impl.GetHistoriqueJobsInteractorImpl;
 import com.studiant.com.domain.interactors.impl.GetJobsInteractorImpl;
 import com.studiant.com.domain.interactors.impl.InsertPostulantInteractorImpl;
 import com.studiant.com.domain.interactors.impl.SendNotificationInteractorImpl;
+import com.studiant.com.domain.interactors.interfaces.CloseJobInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetHistoriqueJobsInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetJobsInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertPostulantInteractor;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
  * Created by dmilicic on 12/13/15.
  */
 public class HistoriqueJobEtudiantPresenterImpl extends AbstractPresenter implements HistoriqueJobEtudiantPresenter,
-        GetHistoriqueJobsInteractor.Callback{
+        GetHistoriqueJobsInteractor.Callback, CloseJobInteractor.Callback {
 
     private View mView;
     private JobRepository mJobRepository;
@@ -93,5 +95,30 @@ public class HistoriqueJobEtudiantPresenterImpl extends AbstractPresenter implem
 
         interactor.execute();
 
+    }
+
+    @Override
+    public void closeJob(Job job) {
+        mView.showProgress();
+        CloseJobInteractor interactor = new CloseJobInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mJobRepository,
+                PresentationModelConverter.convertToJobDomainModel(job)
+        );
+
+        interactor.execute();
+    }
+
+    @Override
+    public void onJobClose() {
+        mView.hideProgress();
+        mView.onJobClose();
+    }
+
+    @Override
+    public void onCloseFailed(String error) {
+        mView.hideProgress();
     }
 }

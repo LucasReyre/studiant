@@ -34,7 +34,9 @@ import static android.view.View.GONE;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
 
-public class DashboardEtudiantActivity extends AppCompatActivity implements FilterFragment.OnFragmentInteractionListener, AddRibFragment.OnFragmentInteractionListener{
+public class DashboardEtudiantActivity extends AppCompatActivity implements FilterFragment.OnFragmentInteractionListener,
+        AddRibFragment.OnFragmentInteractionListener, StudiantCodeFragment.OnFragmentInteractionListener
+{
 
 
     @BindView(R.id.materialViewPager)
