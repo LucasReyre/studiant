@@ -37,6 +37,7 @@ public class LoginInteractorImpl extends AbstractInteractor implements LoginInte
             @Override
             public void run() {
                 //mCallback.onRetrievalFailed("Nothing to welcome you with :(");
+                mCallback.onLoginFailed("Merci de vérifier vos informations");
             }
         });
     }
@@ -59,6 +60,7 @@ public class LoginInteractorImpl extends AbstractInteractor implements LoginInte
             System.out.println("save login success"+user.getTelephone());
             postMessage(user);
         } catch (Exception e) {
+            notifyError();
             e.printStackTrace();
         }
     }

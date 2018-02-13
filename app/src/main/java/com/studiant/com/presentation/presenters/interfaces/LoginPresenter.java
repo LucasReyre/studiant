@@ -11,6 +11,6 @@ public interface LoginPresenter extends BasePresenter {
 
     interface View extends BaseView {
         void onLoginSuccess(User user);
-        void onLoginFailed();
+        void onLoginFailed(String error);
     }
 }

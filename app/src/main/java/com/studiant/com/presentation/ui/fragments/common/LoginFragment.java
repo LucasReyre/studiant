@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -143,7 +144,9 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
 
 
     @Override
-    public void onLoginFailed() {
+    public void onLoginFailed(String error) {
+        Toast.makeText(getActivity(), error,
+                Toast.LENGTH_LONG).show();
 
     }
 

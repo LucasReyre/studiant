@@ -39,9 +39,9 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
     @Override
     public void resume() {
 
-        mView.showProgress();
+        //mView.showProgress();
         // initialize the interactor
-        getFacebookData();
+        //getFacebookData();
     }
 
 
