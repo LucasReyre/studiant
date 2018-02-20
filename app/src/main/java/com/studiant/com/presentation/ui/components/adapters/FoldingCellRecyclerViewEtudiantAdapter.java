@@ -161,7 +161,7 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         public ViewHolder(View itemView){
             super(itemView);
             categorieTextView = (TextView) itemView.findViewById(R.id.categorieTextView);
-            categorieImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
+            categorieImageView = (ImageView) itemView.findViewById(R.id.categorieHistoriqueJobImageView);
             cityTextView = (TextView) itemView.findViewById(R.id.cityTextView);
             cityContentTextView = (TextView) itemView.findViewById(R.id.content_city);
             tarifTextView = (TextView) itemView.findViewById(R.id.tarifTextView);

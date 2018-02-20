@@ -40,7 +40,7 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/categorieImageView"
+            android:id="@+id/categorieHistoriqueJobImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"

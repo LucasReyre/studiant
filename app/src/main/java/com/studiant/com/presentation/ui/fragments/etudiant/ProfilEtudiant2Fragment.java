@@ -1,6 +1,7 @@
 package com.studiant.com.presentation.ui.fragments.etudiant;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -88,6 +89,7 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
     Switch permisSwitch;
     boolean fromFacebook;
 
+    private ProgressDialog progressDialog;
     User user;
     private ProfilParticulierPresenter mPresenter;
     private OnFragmentInteractionListener mListener;
@@ -121,6 +123,8 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
                 }
         );
 
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -180,6 +184,7 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
         }else{
             user = new User();
             user.setLastName(lastNameEditText.getText().toString());
+            user.setDescription(descriptionEditText.getText().toString());
             user.setFirstName(firstNameEditText.getText().toString());
             user.setEmail(emailEditText.getText().toString());
             user.setDiplome(diplomeEditText.getText().toString());
@@ -300,13 +305,16 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
 
     @Override
     public void showProgress() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_add_rib));
+        progressDialog.show();
 
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
+
 
     @Override
     public void showError(WSException e) {

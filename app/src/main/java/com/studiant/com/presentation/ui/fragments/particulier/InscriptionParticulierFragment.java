@@ -98,6 +98,7 @@ public class InscriptionParticulierFragment extends Fragment implements ProfilPa
             categorie = getArguments().getInt(CATEGORIE_ID_JOB);
         }
         progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
         mainActivity = (MainActivity)getActivity();
 
         mPresenter = new ProfilParticulierPresenterImpl(

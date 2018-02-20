@@ -1,5 +1,6 @@
 package com.studiant.com.presentation.ui.activities.particulier;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -84,7 +85,7 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
     PlaceAutocompleteFragment autocompleteFragment;
 
     private AddJobPresenter mPresenter;
-
+    private ProgressDialog progressDialog;
     private User user;
 
     private Job job;
@@ -111,6 +112,9 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
                 new JobRepositoryImpl(),
                 new UserRepositoryImpl()
         );
+
+        progressDialog = new ProgressDialog(this);
+        //progressDialog.setCancelable(false);
 
         autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
@@ -238,13 +242,16 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
 
     @Override
     public void showProgress() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_add_rib));
+        progressDialog.show();
 
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
+
 
     @Override
     public void showError(WSException e) {

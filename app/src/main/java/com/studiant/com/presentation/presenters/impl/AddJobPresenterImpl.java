@@ -45,7 +45,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
     @Override
     public void resume() {
 
-        mView.showProgress();
+        //mView.showProgress();
         // initialize the interactor
         ChooseInteractor interactor = new ChooseInteractorImpl(
                 mExecutor,
@@ -82,6 +82,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     @Override
     public void getCard(User user) {
+        mView.showProgress();
         GetCardInteractor interactor = new GetCardInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -98,6 +99,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
     @Override
     public void onCardRetrieve() {
         System.out.println("onCardRetrieve");
+        mView.hideProgress();
         mView.displayPayment();
 
     }
@@ -105,6 +107,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
     @Override
     public void onCardRetrievalFailed(String error) {
         System.out.println("onCardRetrievalFailed");
+        mView.hideProgress();
         mView.displayAddCard();
     }
 
@@ -121,6 +124,7 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     @Override
     public void insertJob(Job job) {
+        mView.showProgress();
         InsertJobInteractor interactor = new InsertJobInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -144,11 +148,12 @@ public class AddJobPresenterImpl extends AbstractPresenter implements AddJobPres
 
     @Override
     public void onJobInsert() {
+        mView.hideProgress();
         mView.onJobInsert();
     }
 
     @Override
     public void onJobInsertFailed(String error) {
-
+        mView.hideProgress();
     }
 }

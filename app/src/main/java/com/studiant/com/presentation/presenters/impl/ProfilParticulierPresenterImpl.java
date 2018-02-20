@@ -110,12 +110,14 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onProfileRetrieve(User user) {
+        mView.hideProgress();
         mView.onProfileRetrieve(user);
     }
 
     @Override
     public void uploadImage(String image) {
         System.out.println("uploadImage interactore");
+        mView.showProgress();
         UploadImageInteractor interactor = new UploadImageInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -129,6 +131,7 @@ public class ProfilParticulierPresenterImpl extends AbstractPresenter implements
 
     @Override
     public void onImageUpload(String image) {
+        mView.hideProgress();
         mView.onImageUpload(image);
 
     }

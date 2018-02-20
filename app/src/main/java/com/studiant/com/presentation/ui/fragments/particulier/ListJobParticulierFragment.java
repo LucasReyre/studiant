@@ -188,16 +188,16 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     }
 
     public void onViewStudiantClick(Job job){
-        if (job.getStatut().equals("0")){
+        if (job.getStatut().equals("0") || job.getStatut().equals("1")){
             Intent intent = new Intent(getApplicationContext(), ListPostulantActivity.class);
             intent.putExtra(INTENT_USER, user);
             //intent.putExtra(INTENT_LIST_USER, job.getPostulants());
             intent.putExtra(INTENT_JOB, PresentationModelConverter.convertToJobDomainModel(job));
             this.startActivity(intent);
-        }else if(job.getStatut().equals("1") ){
+        }/*else if(job.getStatut().equals("1") ){
             Toast.makeText(getActivity(), "Vous avez déja choisi un étudiant",
                     Toast.LENGTH_LONG).show();
-        }else{
+        }*/else{
             toastJobCompleted();
         }
 

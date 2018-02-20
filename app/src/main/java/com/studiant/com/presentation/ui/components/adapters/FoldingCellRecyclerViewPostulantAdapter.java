@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.ramotion.foldingcell.FoldingCell;
 import com.squareup.picasso.Picasso;
 import com.studiant.com.R;
+import com.studiant.com.presentation.presenters.model.Job;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,13 +26,14 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
 
     List<com.studiant.com.presentation.presenters.model.User> contents;
     Context context;
+    Job job;
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
 
-    public FoldingCellRecyclerViewPostulantAdapter(Context context, ArrayList<com.studiant.com.presentation.presenters.model.User> contents) {
+    public FoldingCellRecyclerViewPostulantAdapter(Context context, ArrayList<com.studiant.com.presentation.presenters.model.User> contents, Job job) {
         this.contents = contents;
-        this.context = context;
+        this.job = job;
     }
 
     @Override
@@ -53,6 +55,13 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
         cellViewHolder.contentNamePostulant.setText(contents.get(position).getFirstName() + " "+contents.get(position).getLastName());
         cellViewHolder.studyPostulant.setText(contents.get(position).getDiplome());
         cellViewHolder.descriptionPostulant.setText(contents.get(position).getDescription());
+
+        if (job.getStatut().equals("1")){
+            cellViewHolder.contentRequestBtn.setVisibility(View.INVISIBLE);
+            cellViewHolder.telPostulant.setText(contents.get(position).getTelephone());
+        }
+        else
+            cellViewHolder.contentRequestBtn.setVisibility(View.VISIBLE);
 
         System.out.println("etudiant en "+ contents.get(position).getDiplome());
 
@@ -111,6 +120,7 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
         ImageView profilPicture;
         ImageView profilPictureTitle;
         TextView contentRequestBtn;
+        TextView telPostulant;
         TextView time;
         FoldingCell foldingCell;
 
@@ -128,6 +138,7 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
             descriptionPostulant = (TextView) itemView.findViewById(R.id.content_description_postulant);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             time = (TextView) itemView.findViewById(R.id.title_time_label);
+            telPostulant = (TextView) itemView.findViewById(R.id.telPostulantTextView);
             profilPicture = (ImageView) itemView.findViewById(R.id.content_profil_picture_postulant);
             profilPictureTitle = (ImageView) itemView.findViewById(R.id.imageViewProfilPictureTitle);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);

@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
 import com.studiant.com.R;
+import com.studiant.com.domain.model.Categorie;
 import com.studiant.com.presentation.presenters.model.Job;
 
 import java.util.ArrayList;
@@ -64,6 +66,9 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         cellViewHolder.contentDate.setText(contents.get(position).getDate());
         cellViewHolder.description.setText(contents.get(position).getDescription());
         cellViewHolder.phoneContent.setText(contents.get(position).getUtilisateur().getTelephone());
+
+        Categorie categorie = new Categorie(contents.get(position).getCategorie());
+        cellViewHolder.categorieImageView.setImageResource(categorie.getImageRessource());
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +131,7 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         TextView timeHeure;
         TextView cityTitle;
         TextView adresseContent;
+        ImageView categorieImageView;
         FoldingCell foldingCell;
 
         //Content Cell
@@ -147,6 +153,7 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             phoneContent = itemView.findViewById(R.id.phoneTextView);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
+            categorieImageView = itemView.findViewById(R.id.categorieHistoriqueJobImageView);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);

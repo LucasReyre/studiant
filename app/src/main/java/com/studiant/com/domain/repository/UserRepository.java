@@ -14,6 +14,7 @@ public interface UserRepository {
 
     User insertUser(User user) throws Exception;
     User updateUser(User user) throws Exception;
+    User updateUserFirebaseToken(User user) throws Exception;
     Job getPaiement(String postulantId, String jobId) throws Exception;
     void getMoney(User user) throws Exception;
     User loginUser(String mail, String password) throws Exception;

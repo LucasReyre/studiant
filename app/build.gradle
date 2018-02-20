@@ -2,19 +2,25 @@ apply plugin: 'com.android.application'
 apply from: "${project.rootDir}/QA/quality.gradle"
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'studiantKey'
+            keyPassword 'Haboetpapou78'
+            storeFile file('C:/Users/lucas/Documents/GitHub/studiant/studiantKey.jks')
+            storePassword 'Haboetpapou78'
+        }
+    }
     compileSdkVersion 27
     buildToolsVersion '26.0.2'
-
     lintOptions {
         abortOnError false
     }
-
     defaultConfig {
         applicationId "com.studiant.com"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 2
-        versionName "1.0"
+        versionCode 7
+        versionName "1.0.4"
         multiDexEnabled true
     }
     buildTypes {
@@ -34,8 +40,7 @@ repositories {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile('com.github.florent37:androidparallax:1.0.1@aar') {
         transitive = true
     }

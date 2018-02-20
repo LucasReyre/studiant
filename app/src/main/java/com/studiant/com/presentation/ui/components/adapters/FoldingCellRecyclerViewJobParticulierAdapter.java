@@ -78,6 +78,20 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
         cellViewHolder.categorieJobImageView.setImageResource(categorie.getImageRessource());
 
+        switch (contents.get(position).getModePaiement()){
+            case "CB":
+                cellViewHolder.modePaiementJobImageView.setImageResource(R.drawable.credit_card);
+                break;
+            case "ESPECES":
+                cellViewHolder.modePaiementJobImageView.setImageResource(R.drawable.change);
+                cellViewHolder.studiantCodeBtn.setVisibility(View.INVISIBLE);
+                break;
+            case "CESU":
+                cellViewHolder.modePaiementJobImageView.setImageResource(R.drawable.check);
+                cellViewHolder.studiantCodeBtn.setVisibility(View.INVISIBLE);
+                break;
+        }
+
         if (contents.get(position).getStatut().equals("2")){
             cellViewHolder.backgroundJobImageView.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
             cellViewHolder.studiantCodeBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
@@ -146,6 +160,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         TextView nummberPostulant;
         TextView categorieJobTextView;
         ImageView categorieJobImageView;
+        ImageView modePaiementJobImageView;
         RelativeLayout backgroundJobImageView;
         TextView cityTextView;
         FoldingCell foldingCell;
@@ -161,6 +176,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             super(itemView);
             backgroundJobImageView = (RelativeLayout) itemView.findViewById(R.id.backgoundJob);
             categorieJobImageView = (ImageView) itemView.findViewById(R.id.categorieImageView);
+            modePaiementJobImageView = (ImageView) itemView.findViewById(R.id.modePaiementJobParticulierImageView);
             titleDescription = (TextView) itemView.findViewById(R.id.categorieTextView);
             //numberTextView = (TextView) itemView.findViewById(R.id.numberTextView);
             price = (TextView) itemView.findViewById(R.id.title_price);

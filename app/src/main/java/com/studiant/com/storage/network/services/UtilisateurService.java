@@ -59,6 +59,12 @@ public interface UtilisateurService {
 
     @FormUrlEncoded
     @Headers("Connection: close")
+    @PATCH("/api/Utilisateurs")
+    Call<RESTUtilisateur> updateUserFirebaseToken(@Field("firebaseToken") String firebaseTokenUtilisateur,
+                                                 @Field("id") String id);
+
+    @FormUrlEncoded
+    @Headers("Connection: close")
     @POST("/mangoApi/demos/user_create_iban.php")
     Call<RESTIban> insertRib( @Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
                                      @Field("IBAN") String iban,

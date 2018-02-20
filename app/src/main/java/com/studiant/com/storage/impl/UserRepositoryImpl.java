@@ -108,6 +108,27 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User updateUserFirebaseToken(User user) throws Exception {
+        UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_URL);
+
+        try {
+
+            //Response<RESTUtilisateur> response = utilisateurService.insertUser(RESTModelConverter.convertToRestUserModel(user)).execute();
+            Response<RESTUtilisateur> response = utilisateurService.updateUserFirebaseToken(user.getFirebaseToken(), user.getId()).execute();
+            if (response.code() == 200){
+                System.out.println("ok" + response.body().getmId());
+                return RESTModelConverter.convertToUserModel(response.body());
+            }
+            else{
+                System.out.println("error");
+                throw new Exception(response.errorBody().string());
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+
+    @Override
     public Job getPaiement(String postulantId, String jobId) throws Exception {
         UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
 

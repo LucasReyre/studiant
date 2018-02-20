@@ -93,6 +93,7 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
                 new UserRepositoryImpl()
         );
         progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
 
     }
 
@@ -130,6 +131,13 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
 
     @Override
     public void onLoginSuccess(User user) {
+        user.setFirebaseToken(FirebaseInstanceId.getInstance().getToken());
+        mPresenter.updateUserFirebaseToken(user);
+    }
+
+
+    @Override
+    public void onTokenUpdate(User user) {
         Intent intent = new Intent();
 
         if (user.getTypeUser() == STATUS_ETUDIANT)
@@ -140,8 +148,6 @@ public class LoginFragment extends Fragment implements LoginPresenter.View {
         intent.putExtra(INTENT_USER, PresentationModelConverter.convertToUserPresenterModel(user));
         startActivity(intent);
     }
-
-
 
     @Override
     public void onLoginFailed(String error) {

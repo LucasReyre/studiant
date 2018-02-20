@@ -61,7 +61,7 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
                 new JobRepositoryImpl()
         );
 
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(this);
 
         user = (User) getIntent().getSerializableExtra(INTENT_USER);
         //postulantArrayList = (ArrayList<User>) getIntent().getSerializableExtra(INTENT_LIST_JOB);
@@ -75,7 +75,7 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
 
     private void createListPostulant(final ArrayList<User> postulantArrayList) {
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellRecyclerViewPostulantAdapter adapter = new FoldingCellRecyclerViewPostulantAdapter(this,postulantArrayList);
+        final FoldingCellRecyclerViewPostulantAdapter adapter = new FoldingCellRecyclerViewPostulantAdapter(this,postulantArrayList, job);
 
         for (int i = 0 ; i<postulantArrayList.size();i++){
             final int j = i;

@@ -5,9 +5,11 @@ import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.GetPasswordInteractorImpl;
 import com.studiant.com.domain.interactors.impl.LoginInteractorImpl;
 import com.studiant.com.domain.interactors.impl.SaveUserInteractorImpl;
+import com.studiant.com.domain.interactors.impl.UpdateUserFirebaseTokenInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.GetPasswordInteractor;
 import com.studiant.com.domain.interactors.interfaces.LoginInteractor;
 import com.studiant.com.domain.interactors.interfaces.SaveUserInteractor;
+import com.studiant.com.domain.interactors.interfaces.UpdateUserFirebaseTokenInteractor;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.base.AbstractPresenter;
@@ -17,7 +19,7 @@ import com.studiant.com.presentation.presenters.interfaces.LoginPresenter;
 /**
  * Created by dmilicic on 12/13/15.
  */
-public class LoginPresenterImpl extends AbstractPresenter implements LoginPresenter, LoginInteractor.Callback, GetPasswordInteractor.Callback {
+public class LoginPresenterImpl extends AbstractPresenter implements LoginPresenter, LoginInteractor.Callback, GetPasswordInteractor.Callback, UpdateUserFirebaseTokenInteractor.Callback {
 
     private View mView;
     private UserRepository mUserRepository;
@@ -86,6 +88,21 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
         interactor.execute();
     }
 
+    @Override
+    public void updateUserFirebaseToken(User user) {
+        mView.showProgress();
+        UpdateUserFirebaseTokenInteractor interactor = new UpdateUserFirebaseTokenInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mUserRepository,
+                user
+        );
+
+        // run the interactor
+        interactor.execute();
+    }
+
     public void saveUser(User user){
         System.out.println("save : "+user.getTelephone());
         SaveUserInteractor interactor = new SaveUserInteractorImpl(
@@ -118,5 +135,17 @@ public class LoginPresenterImpl extends AbstractPresenter implements LoginPresen
     @Override
     public void onPasswordRetrievalFailed(String error) {
         mView.hideProgress();
+    }
+
+    @Override
+    public void onUserFirebaseTokenUpdate(User user) {
+        mView.hideProgress();
+        mView.onTokenUpdate(user);
+    }
+
+    @Override
+    public void onUpdateFailed(String error) {
+        mView.hideProgress();
+
     }
 }
