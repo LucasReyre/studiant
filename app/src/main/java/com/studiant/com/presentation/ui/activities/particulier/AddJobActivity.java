@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
@@ -123,13 +124,13 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
                 new LatLng(42.244785, -2.208252),
                 new LatLng(51.138001, 7.943115)));
 
+        mPresenter.resume();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // let's start welcome message retrieval when the app resumes
-        mPresenter.resume();
     }
 
     @OnTouch(R.id.textViewDate)
@@ -154,7 +155,7 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 job.setCategorie(item);
-                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(view, "Clicked " + job.getCategorie(), Snackbar.LENGTH_LONG).show();
             }
         });
     }
@@ -177,6 +178,15 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
     @OnClick(R.id.buttonAddJob)
     void onClickAddJob() {
 
+        if (dateTextView.getText().toString().length() > 10 || timeTextView.getText().toString().length() > 10 ||
+                priceTextView.getText().toString().equals("")){
+            Toast.makeText(this, "Merci de vérifier votre saisie !",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }
+
+
         FragmentManager fm = getSupportFragmentManager();
         PaymentChoiceFragment paymentChoiceFragment= PaymentChoiceFragment.newInstance();
         paymentChoiceFragment.show(fm, paymentChoiceFragment.getTag());
@@ -186,7 +196,6 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
         job.setDate(dateTextView.getText().toString());
         job.setHeure(timeTextView.getText().toString());
         job.setUtilisateurId(user.getId());
-
         //mPresenter.insertJob(job);
     }
 
@@ -235,6 +244,7 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
 
     @Override
     public void onPaymentConfirm() {
+        System.out.println("onPaymentConfirm "+job.getCategorie());
         fragmentFrameLayout.setVisibility(View.GONE);
         mPresenter.insertJob(job);
 

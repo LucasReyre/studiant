@@ -160,6 +160,12 @@ public class PresentationModelConverter {
                 convertToUserDomainModel(job.getUtilisateur()),
                 convertToArrayListDomainUserModel(job.getPostulants()));
 
+        if (job.getStatut() != null)
+            domainJob.setStatutJob(job.getStatut());
+
+        if (job.getModePaiement() != null)
+            domainJob.setMoyenPayment(job.getModePaiement());
+
         if (job.getLat() != null && job.getLng() != null){
             domainJob.setLat(job.getLat());
             domainJob.setLng(job.getLng());

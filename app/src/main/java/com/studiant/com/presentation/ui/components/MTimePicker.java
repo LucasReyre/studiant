@@ -72,5 +72,9 @@ public class MTimePicker implements View.OnClickListener, TimePickerDialog.OnTim
                 .append(_hour).append("h").append(_minute).append(" "));
     }
 
+    public interface OnFragmentInteractionListener {
+
+    }
+
 
 }

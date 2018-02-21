@@ -34,6 +34,7 @@ public class FoldingCellRecyclerViewPostulantAdapter extends RecyclerView.Adapte
     public FoldingCellRecyclerViewPostulantAdapter(Context context, ArrayList<com.studiant.com.presentation.presenters.model.User> contents, Job job) {
         this.contents = contents;
         this.job = job;
+        this.context = context;
     }
 
     @Override
