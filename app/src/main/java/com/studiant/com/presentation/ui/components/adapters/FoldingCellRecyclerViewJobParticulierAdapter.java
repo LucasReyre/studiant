@@ -96,6 +96,9 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             cellViewHolder.backgroundJobImageView.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
             cellViewHolder.studiantCodeBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
             cellViewHolder.contentRequestBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
+            cellViewHolder.deleteBtn.setVisibility(View.GONE);
+        }else{
+            cellViewHolder.deleteBtn.setVisibility(View.VISIBLE);
         }
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,10 +110,12 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         if (contents.get(position).getRequestBtnClickListener() != null) {
             cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
             cellViewHolder.studiantCodeBtn.setOnClickListener(contents.get(position).getStudiantCodeBtnClickListener());
+            cellViewHolder.deleteBtn.setOnClickListener(contents.get(position).getDeleteBtnClickListener());
         } else {
             // (optionally) add "default" handler if no handler found in item
             cellViewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
             cellViewHolder.studiantCodeBtn.setOnClickListener(defaultRequestBtnClickListener);
+            cellViewHolder.deleteBtn.setOnClickListener(defaultRequestBtnClickListener);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +160,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         TextView titleDescription;
         TextView contentRequestBtn;
         TextView studiantCodeBtn;
+        TextView deleteBtn;
         TextView date;
         TextView time;
         TextView nummberPostulant;
@@ -185,6 +191,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             studiantCodeBtn =  itemView.findViewById(R.id.studiant_btn);
+            deleteBtn =  itemView.findViewById(R.id.delete_btn);
             categorieJobTextView = (TextView) itemView.findViewById(R.id.categorieTextView);
             cityTextView = (TextView) itemView.findViewById(R.id.cityTextView);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);

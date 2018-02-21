@@ -39,6 +39,8 @@ public class PresentationModelConverter {
         if (user.getIdWallet() != null)
             mUser.setIdWallet(user.getIdWallet());
 
+        if (user.getIdIban() != null)
+            mUser.setIdIban(user.getIdIban());
 
         return mUser;
     }

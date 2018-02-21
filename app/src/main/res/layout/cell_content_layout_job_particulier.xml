@@ -222,6 +222,19 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
+
+        <TextView
+            android:id="@+id/delete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/customRed"
+            android:padding="10dp"
+            android:text="@string/delete"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/studiant_btn"
             android:layout_width="match_parent"
@@ -233,6 +246,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
+
 
         <TextView
             android:id="@+id/number_postulant_textview"

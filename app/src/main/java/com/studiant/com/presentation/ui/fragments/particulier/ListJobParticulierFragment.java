@@ -56,6 +56,7 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ArrayList<Job> mJobArrayList;
+    private int mDeletedJobClick;
 
     FoldingCellRecyclerViewJobParticulierAdapter adapter;
     User user;
@@ -88,6 +89,7 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
             );
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -171,6 +173,14 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
                     onStudiantCodeClick(jobArrayList.get(j));
                 }
             });
+
+            jobArrayList.get(i).setDeleteBtnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDeletedJobClick = j;
+                    onDeleteClick(jobArrayList.get(j));
+                }
+            });
         }
         //setup materialviewpager
 
@@ -223,8 +233,20 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         }else{
             toastJobCompleted();
         }
+    }
+
+    public void onDeleteClick(Job job){
+        mPresenter.deleteJob(job.getId());
+    }
+
+    @Override
+    public void onJobDelete() {
+        System.out.println("jobDelete");
+        mJobArrayList.remove(mDeletedJobClick);
+        adapter.notifyDataSetChanged();
 
     }
+
 
     public void toastJobCompleted(){
         Toast.makeText(getActivity(), "Ce job est terminé",

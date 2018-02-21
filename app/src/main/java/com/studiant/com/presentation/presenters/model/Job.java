@@ -29,6 +29,7 @@ public class Job implements Serializable{
 
     private View.OnClickListener requestBtnClickListener;
     private View.OnClickListener studiantCodeBtnClickListener;
+    private View.OnClickListener deleteBtnClickListener;
 
     public Job(){}
 
@@ -152,6 +153,14 @@ public class Job implements Serializable{
 
     public void setStudiantCodeBtnClickListener(View.OnClickListener studiantCodeBtnClickListener) {
         this.studiantCodeBtnClickListener = studiantCodeBtnClickListener;
+    }
+
+    public View.OnClickListener getDeleteBtnClickListener() {
+        return deleteBtnClickListener;
+    }
+
+    public void setDeleteBtnClickListener(View.OnClickListener deleteBtnClickListener) {
+        this.deleteBtnClickListener = deleteBtnClickListener;
     }
 
     public ArrayList<User> getPostulants() {

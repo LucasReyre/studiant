@@ -5,9 +5,11 @@ import android.util.Log;
 import com.studiant.com.domain.executor.Executor;
 import com.studiant.com.domain.executor.MainThread;
 import com.studiant.com.domain.interactors.impl.ChooseInteractorImpl;
+import com.studiant.com.domain.interactors.impl.DeleteJobInteractorImpl;
 import com.studiant.com.domain.interactors.impl.GetJobsInteractorImpl;
 import com.studiant.com.domain.interactors.impl.InsertJobInteractorImpl;
 import com.studiant.com.domain.interactors.interfaces.ChooseInteractor;
+import com.studiant.com.domain.interactors.interfaces.DeleteJobInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetJobsInteractor;
 import com.studiant.com.domain.interactors.interfaces.InsertJobInteractor;
 import com.studiant.com.domain.model.Job;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
  * Created by dmilicic on 12/13/15.
  */
 public class DashboardPresenterImpl extends AbstractPresenter implements DashboardPresenter,
-        GetJobsInteractor.Callback {
+        GetJobsInteractor.Callback, DeleteJobInteractor.Callback {
 
     private View mView;
     private JobRepository mJobRepository;
@@ -80,6 +82,20 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
     }
 
     @Override
+    public void deleteJob(String idJob) {
+        mView.showProgress();
+        DeleteJobInteractor interactor = new DeleteJobInteractorImpl(
+                mExecutor,
+                mMainThread,
+                this,
+                mJobRepository,
+                idJob
+        );
+
+        interactor.execute();
+    }
+
+    @Override
     public void onJobsRetrieve(ArrayList<Job> jobArrayList) {
         mView.onJobsRetrieve(PresentationModelConverter.convertToArrayListPresenterJobModel(jobArrayList));
     }
@@ -88,5 +104,16 @@ public class DashboardPresenterImpl extends AbstractPresenter implements Dashboa
     public void onRetrievalFailed(String error) {
        // mView.showError(error);
 
+    }
+
+    @Override
+    public void onJobDelete() {
+        mView.hideProgress();
+        mView.onJobDelete();
+    }
+
+    @Override
+    public void onDeleteFailed(String error) {
+        mView.hideProgress();
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
@@ -54,5 +55,10 @@ public interface JobService {
     @Headers("Connection: close")
     @PATCH("/api/Jobs/{job_id}")
     Call<RESTJob> updateJob(@Path(value = "job_id", encoded = true) String userId, @Body RESTJob restJob);
+
+    //Update d'un job
+    @Headers("Connection: close")
+    @DELETE("/api/Jobs/{job_id}")
+    Call<RESTJob> deleteJob(@Path(value = "job_id", encoded = true) String jobId);
 
 }

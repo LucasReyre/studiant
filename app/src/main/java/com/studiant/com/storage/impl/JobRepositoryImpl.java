@@ -145,6 +145,30 @@ public class JobRepositoryImpl implements JobRepository {
     }
 
     @Override
+    public void deleteJob(String idJob) {
+        JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
+
+        try {
+            Response<RESTJob> response = jobService.deleteJob(idJob).execute();
+
+            if(response.code() == HTTP_CODE_200)
+                Timber.i("G: %d", response.code());
+            else{
+                Log.d("repo", "error");
+                Log.d("repo", response.errorBody().string());
+
+            }
+            //restJob = response.body();
+
+            //return RESTModelConverter.convertToJobModel(response.body());
+
+        } catch (IOException e) { // something went wrong
+            Timber.e("GET JOBS BY USER FAILED"+e.getMessage());
+        }
+        //return null;
+    }
+
+    @Override
     public Job updateJob(Job job) {
         JobService jobService = RestClient.createService(JobService.class, REST_API_URL);
 

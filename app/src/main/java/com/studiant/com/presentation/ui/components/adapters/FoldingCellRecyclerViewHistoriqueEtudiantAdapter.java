@@ -58,14 +58,18 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         //viewHolder.toAddress.setText(item.getToAddress());
 
         //Content
-        cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName() + " " +contents.get(position).getUtilisateur().getLastName());
+
+        if (contents.get(position).getUtilisateur() != null){
+            cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName() + " " +contents.get(position).getUtilisateur().getLastName());
+            cellViewHolder.phoneContent.setText(contents.get(position).getUtilisateur().getTelephone());
+        }
+
         cellViewHolder.priceContent.setText(contents.get(position).getPrix() + " €");
         //cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.adresseContent.setText(contents.get(position).getAdresse());
         cellViewHolder.timeHeure.setText(contents.get(position).getHeure());
         cellViewHolder.contentDate.setText(contents.get(position).getDate());
         cellViewHolder.description.setText(contents.get(position).getDescription());
-        cellViewHolder.phoneContent.setText(contents.get(position).getUtilisateur().getTelephone());
 
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
         cellViewHolder.categorieImageView.setImageResource(categorie.getImageRessource());

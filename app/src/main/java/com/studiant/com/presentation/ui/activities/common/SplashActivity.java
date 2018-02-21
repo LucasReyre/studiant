@@ -57,7 +57,7 @@ public class SplashActivity extends Activity implements SplashPresenter.View, My
     @Override
     public void onProfileRetrieve(User user) {
         Intent intent = new Intent();
-
+        System.out.println("onProfileretrieve "+user.getIdIban());
         if (user.getTypeUser() == STATUS_ETUDIANT)
             intent = new Intent(context, DashboardEtudiantActivity.class);
         else if(user.getTypeUser() == STATUS_PARTICULIER)

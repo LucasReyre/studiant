@@ -206,7 +206,8 @@ public class ProfilEtudiant2Fragment extends Fragment implements ProfilParticuli
     public boolean verifForm(){
         if (lastNameEditText.getText().toString().length() > 1 && firstNameEditText.getText().toString().length() > 1
             && isValidEmail(emailEditText.getText().toString()) && diplomeEditText.getText().toString().length() > 1
-            && telephoneEditText.getText().toString().length() == 10 && passwordEditText.toString().length() > 1)
+            && telephoneEditText.getText().toString().length() == 10 && passwordEditText.toString().length() > 1
+                && encodedImage != null)
             return true;
         else{
             Toast.makeText(getActivity(), "Merci de vérifier votre saisie",
