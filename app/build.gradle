@@ -19,8 +19,8 @@ android {
         applicationId "com.studiant.com"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 8
-        versionName "1.0.5"
+        versionCode 9
+        versionName "1.0.6"
         multiDexEnabled true
     }
     buildTypes {

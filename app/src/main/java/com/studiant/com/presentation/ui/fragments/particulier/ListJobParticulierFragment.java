@@ -244,7 +244,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         System.out.println("jobDelete");
         mJobArrayList.remove(mDeletedJobClick);
         adapter.notifyDataSetChanged();
-
     }
 
 
