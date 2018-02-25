@@ -6,6 +6,7 @@ import com.studiant.com.domain.interactors.base.AbstractInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetCardInteractor;
 import com.studiant.com.domain.interactors.interfaces.GetMoneyInteractor;
 import com.studiant.com.domain.model.Card;
+import com.studiant.com.domain.model.Payout;
 import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.converters.PresentationModelConverter;
 import com.studiant.com.presentation.presenters.model.User;
@@ -52,8 +53,12 @@ public class GetMoneyInteractorImpl extends AbstractInteractor implements GetMon
     public void run() {
         // retrieve the message
         try {
-            mUserRepository.getMoney(PresentationModelConverter.convertToUserDomainModel(mUser));
-            postMessage();
+            Payout payout = mUserRepository.getMoney(PresentationModelConverter.convertToUserDomainModel(mUser));
+
+            if (payout != null && payout.getStatus() == "CREATED")
+                postMessage();
+            else
+                notifyError();
 
         } catch (Exception e) {
             e.printStackTrace();

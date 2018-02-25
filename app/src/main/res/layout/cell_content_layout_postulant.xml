@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:minHeight="300dp"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <!-- content header line -->
     <RelativeLayout

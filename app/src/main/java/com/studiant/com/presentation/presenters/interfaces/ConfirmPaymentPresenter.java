@@ -13,5 +13,6 @@ public interface ConfirmPaymentPresenter extends BasePresenter {
 
     interface View extends BaseView {
         void onPaymentAccepted();
+        void onPaymentRefused();
     }
 }

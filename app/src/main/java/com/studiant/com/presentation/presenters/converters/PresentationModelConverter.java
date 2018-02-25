@@ -122,6 +122,9 @@ public class PresentationModelConverter {
             presenterJob.setLng(job.getLng());
         }
 
+        if (job.getPostulantId() != null)
+            presenterJob.setPostulantId(job.getPostulantId());
+
         if (job.getMoyenPayment() != null)
             presenterJob.setModePaiement(job.getMoyenPayment());
 
@@ -164,6 +167,9 @@ public class PresentationModelConverter {
 
         if (job.getStatut() != null)
             domainJob.setStatutJob(job.getStatut());
+
+        if (job.getPostulantId() != null)
+            domainJob.setPostulantId(job.getPostulantId());
 
         if (job.getModePaiement() != null)
             domainJob.setMoyenPayment(job.getModePaiement());

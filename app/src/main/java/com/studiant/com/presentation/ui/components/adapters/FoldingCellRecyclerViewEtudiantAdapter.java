@@ -50,14 +50,13 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder cellViewHolder = (ViewHolder) holder;
         cellViewHolder.foldingCell.fold(true);
-        String prix = contents.get(position).getPrix()+" €";
 //        cellViewHolder.price.setText(prix);
+        String prix = contents.get(position).getPrix()+" €";
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
         //viewHolder.toAddress.setText(item.getToAddress());
         cellViewHolder.cityTextView.setText(contents.get(position).getCity());
         cellViewHolder.cityContentTextView.setText(contents.get(position).getCity());
-        cellViewHolder.tarifTextView.setText(prix);
 
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
         cellViewHolder.categorieTextView.setText(contents.get(position).getCategorie());
@@ -65,15 +64,17 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
 
         //Content
         cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
-        cellViewHolder.priceContent.setText(contents.get(position).getPrix() +" €");
+
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
         cellViewHolder.description.setText(contents.get(position).getDescription());
-
         switch (contents.get(position).getModePaiement()){
             case "CB":
                 cellViewHolder.modePaiementImage.setImageResource(R.drawable.credit_card);
                 cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.credit_card);
+                float commission = Float.parseFloat(contents.get(position).getPrix())*15/100;
+                float finalPrice = Float.parseFloat(contents.get(position).getPrix()) - commission;
+                prix = String.valueOf(finalPrice) + " €";
                 break;
             case "ESPECES":
                 cellViewHolder.modePaiementImage.setImageResource(R.drawable.change);
@@ -85,6 +86,8 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
                 break;
         }
 
+        cellViewHolder.tarifTextView.setText(prix);
+        cellViewHolder.priceContent.setText(prix);
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

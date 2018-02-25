@@ -1,5 +1,6 @@
 package com.studiant.com.presentation.ui.fragments.etudiant;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
@@ -18,6 +20,7 @@ import com.studiant.com.presentation.presenters.interfaces.AddRibPresenter;
 import com.studiant.com.presentation.presenters.interfaces.StudiantCodePresenter;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
 import com.studiant.com.storage.network.WSException;
 import com.studiant.com.threading.MainThreadImpl;
@@ -34,6 +37,8 @@ public class StudiantCodeFragment extends Fragment implements StudiantCodePresen
     private StudiantCodePresenter mPresenter;
     private User user;
     private Job job;
+    private ProgressDialog progressDialog;
+    private DashboardEtudiantActivity mActivity;
 
     public StudiantCodeFragment() {
         // Required empty public constructor
@@ -42,6 +47,7 @@ public class StudiantCodeFragment extends Fragment implements StudiantCodePresen
     public static StudiantCodeFragment newInstance(User user, Job job) {
         StudiantCodeFragment fragment = new StudiantCodeFragment();
         Bundle args = new Bundle();
+        System.out.println("user : "+user.getId());
         args.putSerializable(INTENT_USER, user);
         args.putSerializable(INTENT_JOB, job);
         fragment.setArguments(args);
@@ -55,6 +61,9 @@ public class StudiantCodeFragment extends Fragment implements StudiantCodePresen
             user = (User) getArguments().getSerializable(INTENT_USER);
             job = (Job) getArguments().getSerializable(INTENT_JOB);
         }
+        mActivity = (DashboardEtudiantActivity) getActivity();
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -104,22 +113,25 @@ public class StudiantCodeFragment extends Fragment implements StudiantCodePresen
     public void onPaiementSuccess(Job job) {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.remove(this).commit();
-
+        mActivity.reloadDashboardEtudiant();
     }
 
     @Override
     public void onPaiementError() {
-
+        Toast.makeText(getActivity(), "Merci de vérifier votre saisie",
+                Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showProgress() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_wait));
+        progressDialog.show();
 
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @Override

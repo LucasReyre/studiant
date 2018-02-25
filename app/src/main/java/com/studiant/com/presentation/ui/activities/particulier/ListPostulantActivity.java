@@ -67,15 +67,30 @@ public class ListPostulantActivity extends Activity implements ChoosePostulantPr
         //postulantArrayList = (ArrayList<User>) getIntent().getSerializableExtra(INTENT_LIST_JOB);
 
         job = PresentationModelConverter.convertToJobPresenterModel((com.studiant.com.domain.model.Job) getIntent().getSerializableExtra(INTENT_JOB));
-        createListPostulant(job.getPostulants());
+
+        if (job.getStatut().equals("1"))
+            createListPostulant(getStudiantChoose());
+        else
+            createListPostulant(job.getPostulants());
+
 
 
     }
 
+    private ArrayList<User> getStudiantChoose(){
+        ArrayList<User> postulant = new ArrayList<>();
+        for (int i = 0; i < job.getPostulants().size() ; i++){
+            if (job.getPostulants().get(i).getId().equals(job.getPostulantId())){
+                postulant.add(job.getPostulants().get(i));
+                return postulant;
+            }
+        }
+
+        return postulant;
+    }
+
     private void createListPostulant(final ArrayList<User> postulantArrayList) {
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        System.out.println("createListPostulant "+job.getStatut());
-        System.out.println("createListPostulant "+job.getModePaiement());
         final FoldingCellRecyclerViewPostulantAdapter adapter = new FoldingCellRecyclerViewPostulantAdapter(this,postulantArrayList, job);
 
         for (int i = 0 ; i<postulantArrayList.size();i++){

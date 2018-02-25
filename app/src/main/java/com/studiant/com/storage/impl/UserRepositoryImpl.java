@@ -15,6 +15,7 @@ import com.studiant.com.domain.model.Card;
 import com.studiant.com.domain.model.CardReg;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.PayIn;
+import com.studiant.com.domain.model.Payout;
 import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
 import com.studiant.com.domain.repository.UserRepository;
@@ -26,6 +27,7 @@ import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTImage;
 import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
+import com.studiant.com.storage.network.model.RESTPayout;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
 import com.studiant.com.storage.network.services.UtilisateurService;
 
@@ -147,11 +149,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void getMoney(User user) throws Exception {
+    public Payout getMoney(User user) throws Exception {
         UtilisateurService utilisateurService = RestClient.createService(UtilisateurService.class, REST_API_OVH);
 
         try {
-            Response<Void> response = utilisateurService.getMoney(user.getIdWallet(),
+            Response<RESTPayout> response = utilisateurService.getMoney(user.getIdWallet(),
                                                                     user.getLastName(),
                                                                     user.getFirstName(),
                                                                     user.getIdMangoPay(),
@@ -159,6 +161,7 @@ public class UserRepositoryImpl implements UserRepository {
                                                                     user.getIban(),
                                                                     user.getIdIban()).execute();
             if (response.code() == 200){
+                return RESTModelConverter.convertToPayoutModel(response.body());
                 //return RESTModelConverter.convertToJobModel(response.body());
             }
             else{

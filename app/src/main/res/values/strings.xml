@@ -82,6 +82,7 @@
     <string name="get_message">Récupération des jobs</string>
     <string name="get_message_postulant">Postulation en cours</string>
     <string name="get_message_add_rib">Ajout en cours</string>
+    <string name="get_message_wait">Merci de patienter</string>
     <string name="get_message_inscription_loading">Inscription en cours</string>
     <string name="get_message_password">Récupération du mot de passe</string>
     <string name="get_message_connexion">Connexion en cours</string>

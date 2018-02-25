@@ -46,6 +46,7 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
     private static final boolean GRID_LAYOUT = false;
     @BindView(R.id.mainListView) RecyclerView mRecyclerView;
 
+    private DashboardEtudiantActivity mActivity;
 
     private ProgressDialog progressDialog;
     User user;
@@ -78,6 +79,7 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
             );
         }
         progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -90,7 +92,7 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
+        mActivity = (DashboardEtudiantActivity) this.getActivity();
         mPresenter.getHistoriqueJobs(user);
 
     }
@@ -119,7 +121,7 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
         //final ArrayList<Item> items = Item.getTestingList();
 
         // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
-        final FoldingCellRecyclerViewHistoriqueEtudiantAdapter adapter = (new FoldingCellRecyclerViewHistoriqueEtudiantAdapter(jobArrayList));
+        final FoldingCellRecyclerViewHistoriqueEtudiantAdapter adapter = (new FoldingCellRecyclerViewHistoriqueEtudiantAdapter(jobArrayList, this.getContext()));
 
         for (int i = 0 ; i<jobArrayList.size();i++){
             final int j = i;
@@ -172,5 +174,6 @@ public class ListHistoriqueJobEtudiantFragment extends Fragment implements Histo
     @Override
     public void onJobClose() {
         Toast.makeText(getActivity(), "Ce job est validé", Toast.LENGTH_LONG).show();
+        mActivity.reloadDashboardEtudiant();
     }
 }

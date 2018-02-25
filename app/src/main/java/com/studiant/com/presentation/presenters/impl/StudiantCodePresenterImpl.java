@@ -76,11 +76,13 @@ public class StudiantCodePresenterImpl extends AbstractPresenter implements Stud
 
     @Override
     public void onPaiementSuccess(Job job) {
+        mView.hideProgress();
         mView.onPaiementSuccess(PresentationModelConverter.convertToJobPresenterModel(job));
     }
 
     @Override
     public void onPaiementFailed(String error) {
-
+        mView.hideProgress();
+        mView.onPaiementError();
     }
 }

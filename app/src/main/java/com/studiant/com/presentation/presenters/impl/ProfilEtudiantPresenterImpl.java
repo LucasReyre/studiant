@@ -81,6 +81,7 @@ public class ProfilEtudiantPresenterImpl extends AbstractPresenter implements Pr
 
     @Override
     public void getMoney(User user) {
+        mView.showProgress();
         GetMoneyInteractor interactor = new GetMoneyInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -116,12 +117,14 @@ public class ProfilEtudiantPresenterImpl extends AbstractPresenter implements Pr
 
     @Override
     public void onMoneyRetrieve() {
-
+        mView.hideProgress();
+        mView.onMoneyRetrieve();
     }
 
     @Override
     public void onMoneyRetrievalFailed(String error) {
-
+        mView.hideProgress();
+        mView.onMoneyRetrievedFail();
     }
 
     @Override

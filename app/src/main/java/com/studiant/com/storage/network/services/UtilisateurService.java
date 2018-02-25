@@ -6,6 +6,7 @@ import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTImage;
 import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
+import com.studiant.com.storage.network.model.RESTPayout;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
 
 import java.util.HashMap;
@@ -78,13 +79,13 @@ public interface UtilisateurService {
     @FormUrlEncoded
     @Headers("Connection: close")
     @POST("/mangoApi/demos/payout.php")
-    Call<Void> getMoney(@Field("idWalletUtilisateur") String idWalletUtilisateur,
-                         @Field("nomUtilisateur") String nomUtilsateur,
-                         @Field("prenomUtilisateur") String prenomUtilisateur,
-                         @Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
-                         @Field("mailUtilisateur") String mailUtilisateur,
-                         @Field("ibanUtilisateur") String ibanUtilisateur,
-                         @Field("idIbanUtilisateur") String idIbanUtilisateur);
+    Call<RESTPayout> getMoney(@Field("idWalletUtilisateur") String idWalletUtilisateur,
+                              @Field("nomUtilisateur") String nomUtilsateur,
+                              @Field("prenomUtilisateur") String prenomUtilisateur,
+                              @Field("idMangoPayUtilisateur") String idMangoPayUtilisateur,
+                              @Field("mailUtilisateur") String mailUtilisateur,
+                              @Field("ibanUtilisateur") String ibanUtilisateur,
+                              @Field("idIbanUtilisateur") String idIbanUtilisateur);
 
     @FormUrlEncoded
     @Headers("Connection: close")

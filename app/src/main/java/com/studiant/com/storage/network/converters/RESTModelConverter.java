@@ -4,6 +4,7 @@ import com.studiant.com.domain.model.Card;
 import com.studiant.com.domain.model.CardReg;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.PayIn;
+import com.studiant.com.domain.model.Payout;
 import com.studiant.com.domain.model.Postulant;
 import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
@@ -13,6 +14,7 @@ import com.studiant.com.storage.network.model.RESTGeoplace;
 import com.studiant.com.storage.network.model.RESTIban;
 import com.studiant.com.storage.network.model.RESTJob;
 import com.studiant.com.storage.network.model.RESTPayIn;
+import com.studiant.com.storage.network.model.RESTPayout;
 import com.studiant.com.storage.network.model.RESTPostulant;
 import com.studiant.com.storage.network.model.RESTUtilisateur;
 
@@ -198,6 +200,11 @@ public class RESTModelConverter {
                             restPostulant.getmJobId());
     }
 
+    public static Payout convertToPayoutModel(RESTPayout restPayout){
+
+        return new Payout(restPayout.getId(), restPayout.getStatus(), restPayout.getAmount());
+    }
+
     public static Job convertToJobModel(RESTJob restJob){
         String id = restJob.getmId();
         String prix = restJob.getmPrixJob();
@@ -208,13 +215,14 @@ public class RESTModelConverter {
         String utilisateurId = restJob.getmUtilisateurId();
         String typePaiementJob = restJob.getTypePaiementJob();
 
-        System.out.println("convertoJob "+typePaiementJob);
-
         ArrayList<User> postulantsArrayList = new ArrayList<User>();
 
         Job job =  new Job(id,description,prix ,adresse, date, heure, utilisateurId);
 
         job.setMoyenPayment(typePaiementJob);
+
+        if (restJob.getmPostulantId() != null)
+            job.setPostulantId(restJob.getmPostulantId());
 
         if (restJob.getMcategorieJob() != null)
             job.setCategorie(restJob.getMcategorieJob());

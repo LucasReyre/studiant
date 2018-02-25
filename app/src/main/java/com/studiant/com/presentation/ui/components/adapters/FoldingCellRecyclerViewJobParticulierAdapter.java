@@ -81,6 +81,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
         switch (contents.get(position).getModePaiement()){
             case "CB":
                 cellViewHolder.modePaiementJobImageView.setImageResource(R.drawable.credit_card);
+                cellViewHolder.studiantCodeBtn.setVisibility(View.VISIBLE);
                 break;
             case "ESPECES":
                 cellViewHolder.modePaiementJobImageView.setImageResource(R.drawable.change);

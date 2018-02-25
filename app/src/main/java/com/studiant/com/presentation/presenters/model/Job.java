@@ -25,6 +25,7 @@ public class Job implements Serializable{
     private User utilisateur;
     private String modePaiement;
     private String statut;
+    private String postulantId;
     private ArrayList<User> postulants;
 
     private View.OnClickListener requestBtnClickListener;
@@ -217,5 +218,13 @@ public class Job implements Serializable{
 
     public void setStatut(String statut) {
         this.statut = statut;
+    }
+
+    public String getPostulantId() {
+        return postulantId;
+    }
+
+    public void setPostulantId(String postulantId) {
+        this.postulantId = postulantId;
     }
 }

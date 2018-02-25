@@ -58,7 +58,7 @@ public class ConfirmPaymentPresenterImpl extends AbstractPresenter implements Co
 
     @Override
     public void directePayment(String mangoPayId, String amount) {
-
+        mView.showProgress();
         DirectPaymentInteractor interactor = new DirectPaymentInteractorImpl(
                 mExecutor,
                 mMainThread,
@@ -75,11 +75,13 @@ public class ConfirmPaymentPresenterImpl extends AbstractPresenter implements Co
 
     @Override
     public void onDirectPaymentAccepted() {
+        mView.hideProgress();
         mView.onPaymentAccepted();
     }
 
     @Override
     public void onDirectPaymentFailed(String error) {
-
+        mView.hideProgress();
+        mView.onPaymentRefused();
     }
 }

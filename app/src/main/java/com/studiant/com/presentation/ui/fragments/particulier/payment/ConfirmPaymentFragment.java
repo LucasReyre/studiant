@@ -1,24 +1,22 @@
 package com.studiant.com.presentation.ui.fragments.particulier.payment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.vision.text.Text;
 import com.studiant.com.R;
 import com.studiant.com.domain.executor.impl.ThreadExecutor;
 import com.studiant.com.domain.model.Job;
-import com.studiant.com.domain.repository.UserRepository;
 import com.studiant.com.presentation.presenters.impl.ConfirmPaymentPresenterImpl;
-import com.studiant.com.presentation.presenters.impl.MainPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.ConfirmPaymentPresenter;
 import com.studiant.com.presentation.presenters.model.User;
 import com.studiant.com.storage.impl.UserRepositoryImpl;
@@ -29,7 +27,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.studiant.com.storage.Constants.INTENT_AMOUNT;
 import static com.studiant.com.storage.Constants.INTENT_JOB;
 import static com.studiant.com.storage.Constants.INTENT_USER;
 
@@ -40,7 +37,7 @@ public class ConfirmPaymentFragment extends Fragment implements ConfirmPaymentPr
     @BindView(R.id.confirmPaymentButton) Button confirmPaymentButton;
     @BindView(R.id.amountTextView) TextView amountTextView;
 
-
+    private ProgressDialog progressDialog;
     private User user;
     private Job job;
     private ConfirmPaymentPresenter mPresenter;
@@ -66,6 +63,9 @@ public class ConfirmPaymentFragment extends Fragment implements ConfirmPaymentPr
             user = (User) getArguments().getSerializable(INTENT_USER);
             job = (Job) getArguments().getSerializable(INTENT_JOB);
         }
+
+        progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.setCancelable(false);
 
         mPresenter = new ConfirmPaymentPresenterImpl(
                 ThreadExecutor.getInstance(),
@@ -94,7 +94,6 @@ public class ConfirmPaymentFragment extends Fragment implements ConfirmPaymentPr
 
     @OnClick(R.id.confirmPaymentButton)
     public void confirmPayment(){
-
         switch (job.getMoyenPayment()){
             case "CB":
                 mPresenter.directePayment(user.getIdMangoPay(), job.getPrix());
@@ -111,8 +110,16 @@ public class ConfirmPaymentFragment extends Fragment implements ConfirmPaymentPr
 
     @Override
     public void showProgress() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_wait));
+        progressDialog.show();
 
     }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.hide();
+    }
+
 
     @Override
     public void onPaymentAccepted() {
@@ -120,8 +127,13 @@ public class ConfirmPaymentFragment extends Fragment implements ConfirmPaymentPr
     }
 
     @Override
-    public void hideProgress() {
-
+    public void onPaymentRefused() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.remove(this).commit();
+        Toast.makeText(this.getContext(), "Une erreure est survenue lors du paiement !",
+                Toast.LENGTH_LONG).show();
+        mListener.needCbRegister();
+        System.out.println("payment refused");
     }
 
     @Override
@@ -148,5 +160,6 @@ public class ConfirmPaymentFragment extends Fragment implements ConfirmPaymentPr
 
     public interface OnFragmentInteractionListener {
         void onPaymentConfirm();
+        void needCbRegister();
     }
 }

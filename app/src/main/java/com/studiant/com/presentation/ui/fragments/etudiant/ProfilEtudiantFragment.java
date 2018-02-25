@@ -1,15 +1,18 @@
 package com.studiant.com.presentation.ui.fragments.etudiant;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -49,6 +52,9 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
     @BindView(R.id.mailTextView)
     TextView mailTextView;
 
+    @BindView(R.id.addRibButton)
+    Button addRibButton;
+
     @BindView(R.id.diplomeEditText)
     TextView diplomeEditText;
 
@@ -59,6 +65,7 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
     @BindView(R.id.editTextDescription)
     TextView descriptionEditText;
 
+    private ProgressDialog progressDialog;
     User user;
 
     private ProfilEtudiantPresenter mPresenter;
@@ -79,6 +86,8 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
         if (getArguments() != null) {
             user = (User) getArguments().getSerializable(INTENT_USER);
         }
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -101,13 +110,23 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
         //setup materialviewpager
         MaterialViewPagerHelper.registerScrollView(getActivity(), profilEtudiantscrollView);
 
+        if(user.getIdIban() != null){
+            addRibButton.setBackgroundColor(ContextCompat.getColor(this.getContext(),R.color.warm_grey));
+        }
+
     }
+
 
     @OnClick(R.id.addRibButton)
     public void onAddRibClick(){
-        AddRibFragment addRibFragment = AddRibFragment.newInstance(user);
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.add(android.R.id.content, addRibFragment, addRibFragment.getClass().getName()).commit();
+        if(user.getIdIban() != null){
+            Toast.makeText(getActivity(), "Un RIB à déja été renseigné",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            AddRibFragment addRibFragment = AddRibFragment.newInstance(user);
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.add(android.R.id.content, addRibFragment, addRibFragment.getClass().getName()).commit();
+        }
     }
 
 
@@ -119,7 +138,6 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
         }else{
             mPresenter.getMoney(user);
         }
-
     }
 
     private void bindView() {
@@ -134,17 +152,25 @@ public class ProfilEtudiantFragment extends Fragment implements ProfilEtudiantPr
 
     @Override
     public void onMoneyRetrieve() {
-
+        Toast.makeText(getActivity(), "Votre argent à bien été transféré",
+                Toast.LENGTH_LONG).show();
     }
 
     @Override
+    public void onMoneyRetrievedFail() {
+        Toast.makeText(getActivity(), "Vous n'avez pas d'argent à transféré",
+                Toast.LENGTH_LONG).show();
+    }
+
     public void showProgress() {
+        progressDialog.setMessage(getResources().getString(R.string.get_message_wait));
+        progressDialog.show();
 
     }
 
     @Override
     public void hideProgress() {
-
+        progressDialog.hide();
     }
 
     @OnClick(R.id.saveButton)

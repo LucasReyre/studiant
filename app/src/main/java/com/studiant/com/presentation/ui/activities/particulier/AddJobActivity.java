@@ -115,7 +115,7 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
         );
 
         progressDialog = new ProgressDialog(this);
-        //progressDialog.setCancelable(false);
+        progressDialog.setCancelable(false);
 
         autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
@@ -240,6 +240,12 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ConfirmPaymentFragment confirmPaymentFragment= ConfirmPaymentFragment.newInstance(user, job);
         ft.replace(R.id.fragmentFramelayout, confirmPaymentFragment, confirmPaymentFragment.getClass().getName()).commit();
+    }
+
+    @Override
+    public void needCbRegister() {
+        fragmentFrameLayout.setVisibility(View.GONE);
+        displayAddCard();
     }
 
     @Override

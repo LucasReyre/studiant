@@ -4,6 +4,7 @@ import com.studiant.com.domain.model.Card;
 import com.studiant.com.domain.model.CardReg;
 import com.studiant.com.domain.model.Job;
 import com.studiant.com.domain.model.PayIn;
+import com.studiant.com.domain.model.Payout;
 import com.studiant.com.domain.model.Rib;
 import com.studiant.com.domain.model.User;
 
@@ -16,7 +17,7 @@ public interface UserRepository {
     User updateUser(User user) throws Exception;
     User updateUserFirebaseToken(User user) throws Exception;
     Job getPaiement(String postulantId, String jobId) throws Exception;
-    void getMoney(User user) throws Exception;
+    Payout getMoney(User user) throws Exception;
     User loginUser(String mail, String password) throws Exception;
     void getPassword(String mail) throws Exception;
     Card getCardUser(User user) throws Exception;

@@ -1,10 +1,13 @@
 package com.studiant.com.presentation.ui.components.adapters;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
@@ -25,13 +28,15 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
 
     List<Job> contents;
 
+    Context context;
     static final int TYPE_HEADER = 0;
     static final int TYPE_CELL = 1;
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
 
-    public FoldingCellRecyclerViewHistoriqueEtudiantAdapter(ArrayList<Job> contents) {
+    public FoldingCellRecyclerViewHistoriqueEtudiantAdapter(ArrayList<Job> contents, Context context) {
         this.contents = contents;
+        this.context = context;
     }
 
     @Override
@@ -51,7 +56,6 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         cellViewHolder.foldingCell.fold(true);
         cellViewHolder.titleDescription.setText(contents.get(position).getCategorie());
         String prix = contents.get(position).getPrix()+" €";
-        cellViewHolder.price.setText(prix);
         cellViewHolder.cityTitle.setText(contents.get(position).getCity());
         cellViewHolder.time.setText(contents.get(position).getHeure());
         cellViewHolder.date.setText(contents.get(position).getDate());
@@ -64,7 +68,7 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
             cellViewHolder.phoneContent.setText(contents.get(position).getUtilisateur().getTelephone());
         }
 
-        cellViewHolder.priceContent.setText(contents.get(position).getPrix() + " €");
+
         //cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.adresseContent.setText(contents.get(position).getAdresse());
         cellViewHolder.timeHeure.setText(contents.get(position).getHeure());
@@ -73,6 +77,33 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
 
         Categorie categorie = new Categorie(contents.get(position).getCategorie());
         cellViewHolder.categorieImageView.setImageResource(categorie.getImageRessource());
+
+        switch (contents.get(position).getModePaiement()){
+            case "CB":
+                cellViewHolder.modePaiementImageView.setImageResource(R.drawable.credit_card);
+                float commission = Float.parseFloat(contents.get(position).getPrix())*15/100;
+                float finalPrice = Float.parseFloat(contents.get(position).getPrix()) - commission;
+                prix = String.valueOf(finalPrice) + " €";
+                break;
+            case "ESPECES":
+                cellViewHolder.modePaiementImageView.setImageResource(R.drawable.change);
+                break;
+            case "CESU":
+                cellViewHolder.modePaiementImageView.setImageResource(R.drawable.check);
+                break;
+        }
+        cellViewHolder.price.setText(prix);
+        cellViewHolder.priceContent.setText(prix);
+        System.out.println("status : "+contents.get(position).getStatut() +  " "+contents.get(position).getCategorie() + " " + contents.get(position).getModePaiement());
+
+        if (contents.get(position).getStatut().equals("2")){
+            cellViewHolder.leftBackgroundRelativeLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
+            cellViewHolder.contentRequestBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
+        }else{
+            cellViewHolder.leftBackgroundRelativeLayout.setBackground(context.getDrawable(R.drawable.background_job));
+            cellViewHolder.contentRequestBtn.setVisibility(View.VISIBLE);
+            cellViewHolder.contentRequestBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.customRed));
+        }
 
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +167,9 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
         TextView cityTitle;
         TextView adresseContent;
         ImageView categorieImageView;
+        ImageView modePaiementImageView;
         FoldingCell foldingCell;
+        RelativeLayout leftBackgroundRelativeLayout;
 
         //Content Cell
         TextView name;
@@ -154,11 +187,13 @@ public class FoldingCellRecyclerViewHistoriqueEtudiantAdapter extends RecyclerVi
             timeHeure = (TextView) itemView.findViewById(R.id.content_heure_job);
             cityTitle = itemView.findViewById(R.id.cityTextView);
             adresseContent = itemView.findViewById(R.id.adresseTextView);
+            leftBackgroundRelativeLayout = itemView.findViewById(R.id.leftBackground);
             date = (TextView) itemView.findViewById(R.id.title_date_label);
             phoneContent = itemView.findViewById(R.id.phoneTextView);
             contentRequestBtn = (TextView) itemView.findViewById(R.id.content_request_btn);
             categorieImageView = itemView.findViewById(R.id.categorieHistoriqueJobImageView);
             foldingCell = (FoldingCell) itemView.findViewById(R.id.job_folding_cell);
+            modePaiementImageView =  itemView.findViewById(R.id.imageViewModePaiementTitle);
             //Content
             name = (TextView) itemView.findViewById(R.id.content_name_postulant);
             priceContent = (TextView) itemView.findViewById(R.id.content_price_job);

@@ -1,5 +1,6 @@
 package com.studiant.com.presentation.ui.activities.etudiant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,6 +17,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.model.Job;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.ui.activities.particulier.DashboardParticulierActivity;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.presentation.ui.fragments.common.SettingFragment;
 import com.studiant.com.presentation.ui.fragments.etudiant.AddRibFragment;
@@ -32,6 +34,8 @@ import butterknife.ButterKnife;
 
 import static android.view.View.GONE;
 import static com.studiant.com.storage.Constants.INTENT_USER;
+import static com.studiant.com.storage.Constants.STATUS_ETUDIANT;
+import static com.studiant.com.storage.Constants.STATUS_PARTICULIER;
 
 
 public class DashboardEtudiantActivity extends AppCompatActivity implements FilterFragment.OnFragmentInteractionListener,
@@ -221,7 +225,7 @@ public class DashboardEtudiantActivity extends AppCompatActivity implements Filt
     }
 
     public void displaySetStudiantCode(Job job){
-        StudiantCodeFragment studiantCodeFragment = new StudiantCodeFragment();
+        StudiantCodeFragment studiantCodeFragment =StudiantCodeFragment.newInstance(user, job);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         ft.add(android.R.id.content,studiantCodeFragment, studiantCodeFragment.getClass().getName()).commit();
@@ -235,6 +239,12 @@ public class DashboardEtudiantActivity extends AppCompatActivity implements Filt
     @Override
     public void onAddRibClose() {
         isRibDisplay = false;
+    }
 
+    public void reloadDashboardEtudiant(){
+        Intent intent = new Intent(this, DashboardEtudiantActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        startActivity(intent);
+        finish();
     }
 }

@@ -27,6 +27,7 @@ import com.studiant.com.presentation.presenters.converters.PresentationModelConv
 import com.studiant.com.presentation.presenters.impl.DashboardPresenterImpl;
 import com.studiant.com.presentation.presenters.interfaces.DashboardPresenter;
 import com.studiant.com.presentation.ui.activities.particulier.AddJobActivity;
+import com.studiant.com.presentation.ui.activities.particulier.DashboardParticulierActivity;
 import com.studiant.com.presentation.ui.activities.particulier.ListPostulantActivity;
 import com.studiant.com.presentation.ui.components.adapters.FoldingCellRecyclerViewJobParticulierAdapter;
 import com.studiant.com.storage.impl.JobRepositoryImpl;
@@ -57,6 +58,8 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
     private ArrayList<Job> mJobArrayList;
     private int mDeletedJobClick;
+
+    private DashboardParticulierActivity mActivity;
 
     FoldingCellRecyclerViewJobParticulierAdapter adapter;
     User user;
@@ -102,6 +105,7 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         mPresenter.getJobsByUser(user);
+        mActivity = (DashboardParticulierActivity) getActivity();
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -201,7 +205,6 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
         if (job.getStatut().equals("0") || job.getStatut().equals("1")){
             Intent intent = new Intent(getApplicationContext(), ListPostulantActivity.class);
             intent.putExtra(INTENT_USER, user);
-            //intent.putExtra(INTENT_LIST_USER, job.getPostulants());
             intent.putExtra(INTENT_JOB, PresentationModelConverter.convertToJobDomainModel(job));
             this.startActivity(intent);
         }/*else if(job.getStatut().equals("1") ){
@@ -241,9 +244,10 @@ public class ListJobParticulierFragment extends Fragment implements DashboardPre
 
     @Override
     public void onJobDelete() {
-        System.out.println("jobDelete");
+        /*System.out.println("jobDelete");
         mJobArrayList.remove(mDeletedJobClick);
-        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();*/
+        mActivity.reloadDashboardParticulier();
     }
 
 

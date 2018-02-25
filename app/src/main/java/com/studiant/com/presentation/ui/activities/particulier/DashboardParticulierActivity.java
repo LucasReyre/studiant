@@ -1,5 +1,6 @@
 package com.studiant.com.presentation.ui.activities.particulier;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,6 +12,7 @@ import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.studiant.com.R;
 import com.studiant.com.presentation.presenters.model.User;
+import com.studiant.com.presentation.ui.activities.etudiant.DashboardEtudiantActivity;
 import com.studiant.com.presentation.ui.fragments.common.SettingFragment;
 import com.studiant.com.presentation.ui.components.AdjustKeyboard;
 import com.studiant.com.presentation.ui.fragments.particulier.InscriptionParticulierFragment;
@@ -31,6 +33,8 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
     @BindView(R.id.materialViewPager)
     MaterialViewPager mViewPager;
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +43,7 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
         ButterKnife.bind(this);
         AdjustKeyboard.assistActivity(this);
 
-        final User user = (User) getIntent().getSerializableExtra(INTENT_USER);
+        user = (User) getIntent().getSerializableExtra(INTENT_USER);
         System.out.println("user : "+user.getTelephone());
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
@@ -120,5 +124,13 @@ public class DashboardParticulierActivity extends AppCompatActivity implements P
             });
         }*/
 
+    }
+
+    public void reloadDashboardParticulier(){
+        Intent intent = new Intent();
+        intent = new Intent(this, DashboardParticulierActivity.class);
+        intent.putExtra(INTENT_USER, user);
+        startActivity(intent);
+        finish();
     }
 }

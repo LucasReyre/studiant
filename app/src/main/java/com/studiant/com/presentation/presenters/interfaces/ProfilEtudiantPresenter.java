@@ -12,6 +12,7 @@ public interface ProfilEtudiantPresenter extends BasePresenter {
 
     interface View extends BaseView {
         void onMoneyRetrieve();
+        void onMoneyRetrievedFail();
         void onUserUpdate();
         void onUserUpdateFailed();
     }
