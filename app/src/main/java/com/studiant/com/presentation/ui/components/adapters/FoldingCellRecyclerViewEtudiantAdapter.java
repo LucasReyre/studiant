@@ -63,7 +63,8 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         cellViewHolder.categorieImageView.setImageResource(categorie.getImageRessource());
 
         //Content
-        cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
+        if (contents.get(position).getUtilisateur().getFirstName() != null)
+            cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
 
         cellViewHolder.dateContent.setText(contents.get(position).getDate());
         cellViewHolder.timeContent.setText(contents.get(position).getHeure());
