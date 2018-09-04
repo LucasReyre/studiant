@@ -42,6 +42,13 @@
             {
               "client_id": "1005721946438-2gmj6c4tt9mfal7ifu1s9og4q6oirmm1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1005721946438-b4lmd654qd9k82nd0k2dotj4r2fkapjn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fr.studiant"
+              }
             }
           ]
         },

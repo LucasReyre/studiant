@@ -99,6 +99,7 @@ public class FoldingCellRecyclerViewJobParticulierAdapter extends RecyclerView.A
             cellViewHolder.contentRequestBtn.setBackgroundColor(ContextCompat.getColor(context,R.color.warm_grey));
             cellViewHolder.deleteBtn.setVisibility(View.GONE);
         }else{
+            cellViewHolder.backgroundJobImageView.setBackground(ContextCompat.getDrawable(context,R.drawable.background_job));
             cellViewHolder.deleteBtn.setVisibility(View.VISIBLE);
         }
         /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,14 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply from: "${project.rootDir}/QA/quality.gradle"
 
 android {
@@ -19,8 +29,8 @@ android {
         applicationId "com.studiant.com"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 13
-        versionName "1.0.10"
+        versionCode 15
+        versionName "1.0.12"
         multiDexEnabled true
     }
     buildTypes {
@@ -36,6 +46,7 @@ android {
 
 repositories {
     mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 
@@ -53,12 +64,12 @@ dependencies {
     compile 'com.emmasuzuki:easyform:1.1.0'
     compile 'com.ramotion.foldingcell:folding-cell:1.1.0'
     compile 'com.github.florent37:materialviewpager:1.2.1'
-    compile 'com.google.android.gms:play-services:11.0.2'
+    compile 'com.google.android.gms:play-services:12.0.1'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.facebook.android:facebook-android-sdk:4.35.0'
     compile 'com.google.dagger:dagger:2.8'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:+'
@@ -68,10 +79,11 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.mangopay.android.sdk:card-registration-library:1.0.1'
-    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:multidex:1.0.3'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.+'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
     provided 'javax.annotation:jsr250-api:1.0'
 }
 apply plugin: 'com.google.gms.google-services'
