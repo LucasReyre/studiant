@@ -158,7 +158,11 @@ public class FilterFragment extends DialogFragment implements FilterPresenter.Vi
 
     @OnClick(R.id.buttonValidateFilter)
     void validateFilter(){
-        mListener.onValidateFilter(priceEditText.getText().toString(), categorie);
+        String price =priceEditText.getText().toString();
+        if (price.equals(""))
+            price = "0";
+
+        mListener.onValidateFilter(price, categorie);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.remove(this).commit();
     }

@@ -28,9 +28,9 @@ android {
     defaultConfig {
         applicationId "com.studiant.com"
         minSdkVersion 21
-        targetSdkVersion 23
-        versionCode 15
-        versionName "1.0.12"
+        targetSdkVersion 27
+        versionCode 20
+        versionName "1.0.16"
         multiDexEnabled true
     }
     buildTypes {

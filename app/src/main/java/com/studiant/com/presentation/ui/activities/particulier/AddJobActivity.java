@@ -177,9 +177,15 @@ public class AddJobActivity extends AppCompatActivity implements AddJobPresenter
 
     @OnClick(R.id.buttonAddJob)
     void onClickAddJob() {
+        System.out.println("date : "+(dateTextView.getText().toString().length() > 11));
+        System.out.println("date : "+(dateTextView.getText().toString().length()));
+        System.out.println("horaire : "+(timeTextView.getText().toString().length()>10));
+        System.out.println("horaire : "+(timeTextView.getText().toString().length()));
+        System.out.println("price : "+priceTextView.getText().toString().equals(""));
 
-        if (dateTextView.getText().toString().length() > 10 || timeTextView.getText().toString().length() > 10 ||
+        if (dateTextView.getText().toString().length() > 11 || timeTextView.getText().toString().length() > 10 ||
                 priceTextView.getText().toString().equals("")){
+            System.out.println("problème heure ou date ou prix");
             Toast.makeText(this, "Merci de vérifier votre saisie !",
                     Toast.LENGTH_LONG).show();
             return;

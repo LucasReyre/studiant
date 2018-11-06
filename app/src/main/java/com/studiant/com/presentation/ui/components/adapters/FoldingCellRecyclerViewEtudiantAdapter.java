@@ -62,56 +62,61 @@ public class FoldingCellRecyclerViewEtudiantAdapter extends RecyclerView.Adapter
         cellViewHolder.categorieTextView.setText(contents.get(position).getCategorie());
         cellViewHolder.categorieImageView.setImageResource(categorie.getImageRessource());
 
+
         //Content
+
+        if (contents.get(position).getUtilisateur() != null){
+
         if (contents.get(position).getUtilisateur().getFirstName() != null)
-            cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
+                cellViewHolder.name.setText(contents.get(position).getUtilisateur().getFirstName());
 
-        cellViewHolder.dateContent.setText(contents.get(position).getDate());
-        cellViewHolder.timeContent.setText(contents.get(position).getHeure());
-        cellViewHolder.description.setText(contents.get(position).getDescription());
-        switch (contents.get(position).getModePaiement()){
-            case "CB":
-                cellViewHolder.modePaiementImage.setImageResource(R.drawable.credit_card);
-                cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.credit_card);
-                float commission = Float.parseFloat(contents.get(position).getPrix())*15/100;
-                float finalPrice = Float.parseFloat(contents.get(position).getPrix()) - commission;
-                prix = String.valueOf(finalPrice) + " €";
-                break;
-            case "ESPECES":
-                cellViewHolder.modePaiementImage.setImageResource(R.drawable.change);
-                cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.change);
-                break;
-            case "CESU":
-                cellViewHolder.modePaiementImage.setImageResource(R.drawable.check);
-                cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.check);
-                break;
-        }
-
-        cellViewHolder.tarifTextView.setText(prix);
-        cellViewHolder.priceContent.setText(prix);
-        /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "OKOKOKOK" + position, Toast.LENGTH_SHORT).show();
+            cellViewHolder.dateContent.setText(contents.get(position).getDate());
+            cellViewHolder.timeContent.setText(contents.get(position).getHeure());
+            cellViewHolder.description.setText(contents.get(position).getDescription());
+            switch (contents.get(position).getModePaiement()){
+                case "CB":
+                    cellViewHolder.modePaiementImage.setImageResource(R.drawable.credit_card);
+                    cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.credit_card);
+                    float commission = Float.parseFloat(contents.get(position).getPrix())*15/100;
+                    float finalPrice = Float.parseFloat(contents.get(position).getPrix()) - commission;
+                    prix = String.valueOf(finalPrice) + " €";
+                    break;
+                case "ESPECES":
+                    cellViewHolder.modePaiementImage.setImageResource(R.drawable.change);
+                    cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.change);
+                    break;
+                case "CESU":
+                    cellViewHolder.modePaiementImage.setImageResource(R.drawable.check);
+                    cellViewHolder.modePaiementImageTitle.setImageResource(R.drawable.check);
+                    break;
             }
-        });*/
-        // set custom btn handler for list item from that item
-        if (contents.get(position).getRequestBtnClickListener() != null) {
-            cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
-        } else {
-            // (optionally) add "default" handler if no handler found in item
-            cellViewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
-        }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // toggle clicked cell state
-                ((FoldingCell) v).toggle(false);
-                // register in adapter that state for selected cell is toggled
-                registerToggle(position);
+            cellViewHolder.tarifTextView.setText(prix);
+            cellViewHolder.priceContent.setText(prix);
+            /*cellViewHolder.contentRequestBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(), "OKOKOKOK" + position, Toast.LENGTH_SHORT).show();
+                }
+            });*/
+            // set custom btn handler for list item from that item
+            if (contents.get(position).getRequestBtnClickListener() != null) {
+                cellViewHolder.contentRequestBtn.setOnClickListener(contents.get(position).getRequestBtnClickListener());
+            } else {
+                // (optionally) add "default" handler if no handler found in item
+                cellViewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
             }
-        });
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // toggle clicked cell state
+                    ((FoldingCell) v).toggle(false);
+                    // register in adapter that state for selected cell is toggled
+                    registerToggle(position);
+                }
+            });
+        }
     }
 
     // simple methods for register cell state changes

@@ -84,7 +84,7 @@ public class SettingFragment extends Fragment implements SettingPresenter.View {
 
     @OnClick(R.id.imageViewTwitter)
     void onTwitterClick(){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/s_tudiant"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/StudiantOffici1"));
         startActivity(browserIntent);
     }
 
